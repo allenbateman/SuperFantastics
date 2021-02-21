@@ -19,24 +19,24 @@ public:
 		KS_NONE
 	};
 private:
-	bool windowQuit;
-	bool mousePress;
+	bool m_WindowQuit;
+	bool m_MousePressed;
 
-	Vector2i mMousePositionScreen;
+	Vector2i m_MousePosition;
 
-	const uint8* mSDLKeyState;
-	KeyState* mKeyStates;
-	int mNumKeys;
+	const uint8* m_SDLKeyState;
+	KeyState* m_KeyStates;
+	int m_NumKeys;
 public:
 	Input();
 	~Input();
 	void UpdateInputs();
-	bool WindowQuit() { return windowQuit; }
-	void QuitGame() { windowQuit = true; }
+	bool WindowQuit() { return m_WindowQuit; }
+	void QuitGame() { m_WindowQuit = true; }
 
 	bool getKeyUp(uint32 key);
 	bool getKeyDown(uint32 key);
 	bool getKey(uint32 key);
-	Vector2i getMousePos() { return mMousePositionScreen; }
-	bool getMousePress() { return mousePress; }
+	Vector2i getMousePos() { return m_MousePosition; }
+	bool getMousePress() { return m_MousePressed; }
 };

@@ -13,15 +13,15 @@ class Video : public Singleton<Video>
 	friend class Singleton<Video>;
 private:
 	unsigned int
-		lastTime,
-		currentTime,
-		deltaTime;
+		m_LastTime,
+		m_CurrentTime,
+		m_DeltaTime;
 
-	uint32 msFrame;
+	uint32 m_FrameMS;
 
-	SDL_Window* pWindow;
+	SDL_Window* m_Window;
 
-	int mScreenWidth, mScreenHeight;
+	int m_ScreenWidth, mScreenHeight;
 public:
 	Video();
 	~Video();
@@ -39,6 +39,6 @@ public:
 	void tickDelay();
 	void close();
 
-	int getScreenWidth() { return mScreenWidth; }
+	int getScreenWidth() { return m_ScreenWidth; }
 	int getScreenHeight() { return mScreenHeight; }
 };

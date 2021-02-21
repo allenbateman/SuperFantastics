@@ -30,7 +30,7 @@ private:
 		void* resource;
 	};
 
-	std::vector<Resource*> mResources[RT_LAST];
+	std::vector<Resource*> m_Resources[RT_LAST];
 
 	Resources();
 

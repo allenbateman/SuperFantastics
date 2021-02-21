@@ -3,10 +3,10 @@
 
 Video::Video()
 {
-	mScreenWidth = 600;
+	m_ScreenWidth = 600;
 	mScreenHeight = 600;
 
-	pWindow = NULL;
+	m_Window = NULL;
 
 	SDL_Init(SDL_INIT_VIDEO);
 
@@ -14,13 +14,13 @@ Video::Video()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-	pWindow = SDL_CreateWindow("MegaBomberman", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mScreenWidth, mScreenHeight, SDL_WINDOW_SHOWN);
+	m_Window = SDL_CreateWindow("MegaBomberman", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_ScreenWidth, mScreenHeight, SDL_WINDOW_SHOWN);
 
-	lastTime = 0;
-	msFrame = static_cast<uint32>(1.0f / (FPS / 1000.0f));
-	currentTime = 0;
+	m_LastTime = 0;
+	m_FrameMS = static_cast<uint32>(1.0f / (FPS / 1000.0f));
+	m_CurrentTime = 0;
 
-	deltaTime = 0;
+	m_DeltaTime = 0;
 }
 
 Video::~Video()
@@ -30,7 +30,7 @@ Video::~Video()
 
 unsigned int Video::getDeltaTime()
 {
-	return deltaTime;
+	return m_DeltaTime;
 }
 
 void Video::renderGraphic(int img, int posX, int posY)
@@ -82,8 +82,8 @@ void Video::renderGraphic(int img, int sourcePosX, int sourcePosY, int posX, int
 
 void Video::ResizeWindow(int width, int height)
 {
-	SDL_SetWindowSize(pWindow, width, height);
-	mScreenWidth = width;
+	SDL_SetWindowSize(m_Window, width, height);
+	m_ScreenWidth = width;
 	mScreenHeight = height;
 }
 
@@ -95,9 +95,9 @@ void Video::clearScreen()
 void Video::updateScreen()
 {
 	std::string title = "MegaBomberman - ";
-	title += std::to_string(deltaTime);
-	SDL_SetWindowTitle(pWindow, title.c_str());
-	SDL_GL_SwapWindow(pWindow);
+	title += std::to_string(m_DeltaTime);
+	SDL_SetWindowTitle(m_Window, title.c_str());
+	SDL_GL_SwapWindow(m_Window);
 }
 
 void Video::waitTime(int ms)
@@ -107,19 +107,19 @@ void Video::waitTime(int ms)
 
 void Video::tickDelay()
 {
-	currentTime = SDL_GetTicks();
+	m_CurrentTime = SDL_GetTicks();
 
-	deltaTime = currentTime - lastTime;
+	m_DeltaTime = m_CurrentTime - m_LastTime;
 
-	if (deltaTime < msFrame) {
-		SDL_Delay(msFrame - deltaTime);
+	if (m_DeltaTime < m_FrameMS) {
+		SDL_Delay(m_FrameMS - m_DeltaTime);
 	}
 
-	lastTime = currentTime;
+	m_LastTime = m_CurrentTime;
 }
 
 void Video::close()
 {
-	SDL_DestroyWindow(pWindow);
+	SDL_DestroyWindow(m_Window);
 	SDL_Quit();
 }
