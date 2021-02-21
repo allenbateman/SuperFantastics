@@ -5,6 +5,6 @@ Game Development - Project I - Recreation of an arcade game.
 
 Allen Bateman: https://github.com/allenbateman
 Iván José Caballero: https://github.com/ivjocab
-Pablo Llorente - https://github.com/Xymaru
+Pablo Llorente: https://github.com/Xymaru
 Laura Isidro: https://github.com/lau-rgb
 Marc Alcázar: https://github.com/marcspoon07
