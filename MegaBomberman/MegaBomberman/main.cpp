@@ -1,10 +1,23 @@
-#include <sdl.h>
-#include <iostream>
+#include "src/headers/Video.h"
+#include "src/headers/Input.h"
 
 int main(int argc, char* args[]) {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cout << "Error" << std::endl;
+	Video* video = Video::getInstance();
+	Input* input = Input::getInstance();
+
+	while (!input->WindowQuit()) {
+		video->clearScreen();
+		input->UpdateInputs();
+
+		// Game logic
+
+		video->updateScreen();
+		video->tickDelay();
 	}
+
+	video->close();
+
+	delete video;
 
 	return 0;
 }

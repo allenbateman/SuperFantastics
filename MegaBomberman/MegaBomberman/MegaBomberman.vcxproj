@@ -148,6 +148,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\source\Debug.cpp" />
+    <ClCompile Include="src\source\Input.cpp" />
+    <ClCompile Include="src\source\Resources.cpp" />
+    <ClCompile Include="src\source\Video.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\headers\GameState.h" />
+    <ClInclude Include="src\headers\Input.h" />
+    <ClInclude Include="src\headers\math\Sizef.h" />
+    <ClInclude Include="src\headers\math\Sizei.h" />
+    <ClInclude Include="src\headers\math\Vector2f.h" />
+    <ClInclude Include="src\headers\math\Vector2i.h" />
+    <ClInclude Include="src\headers\Resources.h" />
+    <ClInclude Include="src\headers\Singleton.h" />
+    <ClInclude Include="src\headers\Video.h" />
+    <ClInclude Include="src\simple_types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
