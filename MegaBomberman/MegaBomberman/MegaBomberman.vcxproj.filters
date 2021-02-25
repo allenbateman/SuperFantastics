@@ -30,6 +30,9 @@
     <ClCompile Include="src\source\Input.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\source\Renderer2D.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\headers\Singleton.h">
@@ -60,6 +63,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\headers\math\Vector2i.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers\Renderer2D.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers\Debug.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
