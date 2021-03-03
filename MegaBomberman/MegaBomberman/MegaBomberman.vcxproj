@@ -150,6 +150,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\source\Debug.cpp" />
     <ClCompile Include="src\source\Input.cpp" />
+    <ClCompile Include="src\source\Renderer2D.cpp" />
     <ClCompile Include="src\source\Resources.cpp" />
     <ClCompile Include="src\source\Video.cpp" />
   </ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="src\headers\math\Sizei.h" />
     <ClInclude Include="src\headers\math\Vector2f.h" />
     <ClInclude Include="src\headers\math\Vector2i.h" />
+    <ClInclude Include="src\headers\Renderer2D.h" />
     <ClInclude Include="src\headers\Resources.h" />
     <ClInclude Include="src\headers\Singleton.h" />
     <ClInclude Include="src\headers\Video.h" />
