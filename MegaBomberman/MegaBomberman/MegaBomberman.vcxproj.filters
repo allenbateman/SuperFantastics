@@ -62,5 +62,8 @@
     <ClInclude Include="src\headers\math\Vector2i.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\headers\Debug.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

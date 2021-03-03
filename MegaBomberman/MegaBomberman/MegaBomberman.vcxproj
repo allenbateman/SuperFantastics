@@ -154,6 +154,7 @@
     <ClCompile Include="src\source\Video.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\headers\Debug.h" />
     <ClInclude Include="src\headers\GameState.h" />
     <ClInclude Include="src\headers\Input.h" />
     <ClInclude Include="src\headers\math\Sizef.h" />

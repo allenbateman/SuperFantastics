@@ -4,51 +4,51 @@
 
 Input::Input()
 {
-	windowQuit = false;
-	mousePress = false;
+	m_WindowQuit = false;
+	m_MousePressed = false;
 
-	mSDLKeyState = SDL_GetKeyboardState(&mNumKeys);
+	m_SDLKeyState = SDL_GetKeyboardState(&m_NumKeys);
 
-	mKeyStates = new KeyState[mNumKeys];
+	m_KeyStates = new KeyState[m_NumKeys];
 }
 
 
 Input::~Input()
 {
-	delete[] mKeyStates;
+	delete[] m_KeyStates;
 }
 
 void Input::UpdateInputs()
 {
-	memset(mKeyStates, KS_NONE, mNumKeys);
+	memset(m_KeyStates, KS_NONE, m_NumKeys);
 
 	SDL_Event event_poll;
 
 	while (SDL_PollEvent(&event_poll)) {
 		switch (event_poll.type) {
 		case SDL_QUIT:
-			windowQuit = true;
+			m_WindowQuit = true;
 			break;
 		case SDL_KEYDOWN:
 			if (event_poll.key.repeat) {
-				mKeyStates[event_poll.key.keysym.scancode] = KS_KEYPRESS;
+				m_KeyStates[event_poll.key.keysym.scancode] = KS_KEYPRESS;
 			}
 			else {
-				mKeyStates[event_poll.key.keysym.scancode] = KS_KEYDOWN;
+				m_KeyStates[event_poll.key.keysym.scancode] = KS_KEYDOWN;
 			}
 			break;
 		case SDL_KEYUP:
-			mKeyStates[event_poll.key.keysym.scancode] = KS_KEYUP;
+			m_KeyStates[event_poll.key.keysym.scancode] = KS_KEYUP;
 			break;
 		case SDL_MOUSEMOTION:
-			mMousePositionScreen.x = event_poll.motion.x;
-			mMousePositionScreen.y = event_poll.motion.y;
+			m_MousePosition.x = event_poll.motion.x;
+			m_MousePosition.y = event_poll.motion.y;
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			mousePress = true;
+			m_MousePressed = true;
 			break;
 		case SDL_MOUSEBUTTONUP:
-			mousePress = false;
+			m_MousePressed = false;
 			break;
 		default:
 			break;
@@ -58,15 +58,15 @@ void Input::UpdateInputs()
 
 bool Input::getKeyUp(uint32 key)
 {
-	return mKeyStates[key] == KS_KEYUP;
+	return m_KeyStates[key] == KS_KEYUP;
 }
 
 bool Input::getKeyDown(uint32 key)
 {
-	return mKeyStates[key] == KS_KEYDOWN;
+	return m_KeyStates[key] == KS_KEYDOWN;
 }
 
 bool Input::getKey(uint32 key)
 {
-	return mSDLKeyState[key];
+	return m_SDLKeyState[key];
 }
