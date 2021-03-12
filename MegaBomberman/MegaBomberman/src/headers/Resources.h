@@ -1,5 +1,8 @@
 #pragma once
 
+#include <SDL.h>
+#include <SDL_mixer.h>
+
 #include "../simple_types.h"
 
 #include <string>
@@ -10,6 +13,8 @@
 #include "Singleton.h"
 
 typedef uint32 ResourceId;
+
+typedef Mix_Chunk AudioClip;
 
 class Resources : public Singleton<Resources>
 {
@@ -95,44 +100,44 @@ public:
 //}
 
 // SPECIALIZATION FOR MIX_CHUNK
-//template<>
-//inline ResourceId Resources::Load<AudioClip>(const char * file)
-//{
-//	Uint32 size = static_cast<Uint32>(mResources[ResourceType::RT_AUDIOCLIP].size());
-//	Uint32 i;
-//
-//	Uint32 resourceId = -1;
-//
-//	for (i = 0; i < size; i++) {
-//		if (mResources[RT_AUDIOCLIP][i]->filePath == file) {
-//			resourceId = static_cast<Uint32>(i);
-//			break;
-//		}
-//	}
-//
-//	if (i == size) {
-//		Mix_Chunk* audioclip = Mix_LoadWAV(file);
-//
-//		if (!audioclip) {
-//			std::cout << Mix_GetError() << std::endl;
-//		}
-//		else {
-//			Resource* resource = new Resource();
-//
-//			resource->resource = audioclip;
-//
-//			resource->filePath = file;
-//
-//			resourceId = static_cast<Uint32>(size);
-//
-//			mResources[RT_AUDIOCLIP].push_back(resource);
-//
-//			std::cout << "RESOURCES: Loaded " << file << std::endl;
-//		}
-//	}
-//
-//	return resourceId;
-//}
+template<>
+inline ResourceId Resources::Load<AudioClip>(const char * file)
+{
+	Uint32 size = static_cast<Uint32>(m_Resources[ResourceType::RT_AUDIOCLIP].size());
+	Uint32 i;
+
+	Uint32 resourceId = -1;
+
+	for (i = 0; i < size; i++) {
+		if (m_Resources[RT_AUDIOCLIP][i]->filePath == file) {
+			resourceId = static_cast<Uint32>(i);
+			break;
+		}
+	}
+
+	if (i == size) {
+		Mix_Chunk* audioclip = Mix_LoadWAV(file);
+
+		if (!audioclip) {
+			Debug::getInstance()->LogError("Resources", Mix_GetError());
+		}
+		else {
+			Resource* resource = new Resource();
+
+			resource->resource = audioclip;
+
+			resource->filePath = file;
+
+			resourceId = static_cast<Uint32>(size);
+
+			m_Resources[RT_AUDIOCLIP].push_back(resource);
+
+			Debug::getInstance()->Log("Resources LOADED", file);
+		}
+	}
+
+	return resourceId;
+}
 
 //template<>
 //inline AudioClip* Resources::GetResourceById<AudioClip>(ResourceId id)

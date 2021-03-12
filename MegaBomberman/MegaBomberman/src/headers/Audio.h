@@ -8,8 +8,8 @@ class Audio : public Singleton<Audio>
 {
 	friend class Singleton<Audio>;
 private:
-	int mMusicChannel;
-	int mMusicVolume;
+	int m_MusicChannel;
+	int m_MusicVolume;
 public:
 	Audio();
 	~Audio();

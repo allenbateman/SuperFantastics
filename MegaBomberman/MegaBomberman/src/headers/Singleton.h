@@ -36,3 +36,5 @@ inline T * Singleton<T>::getInstance()
 
 template <class T>
 T* Singleton<T>::pInstance = NULL;
+
+// marc se la come a ivan

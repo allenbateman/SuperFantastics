@@ -1,6 +1,6 @@
 #include "../headers/Audio.h"
 #include "sdl.h"
-#include "sdl_mixer.h"
+#include "SDL_mixer.h"
 
 Audio* Audio::pInstance = NULL;
 
@@ -10,9 +10,9 @@ Audio::Audio()
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 	Mix_AllocateChannels(8);
 
-	mMusicChannel = -1;
+	m_MusicChannel = -1;
 
-	mMusicVolume = 6;
+	m_MusicVolume = 6;
 }
 
 Audio::~Audio()
@@ -37,19 +37,11 @@ void Audio::PlayMusic(Uint32 audioClip)
 {
 	Mix_Chunk* clip = NULL;//= Resources::getInstance()->GetResourceById<Mix_Chunk>(audioClip);
 
-	mMusicChannel = Mix_PlayChannel(-1, clip, -1);
-	Mix_Volume(mMusicChannel, mMusicVolume);
+	m_MusicChannel = Mix_PlayChannel(-1, clip, -1);
+	Mix_Volume(m_MusicChannel, m_MusicVolume);
 }
 
 void Audio::StopMusic()
 {
-	Mix_HaltChannel(mMusicChannel);
-}
-
-Audio * Audio::getInstance()
-{
-	if (pInstance == NULL)
-		pInstance = new Audio();
-
-	return pInstance;
+	Mix_HaltChannel(m_MusicChannel);
 }
