@@ -35,6 +35,28 @@ bool SceneLevel1::Start()
 	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
 
+
+	//BOMBERMAN COLLISIONS las laterales
+
+	App->collisions->AddCollider({ 0,0,256,24 }, Collider::Type::WALL);		// UP
+	App->collisions->AddCollider({ 0,208,256,16 }, Collider::Type::WALL);	// DOWN
+	App->collisions->AddCollider({ 0,24,24,184 }, Collider::Type::WALL);	// LEFT
+	App->collisions->AddCollider({ 232,24,24,184 }, Collider::Type::WALL);	// RIGHT
+
+	// ROCK COLLISIONS
+	
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; i < 6; i++) {
+			if ((i != 2 || i != 3) && (j != 1 || j != 2))
+				App->collisions->AddCollider({ 40 + (i * 32),48 + (j * 32),16,16 }, Collider::Type::WALL);
+		}
+	}
+
+	// MACHINE COLLISION
+	App->collisions->AddCollider({ 104,80,48,48 }, Collider::Type::WALL);
+
+
+
 	// Enemies ---
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 600, 80);
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 625, 80);
