@@ -39,8 +39,12 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	App->audio->PlayFx(destroyedFx);
+	//if(collider->type==BOMB){
+	//	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+	//	App->audio->PlayFx(destroyedFx);
+	//}
+
+	//if(collider->type==WALL) pues q cambie de direccion
 
 	SetToDelete();
 }
