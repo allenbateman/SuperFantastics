@@ -10,6 +10,7 @@
 #include "Enemy_RedBird.h"
 #include "Enemy_BrownShip.h"
 #include "Enemy_Mech.h"
+#include "Pokapoka.h"
 
 #define SPAWN_MARGIN 50
 
@@ -28,7 +29,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	//texture = App->textures->Load("Assets/Sprites/enemies.png");
-	texture = App->textures->Load("Assets/Sprites/PokapokaAnimations.png");
+	texture = App->textures->Load("Assets/Sprites/enemies.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -166,6 +167,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case Enemy_Type::MECH:
 					enemies[i] = new Enemy_Mech(info.x, info.y);
+					break;
+				case Enemy_Type::POKAPOKA:
+					enemies[i] = new Pokapoka(info.x, info.y);
 					break;
 			}
 			enemies[i]->texture = texture;
