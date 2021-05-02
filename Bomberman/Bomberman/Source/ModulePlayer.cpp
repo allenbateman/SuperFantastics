@@ -78,13 +78,11 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/Sprites/BomberManAnimations.png");
-	currentAnimation = &downIdleAnim;
+	currentIdleAnim = downIdleAnim;
+	currentAnimation = &downAnim;
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
-
-	position.x = 150;
-	//position.y = 120;
 
 	destroyed = false;
 

@@ -8,6 +8,22 @@ struct SDL_Texture;
 
 class SceneLevel1 : public Module
 {
+private:
+	enum GridType
+	{
+		EMPTY = 0,
+		PLAYER,
+		ROCK,
+		STRUCTURE,
+		ORB,
+		POKAPOKA,
+		MECHA_WALKER,
+		MOUSE,
+		SNAIL,
+		RED_FLOWER,
+		YELLOW_FLOWER
+	};
+
 public:
 	//Constructor
 	SceneLevel1(bool startEnabled);
