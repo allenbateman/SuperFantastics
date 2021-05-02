@@ -201,18 +201,58 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (movedLeft)
 		{
 			position.x += speed;
+			if (position.y + 16 >= c2->rect.y + 23)
+			{
+				position.y += 1;
+				position.x -= 1;
+			}
+			if (position.y <= c2->rect.y - 7)
+			{
+				position.y -= 1;
+				position.x -= 1;
+			}
 		}
 		if (movedRight)
 		{
 			position.x -= speed;
+			if (position.y + 16 >= c2->rect.y + 23)
+			{
+				position.y += 1;
+				position.x += 1;
+			}
+			if (position.y <= c2->rect.y - 7)
+			{
+				position.y -= 1;
+				position.x += 1;
+			}
 		}
 		if(movedUp)
 		{
 			position.y += speed;
+			if (position.x + 16 <= c2->rect.x + 7)
+			{
+				position.x -= 1;
+				position.y -= 1;
+			}
+			if (position.x >= c2->rect.x + 9)
+			{
+				position.x += 1;
+				position.y -= 1;
+			}
 		}
 		if (movedDown)
 		{
 			position.y -= speed;
+			if (position.x + 16 <= c2->rect.x + 7)
+			{
+				position.x -= 1;
+				position.y += 1;
+			}
+			if (position.x >= c2->rect.x + 9)
+			{
+				position.x += 1;
+				position.y += 1;
+			}
 		}
 
 		c1->SetPos(position.x, position.y);
