@@ -108,6 +108,10 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &leftAnim;
 			currentIdleAnim = leftIdleAnim;
 		}
+		movedLeft = true;
+	}
+	else {
+		movedLeft = false;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
@@ -119,6 +123,10 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 			currentIdleAnim = rightIdleAnim;
 		}
+		movedRight = true;
+	}
+	else {
+		movedRight = false;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
@@ -130,6 +138,10 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &downAnim;
 			currentIdleAnim = downIdleAnim;
 		}
+		movedDown = true;
+	}
+	else {
+		movedDown = false;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
@@ -141,6 +153,10 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &upAnim;
 			currentIdleAnim = upIdleAnim;
 		}
+		movedUp = true;
+	}
+	else {
+		movedUp = false;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
@@ -182,19 +198,19 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::WALL)
 	{
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
+		if (movedLeft)
 		{
 			position.x += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
+		if (movedRight)
 		{
 			position.x -= speed;
 		}
-		if(App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
+		if(movedUp)
 		{
 			position.y += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
+		if (movedDown)
 		{
 			position.y -= speed;
 		}
