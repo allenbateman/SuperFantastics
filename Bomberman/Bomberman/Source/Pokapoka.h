@@ -11,13 +11,17 @@ public:
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
+	void OnCollision (Collider* collider) override;
+
+	
+	bool atack = false;
 
 private:
 	// The path that will define the position in the world
-	
+
 
 	// Enemy animations
 	Animation upAnim, downAnim, leftAnim, rightAnim, atackAnim, deathAnim;
-
+	void ChangeDirection(bool opositeDirection);
 };
 

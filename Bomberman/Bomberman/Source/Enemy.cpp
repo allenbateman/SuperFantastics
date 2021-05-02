@@ -28,7 +28,7 @@ void Enemy::Update()
 		currentAnim->Update();
 
 	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+		collider->SetPos(colliderPosition.x, colliderPosition.y);
 }
 
 void Enemy::Draw()
