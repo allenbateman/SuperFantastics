@@ -29,7 +29,7 @@ bool SceneLevel1::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/background.png");
-	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	srand((unsigned)time(0));
 
@@ -87,7 +87,10 @@ bool SceneLevel1::Start()
 		for (int j = 0; i < 13; i++) {
 
 			if (stage1[i][j].PLAYER) {
-
+				iPoint pos;
+				pos.x = i * 16;
+				pos.y = j * 16;
+				App->player->position=pos;
 			}
 			else if (stage1[i][j].ROCK ||stage1[i][j].STRUCTURE) {
 				App->collisions->AddCollider({ 24 + (i * 16),32 + (j * 16),16,16 }, Collider::Type::WALL);
@@ -117,8 +120,6 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	//App->render->camera.x += 3;
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

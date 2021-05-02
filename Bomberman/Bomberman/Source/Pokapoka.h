@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+
 class Pokapoka : public Enemy
 {
 public:
@@ -16,7 +17,7 @@ private:
 	
 
 	// Enemy animations
-	Animation up, down, left, right, atack, death;
+	Animation upAnim, downAnim, leftAnim, rightAnim, atackAnim, deathAnim;
 
 };
 
