@@ -86,7 +86,7 @@ bool ModulePlayer::Start()
 
 	destroyed = false;
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 15, 22 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
 
 	// LOAD UI FONT
 	//char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
@@ -182,21 +182,23 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::WALL)
 	{
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
+		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
 		{
 			position.x += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
 		{
 			position.x -= speed;
 		}
-		if(App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
+		if(App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
 		{
 			position.y += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
+		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
 		{
 			position.y -= speed;
 		}
+
+		c1->SetPos(position.x, position.y);
 	}
 }
