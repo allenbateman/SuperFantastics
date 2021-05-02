@@ -99,6 +99,7 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	lastPos = position;
 	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
 	{
 		position.x -= speed;
@@ -108,9 +109,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &leftAnim;
 			currentIdleAnim = leftIdleAnim;
 		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+	}else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 	{
 		position.x += speed;
 		if (currentAnimation != &rightAnim)
@@ -119,9 +118,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 			currentIdleAnim = rightIdleAnim;
 		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
+	}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
 	{
 		position.y += speed;
 		if (currentAnimation != &downAnim)
@@ -130,9 +127,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &downAnim;
 			currentIdleAnim = downIdleAnim;
 		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
+	}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (currentAnimation != &upAnim)
@@ -159,7 +154,7 @@ Update_Status ModulePlayer::Update()
 		currentAnimation = &currentIdleAnim;
 
 	collider->SetPos(position.x, position.y);
-
+	
 	currentAnimation->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -182,23 +177,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::WALL)
 	{
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
-		{
-			position.x += speed;
-		}
-		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
-		{
-			position.x -= speed;
-		}
-		if(App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
-		{
-			position.y += speed;
-		}
-		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
-		{
-			position.y -= speed;
-		}
-
-		c1->SetPos(position.x, position.y);
+		position = lastPos;
 	}
 }
