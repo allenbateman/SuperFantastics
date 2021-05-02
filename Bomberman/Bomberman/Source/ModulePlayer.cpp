@@ -170,7 +170,7 @@ Update_Status ModulePlayer::PostUpdate()
 	if (!destroyed)
 	{
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture, position.x, position.y, &rect);
+		App->render->Blit(texture, position.x, position.y - 8, &rect);
 	}
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
@@ -180,9 +180,23 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if(c2->type == Collider::Type::WALL)
-	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
+	if (c2->type == Collider::Type::WALL)
 	{
-
+		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
+		{
+			position.x += speed;
+		}
+		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+		{
+			position.x -= speed;
+		}
+		if(App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
+		{
+			position.y += speed;
+		}
+		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
+		{
+			position.y -= speed;
+		}
 	}
 }

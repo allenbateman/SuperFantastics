@@ -50,7 +50,7 @@ bool SceneLevel1::Start()
 
 	for (int i = 1; i < 10; i += 2)
 	{
-		for (int j = 1; j < 12; j += 2)
+		for (int j = 1; j < 14; j += 2)
 		{
 			grid[i][j] = ROCK;
 		}
@@ -109,7 +109,7 @@ bool SceneLevel1::Start()
 				App->player->position=pos;
 			}
 			else if (grid[i][j] == ROCK || grid[i][j] == STRUCTURE) {
-				App->collisions->AddCollider({ 24 + (i * 16),32 + (j * 16),16,16 }, Collider::Type::WALL);
+				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
 			}
 			else if (grid[i][j] == YELLOW_FLOWER) {}
 			else if (grid[i][j] == POKAPOKA)
