@@ -180,9 +180,5 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if(c2->type == Collider::Type::WALL)
-	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
-	{
 
-	}
 }

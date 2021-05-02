@@ -104,8 +104,8 @@ bool SceneLevel1::Start()
 
 			if (grid[i][j] == PLAYER) {
 				iPoint pos;
-				pos.x = 24 + i * 16;
-				pos.y = 32 + j * 16;
+				pos.x = 24 + j * 16;
+				pos.y = 32 + i * 16;
 				App->player->position=pos;
 			}
 			else if (grid[i][j] == ROCK || grid[i][j] == STRUCTURE) {
