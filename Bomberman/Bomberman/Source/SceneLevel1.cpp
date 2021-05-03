@@ -126,7 +126,7 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == STRUCTURE)
 			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::STRUCTURE);
+				App->enemies->AddEnemy(Enemy_Type::MIDDLE_STRUCTURE, j, i);
 			}
 			else if (grid[i][j] == POKAPOKA)
 			{

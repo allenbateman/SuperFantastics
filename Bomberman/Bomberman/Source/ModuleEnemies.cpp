@@ -8,6 +8,8 @@
 
 #include "Enemy.h"
 #include "YellowFlower.h"
+#include "Orb.h"
+#include "MiddleStructure.h"
 #include "Enemy_RedBird.h"
 #include "Enemy_BrownShip.h"
 #include "Enemy_Mech.h"
@@ -164,7 +166,10 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new YellowFlower(info.x, info.y);
 					break;
 				case Enemy_Type::ORB:
-					enemies[i] = new YellowFlower(info.x, info.y);
+					enemies[i] = new Orb(info.x, info.y);
+					break;
+				case Enemy_Type::MIDDLE_STRUCTURE:
+					enemies[i] = new MiddleStructure(info.x, info.y);
 					break;
 				case Enemy_Type::REDBIRD:
 					enemies[i] = new Enemy_RedBird(info.x, info.y);
