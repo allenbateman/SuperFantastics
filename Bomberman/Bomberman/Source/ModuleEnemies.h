@@ -8,12 +8,12 @@
 enum class Enemy_Type
 {
 	NO_TYPE,
-	REDBIRD,
-	BROWNSHIP,
-	MECH,
+	YELLOW_FLOWER,
+	RED_FLOWER,
+	ORB,
+	MIDDLE_STRUCTURE,
 	POKAPOKA,
-	MECHA_WALKER,
-	RED_FLOWER
+	MECHA_WALKER
 };
 
 struct EnemySpawnpoint

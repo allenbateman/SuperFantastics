@@ -13,6 +13,9 @@ struct Collider
 	{
 		NONE = -1,
 		WALL,
+		YELLOW_FLOWER,
+		RED_FLOWER,
+		STRUCTURE,
 		PLAYER,
 		ENEMY,
 		PLAYER_SHOT,
