@@ -32,6 +32,9 @@ bool SceneLevel1::Start()
 
 	bgTexture = App->textures->Load("Assets/Sprites/background.png");
 	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+
+	srand((unsigned)time(0));
+
 	
 	// Fixed positions
 
@@ -45,9 +48,9 @@ bool SceneLevel1::Start()
 		}
 	}
 
-	for (int i = 1; i < 11; i += 2)
+	for (int i = 1; i < 10; i += 2)
 	{
-		for (int j = 1; j < 13; j += 2)
+		for (int j = 1; j < 12; j += 2)
 		{
 			grid[i][j] = ROCK;
 		}
@@ -64,13 +67,13 @@ bool SceneLevel1::Start()
 	grid[8][3] = MECHA_WALKER;
 	grid[2][10] = ORB;
 	grid[8][2] = ORB;
-	grid[3][5] = STRUCTURE;
-	grid[3][6] = STRUCTURE;
-	grid[3][7] = STRUCTURE;
-	grid[4][5] = STRUCTURE;
-	grid[4][7] = STRUCTURE;
-	grid[5][5] = STRUCTURE;
+	grid[5][6] = STRUCTURE;
 	grid[5][7] = STRUCTURE;
+	grid[5][8] = STRUCTURE;
+	grid[6][6] = STRUCTURE;
+	grid[7][6] = STRUCTURE;
+	grid[6][8] = STRUCTURE;
+	grid[7][8] = STRUCTURE;
 
 	int flowerAmount = rand() % 10 + 35;
 	int x = 0;
@@ -81,9 +84,9 @@ bool SceneLevel1::Start()
 		x = rand() % 13;
 		y = rand() % 11;
 
-		if (grid[y][x] == EMPTY)
+		if (grid[x][y] == EMPTY)
 		{
-			grid[y][x] = YELLOW_FLOWER;
+			grid[x][y] = YELLOW_FLOWER;
 			i++;
 		}
 	}
@@ -93,49 +96,29 @@ bool SceneLevel1::Start()
 	grid[0][2] = EMPTY;
 	grid[1][0] = EMPTY;
 	grid[2][0] = EMPTY;
-	grid[4][6] = EMPTY;
-	grid[5][6] = EMPTY;
 
 	// generate scene elements or rock collisions
 
 	for (int i = 0; i < 11; i++) {
 		for (int j = 0; j < 13; j++) {
 
-			if (grid[i][j] == PLAYER) 
-			{
+			if (grid[i][j] == PLAYER) {
 				iPoint pos;
 				pos.x = 24 + j * 16;
 				pos.y = 32 + i * 16;
-				App->player->position = pos;
+				App->player->position=pos;
 			}
-			else if (grid[i][j] == ROCK) 
-			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
+			else if (grid[i][j] == ROCK || grid[i][j] == STRUCTURE) {
+				App->collisions->AddCollider({ 24 + (i * 16),32 + (j * 16),16,16 }, Collider::Type::WALL);
 			}
-			else if (grid[i][j] == YELLOW_FLOWER)
-			{
-				App->enemies->AddEnemy(Enemy_Type::YELLOW_FLOWER, j, i);
-			}
-			else if (grid[i][j] == RED_FLOWER)
-			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::RED_FLOWER);
-			}
-			else if (grid[i][j] == ORB)
-			{
-				App->enemies->AddEnemy(Enemy_Type::ORB, j, i);
-			}
-			else if (grid[i][j] == STRUCTURE)
-			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::STRUCTURE);
-			}
+			else if (grid[i][j] == YELLOW_FLOWER) {}
 			else if (grid[i][j] == POKAPOKA)
 			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::ENEMY);
+				//App->enemies->AddEnemy(Enemy_Type::POKAPOKA, 24 + (i * 16), 32 + (j * 16));
 			}
-			else if (grid[i][j] == MECHA_WALKER)
-			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::ENEMY);
-			}
+			else if (grid[i][j] == MECHA_WALKER) {}
+			else if (grid[i][j] == RED_FLOWER) {}
+			else if (grid[i][j] == MECHA_WALKER){}
 		}
 	}
 

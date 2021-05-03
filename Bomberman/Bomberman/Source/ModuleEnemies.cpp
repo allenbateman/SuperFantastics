@@ -7,9 +7,9 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "YellowFlower.h"
-#include "Orb.h"
-#include "MiddleStructure.h"
+#include "Enemy_RedBird.h"
+#include "Enemy_BrownShip.h"
+#include "Enemy_Mech.h"
 #include "Pokapoka.h"
 
 #define SPAWN_MARGIN 50
@@ -159,14 +159,14 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case Enemy_Type::YELLOW_FLOWER:
-					enemies[i] = new YellowFlower(info.x, info.y);
+				case Enemy_Type::REDBIRD:
+					enemies[i] = new Enemy_RedBird(info.x, info.y);
 					break;
-				case Enemy_Type::ORB:
-					enemies[i] = new Orb(info.x, info.y);
+				case Enemy_Type::BROWNSHIP:
+					enemies[i] = new Enemy_BrownShip(info.x, info.y);
 					break;
-				case Enemy_Type::MIDDLE_STRUCTURE:
-					enemies[i] = new MiddleStructure(info.x, info.y);
+				case Enemy_Type::MECH:
+					enemies[i] = new Enemy_Mech(info.x, info.y);
 					break;
 				case Enemy_Type::POKAPOKA:
 					enemies[i] = new Pokapoka(info.x, info.y);

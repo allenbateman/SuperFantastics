@@ -33,10 +33,8 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 public:
-	int lastKeyPressed = 0;
 	// Position of the player in the map
 	iPoint position;
-	iPoint lastPos;
 
 	// The speed in which we move the player (pixels per frame)
 	int speed = 1;
@@ -68,10 +66,6 @@ public:
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 
-	bool movedUp = false;
-	bool movedDown = false;
-	bool movedLeft = false;
-	bool movedRight = false;
 };
 
 #endif //!__MODULE_PLAYER_H__
