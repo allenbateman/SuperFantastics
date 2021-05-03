@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Globals.h"
 #include "MemLeaks.h"
+#include "time.h"
 
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib")
@@ -20,6 +21,8 @@ Application* App = nullptr;
 
 int main(int argc, char* argv[])
 {
+	srand((unsigned)time(0));
+
 	ReportMemoryLeaks();
 
 	int main_return = EXIT_FAILURE;
