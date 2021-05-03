@@ -63,6 +63,8 @@ public:
 	ModuleFonts* fonts = nullptr;
 
 	ModuleRender* render = nullptr;
+
+	int frameCounter = 0;
 };
 
 // Global var made extern for Application ---

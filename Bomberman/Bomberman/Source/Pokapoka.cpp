@@ -2,11 +2,25 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "SceneLevel1.h"
+#include <ctime>
 
 Pokapoka::Pokapoka(int x, int y) : Enemy(x, y)
 {
 	position.x = x;
 	position.y = y;
+
+	Animation atackAnim;
+
+	// atack
+	atackAnim.PushBack({ 176,0,16,32 });
+	atackAnim.PushBack({ 192,0,16,32 });
+	atackAnim.PushBack({ 208,0,16,32 });
+	atackAnim.PushBack({ 224,0,16,32 });
+	atackAnim.PushBack({ 240,0,16,32 });
+	upAnim.loop = true;
+	upAnim.mustFlip = false;
+	upAnim.speed = 0.1f;
 
 	// move up
 	upAnim.PushBack({ 112,0,16,32 });
@@ -45,12 +59,169 @@ Pokapoka::Pokapoka(int x, int y) : Enemy(x, y)
 	rightAnim.speed = 0.1f;
 	
 	currentAnim = &rightAnim;
-	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	state = IDLE;
+	direction = RIGHT;
+	collider = App->collisions->AddCollider({ 0, 0, 16, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	colliderPosition.x = position.x;
+	colliderPosition.y = position.y + 16;
 }
 
 
 void Pokapoka::Update()
 {
-
 	Enemy::Update();
+
+	switch (state)
+	{
+	case Enemy::IDLE:
+		CheckDirection();
+		currentAnim = &rightAnim;
+		break;
+
+	case Enemy::MOVE:
+		if ((App->frameCounter % 2)) {
+
+			if ((colliderPosition.x - 24) %16==0 && (colliderPosition.y - 32) % 16==0) CheckDirection();
+			App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
+
+			if (direction == UP) position.y--;
+			else if (direction == DOWN) position.y++;
+			else if (direction == LEFT) position.x--;
+			else if (direction == RIGHT) position.x++;
+
+			colliderPosition.x = position.x;
+			colliderPosition.y = position.y + 16;
+
+			App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::POKAPOKA;
+		}
+		
+		break;
+
+	case Enemy::ATACK:
+		currentAnim = &atackAnim;
+		if (atackAnim.HasFinished() == true) state = IDLE;
+		break;
+	default:
+		break;
+	}
+	
+
+}
+
+
+void Pokapoka::CheckDirection()
+{
+	srand((unsigned)time(0));
+	Direction avaibleDirections[4];
+	int avaibleCount = 0;
+	int randDirection = 0;
+	bool canContinue = false;
+
+	int x = (colliderPosition.x - 24) / 16;
+	int y = (colliderPosition.y - 32) / 16;
+
+	if (y != 10) {
+		if (App->sceneLevel_1->grid[x][y + 1] == 0)
+		{
+			avaibleDirections[avaibleCount] = DOWN;
+			avaibleCount++;
+		}
+	}
+	if (y != 0)
+	{
+		if (App->sceneLevel_1->grid[x][y - 1] == 0)
+		{
+			avaibleDirections[avaibleCount] = UP;
+			avaibleCount++;
+		}
+	}
+	if (x != 0)
+	{
+		if (App->sceneLevel_1->grid[x - 1][y] == 0)
+		{
+			avaibleDirections[avaibleCount] = LEFT;
+			avaibleCount++;
+		}
+	}
+	if (x != 12) {
+		if (App->sceneLevel_1->grid[x + 1][y] == 0)
+		{
+			avaibleDirections[avaibleCount] = RIGHT;
+			avaibleCount++;
+		}
+	}
+	
+	for (int i = 0; i < avaibleCount; i++) {
+		if (avaibleDirections[i] == direction) canContinue = true;
+	}
+
+	if (canContinue == true)
+	{
+		int randnum = rand() % (100);
+
+		if (randnum >60) {
+			canContinue = false;
+		}
+	}
+
+	if (avaibleDirections > 0 && canContinue == false)
+	{
+		randDirection = rand() % avaibleCount;
+		direction = avaibleDirections[randDirection];
+
+
+		switch (direction)
+		{
+		case Enemy::UP: currentAnim = &upAnim;
+			break;
+		case Enemy::DOWN: currentAnim = &downAnim;
+			break;
+		case Enemy::RIGHT: currentAnim = &rightAnim;
+			break;
+		case Enemy::LEFT: currentAnim = &leftAnim;
+			break;
+		case Enemy::NONE:
+			break;
+		default:
+			break;
+		}
+		state = MOVE;
+	}
+	else state = IDLE;
+
+}
+
+void Pokapoka::OnCollision(Collider* collider)
+{
+	if (collider->type == Collider::Type::ENEMY)
+	{
+		/*if (direction == UP) position.y++;
+		else if (direction == DOWN) position.y--;
+		else if (direction == LEFT) position.x++;
+		else if (direction == RIGHT) position.x--;*/
+		switch (direction)
+		{
+		case UP:
+			currentAnim = &downAnim;
+			direction = DOWN;
+			break;
+
+		case DOWN:
+			direction = UP;
+			currentAnim = &upAnim;
+			break;
+
+		case RIGHT:
+			direction = LEFT;
+			currentAnim = &leftAnim;
+			break;
+
+		case LEFT:
+			direction = RIGHT;
+			currentAnim = &rightAnim;
+			break;
+		}
+	}
+
+	
 }

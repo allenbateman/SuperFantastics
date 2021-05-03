@@ -35,8 +35,6 @@ bool SceneLevel1::Start()
 	
 	// Fixed positions
 
-	GridType grid[11][13];
-
 	for (int i = 0; i < 11; i++)
 	{
 		for (int j = 0; j < 13; j++)
@@ -130,7 +128,7 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == POKAPOKA)
 			{
-				App->enemies->AddEnemy(Enemy_Type::POKAPOKA, j, i);
+				App->enemies->AddEnemy(Enemy_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == MECHA_WALKER)
 			{

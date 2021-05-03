@@ -9,20 +9,7 @@ struct SDL_Texture;
 class SceneLevel1 : public Module
 {
 private:
-	enum GridType
-	{
-		EMPTY = 0,
-		PLAYER,
-		ROCK,
-		STRUCTURE,
-		ORB,
-		POKAPOKA,
-		MECHA_WALKER,
-		MOUSE,
-		SNAIL,
-		RED_FLOWER,
-		YELLOW_FLOWER
-	};
+	
 
 public:
 	//Constructor
@@ -46,10 +33,30 @@ public:
 	// Disables the player and the enemies
 	bool CleanUp();
 
+	enum GridType
+	{
+		EMPTY = 0,
+		PLAYER,
+		ROCK,
+		STRUCTURE,
+		ORB,
+		POKAPOKA,
+		MECHA_WALKER,
+		MOUSE,
+		SNAIL,
+		RED_FLOWER,
+		YELLOW_FLOWER
+	};
+
+
 public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
+	GridType grid[11][13];
+
+	
+
 };
 
 #endif
