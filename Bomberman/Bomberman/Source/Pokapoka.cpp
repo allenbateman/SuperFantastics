@@ -10,7 +10,10 @@ Pokapoka::Pokapoka(int x, int y) : Enemy(x, y)
 	position.x = x;
 	position.y = y;
 
-	Animation atackAnim;
+	idleAnim.PushBack({ 0,0,16,32 });
+	idleAnim.loop = true;
+	idleAnim.mustFlip = false;
+	idleAnim.speed = 0.1f;
 
 	// atack
 	atackAnim.PushBack({ 176,0,16,32 });
@@ -71,28 +74,33 @@ void Pokapoka::Update()
 {
 	Enemy::Update();
 
+
 	switch (state)
 	{
 	case Enemy::IDLE:
+		
+		currentAnim = &idleAnim;
 		CheckDirection();
-		currentAnim = &rightAnim;
 		break;
 
 	case Enemy::MOVE:
 		if ((App->frameCounter % 2)) {
 
 			if ((colliderPosition.x - 24) %16==0 && (colliderPosition.y - 32) % 16==0) CheckDirection();
-			App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
+			
+			if (state != IDLE)
+			{
+				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
+				if (direction == UP) position.y--;
+				else if (direction == DOWN) position.y++;
+				else if (direction == LEFT) position.x--;
+				else if (direction == RIGHT) position.x++;
 
-			if (direction == UP) position.y--;
-			else if (direction == DOWN) position.y++;
-			else if (direction == LEFT) position.x--;
-			else if (direction == RIGHT) position.x++;
+				colliderPosition.x = position.x;
+				colliderPosition.y = position.y + 16;
 
-			colliderPosition.x = position.x;
-			colliderPosition.y = position.y + 16;
-
-			App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::POKAPOKA;
+				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::POKAPOKA;
+			}
 		}
 		
 		break;
@@ -110,8 +118,7 @@ void Pokapoka::Update()
 
 
 void Pokapoka::CheckDirection()
-{
-	srand((unsigned)time(0));
+ {
 	Direction avaibleDirections[4];
 	int avaibleCount = 0;
 	int randDirection = 0;
@@ -121,7 +128,7 @@ void Pokapoka::CheckDirection()
 	int y = (colliderPosition.y - 32) / 16;
 
 	if (y != 10) {
-		if (App->sceneLevel_1->grid[x][y + 1] == 0)
+		if (App->sceneLevel_1->grid[y + 1][x] == SceneLevel1::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = DOWN;
 			avaibleCount++;
@@ -129,7 +136,7 @@ void Pokapoka::CheckDirection()
 	}
 	if (y != 0)
 	{
-		if (App->sceneLevel_1->grid[x][y - 1] == 0)
+		if (App->sceneLevel_1->grid[y - 1][x] == SceneLevel1::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = UP;
 			avaibleCount++;
@@ -137,14 +144,14 @@ void Pokapoka::CheckDirection()
 	}
 	if (x != 0)
 	{
-		if (App->sceneLevel_1->grid[x - 1][y] == 0)
+		if (App->sceneLevel_1->grid[y][x - 1] == SceneLevel1::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = LEFT;
 			avaibleCount++;
 		}
 	}
 	if (x != 12) {
-		if (App->sceneLevel_1->grid[x + 1][y] == 0)
+		if (App->sceneLevel_1->grid[y][x + 1] == SceneLevel1::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = RIGHT;
 			avaibleCount++;
@@ -164,7 +171,7 @@ void Pokapoka::CheckDirection()
 		}
 	}
 
-	if (avaibleDirections > 0 && canContinue == false)
+	if (avaibleCount > 0 && canContinue == false)
 	{
 		randDirection = rand() % avaibleCount;
 		direction = avaibleDirections[randDirection];

@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 #include "SDL.h"
+#include "SceneLevel1.h"
 #include <stdio.h>
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
@@ -166,6 +167,14 @@ Update_Status ModulePlayer::Update()
 	if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
 		position = lastPos;
 	}
+
+	if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
+	{
+		App->sceneLevel_1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
+		App->sceneLevel_1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
+
+	}
+		
 
 	return Update_Status::UPDATE_CONTINUE;
 }

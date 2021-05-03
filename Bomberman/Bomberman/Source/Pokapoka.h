@@ -21,6 +21,6 @@ private:
 
 
 	// Enemy animations
-	Animation upAnim, downAnim, leftAnim, rightAnim, atackAnim, deathAnim;
+	Animation upAnim, downAnim, leftAnim, rightAnim, atackAnim, deathAnim, idleAnim;
 };
 
