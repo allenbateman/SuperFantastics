@@ -100,7 +100,7 @@ bool ModulePlayer::Start()
 Update_Status ModulePlayer::Update()
 {
 	lastPos = position;
-	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
 	{
 		position.x -= speed;
 		if (currentAnimation != &leftAnim)
@@ -109,7 +109,9 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &leftAnim;
 			currentIdleAnim = leftIdleAnim;
 		}
-	}else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+		lastKeyPressed = SDL_SCANCODE_LEFT;
+	}
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
 	{
 		position.x += speed;
 		if (currentAnimation != &rightAnim)
@@ -118,7 +120,9 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 			currentIdleAnim = rightIdleAnim;
 		}
-	}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
+		lastKeyPressed = SDL_SCANCODE_RIGHT;
+	}
+	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT)
 	{
 		position.y += speed;
 		if (currentAnimation != &downAnim)
@@ -127,7 +131,9 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &downAnim;
 			currentIdleAnim = downIdleAnim;
 		}
-	}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
+		lastKeyPressed = SDL_SCANCODE_DOWN;
+	}
+	if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (currentAnimation != &upAnim)
@@ -136,26 +142,32 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &upAnim;
 			currentIdleAnim = upIdleAnim;
 		}
+		lastKeyPressed = SDL_SCANCODE_UP;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN)
 	{
 		//add bomb here
-		//Particle* newParticle = App->particles->AddParticle(App->particles->bomb, position.x, position.y, Collider::Type::PLAYER_SHOT);
+		//Particle* newParticle = App->particles->AddParticle(App->particles->bomb, position.x, position.y, Collider::Type::BOMB);
 		//newParticle->collider->AddListener(this);
 		//App->audio->PlayFx(laserFx);
 	}
 
 	// If no movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE 
-		&& App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_IDLE)
+	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE)
 		currentAnimation = &currentIdleAnim;
 
 	collider->SetPos(position.x, position.y);
 	
 	currentAnimation->Update();
+
+	//check border colliders
+	if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
+		position = lastPos;
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -177,6 +189,63 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::WALL)
 	{
-		position = lastPos;
+		switch (lastKeyPressed)
+		{
+			case SDL_SCANCODE_LEFT:
+				position.x += speed;
+				if (position.y + 16 >= c2->rect.y + 23)
+				{
+					position.y += 1;
+					position.x -= 1;
+				}
+				if (position.y <= c2->rect.y - 7)
+				{
+					position.y -= 1;
+					position.x -= 1;
+				}
+				break;
+			case SDL_SCANCODE_RIGHT:
+				position.x -= speed;
+				if (position.y + 16 >= c2->rect.y + 23)
+				{
+					position.y += 1;
+					position.x += 1;
+				}
+				if (position.y <= c2->rect.y - 7)
+				{
+					position.y -= 1;
+					position.x += 1;
+				}
+				break;
+			case SDL_SCANCODE_DOWN:
+				position.y -= speed;
+				if (position.x + 16 <= c2->rect.x + 7)
+				{
+					position.x -= 1;
+					position.y += 1;
+				}
+				if (position.x >= c2->rect.x + 9)
+				{
+					position.x += 1;
+					position.y += 1;
+				}
+				break;
+			case SDL_SCANCODE_UP:
+				position.y += speed;
+				if (position.x + 16 <= c2->rect.x + 7)
+				{
+					position.x -= 1;
+					position.y -= 1;
+				}
+				if (position.x >= c2->rect.x + 9)
+				{
+					position.x += 1;
+					position.y -= 1;
+				}
+				break;
+			 default:
+				break;
+		}
+		c1->SetPos(position.x, position.y);
 	}
 }
