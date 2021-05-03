@@ -33,6 +33,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 public:
+	int lastKeyPressed = 0;
 	// Position of the player in the map
 	iPoint position;
 	iPoint lastPos;
