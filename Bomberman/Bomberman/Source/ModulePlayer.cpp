@@ -148,7 +148,7 @@ Update_Status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN)
 	{
 		//add bomb here
-		//Particle* newParticle = App->particles->AddParticle(App->particles->bomb, position.x, position.y, Collider::Type::PLAYER_SHOT);
+		//Particle* newParticle = App->particles->AddParticle(App->particles->bomb, position.x, position.y, Collider::Type::BOMB);
 		//newParticle->collider->AddListener(this);
 		//App->audio->PlayFx(laserFx);
 	}
@@ -165,12 +165,8 @@ Update_Status ModulePlayer::Update()
 	currentAnimation->Update();
 
 	//check border colliders
-	if (position.y < 32 || position.y > 56 ) {
-		//position = lastPos;
-	}
-	if (position.x < 24)
-	{
-		//position = lastPos;
+	if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
+		position = lastPos;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
