@@ -36,7 +36,6 @@ public:
 public:
 	// The current position in the world
 	iPoint position;
-	iPoint colliderPosition;
 
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;
@@ -46,19 +45,6 @@ public:
 
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
-	
-	bool canMove = false;
-
-	enum Direction
-	{
-		UP,
-		DOWN,
-		RIGHT,
-		LEFT,
-		NONE
-	};
-
-	Direction direction;
 
 protected:
 	// A ptr to the current animation
