@@ -35,6 +35,7 @@ public:
 public:
 	// Position of the player in the map
 	iPoint position;
+	iPoint lastPos;
 
 	// The speed in which we move the player (pixels per frame)
 	int speed = 1;

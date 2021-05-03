@@ -99,6 +99,7 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	lastPos = position;
 	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
 	{
 		position.x -= speed;
@@ -108,13 +109,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &leftAnim;
 			currentIdleAnim = leftIdleAnim;
 		}
-		movedLeft = true;
-	}
-	else {
-		movedLeft = false;
-	}
-
-	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+	}else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 	{
 		position.x += speed;
 		if (currentAnimation != &rightAnim)
@@ -123,13 +118,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 			currentIdleAnim = rightIdleAnim;
 		}
-		movedRight = true;
-	}
-	else {
-		movedRight = false;
-	}
-
-	if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
+	}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
 	{
 		position.y += speed;
 		if (currentAnimation != &downAnim)
@@ -138,13 +127,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &downAnim;
 			currentIdleAnim = downIdleAnim;
 		}
-		movedDown = true;
-	}
-	else {
-		movedDown = false;
-	}
-
-	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
+	}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (currentAnimation != &upAnim)
@@ -153,10 +136,6 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &upAnim;
 			currentIdleAnim = upIdleAnim;
 		}
-		movedUp = true;
-	}
-	else {
-		movedUp = false;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
@@ -175,7 +154,7 @@ Update_Status ModulePlayer::Update()
 		currentAnimation = &currentIdleAnim;
 
 	collider->SetPos(position.x, position.y);
-
+	
 	currentAnimation->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -198,63 +177,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::WALL)
 	{
-		if (movedLeft)
-		{
-			position.x += speed;
-			if (position.y + 16 >= c2->rect.y + 23)
-			{
-				position.y += 1;
-				position.x -= 1;
-			}
-			if (position.y <= c2->rect.y - 7)
-			{
-				position.y -= 1;
-				position.x -= 1;
-			}
-		}
-		if (movedRight)
-		{
-			position.x -= speed;
-			if (position.y + 16 >= c2->rect.y + 23)
-			{
-				position.y += 1;
-				position.x += 1;
-			}
-			if (position.y <= c2->rect.y - 7)
-			{
-				position.y -= 1;
-				position.x += 1;
-			}
-		}
-		if(movedUp)
-		{
-			position.y += speed;
-			if (position.x + 16 <= c2->rect.x + 7)
-			{
-				position.x -= 1;
-				position.y -= 1;
-			}
-			if (position.x >= c2->rect.x + 9)
-			{
-				position.x += 1;
-				position.y -= 1;
-			}
-		}
-		if (movedDown)
-		{
-			position.y -= speed;
-			if (position.x + 16 <= c2->rect.x + 7)
-			{
-				position.x -= 1;
-				position.y += 1;
-			}
-			if (position.x >= c2->rect.x + 9)
-			{
-				position.x += 1;
-				position.y += 1;
-			}
-		}
-
-		c1->SetPos(position.x, position.y);
+		position = lastPos;
 	}
 }
