@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
+#include "YellowFlower.h"
 #include "Enemy_RedBird.h"
 #include "Enemy_BrownShip.h"
 #include "Enemy_Mech.h"
@@ -159,6 +160,12 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
+				case Enemy_Type::YELLOW_FLOWER:
+					enemies[i] = new YellowFlower(info.x, info.y);
+					break;
+				case Enemy_Type::ORB:
+					enemies[i] = new YellowFlower(info.x, info.y);
+					break;
 				case Enemy_Type::REDBIRD:
 					enemies[i] = new Enemy_RedBird(info.x, info.y);
 					break;

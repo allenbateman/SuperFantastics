@@ -45,9 +45,9 @@ bool SceneLevel1::Start()
 		}
 	}
 
-	for (int i = 1; i < 10; i += 2)
+	for (int i = 1; i < 11; i += 2)
 	{
-		for (int j = 1; j < 14; j += 2)
+		for (int j = 1; j < 13; j += 2)
 		{
 			grid[i][j] = ROCK;
 		}
@@ -114,13 +114,17 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == YELLOW_FLOWER)
 			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::YELLOW_FLOWER);
+				App->enemies->AddEnemy(Enemy_Type::YELLOW_FLOWER, j, i);
 			}
 			else if (grid[i][j] == RED_FLOWER)
 			{
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::RED_FLOWER);
 			}
-			else if (grid[i][j] == ORB || grid[i][j] == STRUCTURE)
+			else if (grid[i][j] == ORB)
+			{
+				App->enemies->AddEnemy(Enemy_Type::ORB, j, i);
+			}
+			else if (grid[i][j] == STRUCTURE)
 			{
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::STRUCTURE);
 			}

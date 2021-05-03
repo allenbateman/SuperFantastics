@@ -13,7 +13,9 @@ enum class Enemy_Type
 	MECH,
 	POKAPOKA,
 	MECHA_WALKER,
-	RED_FLOWER
+	YELLOW_FLOWER,
+	RED_FLOWER,
+	ORB
 };
 
 struct EnemySpawnpoint
