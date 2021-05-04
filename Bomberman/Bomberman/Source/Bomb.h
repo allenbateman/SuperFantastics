@@ -23,5 +23,5 @@ private:
 	};
 
 	State state = IDLE;
-
+	int frameSpawn = 0;
 };

@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleTextures.h"
+#include "ModuleEnemies.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
@@ -185,6 +186,9 @@ Update_Status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN)
 	{
+		if (App->enemies->bombCount < maxBombs) {
+			App->enemies->AddEnemy(Enemy_Type::BOMB, position.x, position.y);
+		}
 		//add bomb here
 		//Particle* newParticle = App->particles->AddParticle(App->particles->bomb, position.x, position.y, Collider::Type::BOMB);
 		//newParticle->collider->AddListener(this);

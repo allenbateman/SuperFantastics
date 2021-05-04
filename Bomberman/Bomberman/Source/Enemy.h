@@ -3,6 +3,7 @@
 
 #include "p2Point.h"
 #include "Animation.h"
+#include "ModuleEnemies.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -40,6 +41,8 @@ public:
 	// The current position in the world
 	iPoint position;
 	iPoint colliderPosition;
+
+	Enemy_Type type;
 
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;

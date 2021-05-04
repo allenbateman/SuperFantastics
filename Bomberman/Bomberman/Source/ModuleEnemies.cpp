@@ -11,6 +11,7 @@
 #include "Orb.h"
 #include "MiddleStructure.h"
 #include "Pokapoka.h"
+#include "Bomb.h"
 
 #define SPAWN_MARGIN 50
 
@@ -43,6 +44,9 @@ Update_Status ModuleEnemies::PreUpdate()
 	{
 		if (enemies[i] != nullptr && enemies[i]->pendingToDelete)
 		{
+			if (enemies[i]->type == Enemy_Type::BOMB) {
+				bombCount--;
+			}
 			delete enemies[i];
 			enemies[i] = nullptr;
 		}
@@ -171,9 +175,14 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case Enemy_Type::POKAPOKA:
 					enemies[i] = new Pokapoka(info.x, info.y);
 					break;
+				case Enemy_Type::BOMB:
+					enemies[i] = new Bomb(info.x, info.y);
+					bombCount++;
+					break;
 			}
 			enemies[i]->texture = texture;
 			enemies[i]->destroyedFx = enemyDestroyedFx;
+			enemies[i]->type = info.type;
 			break;
 		}
 	}

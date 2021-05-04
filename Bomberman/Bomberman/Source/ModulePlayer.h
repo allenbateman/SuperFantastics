@@ -78,6 +78,9 @@ public:
 	bool movedRight = false;
 
 	SDL_Texture* scoreboardFont = nullptr;
+
+	// Player powers
+	int maxBombs = 1;
 };
 
 #endif //!__MODULE_PLAYER_H__

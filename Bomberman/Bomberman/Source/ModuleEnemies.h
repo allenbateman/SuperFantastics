@@ -13,7 +13,8 @@ enum class Enemy_Type
 	ORB,
 	MIDDLE_STRUCTURE,
 	POKAPOKA,
-	MECHA_WALKER
+	MECHA_WALKER,
+	BOMB
 };
 
 struct EnemySpawnpoint
@@ -67,6 +68,7 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
+	int bombCount = 0;
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
