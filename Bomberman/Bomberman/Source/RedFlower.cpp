@@ -29,10 +29,10 @@ void RedFlower::Update()
 
 	switch (state)
 	{
-	case Enemy::DEATH:
+	case Enemy::IDLE:
 		currentAnim = &idleAnim;
 		break;
-	case Enemy::IDLE:
+	case Enemy::DEATH:
 		currentAnim = &deathAnim;
 		if (deathAnim.HasFinished() == true) SetToDelete();
 		break;
