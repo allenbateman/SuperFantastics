@@ -90,8 +90,7 @@ bool ModulePlayer::Start()
 	collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
 
 	// LOAD UI FONT
-	//char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
-	//scoreFont = App->fonts->Load("Assets/Fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
+	scoreboardFont = App->textures->Load("Assets/Fonts/interface.png");
 
 	return ret;
 }
@@ -296,4 +295,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 		c1->SetPos(position.x, position.y);
 	}
+}
+
+void ModulePlayer::DrawScoreboard()
+{
+
 }
