@@ -36,7 +36,11 @@ void Powerup::Draw()
 
 void Powerup::OnCollision(Collider* collider)
 {
-	SetToDelete();
+	if (collider->PLAYER)
+	{
+		//Add stats
+		SetToDelete();
+	}
 }
 
 const Collider* Powerup::GetCollider() const
