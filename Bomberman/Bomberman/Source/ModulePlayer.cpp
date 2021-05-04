@@ -99,8 +99,7 @@ bool ModulePlayer::Start()
 Update_Status ModulePlayer::Update()
 {
 	lastPos = position;
-	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
-	{
+	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT){
 		position.x -= speed;
 		if (currentAnimation != &leftAnim)
 		{
@@ -109,9 +108,19 @@ Update_Status ModulePlayer::Update()
 			currentIdleAnim = leftIdleAnim;
 		}
 		lastKeyPressed = SDL_SCANCODE_LEFT;
-	}
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
-	{
+
+		if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.y -= speed;
+			isStuck = false;
+		}
+		else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.y += speed;
+			isStuck = false;
+		}
+
+	}else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT){
 		position.x += speed;
 		if (currentAnimation != &rightAnim)
 		{
@@ -120,9 +129,19 @@ Update_Status ModulePlayer::Update()
 			currentIdleAnim = rightIdleAnim;
 		}
 		lastKeyPressed = SDL_SCANCODE_RIGHT;
-	}
-	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT)
-	{
+
+		if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.y -= speed;
+			isStuck = false;
+		}
+		else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.y += speed;
+			isStuck = false;
+		}
+
+	}else	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT){
 		position.y += speed;
 		if (currentAnimation != &downAnim)
 		{
@@ -131,9 +150,19 @@ Update_Status ModulePlayer::Update()
 			currentIdleAnim = downIdleAnim;
 		}
 		lastKeyPressed = SDL_SCANCODE_DOWN;
-	}
-	if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT)
-	{
+
+		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.x -= speed;
+			isStuck = false;
+		}
+		else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.x += speed;
+			isStuck = false;
+		}
+
+	}else if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT){
 		position.y -= speed;
 		if (currentAnimation != &upAnim)
 		{
@@ -142,6 +171,17 @@ Update_Status ModulePlayer::Update()
 			currentIdleAnim = upIdleAnim;
 		}
 		lastKeyPressed = SDL_SCANCODE_UP;
+
+		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.x -= speed;
+			isStuck = false;
+		}
+		else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
+		{
+			position.x += speed;
+			isStuck = false;
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN)
@@ -194,8 +234,9 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == Collider::Type::WALL)
+	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER)
 	{
+		isStuck = true;
 		switch (lastKeyPressed)
 		{
 			case SDL_SCANCODE_LEFT:

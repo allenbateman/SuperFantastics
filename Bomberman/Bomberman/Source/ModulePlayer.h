@@ -34,6 +34,7 @@ public:
 
 public:
 	int lastKeyPressed = 0;
+	bool isStuck=false;
 	// Position of the player in the map
 	iPoint position;
 	iPoint lastPos;
