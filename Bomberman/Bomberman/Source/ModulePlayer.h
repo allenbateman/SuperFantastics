@@ -79,6 +79,7 @@ public:
 	bool movedDown = false;
 	bool movedLeft = false;
 	bool movedRight = false;
+	bool death = false;
 
 	SDL_Texture* scoreboardFont = nullptr;
 

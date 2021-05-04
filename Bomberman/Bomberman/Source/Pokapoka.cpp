@@ -80,7 +80,7 @@ Pokapoka::Pokapoka(int x, int y) : Enemy(x, y)
 	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	colliderPosition.x = position.x;
 	colliderPosition.y = position.y + 16;
-	App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
+	App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::EMPTY;
 }
 
 
@@ -104,7 +104,7 @@ void Pokapoka::Update()
 			
 			if (state != IDLE)
 			{
-				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
+				App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::EMPTY;
 				if (direction == UP) position.y--;
 				else if (direction == DOWN) position.y++;
 				else if (direction == LEFT) position.x--;
@@ -113,7 +113,7 @@ void Pokapoka::Update()
 				colliderPosition.x = position.x;
 				colliderPosition.y = position.y + 16;
 
-				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::POKAPOKA;
+				App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::POKAPOKA;
 			}
 		}
 		
@@ -153,11 +153,14 @@ void Pokapoka::CheckDirection()
 	}
 	if (y != 0)
 	{
-		if (App->sceneLevel_1->grid[y - 1][x] == SceneLevel1::GridType::EMPTY)
+		if (y != 5 && x != 6)
 		{
-			avaibleDirections[avaibleCount] = UP;
-			avaibleCount++;
-		}
+			if (App->sceneLevel_1->grid[y - 1][x] == SceneLevel1::GridType::EMPTY)
+			{
+				avaibleDirections[avaibleCount] = UP;
+				avaibleCount++;
+			}
+		}		
 	}
 	if (x != 0)
 	{

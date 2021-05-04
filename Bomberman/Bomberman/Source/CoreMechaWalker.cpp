@@ -86,7 +86,7 @@ void CoreMechaWalker::Update()
 				if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
 				if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
 
-				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
+				App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::EMPTY;
 				if (direction == UP) position.y--;
 				else if (direction == DOWN) position.y++;
 				else if (direction == LEFT) position.x--;
@@ -95,7 +95,7 @@ void CoreMechaWalker::Update()
 				colliderPosition.x = position.x + 8;
 				colliderPosition.y = position.y + 16;
 
-				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::MECHA_WALKER;
+				App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::MECHA_WALKER;
 			}
 		}
 
@@ -130,10 +130,13 @@ void CoreMechaWalker::CheckDirection()
 	}
 	if (y != 0)
 	{
-		if (App->sceneLevel_1->grid[y - 1][x] == SceneLevel1::GridType::EMPTY)
+		if (y != 5 && x != 6)
 		{
-			avaibleDirections[avaibleCount] = UP;
-			avaibleCount++;
+			if (App->sceneLevel_1->grid[y - 1][x] == SceneLevel1::GridType::EMPTY)
+			{
+				avaibleDirections[avaibleCount] = UP;
+				avaibleCount++;
+			}
 		}
 	}
 	if (x != 0)

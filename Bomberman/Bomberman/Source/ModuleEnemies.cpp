@@ -13,6 +13,7 @@
 #include "MiddleStructure.h"
 #include "Pokapoka.h"
 #include "Bomb.h"
+#include "CoreMechaWalker.h"
 
 #define SPAWN_MARGIN 50
 
@@ -178,6 +179,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case Enemy_Type::POKAPOKA:
 					enemies[i] = new Pokapoka(info.x, info.y);
+					break;
+				case Enemy_Type::MECHA_WALKER:
+					enemies[i] = new CoreMechaWalker(info.x, info.y);
 					break;
 				case Enemy_Type::BOMB:
 					enemies[i] = new Bomb(info.x, info.y);
