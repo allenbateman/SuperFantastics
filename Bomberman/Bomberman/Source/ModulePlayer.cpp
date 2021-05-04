@@ -71,7 +71,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	structureIdle.PushBack({ 96, 98, 48, 64 });
 	structureIdle.PushBack({ 144, 98, 48, 64 });
 	structureIdle.loop = true;
-	structureIdle.speed = 0.1f;
+	structureIdle.speed = 0.05f;
 }
 
 ModulePlayer::~ModulePlayer()

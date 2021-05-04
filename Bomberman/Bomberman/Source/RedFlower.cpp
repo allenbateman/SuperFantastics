@@ -8,6 +8,7 @@ RedFlower::RedFlower(int x, int y) : Enemy(x, y)
 {
 	position.x = 24 + (x * 16);
 	position.y = 32 + (y * 16);
+	state = IDLE;
 
 	App->collisions->AddCollider({ 24 + (x * 16),32 + (y * 16),16,16 }, Collider::Type::RED_FLOWER);
 
@@ -16,7 +17,7 @@ RedFlower::RedFlower(int x, int y) : Enemy(x, y)
 	deathAnim.PushBack({ 304, 0, 16, 16 });
 	deathAnim.PushBack({ 320, 0, 16, 16 });
 	deathAnim.PushBack({ 336, 0, 16, 16 });
-	deathAnim.PushBack({ 356, 0, 16, 16 });
+	deathAnim.PushBack({ 352, 0, 16, 16 });
 	idleAnim.loop = false;
 	idleAnim.mustFlip = false;
 	idleAnim.speed = 0.1f;
@@ -28,10 +29,10 @@ void RedFlower::Update()
 
 	switch (state)
 	{
-	case Enemy::DEATH:
+	case Enemy::IDLE:
 		currentAnim = &idleAnim;
 		break;
-	case Enemy::IDLE:
+	case Enemy::DEATH:
 		currentAnim = &deathAnim;
 		break;
 	}
