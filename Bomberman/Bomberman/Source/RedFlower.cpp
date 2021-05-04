@@ -14,13 +14,13 @@ RedFlower::RedFlower(int x, int y) : Enemy(x, y)
 
 	idleAnim.PushBack({ 400, 16, 16, 16 });
 
-	deathAnim.PushBack({ 304, 0, 16, 16 });
-	deathAnim.PushBack({ 320, 0, 16, 16 });
-	deathAnim.PushBack({ 336, 0, 16, 16 });
-	deathAnim.PushBack({ 352, 0, 16, 16 });
-	idleAnim.loop = false;
-	idleAnim.mustFlip = false;
-	idleAnim.speed = 0.1f;
+	deathAnim.PushBack({ 416, 0, 16, 16 });
+	deathAnim.PushBack({ 432, 0, 16, 16 });
+	deathAnim.PushBack({ 448, 0, 16, 16 });
+	deathAnim.PushBack({ 464, 0, 16, 16 });
+	deathAnim.loop = false;
+	deathAnim.mustFlip = false;
+	deathAnim.speed = 0.1f;
 }
 
 void RedFlower::Update()
@@ -29,11 +29,12 @@ void RedFlower::Update()
 
 	switch (state)
 	{
-	case Enemy::IDLE:
+	case Enemy::DEATH:
 		currentAnim = &idleAnim;
 		break;
-	case Enemy::DEATH:
+	case Enemy::IDLE:
 		currentAnim = &deathAnim;
+		if (deathAnim.HasFinished() == true) SetToDelete();
 		break;
 	}
 	
@@ -44,6 +45,5 @@ void RedFlower::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::BOMB) {
 		state = DEATH;
-		SetToDelete();
 	}
 }
