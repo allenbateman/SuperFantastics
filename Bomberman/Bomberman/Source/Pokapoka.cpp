@@ -60,6 +60,19 @@ Pokapoka::Pokapoka(int x, int y) : Enemy(x, y)
 	rightAnim.loop = true;
 	rightAnim.mustFlip = true;
 	rightAnim.speed = 0.1f;
+
+	// death
+	deathAnim.PushBack({ 256,0,16,32 });
+	deathAnim.PushBack({ 272,0,16,32 });
+	deathAnim.PushBack({ 288,0,16,32 });
+	deathAnim.PushBack({ 304,0,16,32 });
+	deathAnim.PushBack({ 320,0,16,32 });
+	deathAnim.PushBack({ 336,0,16,32 });
+	deathAnim.PushBack({ 352,0,16,32 });
+	deathAnim.PushBack({ 368,0,16,32 });
+	deathAnim.loop = false;
+	deathAnim.mustFlip = false;
+	deathAnim.speed = 0.1f;
 	
 	currentAnim = &rightAnim;
 	state = IDLE;
@@ -111,7 +124,7 @@ void Pokapoka::Update()
 		if (atackAnim.HasFinished() == true) state = IDLE;
 		break;
 	case Enemy::DEATH:
-
+		if (deathAnim.HasFinished()==true) SetToDelete();
 		break;
 	default:
 		break;
@@ -170,7 +183,7 @@ void Pokapoka::CheckDirection()
 	{
 		int randnum = rand() % (100);
 
-		if (randnum >60) {
+		if (randnum < 90) {
 			canContinue = false;
 		}
 	}
@@ -206,7 +219,7 @@ void Pokapoka::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::BOMB) {
 		state = DEATH;
-		SetToDelete();
+		currentAnim = &deathAnim;
 	}
 	if (collider->type == Collider::Type::ENEMY)
 	{
