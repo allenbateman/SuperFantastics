@@ -10,7 +10,8 @@ The player, following the story line, will travel arround different biomas and f
 ## Controls
 
 -Arrows for movement.
--Z to place bomb
+
+-Z to place bomb.
 
 ## Members
 
