@@ -62,7 +62,8 @@ public:
 	{
 		IDLE,
 		MOVE,
-		ATACK
+		ATACK,
+		DEATH
 	};
 
 	State state;
