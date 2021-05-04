@@ -15,6 +15,13 @@ public:
 
 
 private:
+
+	int upCount, downCount, leftCount, rightCount;
+
+	int bombTimer = 300;
+	int explosionTimer = 150;
+	int frameExplode;
+
 	Animation idleAnim, centerAnim, horSideAnim, leftExtrAnim, rightExtrAnim, vertSideAnim, upExtrAnim, downExtrAnim;
 
 	enum State {

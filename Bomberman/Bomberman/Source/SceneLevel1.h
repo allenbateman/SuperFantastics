@@ -37,6 +37,7 @@ public:
 	{
 		EMPTY = 0,
 		PLAYER,
+		BOMB,
 		ROCK,
 		STRUCTURE,
 		ORB,
