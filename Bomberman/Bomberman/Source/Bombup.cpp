@@ -21,5 +21,5 @@ void Bombup::Update()
 void Bombup::OnCollision(Collider* collider)
 {	
 	App->player->maxBombs ++;
-	pendingToDelete = true;
+	SetToDelete();
 }
