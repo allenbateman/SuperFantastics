@@ -21,7 +21,6 @@ struct Collider
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 		BOMB,
-
 		MAX
 	};
 

@@ -8,6 +8,7 @@
 
 #include "Enemy.h"
 #include "YellowFlower.h"
+#include "RedFlower.h"
 #include "Orb.h"
 #include "MiddleStructure.h"
 #include "Pokapoka.h"
@@ -165,6 +166,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			{
 				case Enemy_Type::YELLOW_FLOWER:
 					enemies[i] = new YellowFlower(info.x, info.y);
+					break;
+				case Enemy_Type::RED_FLOWER:
+					enemies[i] = new RedFlower(info.x, info.y);
 					break;
 				case Enemy_Type::ORB:
 					enemies[i] = new Orb(info.x, info.y);
