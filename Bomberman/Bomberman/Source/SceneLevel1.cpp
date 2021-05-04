@@ -116,7 +116,7 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == RED_FLOWER)
 			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::RED_FLOWER);
+				App->enemies->AddEnemy(Enemy_Type::RED_FLOWER, j, i);
 			}
 			else if (grid[i][j] == ORB)
 			{
