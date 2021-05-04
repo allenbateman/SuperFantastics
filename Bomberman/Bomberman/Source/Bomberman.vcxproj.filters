@@ -26,6 +26,9 @@
     <Filter Include="Source Files\Entities\Enemies">
       <UniqueIdentifier>{c465321a-28ed-404a-aa97-e9d0c6f722ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Powerups">
+      <UniqueIdentifier>{46191a70-7f13-4fe0-8070-7f7b7f664cc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -118,6 +121,9 @@
     <ClInclude Include="RedFlower.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Powerup.h">
+      <Filter>Source Files\Entities\Powerups</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -203,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="RedFlower.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Powerup.cpp">
+      <Filter>Source Files\Entities\Powerups</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

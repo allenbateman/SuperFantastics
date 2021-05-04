@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -91,6 +91,7 @@
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Pokapoka.h" />
+    <ClInclude Include="Powerup.h" />
     <ClInclude Include="RedFlower.h" />
     <ClInclude Include="SceneIntro.h" />
     <ClInclude Include="SceneLevel1.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Pokapoka.cpp" />
+    <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="RedFlower.cpp" />
     <ClCompile Include="SceneIntro.cpp" />
     <ClCompile Include="SceneLevel1.cpp" />

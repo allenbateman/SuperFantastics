@@ -14,7 +14,8 @@ enum class Enemy_Type
 	MIDDLE_STRUCTURE,
 	POKAPOKA,
 	MECHA_WALKER,
-	BOMB
+	BOMB,
+	BOMBUP
 };
 
 struct EnemySpawnpoint
