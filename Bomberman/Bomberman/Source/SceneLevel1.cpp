@@ -132,6 +132,7 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == MECHA_WALKER)
 			{
+				//App->enemies->AddEnemy(Enemy_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::ENEMY);
 			}
 		}

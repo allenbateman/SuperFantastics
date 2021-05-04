@@ -10,49 +10,45 @@ CoreMechaWalker::CoreMechaWalker(int x, int y) : Enemy(x, y)
 	position.x = x;
 	position.y = y;
 
-	idleAnim.PushBack({ 0,0,16,32 });
+
+	// idle
+	idleAnim.PushBack({ 128, 64,32,32 });
 	idleAnim.loop = true;
 	idleAnim.mustFlip = false;
 	idleAnim.speed = 0.1f;
 
 	// move up
-	upAnim.PushBack({ 112,0,16,32 });
-	upAnim.PushBack({ 128,0,16,32 });
-	upAnim.PushBack({ 144,0,16,32 });
-	upAnim.PushBack({ 160,0,16,32 });
+	upAnim.PushBack({ 192, 64,32,32 });
+	upAnim.PushBack({ 224, 64,32,32 });
 	upAnim.loop = true;
 	upAnim.mustFlip = false;
 	upAnim.speed = 0.1f;
 
 	// move down
-	downAnim.PushBack({ 0,0,16,32 });
-	downAnim.PushBack({ 16,0,16,32 });
-	downAnim.PushBack({ 32,0,16,32 });
-	downAnim.PushBack({ 48,0,16,32 });
+	downAnim.PushBack({ 128, 64,32,32 });
+	downAnim.PushBack({ 160, 64,32,32 });
 	downAnim.loop = true;
 	downAnim.mustFlip = false;
 	downAnim.speed = 0.1f;
 
 	// move left
-	leftAnim.PushBack({ 16,0,16,32 });
-	leftAnim.PushBack({ 64,0,16,32 });
-	leftAnim.PushBack({ 80,0,16,32 });
-	leftAnim.PushBack({ 96,0,16,32 });
+	leftAnim.PushBack({ 256, 64,32,32 });
+	leftAnim.PushBack({ 288, 64,32,32 });
+	leftAnim.PushBack({ 320, 64,32,32 });
 	leftAnim.loop = true;
 	leftAnim.mustFlip = false;
 	leftAnim.speed = 0.1f;
 
 	// move right
-	rightAnim.PushBack({ 16,0,16,32 });
-	rightAnim.PushBack({ 64,0,16,32 });
-	rightAnim.PushBack({ 80,0,16,32 });
-	rightAnim.PushBack({ 96,0,16,32 });
+	rightAnim.PushBack({ 256, 64,32,32 });
+	rightAnim.PushBack({ 288, 64,32,32 });
+	rightAnim.PushBack({ 320, 64,32,32 });
 	rightAnim.loop = true;
 	rightAnim.mustFlip = true;
 	rightAnim.speed = 0.1f;
 
 	// death
-	deathAnim.PushBack({ 256,0,16,32 });
+	deathAnim.PushBack({ 352, 64,32,32 });
 	deathAnim.loop = false;
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
@@ -60,8 +56,8 @@ CoreMechaWalker::CoreMechaWalker(int x, int y) : Enemy(x, y)
 	currentAnim = &idleAnim;
 	state = IDLE;
 	direction = RIGHT;
-	collider = App->collisions->AddCollider({ 0, 0, 16, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	colliderPosition.x = position.x;
+	collider = App->collisions->AddCollider({ 8, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	colliderPosition.x = position.x + 8;
 	colliderPosition.y = position.y + 16;
 	App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
 }
@@ -87,13 +83,16 @@ void CoreMechaWalker::Update()
 
 			if (state != IDLE)
 			{
+				if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
+				if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
+
 				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
 				if (direction == UP) position.y--;
 				else if (direction == DOWN) position.y++;
 				else if (direction == LEFT) position.x--;
 				else if (direction == RIGHT) position.x++;
 
-				colliderPosition.x = position.x;
+				colliderPosition.x = position.x + 8;
 				colliderPosition.y = position.y + 16;
 
 				App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::MECHA_WALKER;
@@ -161,7 +160,7 @@ void CoreMechaWalker::CheckDirection()
 	{
 		int randnum = rand() % (100);
 
-		if (randnum < 90) {
+		if (randnum < 60) {
 			canContinue = false;
 		}
 	}
