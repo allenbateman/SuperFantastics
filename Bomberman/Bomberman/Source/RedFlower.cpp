@@ -37,8 +37,6 @@ void RedFlower::Update()
 		if (deathAnim.HasFinished() == true) SetToDelete();
 		break;
 	}
-	
-
 }
 
 void RedFlower::OnCollision(Collider* collider)

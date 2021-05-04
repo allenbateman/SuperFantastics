@@ -85,6 +85,7 @@ public:
 
 	// Player powers
 	int maxBombs = 1;
+	int rangeExplosion = 3;
 };
 
 #endif //!__MODULE_PLAYER_H__
