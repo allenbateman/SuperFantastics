@@ -15,7 +15,7 @@ public:
 
 
 private:
-	Animation idleAnim, leftAnim, rightAnim, upAnim, downAnim, centerAnim;
+	Animation idleAnim, centerAnim, horSideAnim, leftExtrAnim, rightExtrAnim, vertSideAnim, upExtrAnim, downExtrAnim;
 
 	enum State {
 		IDLE,
