@@ -26,13 +26,14 @@ bool SceneLevel1::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 
+	numTex = App->textures->Load("Assets/Fonts/interface.png");
 	LOG("Loading background assets");
 
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/background.png");
-	App->audio->PlayMusic("Assets/Music/Area 1 - Jammin' Jungle.ogg", 1.0f);
-	
+	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+
 	// Fixed positions
 
 	for (int i = 0; i < 11; i++)
@@ -97,16 +98,16 @@ bool SceneLevel1::Start()
 	// generate scene elements or rock collisions
 
 	for (int i = 0; i < 11; i++) {
-		for (int j = 0; j < 13; j++) 
+		for (int j = 0; j < 13; j++)
 		{
 			if (grid[i][j] == PLAYER)
 			{
-			iPoint pos;
-			pos.x = 24 + j * 16;
-			pos.y = 32 + i * 16;
-			App->player->position = pos;
+				iPoint pos;
+				pos.x = 24 + j * 16;
+				pos.y = 32 + i * 16;
+				App->player->position = pos;
 			}
-			else if (grid[i][j] == ROCK) 
+			else if (grid[i][j] == ROCK)
 			{
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
 			}
@@ -135,10 +136,6 @@ bool SceneLevel1::Start()
 				App->enemies->AddEnemy(Enemy_Type::MECHA_WALKER, 24 - 8 + (j * 16), 32 - 16 + (i * 16));
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::ENEMY);
 			}
-			else if (grid[i][j] == BOMB)
-			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::BOMB);
-			}
 		}
 	}
 
@@ -150,15 +147,49 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
+	time = (App->frameCounter - initialFrame) / 60;
+	timeLeft = 240 - time;
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
 Update_Status SceneLevel1::PostUpdate()
 {
+	int x = 136;
+	int y = 8;
+	int score = App->player->score;
+	SDL_Rect rec = { 0 };
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
+
+	// draw score
+	int digits = 10000000;
+	for (int i = 0; i < 8; i++) {
+		int d = score / digits;
+		if (d > 0 || i > 5) {
+			rec = { d * 8,0,8,8 };
+			App->render->Blit(numTex, x + (8 * i), y, &rec);
+		}
+		score = score % digits;
+		digits /= 10;
+	}
+
+	// draw lifes
+	rec = { App->player->lifes * 8,0,8,8 };
+	App->render->Blit(numTex, 232, y, &rec);
+
+	// draw time
+	rec = { timeLeft / (60) * 8,0,8,8 };
+	App->render->Blit(numTex, 16, y, &rec);
+	rec = { (timeLeft % 60) / 10 * 8,0,8,8 };
+	App->render->Blit(numTex, 32, y, &rec);
+	rec = { (timeLeft % 10) * 8,0,8,8 };
+	App->render->Blit(numTex, 40, y, &rec);
+
+
+	//App->player->score
 	return Update_Status::UPDATE_CONTINUE;
 }
 

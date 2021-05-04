@@ -74,6 +74,7 @@ public:
 	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
+	int lifes = 3;
 
 	bool movedUp = false;
 	bool movedDown = false;
