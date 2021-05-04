@@ -65,6 +65,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	winAnim.PushBack({ 40,71,15,23 });
 	winAnim.loop = false;
 	winAnim.speed = 0.1f;
+
+	//Structure Animation
+	structureIdle.PushBack({ 48, 98, 48, 64 });
+	structureIdle.PushBack({ 96, 98, 48, 64 });
+	structureIdle.PushBack({ 144, 98, 48, 64 });
+	structureIdle.loop = true;
+	structureIdle.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -91,6 +98,7 @@ bool ModulePlayer::Start()
 
 	// LOAD UI FONT
 	scoreboardFont = App->textures->Load("Assets/Fonts/interface.png");
+	structureTexture = App->textures->Load("Assets/Sprites/enemies.png");
 
 	return ret;
 }
@@ -201,6 +209,7 @@ Update_Status ModulePlayer::Update()
 	collider->SetPos(position.x, position.y);
 	
 	currentAnimation->Update();
+	structureIdle.Update();
 
 	//check border colliders
 	if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
@@ -222,9 +231,22 @@ Update_Status ModulePlayer::PostUpdate()
 {
 	if (!destroyed)
 	{
+		if (position.y >= 80)
+		{
+			SDL_Rect rect = structureIdle.GetCurrentFrame();
+			App->render->Blit(structureTexture, 104, 64, &rect);
+		}
+
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y - 8, &rect);
+
+		if (position.y < 80)
+		{
+			rect = structureIdle.GetCurrentFrame();
+			App->render->Blit(structureTexture, 104, 64, &rect);
+		}
 	}
+
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
 
@@ -233,7 +255,7 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER)
+	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE)
 	{
 		isStuck = true;
 		switch (lastKeyPressed)
