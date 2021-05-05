@@ -229,8 +229,8 @@ Update_Status ModulePlayer::Update()
 			//Place Bomb
 			if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN)
 			{
-				if (App->enemies->bombCount < currentBombs) {
-					App->enemies->AddEntity(Entity_Type::BOMB, position.x, position.y);
+				if (App->entities->bombCount < currentBombs) {
+					App->entities->AddEntity(Entity_Type::BOMB, position.x, position.y);
 					App->audio->PlayFx(bombIsPlaced);
 				}
 			}

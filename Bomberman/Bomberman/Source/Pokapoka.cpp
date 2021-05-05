@@ -77,7 +77,7 @@ Pokapoka::Pokapoka(int x, int y) : Entity(x, y)
 	currentAnim = &rightAnim;
 	state = IDLE;
 	direction = RIGHT;
-	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
 	colliderPosition.x = position.x;
 	colliderPosition.y = position.y + 16;
 	App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::EMPTY;

@@ -56,7 +56,7 @@ CoreMechaWalker::CoreMechaWalker(int x, int y) : Entity(x, y)
 	currentAnim = &idleAnim;
 	state = IDLE;
 	direction = RIGHT;
-	collider = App->collisions->AddCollider({ 8, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ 8, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
 	colliderPosition.x = position.x + 8;
 	colliderPosition.y = position.y + 16;
 	App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;

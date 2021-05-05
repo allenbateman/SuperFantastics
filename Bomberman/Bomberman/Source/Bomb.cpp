@@ -162,8 +162,8 @@ void Bomb::Update()
 		break;
 
 	case EXPLOSION:
+		
 		SDL_Rect rect;
-
 		centerAnim.Update();
 		vertSideAnim.Update();
 		upExtrAnim.Update();
@@ -171,6 +171,8 @@ void Bomb::Update()
 		horSideAnim.Update();
 		leftExtrAnim.Update();
 		rightExtrAnim.Update();
+
+		
 
 		rect = centerAnim.GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rect);
@@ -231,11 +233,19 @@ void Bomb::Update()
 
 		if (App->frameCounter >= frameExplode + explosionTimer) {
 			// Remove all explosion colliders (No se como se hace no lo habia mirado)
+			//Loop all the colliders placed by bomb and remove them.
+			//App->collisions->RemoveCollider();
 			SetToDelete();
 		}
 		break;
 	}
 }
+
+void Bomb::Draw()
+{
+	//draw bomb here
+}
+
 
 void Bomb::OnCollision(Collider* collider)
 {

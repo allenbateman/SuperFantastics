@@ -24,7 +24,7 @@ SceneLevel1::~SceneLevel1()
 bool SceneLevel1::Start()
 {
 	App->player->Enable();
-	App->enemies->Enable();
+	App->entities->Enable();
 	App->collisions->Enable();
 
 	numTex = App->textures->Load("Assets/Fonts/interface.png");
@@ -114,15 +114,15 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == YELLOW_FLOWER)
 			{
-				App->enemies->AddEntity(Entity_Type::YELLOW_FLOWER, j, i);
+				App->entities->AddEntity(Entity_Type::YELLOW_FLOWER, j, i);
 			}
 			else if (grid[i][j] == RED_FLOWER)
 			{
-				App->enemies->AddEntity(Entity_Type::RED_FLOWER, j, i);
+				App->entities->AddEntity(Entity_Type::RED_FLOWER, j, i);
 			}
 			else if (grid[i][j] == ORB)
 			{
-				App->enemies->AddEntity(Entity_Type::ORB, j, i);
+				App->entities->AddEntity(Entity_Type::ORB, j, i);
 			}
 			else if (grid[i][j] == STRUCTURE)
 			{
@@ -130,11 +130,11 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == POKAPOKA)
 			{
-				App->enemies->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == MECHA_WALKER)
 			{
-				App->enemies->AddEntity(Entity_Type::MECHA_WALKER, 24 - 8 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::MECHA_WALKER, 24 - 8 + (j * 16), 32 - 16 + (i * 16));
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::ENEMY);
 			}
 		}
@@ -162,7 +162,9 @@ Update_Status SceneLevel1::PostUpdate()
 	int score = App->player->score;
 	SDL_Rect rec = { 0 };
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+
+	//Draw background
+	//App->render->Blit(bgTexture, 0, 0, NULL);
 
 
 	// draw score
@@ -197,7 +199,7 @@ Update_Status SceneLevel1::PostUpdate()
 bool SceneLevel1::CleanUp()
 {
 	App->player->Disable();
-	App->enemies->Disable();
+	App->entities->Disable();
 	App->collisions->Disable();
 
 	return true;
