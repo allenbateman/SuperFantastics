@@ -114,15 +114,15 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == YELLOW_FLOWER)
 			{
-				App->enemies->AddEntitie(Entitie_Type::YELLOW_FLOWER, j, i);
+				App->enemies->AddEntity(Entity_Type::YELLOW_FLOWER, j, i);
 			}
 			else if (grid[i][j] == RED_FLOWER)
 			{
-				App->enemies->AddEntitie(Entitie_Type::RED_FLOWER, j, i);
+				App->enemies->AddEntity(Entity_Type::RED_FLOWER, j, i);
 			}
 			else if (grid[i][j] == ORB)
 			{
-				App->enemies->AddEntitie(Entitie_Type::ORB, j, i);
+				App->enemies->AddEntity(Entity_Type::ORB, j, i);
 			}
 			else if (grid[i][j] == STRUCTURE)
 			{
@@ -130,11 +130,11 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == POKAPOKA)
 			{
-				App->enemies->AddEntitie(Entitie_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->enemies->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == MECHA_WALKER)
 			{
-				App->enemies->AddEntitie(Entitie_Type::MECHA_WALKER, 24 - 8 + (j * 16), 32 - 16 + (i * 16));
+				App->enemies->AddEntity(Entity_Type::MECHA_WALKER, 24 - 8 + (j * 16), 32 - 16 + (i * 16));
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::ENEMY);
 			}
 		}

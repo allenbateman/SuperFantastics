@@ -6,7 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 
-#include "Entitie.h"
+#include "Entity.h"
 #include "YellowFlower.h"
 #include "RedFlower.h"
 #include "Orb.h"
@@ -46,7 +46,7 @@ Update_Status ModuleEntities::PreUpdate()
 	{
 		if (entities[i] != nullptr && entities[i]->pendingToDelete)
 		{
-			if (entities[i]->type == Entitie_Type::BOMB) {
+			if (entities[i]->type == Entity_Type::BOMB) {
 				bombCount--;
 			}
 			delete entities[i];
@@ -100,13 +100,13 @@ bool ModuleEntities::CleanUp()
 	return true;
 }
 
-bool ModuleEntities::AddEntitie(Entitie_Type type, int x, int y)
+bool ModuleEntities::AddEntity(Entity_Type type, int x, int y)
 {
 	bool ret = false;
 
 	for(uint i = 0; i < MAX_ENTITIES; ++i)
 	{
-		if(spawnQueue[i].type == Entitie_Type::NO_TYPE)
+		if(spawnQueue[i].type == Entity_Type::NO_TYPE)
 		{
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
@@ -124,7 +124,7 @@ void ModuleEntities::HandleEntitiesSpawn()
 	// Iterate all the entities queue
 	for (uint i = 0; i < MAX_ENTITIES; ++i)
 	{
-		if (spawnQueue[i].type != Entitie_Type::NO_TYPE)
+		if (spawnQueue[i].type != Entity_Type::NO_TYPE)
 		{
 			// Spawn a new Entitie if the screen has reached a spawn position
 			if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
@@ -132,7 +132,7 @@ void ModuleEntities::HandleEntitiesSpawn()
 				LOG("Spawning Entitie at %d", spawnQueue[i].x * SCREEN_SIZE);
 
 				SpawnEntitie(spawnQueue[i]);
-				spawnQueue[i].type = Entitie_Type::NO_TYPE; // Removing the newly spawned Entitie from the queue
+				spawnQueue[i].type = Entity_Type::NO_TYPE; // Removing the newly spawned Entitie from the queue
 			}
 		}
 	}
@@ -165,25 +165,25 @@ void ModuleEntities::SpawnEntitie(const EntitieSpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case Entitie_Type::YELLOW_FLOWER:
+				case Entity_Type::YELLOW_FLOWER:
 					entities[i] = new YellowFlower(info.x, info.y);
 					break;
-				case Entitie_Type::RED_FLOWER:
+				case Entity_Type::RED_FLOWER:
 					entities[i] = new RedFlower(info.x, info.y);
 					break;
-				case Entitie_Type::ORB:
+				case Entity_Type::ORB:
 					entities[i] = new Orb(info.x, info.y);
 					break;
-				case Entitie_Type::MIDDLE_STRUCTURE:
+				case Entity_Type::MIDDLE_STRUCTURE:
 					entities[i] = new MiddleStructure(info.x, info.y);
 					break;
-				case Entitie_Type::POKAPOKA:
+				case Entity_Type::POKAPOKA:
 					entities[i] = new Pokapoka(info.x, info.y);
 					break;
-				case Entitie_Type::MECHA_WALKER:
+				case Entity_Type::MECHA_WALKER:
 					entities[i] = new CoreMechaWalker(info.x, info.y);
 					break;
-				case Entitie_Type::BOMB:
+				case Entity_Type::BOMB:
 					entities[i] = new Bomb(info.x, info.y);
 					bombCount++;
 					break;

@@ -1,5 +1,5 @@
 #pragma once
-#include "Entitie.h"
+#include "Entity.h"
 #include "Powerup.h"
 class Fire :
     public Powerup

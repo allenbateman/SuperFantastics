@@ -3,13 +3,13 @@
 
 #include "p2Point.h"
 #include "Animation.h"
-#include "Entitie.h"
+#include "Entity.h"
 
 struct SDL_Texture;
 struct Collider;
 
 
-class Powerup : public Entitie
+class Powerup : public Entity
 {
 public:
 	Powerup(int x, int y);
@@ -27,7 +27,7 @@ public:
 	iPoint colliderPosition;
 	SDL_Texture* texture = nullptr;
 	bool pendingToDelete = false;
-	Entitie_Type type;
+	Entity_Type type;
 	int destroyedFx = 0;
 
 	enum State {

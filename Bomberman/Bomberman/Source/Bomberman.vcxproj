@@ -82,7 +82,7 @@
     <ClInclude Include="Bombup.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CoreMechaWalker.h" />
-    <ClInclude Include="Entitie.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="MiddleStructure.h" />
     <ClInclude Include="ModuleAudio.h" />
@@ -116,7 +116,7 @@
     <ClCompile Include="Bombup.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CoreMechaWalker.cpp" />
-    <ClCompile Include="Entitie.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="MiddleStructure.cpp" />

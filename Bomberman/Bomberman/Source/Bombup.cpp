@@ -4,7 +4,7 @@
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
 
-Bombup::Bombup(int x, int y) : Entitie(x, y)
+Bombup::Bombup(int x, int y) : Entity(x, y)
 {
 	position.x = x;
 	position.y = y;

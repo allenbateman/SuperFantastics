@@ -5,7 +5,7 @@
 
 #define MAX_ENTITIES 100
 
-enum class Entitie_Type
+enum class Entity_Type
 {
 	NO_TYPE,
 	YELLOW_FLOWER,
@@ -20,11 +20,11 @@ enum class Entitie_Type
 
 struct EntitieSpawnpoint
 {
-	Entitie_Type type = Entitie_Type::NO_TYPE;
+	Entity_Type type = Entity_Type::NO_TYPE;
 	int x, y;
 };
 
-class Entitie;
+class Entity;
 struct SDL_Texture;
 
 class ModuleEntities : public Module
@@ -61,7 +61,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an Entitie into the queue to be spawned later
-	bool AddEntitie(Entitie_Type type, int x, int y);
+	bool AddEntity(Entity_Type type, int x, int y);
 
 	// Iterates the queue and checks for camera position
 	void HandleEntitiesSpawn();
@@ -79,7 +79,7 @@ private:
 	EntitieSpawnpoint spawnQueue[MAX_ENTITIES];
 
 	// All spawned enemies in the scene
-	Entitie* entities[MAX_ENTITIES] = { nullptr };
+	Entity* entities[MAX_ENTITIES] = { nullptr };
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;

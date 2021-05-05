@@ -1,7 +1,7 @@
 #pragma once
-#include "Entitie.h"
+#include "Entity.h"
 
-class YellowFlower : public Entitie
+class YellowFlower : public Entity
 {
 public:
 	// Constructor (x y coordinates in the world)

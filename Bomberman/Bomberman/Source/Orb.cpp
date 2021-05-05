@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Orb::Orb(int x, int y) : Entitie(x, y)
+Orb::Orb(int x, int y) : Entity(x, y)
 {
 	position.x = 24 + (x * 16);
 	position.y = 24 + (y * 16);

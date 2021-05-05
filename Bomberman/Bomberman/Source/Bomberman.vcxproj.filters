@@ -127,7 +127,7 @@
     <ClInclude Include="ModuleEntities.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Entitie.h">
+    <ClInclude Include="Entity.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -222,7 +222,7 @@
     <ClCompile Include="ModuleEntities.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Entitie.cpp">
+    <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
   </ItemGroup>

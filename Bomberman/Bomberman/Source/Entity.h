@@ -1,5 +1,5 @@
-#ifndef __ENTITIE_H__
-#define __ENTITIE_H__
+#ifndef __ENTITY_H__
+#define __ENTITY_H__
 
 #include "p2Point.h"
 #include "Animation.h"
@@ -8,24 +8,24 @@
 struct SDL_Texture;
 struct Collider;
 
-class Entitie
+class Entity
 {
 public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
-	Entitie(int x, int y);
+	Entity(int x, int y);
 
 	// Destructor
-	virtual ~Entitie();
+	virtual ~Entity();
 
-	// Returns the Entitie's collider
+	// Returns the Entity's collider
 	const Collider* GetCollider() const;
 
 	// Called from inhering enemies' Udpate
 	// Updates animation and collider position
 	virtual void Update();
 
-	// Called from ModuleEntities' Update
+	// Called from ModuleEntitys' Update
 	virtual void Draw();
 
 	// Collision response
@@ -42,15 +42,15 @@ public:
 	iPoint position;
 	iPoint colliderPosition;
 
-	Entitie_Type type;
+	Entity_Type type;
 
-	// The Entitie's texture
+	// The Entity's texture
 	SDL_Texture* texture = nullptr;
 
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 
-	// A flag for the Entitie removal. Important! We do not delete objects instantly
+	// A flag for the Entity removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
 	enum Direction
@@ -76,11 +76,11 @@ protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
-	// The Entitie's collider
+	// The Entity's collider
 	Collider* collider = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 };
 
-#endif // __ENTITIE_H__
+#endif // __ENTITY_H__
