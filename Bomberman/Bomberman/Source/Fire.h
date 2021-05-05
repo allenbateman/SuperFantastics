@@ -1,7 +1,8 @@
 #pragma once
 #include "Enemy.h"
+#include "Powerup.h"
 class Fire :
-    public Enemy
+    public Powerup
 {
 public:
 	Fire(int x, int y);

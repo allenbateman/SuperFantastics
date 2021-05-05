@@ -86,7 +86,7 @@ public:
 
 	SDL_Texture* scoreboardFont = nullptr;
 
-	enum PlayerState {
+	enum class PlayerState {
 		ALIVE,
 		DEAD,
 		WINING

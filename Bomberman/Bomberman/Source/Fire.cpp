@@ -3,7 +3,7 @@
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
 
-Fire::Fire(int x, int y) : Enemy(x, y)
+Fire::Fire(int x, int y) : Powerup(x, y)
 {
 	position.x = x;
 	position.y = y;

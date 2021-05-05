@@ -6,7 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 
-Powerup::Powerup(int x, int y)
+Powerup::Powerup(int x, int y) : position(x, y)
 {
 	spawnPos = position;
 }
@@ -38,7 +38,6 @@ void Powerup::OnCollision(Collider* collider)
 {
 	if (collider->PLAYER)
 	{
-		//Add stats
 		SetToDelete();
 	}
 }

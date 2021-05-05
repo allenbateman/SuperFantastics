@@ -98,6 +98,8 @@ bool ModulePlayer::Start()
     currentBombs = 1;
 	rangeExplosion = 3;
 
+	currentState = PlayerState::ALIVE;
+
 	collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
 
 	// LOAD UI FONT
@@ -109,142 +111,176 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
-	lastPos = position;
-	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT){
-		position.x -= speed;
-		if (currentAnimation != &leftAnim)
-		{
-			leftAnim.Reset();
-			currentAnimation = &leftAnim;
-			currentIdleAnim = leftIdleAnim;
-		}
-		lastKeyPressed = SDL_SCANCODE_LEFT;
+	switch (currentState){
+		case PlayerState::ALIVE:
+			//Movement
+			lastPos = position;
+			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT) {
+				position.x -= speed;
+				if (currentAnimation != &leftAnim)
+				{
+					leftAnim.Reset();
+					currentAnimation = &leftAnim;
+					currentIdleAnim = leftIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_LEFT;
 
-		if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.y -= speed;
-			isStuck = false;
-		}
-		else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.y += speed;
-			isStuck = false;
-		}
+				if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y += speed;
+					isStuck = false;
+				}
 
-	}else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT){
-		position.x += speed;
-		if (currentAnimation != &rightAnim)
-		{
-			rightAnim.Reset();
-			currentAnimation = &rightAnim;
-			currentIdleAnim = rightIdleAnim;
-		}
-		lastKeyPressed = SDL_SCANCODE_RIGHT;
+			}
+			else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT) {
+				position.x += speed;
+				if (currentAnimation != &rightAnim)
+				{
+					rightAnim.Reset();
+					currentAnimation = &rightAnim;
+					currentIdleAnim = rightIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_RIGHT;
 
-		if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.y -= speed;
-			isStuck = false;
-		}
-		else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.y += speed;
-			isStuck = false;
-		}
+				if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y += speed;
+					isStuck = false;
+				}
 
-	}else	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT){
-		position.y += speed;
-		if (currentAnimation != &downAnim)
-		{
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-			currentIdleAnim = downIdleAnim;
-		}
-		lastKeyPressed = SDL_SCANCODE_DOWN;
+			}
+			else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT) {
+				position.y += speed;
+				if (currentAnimation != &downAnim)
+				{
+					downAnim.Reset();
+					currentAnimation = &downAnim;
+					currentIdleAnim = downIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_DOWN;
 
-		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.x -= speed;
-			isStuck = false;
-		}
-		else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.x += speed;
-			isStuck = false;
-		}
+				if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x += speed;
+					isStuck = false;
+				}
 
-	}else if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT){
-		position.y -= speed;
-		if (currentAnimation != &upAnim)
-		{
-			upAnim.Reset();
-			currentAnimation = &upAnim;
-			currentIdleAnim = upIdleAnim;
-		}
-		lastKeyPressed = SDL_SCANCODE_UP;
+			}
+			else if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT) {
+				position.y -= speed;
+				if (currentAnimation != &upAnim)
+				{
+					upAnim.Reset();
+					currentAnimation = &upAnim;
+					currentIdleAnim = upIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_UP;
 
-		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.x -= speed;
-			isStuck = false;
-		}
-		else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
-		{
-			position.x += speed;
-			isStuck = false;
-		}
+				if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x += speed;
+					isStuck = false;
+				}
+			}
+
+			// If no movement detected, set the current animation back to idle
+			if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
+				&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
+				&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
+				&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+				&& currentAnimation != &deathAnim)
+				currentAnimation = &currentIdleAnim;
+			
+			//move collider
+			collider->SetPos(position.x, position.y);
+
+			//check border colliders
+			if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
+				position = lastPos;
+			}
+
+			//Update grid 
+			if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
+			{
+				App->sceneLevel_1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
+				App->sceneLevel_1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
+			}
+
+			//Place Bomb
+			if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN)
+			{
+				if (App->enemies->bombCount < currentBombs) {
+					App->enemies->AddEnemy(Enemy_Type::BOMB, position.x, position.y);
+					App->audio->PlayFx(bombIsPlaced);
+				}
+			}
+
+			//End Game with F2
+			if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN)
+			{
+				currentState = PlayerState::DEAD;
+			}
+			//Win Game with F3
+			if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN)
+			{
+				currentState = PlayerState::WINING;
+			}
+		
+			break;
+		case PlayerState::DEAD:
+		
+			if (currentAnimation != &deathAnim) {
+				deathAnim.Reset();
+				currentAnimation = &deathAnim;
+			}else if (currentAnimation == &deathAnim && currentAnimation->HasFinished()){
+				destroyed = true;
+				App->sceneLevel_1->Disable();
+				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
+			}
+
+			break;
+		case PlayerState::WINING:
+			if (currentAnimation != &winAnim) {
+				winAnim.Reset();
+				currentAnimation = &winAnim;
+			}
+			else if (currentAnimation == &winAnim && currentAnimation->HasFinished()) {
+				
+				//save player status...
+				//Disable current level...
+				App->sceneLevel_1->Disable();			
+				//load nex level...
+				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);		
+			
+			}
+			break;
+		default:
+			break;
 	}
-
-	if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN)
-	{
-		if (App->enemies->bombCount < currentBombs) {
-			App->enemies->AddEnemy(Enemy_Type::BOMB, position.x, position.y);
-			App->audio->PlayFx(bombIsPlaced);
-		}
-	}
-
-	//End Game with F2
-	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN)
-	{	
-		if (currentAnimation != &deathAnim) {
-			deathAnim.Reset();
-			currentAnimation = &deathAnim;
-		}	
-	}
-	if (currentAnimation == &deathAnim && currentAnimation->HasFinished())
-	{		
-		destroyed = true;
-		App->sceneLevel_1->Disable();
-		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
-	}
-
-
-	// If no movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
-		&& currentAnimation != &deathAnim)
-		currentAnimation = &currentIdleAnim;
-
-	collider->SetPos(position.x, position.y);
 	
+	//update animations
 	currentAnimation->Update();
 	structureIdle.Update();
-
-	//check border colliders
-	if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
-		position = lastPos;
-	}
-
-	if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
-	{
-		App->sceneLevel_1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
-		App->sceneLevel_1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
-
-	}
-	
-	
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -339,10 +375,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 		c1->SetPos(position.x, position.y);
 	}
-	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT)
+	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT || c2->type == Collider::Type::BOMB)
 	{
-		currentAnimation = &deathAnim;
+		currentState = PlayerState::DEAD;
 	}
+	//check win collider....
 }
 
 void ModulePlayer::DrawScoreboard()
