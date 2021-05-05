@@ -6,7 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 
-Powerup::Powerup(int x, int y) : position(x, y)
+Powerup::Powerup(int x, int y) : Entitie(x, y)
 {
 	spawnPos = position;
 }

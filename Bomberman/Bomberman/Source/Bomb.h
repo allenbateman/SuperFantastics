@@ -1,14 +1,14 @@
 #pragma once
-#include "Enemy.h"
+#include "Entitie.h"
 
-class Bomb : public Enemy {
+class Bomb : public Entitie {
 public:
 
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
 	Bomb(int x, int y);
 
-	// The enemy is going to follow the different steps in the path
+	// The Entitie is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 	void OnCollision(Collider* collider) override;

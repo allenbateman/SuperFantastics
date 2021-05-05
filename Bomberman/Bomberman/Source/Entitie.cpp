@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "Entitie.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
@@ -6,23 +6,23 @@
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 
-Enemy::Enemy(int x, int y) : position(x, y)
+Entitie::Entitie(int x, int y) : position(x, y)
 {
 	spawnPos = position;
 }
 
-Enemy::~Enemy()
+Entitie::~Entitie()
 {
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
 }
 
-const Collider* Enemy::GetCollider() const
+const Collider* Entitie::GetCollider() const
 {
 	return collider;
 }
 
-void Enemy::Update()
+void Entitie::Update()
 {
 	if (currentAnim != nullptr)
 		currentAnim->Update();
@@ -31,7 +31,7 @@ void Enemy::Update()
 		collider->SetPos(colliderPosition.x, colliderPosition.y);
 }
 
-void Enemy::Draw()
+void Entitie::Draw()
 {
 	if (currentAnim != nullptr) {
 		if (currentAnim->mustFlip==false) App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
@@ -39,7 +39,7 @@ void Enemy::Draw()
 	}
 }
 
-void Enemy::OnCollision(Collider* collider)
+void Entitie::OnCollision(Collider* collider)
 {
 	//if(collider->type==BOMB){
 	//	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
@@ -51,7 +51,7 @@ void Enemy::OnCollision(Collider* collider)
 	SetToDelete();
 }
 
-void Enemy::SetToDelete()
+void Entitie::SetToDelete()
 {
 	pendingToDelete = true;
 	if (collider != nullptr)

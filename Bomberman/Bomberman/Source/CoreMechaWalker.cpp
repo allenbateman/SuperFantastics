@@ -5,7 +5,7 @@
 #include "SceneLevel1.h"
 #include <ctime>
 
-CoreMechaWalker::CoreMechaWalker(int x, int y) : Enemy(x, y)
+CoreMechaWalker::CoreMechaWalker(int x, int y) : Entitie(x, y)
 {
 	position.x = x;
 	position.y = y;
@@ -65,18 +65,18 @@ CoreMechaWalker::CoreMechaWalker(int x, int y) : Enemy(x, y)
 
 void CoreMechaWalker::Update()
 {
-	Enemy::Update();
+	Entitie::Update();
 
 
 	switch (state)
 	{
-	case Enemy::IDLE:
+	case Entitie::IDLE:
 
 		currentAnim = &idleAnim;
 		CheckDirection();
 		break;
 
-	case Enemy::MOVE:
+	case Entitie::MOVE:
 		if ((App->frameCounter % 2)) {
 
 			if ((colliderPosition.x - 24) % 16 == 0 && (colliderPosition.y - 32) % 16 == 0) CheckDirection();
@@ -100,7 +100,7 @@ void CoreMechaWalker::Update()
 		}
 
 		break;
-	case Enemy::DEATH:
+	case Entitie::DEATH:
 		if (deathAnim.HasFinished() == true) SetToDelete();
 		break;
 	default:
@@ -176,15 +176,15 @@ void CoreMechaWalker::CheckDirection()
 
 		switch (direction)
 		{
-		case Enemy::UP: currentAnim = &upAnim;
+		case Entitie::UP: currentAnim = &upAnim;
 			break;
-		case Enemy::DOWN: currentAnim = &downAnim;
+		case Entitie::DOWN: currentAnim = &downAnim;
 			break;
-		case Enemy::RIGHT: currentAnim = &rightAnim;
+		case Entitie::RIGHT: currentAnim = &rightAnim;
 			break;
-		case Enemy::LEFT: currentAnim = &leftAnim;
+		case Entitie::LEFT: currentAnim = &leftAnim;
 			break;
-		case Enemy::NONE:
+		case Entitie::NONE:
 			break;
 		default:
 			break;

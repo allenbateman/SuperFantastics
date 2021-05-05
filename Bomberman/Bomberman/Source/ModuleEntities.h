@@ -1,11 +1,11 @@
-#ifndef __MODULE_ENEMIES_H__
-#define __MODULE_ENEMIES_H__
+#ifndef __MODULE_ENTITIES_H__
+#define __MODULE_ENTITIES_H__
 
 #include "Module.h"
 
-#define MAX_ENEMIES 100
+#define MAX_ENTITIES 100
 
-enum class Enemy_Type
+enum class Entitie_Type
 {
 	NO_TYPE,
 	YELLOW_FLOWER,
@@ -18,23 +18,23 @@ enum class Enemy_Type
 	BOMBUP
 };
 
-struct EnemySpawnpoint
+struct EntitieSpawnpoint
 {
-	Enemy_Type type = Enemy_Type::NO_TYPE;
+	Entitie_Type type = Entitie_Type::NO_TYPE;
 	int x, y;
 };
 
-class Enemy;
+class Entitie;
 struct SDL_Texture;
 
-class ModuleEnemies : public Module
+class ModuleEntities : public Module
 {
 public:
 	// Constructor
-	ModuleEnemies(bool startEnabled);
+	ModuleEntities(bool startEnabled);
 
 	// Destructor
-	~ModuleEnemies();
+	~ModuleEntities();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the enemies
@@ -57,35 +57,35 @@ public:
 	bool CleanUp() override;
 
 	// Called when an enemi collider hits another collider
-	// The enemy is destroyed and an explosion particle is fired
+	// The Entitie is destroyed and an explosion particle is fired
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	// Add an enemy into the queue to be spawned later
-	bool AddEnemy(Enemy_Type type, int x, int y);
+	// Add an Entitie into the queue to be spawned later
+	bool AddEntitie(Entitie_Type type, int x, int y);
 
 	// Iterates the queue and checks for camera position
-	void HandleEnemiesSpawn();
+	void HandleEntitiesSpawn();
 
 	// Destroys any enemies that have moved outside the camera limits
-	void HandleEnemiesDespawn();
+	void HandleEntitiesDespawn();
 
 	int bombCount = 0;
 private:
-	// Spawns a new enemy using the data from the queue
-	void SpawnEnemy(const EnemySpawnpoint& info);
+	// Spawns a new Entitie using the data from the queue
+	void SpawnEntitie(const EntitieSpawnpoint& info);
 
 private:
 	// A queue with all spawn points information
-	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
+	EntitieSpawnpoint spawnQueue[MAX_ENTITIES];
 
 	// All spawned enemies in the scene
-	Enemy* enemies[MAX_ENEMIES] = { nullptr };
+	Entitie* entities[MAX_ENTITIES] = { nullptr };
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
 
-	// The audio fx for destroying an enemy
-	int enemyDestroyedFx = 0;
+	// The audio fx for destroying an Entitie
+	int EntitieDestroyedFx = 0;
 };
 
-#endif // __MODULE_ENEMIES_H__
+#endif // __MODULE_ENTITIES_H__

@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-MiddleStructure::MiddleStructure(int x, int y) : Enemy(x, y)
+MiddleStructure::MiddleStructure(int x, int y) : Entitie(x, y)
 {
 	position.x = 24 + (x * 16);
 	position.y = 32 + (y * 16);

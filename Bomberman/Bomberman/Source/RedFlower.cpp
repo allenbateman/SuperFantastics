@@ -4,7 +4,7 @@
 #include "ModuleCollisions.h"
 #include "SceneLevel1.h"
 
-RedFlower::RedFlower(int x, int y) : Enemy(x, y)
+RedFlower::RedFlower(int x, int y) : Entitie(x, y)
 {
 	position.x = 24 + (x * 16);
 	position.y = 32 + (y * 16);
@@ -25,14 +25,14 @@ RedFlower::RedFlower(int x, int y) : Enemy(x, y)
 
 void RedFlower::Update()
 {
-	Enemy::Update();
+	Entitie::Update();
 
 	switch (state)
 	{
-	case Enemy::IDLE:
+	case Entitie::IDLE:
 		currentAnim = &idleAnim;
 		break;
-	case Enemy::DEATH:
+	case Entitie::DEATH:
 		currentAnim = &deathAnim;
 		if (deathAnim.HasFinished() == true) SetToDelete();
 		break;

@@ -19,7 +19,7 @@ public:
 	// Adds a new frame to the array
 	void PushBack(fPoint speed, uint frames, Animation* animation = nullptr);
 
-	// Called from Enemy's Update
+	// Called from Entitie's Update
 	// Increases the frame count and, if necessary, increases step
 	void Update();
 

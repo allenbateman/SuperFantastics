@@ -1,6 +1,6 @@
 #pragma once
-#include "Enemy.h"
-class Bombup :  public Enemy
+#include "Entitie.h"
+class Bombup :  public Entitie
 {
 public:
 	Bombup(int x, int y);

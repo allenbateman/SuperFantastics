@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "ModuleTextures.h"
-#include "ModuleEnemies.h"
+#include "ModuleEntities.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
@@ -104,7 +104,7 @@ bool ModulePlayer::Start()
 
 	// LOAD UI FONT
 	scoreboardFont = App->textures->Load("Assets/Fonts/interface.png");
-	structureTexture = App->textures->Load("Assets/Sprites/enemies.png");
+	structureTexture = App->textures->Load("Assets/Sprites/entities.png");
 
 	return ret;
 }
@@ -230,7 +230,7 @@ Update_Status ModulePlayer::Update()
 			if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN)
 			{
 				if (App->enemies->bombCount < currentBombs) {
-					App->enemies->AddEnemy(Enemy_Type::BOMB, position.x, position.y);
+					App->enemies->AddEntitie(Entitie_Type::BOMB, position.x, position.y);
 					App->audio->PlayFx(bombIsPlaced);
 				}
 			}

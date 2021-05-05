@@ -3,13 +3,13 @@
 
 #include "p2Point.h"
 #include "Animation.h"
-#include "ModuleEnemies.h"
+#include "Entitie.h"
 
 struct SDL_Texture;
 struct Collider;
 
 
-class Powerup
+class Powerup : public Entitie
 {
 public:
 	Powerup(int x, int y);
@@ -27,7 +27,7 @@ public:
 	iPoint colliderPosition;
 	SDL_Texture* texture = nullptr;
 	bool pendingToDelete = false;
-	Enemy_Type type;
+	Entitie_Type type;
 	int destroyedFx = 0;
 
 	enum State {
@@ -41,7 +41,7 @@ protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
-	// The enemy's collider
+	// The Entitie's collider
 	Collider* collider = nullptr;
 
 	// Original spawn position. Stored for movement calculations

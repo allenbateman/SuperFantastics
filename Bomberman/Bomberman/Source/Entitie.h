@@ -1,31 +1,31 @@
-#ifndef __ENEMY_H__
-#define __ENEMY_H__
+#ifndef __ENTITIE_H__
+#define __ENTITIE_H__
 
 #include "p2Point.h"
 #include "Animation.h"
-#include "ModuleEnemies.h"
+#include "ModuleEntities.h"
 
 struct SDL_Texture;
 struct Collider;
 
-class Enemy
+class Entitie
 {
 public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
-	Enemy(int x, int y);
+	Entitie(int x, int y);
 
 	// Destructor
-	virtual ~Enemy();
+	virtual ~Entitie();
 
-	// Returns the enemy's collider
+	// Returns the Entitie's collider
 	const Collider* GetCollider() const;
 
 	// Called from inhering enemies' Udpate
 	// Updates animation and collider position
 	virtual void Update();
 
-	// Called from ModuleEnemies' Update
+	// Called from ModuleEntities' Update
 	virtual void Draw();
 
 	// Collision response
@@ -42,15 +42,15 @@ public:
 	iPoint position;
 	iPoint colliderPosition;
 
-	Enemy_Type type;
+	Entitie_Type type;
 
-	// The enemy's texture
+	// The Entitie's texture
 	SDL_Texture* texture = nullptr;
 
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 
-	// A flag for the enemy removal. Important! We do not delete objects instantly
+	// A flag for the Entitie removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
 	enum Direction
@@ -76,11 +76,11 @@ protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
-	// The enemy's collider
+	// The Entitie's collider
 	Collider* collider = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 };
 
-#endif // __ENEMY_H__
+#endif // __ENTITIE_H__

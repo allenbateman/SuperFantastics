@@ -5,7 +5,7 @@
 #include "SceneLevel1.h"
 #include "ModuleCollisions.h"
 
-Bomb::Bomb(int x, int y):Enemy(x, y)
+Bomb::Bomb(int x, int y):Entitie(x, y)
 {
 	int diffX = (x - 24) % 16;
 	int diffY = (y - 32) % 16;
@@ -102,7 +102,7 @@ Bomb::Bomb(int x, int y):Enemy(x, y)
 
 void Bomb::Update()
 {
-	Enemy::Update();
+	Entitie::Update();
 
 	switch (state) {
 
