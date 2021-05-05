@@ -25,6 +25,7 @@ bool SceneLevel1::Start()
 {
 	App->player->Enable();
 	App->enemies->Enable();
+	App->collisions->Enable();
 
 	numTex = App->textures->Load("Assets/Fonts/interface.png");
 	LOG("Loading background assets");
@@ -197,6 +198,7 @@ bool SceneLevel1::CleanUp()
 {
 	App->player->Disable();
 	App->enemies->Disable();
+	App->collisions->Disable();
 
 	return true;
 }

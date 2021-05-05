@@ -125,7 +125,10 @@
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClInclude>
     <ClInclude Include="Bombup.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
+      <Filter>Source Files\Entities\Powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Source Files\Entities\Powerups</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +220,10 @@
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClCompile>
     <ClCompile Include="Bombup.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
+      <Filter>Source Files\Entities\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Source Files\Entities\Powerups</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

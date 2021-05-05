@@ -20,6 +20,8 @@ void Bombup::Update()
 
 void Bombup::OnCollision(Collider* collider)
 {	
-	App->player->maxBombs ++;
+	if(MAX_BOMBS > App->player->currentBombs)
+	App->player->currentBombs++;
+
 	SetToDelete();
 }

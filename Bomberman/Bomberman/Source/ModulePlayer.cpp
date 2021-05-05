@@ -90,10 +90,13 @@ bool ModulePlayer::Start()
 	currentIdleAnim = downIdleAnim;
 	currentAnimation = &downAnim;
 
-	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	bombIsPlaced = App->audio->LoadFx("Assets/Fx/BomIsPlaced.wav");
 
 	destroyed = false;
+	death = false;
+
+    currentBombs = 1;
+	rangeExplosion = 3;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
 
@@ -192,22 +195,36 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN)
 	{
-		if (App->enemies->bombCount < maxBombs) {
+		if (App->enemies->bombCount < currentBombs) {
 			App->enemies->AddEnemy(Enemy_Type::BOMB, position.x, position.y);
+			App->audio->PlayFx(bombIsPlaced);
 		}
-		//add bomb here
-		//Particle* newParticle = App->particles->AddParticle(App->particles->bomb, position.x, position.y, Collider::Type::BOMB);
-		//newParticle->collider->AddListener(this);
-		//App->audio->PlayFx(laserFx);
 	}
+
+	//End Game with F2
+	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN)
+	{	
+		if (currentAnimation != &deathAnim) {
+			deathAnim.Reset();
+			currentAnimation = &deathAnim;
+		}	
+	}
+	if (currentAnimation == &deathAnim && currentAnimation->HasFinished())
+	{		
+		destroyed = true;
+		App->sceneLevel_1->Disable();
+		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
+	}
+
 
 	// If no movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE)
+		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+		&& currentAnimation != &deathAnim)
 		currentAnimation = &currentIdleAnim;
 
 	collider->SetPos(position.x, position.y);
@@ -226,7 +243,8 @@ Update_Status ModulePlayer::Update()
 		App->sceneLevel_1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
 
 	}
-		
+	
+	
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -320,6 +338,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				break;
 		}
 		c1->SetPos(position.x, position.y);
+	}
+	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT)
+	{
+		currentAnimation = &deathAnim;
 	}
 }
 

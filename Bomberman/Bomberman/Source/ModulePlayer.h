@@ -5,6 +5,9 @@
 #include "Animation.h"
 #include "p2Point.h"
 
+#define MAX_BOMBS 5
+#define MAX_RANGE_EXPLOSION 9
+
 struct SDL_Texture;
 struct Collider;
 
@@ -67,8 +70,7 @@ public:
 	bool destroyed = false;
 
 	// Sound effects indices
-	uint laserFx = 0;
-	uint explosionFx = 0;
+	uint bombIsPlaced = 0;
 
 	// Font score index
 	uint score = 000;
@@ -84,8 +86,14 @@ public:
 
 	SDL_Texture* scoreboardFont = nullptr;
 
+	enum PlayerState {
+		ALIVE,
+		DEAD,
+		WINING
+	};
+	PlayerState currentState;
 	// Player powers
-	int maxBombs = 1;
+	int currentBombs = 1;
 	int rangeExplosion = 3;
 };
 
