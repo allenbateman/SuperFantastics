@@ -59,37 +59,37 @@ Bomb::Bomb(int x, int y):Entity(x, y)
 	leftExtrAnim.speed = 0.1f;
 
 	// Right extreme explosion
-	rightExtrAnim.PushBack({ 0,336,15,351 });
-	rightExtrAnim.PushBack({ 16,336,31,351 });
-	rightExtrAnim.PushBack({ 32,336,47,351 });
-	rightExtrAnim.PushBack({ 48,336,63,351 });
+	rightExtrAnim.PushBack({ 0,336,16,16 });
+	rightExtrAnim.PushBack({ 16,336,16,16 });
+	rightExtrAnim.PushBack({ 32,336,16,16 });
+	rightExtrAnim.PushBack({ 48,336,16,16 });
 	rightExtrAnim.loop = true;
 	rightExtrAnim.pingpong = true;
 	rightExtrAnim.speed = 0.1f;
 
 	// Vertical side explosion
-	vertSideAnim.PushBack({ 0,352,15,367 });
-	vertSideAnim.PushBack({ 16,352,31,367 });
-	vertSideAnim.PushBack({ 32,352,47,367 });
-	vertSideAnim.PushBack({ 48,352,63,367 });
+	vertSideAnim.PushBack({ 0,352,16,16 });
+	vertSideAnim.PushBack({ 16,352,16,16 });
+	vertSideAnim.PushBack({ 32,352,16,16 });
+	vertSideAnim.PushBack({ 48,352,16,16 });
 	vertSideAnim.loop = true;
 	vertSideAnim.pingpong = true;
 	vertSideAnim.speed = 0.1f;
 
 	// Up extreme explosion
-	upExtrAnim.PushBack({ 0,368,15,383 });
-	upExtrAnim.PushBack({ 16,368,31,383 });
-	upExtrAnim.PushBack({ 32,368,47,383 });
-	upExtrAnim.PushBack({ 48,368,63,383 });
+	upExtrAnim.PushBack({ 0,368,16,16 });
+	upExtrAnim.PushBack({ 16,368,16,16 });
+	upExtrAnim.PushBack({ 32,368,16,16 });
+	upExtrAnim.PushBack({ 48,368,16,16 });
 	upExtrAnim.loop = true;
 	upExtrAnim.pingpong = true;
 	upExtrAnim.speed = 0.1f;
 
 	// Down extreme explosion
-	downExtrAnim.PushBack({ 0,384,15,400 });
-	downExtrAnim.PushBack({ 16,384,31,400 });
-	downExtrAnim.PushBack({ 32,384,47,400 });
-	downExtrAnim.PushBack({ 48,384,63,400 });
+	downExtrAnim.PushBack({ 0,384,16,16 });
+	downExtrAnim.PushBack({ 16,384,16,16 });
+	downExtrAnim.PushBack({ 32,384,16,16 });
+	downExtrAnim.PushBack({ 48,384,16,16 });
 	downExtrAnim.loop = true;
 	downExtrAnim.pingpong = true;
 	downExtrAnim.speed = 0.1f;
