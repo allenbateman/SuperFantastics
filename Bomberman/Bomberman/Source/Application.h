@@ -11,6 +11,7 @@ class ModuleInput;
 class ModuleTextures;
 class ModuleAudio;
 class ModulePlayer;
+class SceneInit;
 class SceneIntro;
 class SceneLevel1;
 class ModuleParticles;
@@ -52,6 +53,7 @@ public:
 
 	ModulePlayer* player = nullptr;
 
+	SceneInit* sceneInit = nullptr;
 	SceneIntro* sceneIntro = nullptr;
 	SceneLevel1* sceneLevel_1 = nullptr;
 
