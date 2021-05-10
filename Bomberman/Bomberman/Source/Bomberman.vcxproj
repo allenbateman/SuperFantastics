@@ -95,7 +95,6 @@
     <ClInclude Include="Pokapoka.h" />
     <ClInclude Include="Powerup.h" />
     <ClInclude Include="RedFlower.h" />
-    <ClInclude Include="SceneInit.h" />
     <ClInclude Include="SceneIntro.h" />
     <ClInclude Include="SceneLevel1.h" />
     <ClInclude Include="ModuleInput.h" />
@@ -131,7 +130,6 @@
     <ClCompile Include="Pokapoka.cpp" />
     <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="RedFlower.cpp" />
-    <ClCompile Include="SceneInit.cpp" />
     <ClCompile Include="SceneIntro.cpp" />
     <ClCompile Include="SceneLevel1.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
