@@ -18,7 +18,7 @@ enum class Entity_Type
 	BOMBUP
 };
 
-struct EntitieSpawnpoint
+struct EntitySpawnpoint
 {
 	Entity_Type type = Entity_Type::NO_TYPE;
 	int x, y;
@@ -72,11 +72,11 @@ public:
 	int bombCount = 0;
 private:
 	// Spawns a new Entitie using the data from the queue
-	void SpawnEntitie(const EntitieSpawnpoint& info);
+	void SpawnEntity(const EntitySpawnpoint& info);
 
 private:
 	// A queue with all spawn points information
-	EntitieSpawnpoint spawnQueue[MAX_ENTITIES];
+	EntitySpawnpoint spawnQueue[MAX_ENTITIES];
 
 	// All spawned enemies in the scene
 	Entity* entities[MAX_ENTITIES] = { nullptr };

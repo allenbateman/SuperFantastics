@@ -96,7 +96,7 @@ Bomb::Bomb(int x, int y):Entity(x, y)
 
 	state = IDLE;
 
-	App->collisions->AddCollider({ position.x, position.y, 16, 16}, Collider::BOMB);
+	colliderList[0] =  App->collisions->AddCollider({ position.x, position.y, 16, 16}, Collider::BOMB);
 
 	currentAnim = &idleAnim;
 	frameSpawn = App->frameCounter;
@@ -115,8 +115,15 @@ void Bomb::Update()
 			// UP DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16 - i - 1][(position.x - 24) / 16] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x, position.y - (i + 1) * 16 }, Collider::EXPLOSION);
-					upCount++;
+					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++) 
+					{
+						if (colliderList[i] == nullptr)
+						{
+							colliderList[i] = App->collisions->AddCollider({ position.x, position.y - (i + 1) * 16 }, Collider::EXPLOSION);
+							upCount++;
+							break;
+						}
+					}
 				}
 				else {
 					break;
@@ -126,8 +133,15 @@ void Bomb::Update()
 			// DOWN DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16 + i + 1][(position.x - 24) / 16] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x, position.y + (i + 1) * 16 }, Collider::EXPLOSION);
-					downCount++;
+					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
+					{
+						if (colliderList[i] == nullptr)
+						{
+							colliderList[i] = App->collisions->AddCollider({ position.x, position.y + (i + 1) * 16 }, Collider::EXPLOSION);
+							downCount++;
+							break;
+						}
+					}
 				}
 				else {
 					break;
@@ -137,8 +151,15 @@ void Bomb::Update()
 			// RIGHT DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16][(position.x - 24) / 16 + i + 1] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x + (i + 1) * 16, position.y }, Collider::EXPLOSION);
-					rightCount++;
+					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
+					{
+						if (colliderList[i] == nullptr)
+						{
+							colliderList[i] = App->collisions->AddCollider({ position.x + (i + 1) * 16, position.y }, Collider::EXPLOSION);
+							rightCount++;
+							break;
+						}
+					}
 				}
 				else {
 					break;
@@ -148,8 +169,15 @@ void Bomb::Update()
 			// LEFT DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16][(position.x - 24) / 16 - i - 1] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x - (i + 1) * 16, position.y }, Collider::EXPLOSION);
-					leftCount++;
+					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
+					{
+						if (colliderList[i] == nullptr)
+						{
+							colliderList[i] = App->collisions->AddCollider({ position.x - (i + 1) * 16, position.y }, Collider::EXPLOSION);
+							leftCount++;
+							break;
+						}
+					}			
 				}
 				else {
 					break;
@@ -171,6 +199,7 @@ void Bomb::Update()
 		horSideAnim.Update();
 		leftExtrAnim.Update();
 		rightExtrAnim.Update();
+
 		break;
 	}
 }
@@ -245,11 +274,10 @@ void Bomb::Draw()
 		}
 
 		if (App->frameCounter >= frameExplode + explosionTimer) {
-			// Remove all explosion colliders (No se como se hace no lo habia mirado)
-			//Loop all the colliders placed by bomb and remove them.
-			//App->collisions->RemoveCollider();
+
 			SetToDelete();
 		}
+
 		break;
 	}
 	
@@ -260,3 +288,17 @@ void Bomb::OnCollision(Collider* collider)
 {
 
 }
+
+void Bomb::SetToDelete()
+{
+	currentAnim = nullptr;
+	pendingToDelete = true;
+	for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
+	{
+		if (colliderList[i] != nullptr)
+		{
+			colliderList[i]->pendingToDelete = true;
+		}
+	}
+}
+

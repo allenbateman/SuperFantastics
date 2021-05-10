@@ -131,7 +131,7 @@ void ModuleEntities::HandleEntitiesSpawn()
 			{
 				LOG("Spawning Entitie at %d", spawnQueue[i].x * SCREEN_SIZE);
 
-				SpawnEntitie(spawnQueue[i]);
+				SpawnEntity(spawnQueue[i]);
 				spawnQueue[i].type = Entity_Type::NO_TYPE; // Removing the newly spawned Entitie from the queue
 			}
 		}
@@ -156,7 +156,7 @@ void ModuleEntities::HandleEntitiesDespawn()
 	}
 }
 
-void ModuleEntities::SpawnEntitie(const EntitieSpawnpoint& info)
+void ModuleEntities::SpawnEntity(const EntitySpawnpoint& info)
 {
 	// Find an empty slot in the entities array
 	for (uint i = 0; i < MAX_ENTITIES; ++i)

@@ -29,6 +29,9 @@
     <Filter Include="Source Files\Entities\Powerups">
       <UniqueIdentifier>{46191a70-7f13-4fe0-8070-7f7b7f664cc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Enviroment">
+      <UniqueIdentifier>{76ccbadc-e24c-4a04-8c05-55675c19a2c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -100,19 +103,7 @@
     <ClInclude Include="CoreMechaWalker.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="YellowFlower.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Orb.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="MiddleStructure.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="Bomb.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="RedFlower.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Powerup.h">
@@ -127,11 +118,23 @@
     <ClInclude Include="ModuleEntities.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="SceneInit.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="YellowFlower.h">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClInclude>
+    <ClInclude Include="RedFlower.h">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClInclude>
+    <ClInclude Include="Orb.h">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClInclude>
+    <ClInclude Include="MiddleStructure.h">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Source Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -198,19 +201,7 @@
     <ClCompile Include="CoreMechaWalker.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="YellowFlower.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Orb.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="MiddleStructure.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="Bomb.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="RedFlower.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Powerup.cpp">
@@ -225,11 +216,23 @@
     <ClCompile Include="ModuleEntities.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="SceneInit.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="YellowFlower.cpp">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="RedFlower.cpp">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="Orb.cpp">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="MiddleStructure.cpp">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

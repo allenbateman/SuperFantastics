@@ -1,6 +1,8 @@
 #pragma once
 #include "Entity.h"
 
+#define MAX_BOMB_COLLIDERS 30
+
 class Bomb : public Entity {
 public:
 
@@ -13,7 +15,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void OnCollision(Collider* collider) override;
-
+	void SetToDelete() override;
 
 private:
 
@@ -32,4 +34,7 @@ private:
 
 	State state = IDLE;
 	int frameSpawn = 0;
+
+	Collider* colliderList[MAX_BOMB_COLLIDERS] = { nullptr };
+
 };
