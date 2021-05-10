@@ -94,7 +94,7 @@ public:
 	PlayerState currentState;
 	// Player powers
 	int currentBombs = 1;
-	int rangeExplosion = 3;
+	int rangeExplosion = 2;
 };
 
 #endif //!__MODULE_PLAYER_H__

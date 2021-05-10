@@ -164,7 +164,7 @@ Update_Status SceneLevel1::PostUpdate()
 	// Draw everything --------------------------------------
 
 	//Draw background
-	//App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bgTexture, 0, 0, NULL);
 
 
 	// draw score

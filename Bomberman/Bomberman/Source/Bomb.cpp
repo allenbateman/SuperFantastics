@@ -96,6 +96,8 @@ Bomb::Bomb(int x, int y):Entity(x, y)
 
 	state = IDLE;
 
+	App->collisions->AddCollider({ position.x, position.y, 16, 16}, Collider::BOMB);
+
 	currentAnim = &idleAnim;
 	frameSpawn = App->frameCounter;
 }
@@ -105,15 +107,15 @@ void Bomb::Update()
 	Entity::Update();
 
 	switch (state) {
-
-
 	case IDLE:
+
+		idleAnim.Update();
 
 		if (App->frameCounter >= frameSpawn + bombTimer) {
 			// UP DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16 - i - 1][(position.x - 24) / 16] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x, position.y - (i + 1) * 16 }, Collider::BOMB);
+					App->collisions->AddCollider({ position.x, position.y - (i + 1) * 16 }, Collider::EXPLOSION);
 					upCount++;
 				}
 				else {
@@ -124,7 +126,7 @@ void Bomb::Update()
 			// DOWN DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16 + i + 1][(position.x - 24) / 16] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x, position.y + (i + 1) * 16 }, Collider::BOMB);
+					App->collisions->AddCollider({ position.x, position.y + (i + 1) * 16 }, Collider::EXPLOSION);
 					downCount++;
 				}
 				else {
@@ -135,7 +137,7 @@ void Bomb::Update()
 			// RIGHT DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16][(position.x - 24) / 16 + i + 1] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x + (i + 1) * 16, position.y}, Collider::BOMB);
+					App->collisions->AddCollider({ position.x + (i + 1) * 16, position.y }, Collider::EXPLOSION);
 					rightCount++;
 				}
 				else {
@@ -146,7 +148,7 @@ void Bomb::Update()
 			// LEFT DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
 				if (App->sceneLevel_1->grid[(position.y - 32) / 16][(position.x - 24) / 16 - i - 1] == SceneLevel1::EMPTY) {
-					App->collisions->AddCollider({ position.x - (i + 1) * 16, position.y }, Collider::BOMB);
+					App->collisions->AddCollider({ position.x - (i + 1) * 16, position.y }, Collider::EXPLOSION);
 					leftCount++;
 				}
 				else {
@@ -162,8 +164,6 @@ void Bomb::Update()
 		break;
 
 	case EXPLOSION:
-		
-		SDL_Rect rect;
 		centerAnim.Update();
 		vertSideAnim.Update();
 		upExtrAnim.Update();
@@ -171,9 +171,22 @@ void Bomb::Update()
 		horSideAnim.Update();
 		leftExtrAnim.Update();
 		rightExtrAnim.Update();
+		break;
+	}
+}
 
-		
+void Bomb::Draw()
+{
+	switch (state)
+	{
+		SDL_Rect rect;
+	case IDLE:
+		rect = idleAnim.GetCurrentFrame();
+		App->render->Blit(texture, position.x, position.y, &rect);
 
+		break;
+	case EXPLOSION:
+		//draw bomb here
 		rect = centerAnim.GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rect);
 
@@ -239,11 +252,7 @@ void Bomb::Update()
 		}
 		break;
 	}
-}
-
-void Bomb::Draw()
-{
-	//draw bomb here
+	
 }
 
 

@@ -313,7 +313,8 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE || c2->type == Collider::Type::RED_FLOWER)
+	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
+		|| c2->type == Collider::Type::RED_FLOWER || c2->type == Collider::Type::BOMB)
 	{
 		isStuck = true;
 		switch (lastKeyPressed)
@@ -375,7 +376,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 		c1->SetPos(position.x, position.y);
 	}
-	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT || c2->type == Collider::Type::BOMB)
+	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT || c2->type == Collider::Type::EXPLOSION)
 	{
 		currentState = PlayerState::DEAD;
 	}
