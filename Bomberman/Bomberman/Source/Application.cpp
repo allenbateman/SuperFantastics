@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "SceneInit.h"
 #include "SceneIntro.h"
 #include "SceneLevel1.h"
 #include "ModuleParticles.h"
@@ -26,16 +27,17 @@ Application::Application()
 	modules[2] =	textures =		new ModuleTextures(true);
 	modules[3] =	audio =			new ModuleAudio(true);
 
-	modules[4] =	sceneIntro =	new SceneIntro(true);
-	modules[5] =	sceneLevel_1 =	new SceneLevel1(false);		//Gameplay scene starts disabled
-	modules[6] =	particles =		new ModuleParticles(true);
-	modules[7] =    entities =		new ModuleEntities(false);	//Enemies start disabled
-	modules[8] =	player =		new ModulePlayer(false);	//Player starts disabled
+	modules[4] =	sceneInit =		new SceneInit(true);
+	modules[5] =	sceneIntro =	new SceneIntro(true);
+	modules[6] =	sceneLevel_1 =	new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[7] =	particles =		new ModuleParticles(true);
+	modules[8] =    entities =		new ModuleEntities(false);	//Enemies start disabled
+	modules[9] =	player =		new ModulePlayer(false);	//Player starts disabled
 
-	modules[9] =	collisions =	new ModuleCollisions(true);
-	modules[10] =	fade =			new ModuleFadeToBlack(true);
-	modules[11] =	fonts =			new ModuleFonts(true);
-	modules[12] =	render =		new ModuleRender(true);
+	modules[10] =	collisions =	new ModuleCollisions(true);
+	modules[11] =	fade =			new ModuleFadeToBlack(true);
+	modules[12] =	fonts =			new ModuleFonts(true);
+	modules[13] =	render =		new ModuleRender(true);
 }
 
 Application::~Application()
