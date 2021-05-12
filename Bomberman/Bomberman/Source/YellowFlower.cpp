@@ -17,3 +17,11 @@ YellowFlower::YellowFlower(int x, int y) : Entity(x, y)
 void YellowFlower::Update()
 {
 }
+
+void YellowFlower::OnCollision(Collider* collider)
+{
+	if (collider->type == Collider::Type::EXPLOSION) {
+		SetToDelete();
+	}
+}
+

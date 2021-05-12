@@ -33,7 +33,7 @@ bool SceneLevel1::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/background.png");
-	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	// Fixed positions
 
@@ -204,4 +204,9 @@ bool SceneLevel1::CleanUp()
 	App->collisions->Disable();
 
 	return true;
+}
+
+SceneLevel1::GridType SceneLevel1::GetGridType(int y, int x)
+{
+	return grid[y][x];
 }

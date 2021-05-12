@@ -41,7 +41,7 @@ void RedFlower::Update()
 
 void RedFlower::OnCollision(Collider* collider)
 {
-	if (collider->type == Collider::Type::BOMB) {
+	if (collider->type == Collider::Type::EXPLOSION) {
 		state = DEATH;
 	}
 }

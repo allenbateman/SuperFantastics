@@ -33,7 +33,9 @@ public:
 	// Disables the player and the enemies
 	bool CleanUp();
 
-	enum GridType
+
+
+    enum GridType
 	{
 		EMPTY = 0,
 		PLAYER,
@@ -47,15 +49,16 @@ public:
 		SNAIL,
 		RED_FLOWER,
 		YELLOW_FLOWER
-	};
+	}; 
 
+	GridType GetGridType(int x, int y);
 
 public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	GridType grid[11][13];
-
+	
 	int timeLeft = 240;
 	int initialFrame = 0;
 	int time = 0;
