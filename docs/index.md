@@ -1,28 +1,41 @@
 # Mega Bomberman
 ## Project I - Recreation of Mega Bomberman
 
+### Info that may be helpful
 You can use the [editor on GitHub](https://github.com/allenbateman/SuperFantastics/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
-
-tEST WORDS tEST WORDStEST WORDStEST WORDStEST WORDStEST WORDStEST WORDStEST WORDStEST WORDStEST WORDStEST WORDStEST WORDStEST WORDS
-
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### Introduction
+This is a replica of the first level of Mega Bomberman, a game from the Bomberman's saga launched in 1994 for the Sega Mega Drive. This project has been done by four Game Design & Development students from UPC in Barcelona, Spain.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### About Mega Bomberman
+Mega Bomberman is an action and maze game launched the 10th of December of 1993 under the name of Bomberman '94 for the TurboGrafx-16 exclussively in Japan. Some months later, the 11th of October of 1994 it was released in USA and Europe as Mega Bomberman for the Sega Genesis and Mega Drive.
 
-```markdown
-Syntax highlighted code block
+In this game you take the role of the main character of the story, "Bomberman". The story takes place in a moment of war and dispute. While Planet Bomber lived in peace and under the protection of five spirits, Buglear (the villian of the game) and his Robot Army invaded the planet and the Spirit Pictures where destroyed and so did the magical powers of the spirits. Now Planet Bomber is divided into five pieces and Bomberman's mission is to restore the Spirit Pictures and bring peace back again to the planet.
 
-# Header 1
-## Header 2
-### Header 3
+### Gameplay video
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+
+
+
+## Controls
+
+``` CONTROLS HERE
+KEYBOARD
+- Move up: up arrow
+- Move down: down arrow
+- Move left: left arrow
+- Move right: right arrow
+- Place bomb: C key
+
+GAMEPAD
+- Moves the character / Moves around Ui: directional pad
+- Place a bomb / Select: C button
+- Pause Game: Start
+- Use Luie’s power: B button
+
+No use buttons: A button
 
 **Bold** and _Italic_ and `Code` text
 
