@@ -14,6 +14,7 @@
 #include "Pokapoka.h"
 #include "Bomb.h"
 #include "CoreMechaWalker.h"
+#include "ModulePlayer.h"
 
 #define SPAWN_MARGIN 50
 
@@ -34,6 +35,7 @@ bool ModuleEntities::Start()
 	//texture = App->textures->Load("Assets/Sprites/entities.png");
 	texture = App->textures->Load("Assets/Sprites/entities.png");
 	EntitieDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	bombCount = 0;
 
 	return true;
 }
@@ -77,7 +79,19 @@ Update_Status ModuleEntities::PostUpdate()
 	for (uint i = 0; i < MAX_ENTITIES; ++i)
 	{
 		if (entities[i] != nullptr)
-			entities[i]->Draw();
+		{
+			//check if player is behind or in front of any entity
+			if (App->player->position.y < entities[i]->position.y)
+			{
+				App->player->Draw();
+				entities[i]->Draw();
+			}
+			else {
+				entities[i]->Draw();
+				App->player->Draw();
+			}
+			
+		}
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

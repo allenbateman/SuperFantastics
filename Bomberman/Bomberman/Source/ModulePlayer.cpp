@@ -12,6 +12,7 @@
 #include "ModuleFonts.h"
 #include "SDL.h"
 #include "SceneLevel1.h"
+#include "MiddleStructure.h"
 #include <stdio.h>
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
@@ -66,13 +67,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	winAnim.PushBack({ 40,71,15,23 });
 	winAnim.loop = false;
 	winAnim.speed = 0.1f;
-
-	//Structure Animation
-	structureIdle.PushBack({ 48, 98, 48, 64 });
-	structureIdle.PushBack({ 96, 98, 48, 64 });
-	structureIdle.PushBack({ 144, 98, 48, 64 });
-	structureIdle.loop = true;
-	structureIdle.speed = 0.05f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -104,7 +98,6 @@ bool ModulePlayer::Start()
 
 	// LOAD UI FONT
 	scoreboardFont = App->textures->Load("Assets/Fonts/interface.png");
-	structureTexture = App->textures->Load("Assets/Sprites/entities.png");
 
 	return ret;
 }
@@ -280,31 +273,12 @@ Update_Status ModulePlayer::Update()
 	
 	//update animations
 	currentAnimation->Update();
-	structureIdle.Update();
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModulePlayer::PostUpdate()
 {
-	if (!destroyed)
-	{
-		if (position.y >= 80)
-		{
-			SDL_Rect rect = structureIdle.GetCurrentFrame();
-			App->render->Blit(structureTexture, 104, 64, &rect);
-		}
-
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture, position.x, position.y - 8, &rect);
-
-		if (position.y < 80)
-		{
-			rect = structureIdle.GetCurrentFrame();
-			App->render->Blit(structureTexture, 104, 64, &rect);
-		}
-	}
-
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
 
@@ -380,7 +354,19 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		currentState = PlayerState::DEAD;
 	}
-	//check win collider....
+	else if (c2->type == Collider::Type::WIN)
+	{
+		currentState = PlayerState::WINING;
+	}
+}
+
+void ModulePlayer::Draw()
+{
+	if (!destroyed)
+	{
+		SDL_Rect rect = currentAnimation->GetCurrentFrame();
+		App->render->Blit(texture, position.x, position.y - 8, &rect);
+	}
 }
 
 void ModulePlayer::DrawScoreboard()

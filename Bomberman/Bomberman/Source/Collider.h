@@ -22,6 +22,7 @@ struct Collider
 		ENEMY_SHOT,
 		BOMB,
 		EXPLOSION,
+		WIN,
 		MAX
 	};
 

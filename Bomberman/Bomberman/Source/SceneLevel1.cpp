@@ -33,7 +33,7 @@ bool SceneLevel1::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/background.png");
-	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	// Fixed positions
 
@@ -126,6 +126,7 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == STRUCTURE)
 			{
+				App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::STRUCTURE);
 			}
 			else if (grid[i][j] == POKAPOKA)

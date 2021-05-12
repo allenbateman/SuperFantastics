@@ -96,8 +96,6 @@ Bomb::Bomb(int x, int y):Entity(x, y)
 
 	state = IDLE;
 
-	colliderList[0] =  App->collisions->AddCollider({ position.x, position.y, 16, 16}, Collider::BOMB);
-
 	currentAnim = &idleAnim;
 	frameSpawn = App->frameCounter;
 }
@@ -110,6 +108,12 @@ void Bomb::Update()
 	case IDLE:
 
 		idleAnim.Update();
+		//Set Bomb collider once the grid is empty
+		if (App->sceneLevel_1->grid[position.y][position.x] == SceneLevel1::EMPTY)
+		{
+			colliderList[0] = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::BOMB);
+			App->sceneLevel_1->grid[position.y][position.x] = SceneLevel1::BOMB;
+		}
 
 		if (App->frameCounter >= frameSpawn + bombTimer) {
 			// UP DIRECTION
