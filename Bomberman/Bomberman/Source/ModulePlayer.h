@@ -80,8 +80,6 @@ public:
 	bool movedRight = false;
 	bool death = false;
 
-	SDL_Texture* scoreboardFont = nullptr;
-
 	enum class PlayerState {
 		ALIVE,
 		DEAD,
@@ -91,6 +89,8 @@ public:
 	// Player powers
 	int currentBombs = 1;
 	int rangeExplosion = 2;
+
+	bool bombPlaced = false;
 };
 
 #endif //!__MODULE_PLAYER_H__

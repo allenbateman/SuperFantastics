@@ -2,11 +2,13 @@
 
 #include "Application.h"
 #include "ModuleTextures.h"
+#include "ModuleUI.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleEntities.h"
 #include "ModulePlayer.h"
+#include "MiddleStructure.h"
 
 #include <ctime>
 
@@ -26,8 +28,11 @@ bool SceneLevel1::Start()
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
+	App->UI->Enable();
+	
+	App->UI->timeLeft = timeLevel;
+	App->UI->timeLevel = timeLevel;
 
-	numTex = App->textures->Load("Assets/Fonts/interface.png");
 	LOG("Loading background assets");
 
 	bool ret = true;
@@ -96,8 +101,9 @@ bool SceneLevel1::Start()
 	grid[4][6] = EMPTY;
 	grid[5][6] = EMPTY;
 
-	// generate scene elements or rock collisions
+	middleStructureIsSet = false;
 
+	// generate scene elements or rock collisions
 	for (int i = 0; i < 11; i++) {
 		for (int j = 0; j < 13; j++)
 		{
@@ -126,8 +132,11 @@ bool SceneLevel1::Start()
 			}
 			else if (grid[i][j] == STRUCTURE)
 			{
-				App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::STRUCTURE);
+				if (!middleStructureIsSet)
+				{
+					App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
+					middleStructureIsSet = true;
+				}
 			}
 			else if (grid[i][j] == POKAPOKA)
 			{
@@ -136,7 +145,6 @@ bool SceneLevel1::Start()
 			else if (grid[i][j] == MECHA_WALKER)
 			{
 				App->entities->AddEntity(Entity_Type::MECHA_WALKER, 24 - 8 + (j * 16), 32 - 16 + (i * 16));
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::ENEMY);
 			}
 		}
 	}
@@ -149,51 +157,15 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	time = (App->frameCounter - initialFrame) / 60;
-	timeLeft = 240 - time;
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
 Update_Status SceneLevel1::PostUpdate()
 {
-	int x = 136;
-	int y = 8;
-	int score = App->player->score;
-	SDL_Rect rec = { 0 };
-	// Draw everything --------------------------------------
-
 	//Draw background
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
-
-	// draw score
-	int digits = 10000000;
-	for (int i = 0; i < 8; i++) {
-		int d = score / digits;
-		if (d > 0 || i > 5) {
-			rec = { d * 8,0,8,8 };
-			App->render->Blit(numTex, x + (8 * i), y, &rec);
-		}
-		score = score % digits;
-		digits /= 10;
-	}
-
-	// draw lifes
-	rec = { App->player->lifes * 8,0,8,8 };
-	App->render->Blit(numTex, 232, y, &rec);
-
-	// draw time
-	rec = { timeLeft / (60) * 8,0,8,8 };
-	App->render->Blit(numTex, 16, y, &rec);
-	rec = { (timeLeft % 60) / 10 * 8,0,8,8 };
-	App->render->Blit(numTex, 32, y, &rec);
-	rec = { (timeLeft % 10) * 8,0,8,8 };
-	App->render->Blit(numTex, 40, y, &rec);
-
-
-	//App->player->score
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -202,6 +174,7 @@ bool SceneLevel1::CleanUp()
 	App->player->Disable();
 	App->entities->Disable();
 	App->collisions->Disable();
+	App->UI->Disable();
 
 	return true;
 }

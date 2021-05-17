@@ -58,11 +58,8 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	GridType grid[11][13];
-	
-	int timeLeft = 240;
-	int initialFrame = 0;
-	int time = 0;
-	SDL_Texture* numTex;
+	bool middleStructureIsSet = false;
+	int timeLevel = 240;
 };
 
 #endif

@@ -91,6 +91,7 @@
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleParticles.h" />
+    <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Pokapoka.h" />
     <ClInclude Include="Powerup.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
+    <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Pokapoka.cpp" />
     <ClCompile Include="Powerup.cpp" />
