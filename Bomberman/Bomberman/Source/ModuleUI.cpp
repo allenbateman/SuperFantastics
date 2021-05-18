@@ -58,7 +58,7 @@ Update_Status ModuleUI::PostUpdate(){
 	rec = { (timeLeft % 10) * 8,0,8,8 };
 	App->render->Blit(numTex, 40, y, &rec);
 	
-	//draw powerups
+	//draw Orbs
 
 	return  Update_Status::UPDATE_CONTINUE;
 }

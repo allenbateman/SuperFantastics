@@ -73,6 +73,7 @@ bool SceneLevel1::Start()
 	grid[3][6] = STRUCTURE;
 	grid[3][7] = STRUCTURE;
 	grid[4][5] = STRUCTURE;
+	grid[4][6] = WIN_SPOT;
 	grid[4][7] = STRUCTURE;
 	grid[5][5] = STRUCTURE;
 	grid[5][7] = STRUCTURE;
@@ -179,7 +180,12 @@ bool SceneLevel1::CleanUp()
 	return true;
 }
 
-SceneLevel1::GridType SceneLevel1::GetGridType(int y, int x)
+SceneLevel1::GridType SceneLevel1::GetGridType(int y, int x, int yIteration, int xIterantion)
 {
-	return grid[y][x];
+	return grid[(y - 32) / 16 + yIteration ][(x - 24) / 16 + xIterantion];
+}
+
+SceneLevel1::GridType SceneLevel1::SetGridType(GridType type,int y, int x, int yIteration, int xIterantion)
+{
+	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIterantion] = type;
 }

@@ -30,6 +30,7 @@ struct Collider
 	Collider(SDL_Rect rectangle, Type type, Module* listener = nullptr);
 
 	void SetPos(int x, int y);
+
 	iPoint GetPos() { return iPoint {rect.x,rect.y}; }
 	
 	bool Intersects(const SDL_Rect& r) const;

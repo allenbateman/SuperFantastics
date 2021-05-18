@@ -73,11 +73,6 @@ public:
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 	int lifes = 3;
-
-	bool movedUp = false;
-	bool movedDown = false;
-	bool movedLeft = false;
-	bool movedRight = false;
 	bool death = false;
 
 	enum class PlayerState {

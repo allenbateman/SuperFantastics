@@ -14,6 +14,7 @@ private:
 
 	Animation idleAnim, winAnim;
 	Collider* colliders[7] = {nullptr};
-	
+	Collider* winCollider = nullptr;
+	bool winColliderSet = false;
 
 };

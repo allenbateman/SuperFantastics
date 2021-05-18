@@ -204,7 +204,7 @@ Update_Status ModulePlayer::Update()
 			//move collider
 			collider->SetPos(position.x, position.y);
 
-			App->sceneLevel_1->grid[(collider->GetPos().y - 32) / 16][(collider->GetPos().x - 24) / 16] = SceneLevel1::GridType::PLAYER;
+			App->sceneLevel_1->SetGridType(SceneLevel1::GridType::PLAYER,collider->GetPos().y,collider->GetPos().x);
 
 			//check border colliders
 			if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
@@ -287,8 +287,8 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
-		|| c2->type == Collider::Type::RED_FLOWER || (c2->type == Collider::Type::BOMB && !bombPlaced))
+    if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
+		|| c2->type == Collider::Type::RED_FLOWER || c2->type == Collider::Type::BOMB)
 	{
 		bombPlaced = false;
 		isStuck = true;

@@ -48,10 +48,12 @@ public:
 		MOUSE,
 		SNAIL,
 		RED_FLOWER,
-		YELLOW_FLOWER
+		YELLOW_FLOWER,
+		WIN_SPOT
 	}; 
 
-	GridType GetGridType(int x, int y);
+	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
+	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 
 public:
 	
