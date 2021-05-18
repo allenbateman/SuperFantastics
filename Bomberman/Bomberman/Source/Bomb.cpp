@@ -31,7 +31,7 @@ Bomb::Bomb(int x, int y):Entity(x, y)
 	idleAnim.pingpong = true;
 	idleAnim.speed = 0.1f;
 
-	// Animacion centro explosion (SOLO IDA (como se hace ida y vuelta???))
+	// Animacion centro explosion
 	centerAnim.PushBack({ 0,288,16,16 });
 	centerAnim.PushBack({ 16,288,16,16 });
 	centerAnim.PushBack({ 32,288,16,16 });
