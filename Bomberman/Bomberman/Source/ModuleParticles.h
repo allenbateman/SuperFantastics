@@ -54,10 +54,7 @@ public:
 
 public:
 	//Template particle for an explosion
-	Particle explosion;
-
-	//Template particle for a laser
-	Particle laser;
+	Particle centerExplosion,verticalExplosion,horizontalExplosion,endLeftExp,endRightExp,endUpExp,endDowExp;
 
 private:
 	// Particles spritesheet loaded into an SDL Texture

@@ -22,23 +22,70 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Sprites/particles.png");
+	texture = App->textures->Load("Assets/Sprites/entities.png");
 
-	// Explosion particle
-	explosion.anim.PushBack({274, 296, 33, 30});
-	explosion.anim.PushBack({313, 296, 33, 30});
-	explosion.anim.PushBack({346, 296, 33, 30});
-	explosion.anim.PushBack({382, 296, 33, 30});
-	explosion.anim.PushBack({419, 296, 33, 30});
-	explosion.anim.PushBack({457, 296, 33, 30});
-	explosion.anim.loop = false;
-	explosion.anim.speed = 0.3f;
+	// Animacion centro explosion (SOLO IDA (como se hace ida y vuelta???))
+	centerExplosion.anim.PushBack({ 0,288,16,16 });
+	centerExplosion.anim.PushBack({ 16,288,16,16 });
+	centerExplosion.anim.PushBack({ 32,288,16,16 });
+	centerExplosion.anim.PushBack({ 48,288,16,16 });
+	centerExplosion.anim.loop = true;
+	centerExplosion.anim.pingpong = true;
+	centerExplosion.anim.speed = 0.1f;
 
-	laser.anim.PushBack({ 232, 103, 16, 12 });
-	laser.anim.PushBack({ 249, 103, 16, 12 });
-	laser.speed.x = 5;
-	laser.lifetime = 180;
-	laser.anim.speed = 0.2f;
+	// Horizontal side explosion
+	horizontalExplosion.anim.PushBack({ 0,304,16,16 });
+	horizontalExplosion.anim.PushBack({ 16,304,16,16 });
+	horizontalExplosion.anim.PushBack({ 32,304,16,16 });
+	horizontalExplosion.anim.PushBack({ 48,304,16,16 });
+	horizontalExplosion.anim.loop = true;
+	horizontalExplosion.anim.pingpong = true;
+	horizontalExplosion.anim.speed = 0.1f;
+
+	// Left extreme explosion
+	endLeftExp.anim.PushBack({ 0,320,16,16 });
+	endLeftExp.anim.PushBack({ 16,320,16,16 });
+	endLeftExp.anim.PushBack({ 32,320,16,16 });
+	endLeftExp.anim.PushBack({ 48,320,16,16 });
+	endLeftExp.anim.loop = true;
+	endLeftExp.anim.pingpong = true;
+	endLeftExp.anim.speed = 0.1f;
+
+	// Right extreme explosion
+	endRightExp.anim.PushBack({ 0,336,16,16 });
+	endRightExp.anim.PushBack({ 16,336,16,16 });
+	endRightExp.anim.PushBack({ 32,336,16,16 });
+	endRightExp.anim.PushBack({ 48,336,16,16 });
+	endRightExp.anim.loop = true;
+	endRightExp.anim.pingpong = true;
+	endRightExp.anim.speed = 0.1f;
+
+	// Vertical side explosion
+	verticalExplosion.anim.PushBack({ 0,352,16,16 });
+	verticalExplosion.anim.PushBack({ 16,352,16,16 });
+	verticalExplosion.anim.PushBack({ 32,352,16,16 });
+	verticalExplosion.anim.PushBack({ 48,352,16,16 });
+	verticalExplosion.anim.loop = true;
+	verticalExplosion.anim.pingpong = true;
+	verticalExplosion.anim.speed = 0.1f;
+
+	// Up extreme explosion
+	endUpExp.anim.PushBack({ 0,368,16,16 });
+	endUpExp.anim.PushBack({ 16,368,16,16 });
+	endUpExp.anim.PushBack({ 32,368,16,16 });
+	endUpExp.anim.PushBack({ 48,368,16,16 });
+	endUpExp.anim.loop = true;
+	endUpExp.anim.pingpong = true;
+	endUpExp.anim.speed = 0.1f;
+
+	// Down extreme explosion
+	endDowExp.anim.PushBack({ 0,384,16,16 });
+	endDowExp.anim.PushBack({ 16,384,16,16 });
+	endDowExp.anim.PushBack({ 32,384,16,16 });
+	endDowExp.anim.PushBack({ 48,384,16,16 });
+	endDowExp.anim.loop = true;
+	endDowExp.anim.pingpong = true;
+	endDowExp.anim.speed = 0.1f;
 
 	return true;
 }

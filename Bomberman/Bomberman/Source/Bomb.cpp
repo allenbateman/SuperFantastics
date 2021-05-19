@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleParticles.h"
 #include "SceneLevel1.h"
 #include "ModuleCollisions.h"
 
