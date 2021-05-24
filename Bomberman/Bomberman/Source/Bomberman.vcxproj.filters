@@ -139,6 +139,15 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="SceneBossFight.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLevel2.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLevel3.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -238,6 +247,15 @@
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBossFight.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLevel2.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLevel3.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
