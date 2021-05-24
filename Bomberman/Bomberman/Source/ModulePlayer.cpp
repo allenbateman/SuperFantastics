@@ -96,9 +96,6 @@ bool ModulePlayer::Start()
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
 
-	// LOAD UI FONT
-	scoreboardFont = App->textures->Load("Assets/Fonts/interface.png");
-
 	return ret;
 }
 
@@ -107,6 +104,7 @@ Update_Status ModulePlayer::Update()
 	switch (currentState){
 		case PlayerState::ALIVE:
 			//Movement
+			App->sceneLevel_1->grid[(collider->GetPos().y - 32) / 16][(collider->GetPos().x - 24) / 16] = SceneLevel1::GridType::EMPTY;
 			lastPos = position;
 			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT) {
 				position.x -= speed;
@@ -128,7 +126,6 @@ Update_Status ModulePlayer::Update()
 					position.y += speed;
 					isStuck = false;
 				}
-
 			}
 			else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT) {
 				position.x += speed;
@@ -207,6 +204,8 @@ Update_Status ModulePlayer::Update()
 			//move collider
 			collider->SetPos(position.x, position.y);
 
+			App->sceneLevel_1->SetGridType(SceneLevel1::GridType::PLAYER,collider->GetPos().y,collider->GetPos().x);
+
 			//check border colliders
 			if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
 				position = lastPos;
@@ -225,6 +224,7 @@ Update_Status ModulePlayer::Update()
 				if (App->entities->bombCount < currentBombs) {
 					App->entities->AddEntity(Entity_Type::BOMB, position.x, position.y);
 					App->audio->PlayFx(bombIsPlaced);
+					bombPlaced = true;
 				}
 			}
 
@@ -287,9 +287,10 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
+    if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
 		|| c2->type == Collider::Type::RED_FLOWER || c2->type == Collider::Type::BOMB)
 	{
+		bombPlaced = false;
 		isStuck = true;
 		switch (lastKeyPressed)
 		{
@@ -367,9 +368,4 @@ void ModulePlayer::Draw()
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y - 8, &rect);
 	}
-}
-
-void ModulePlayer::DrawScoreboard()
-{
-
 }

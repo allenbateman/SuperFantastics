@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleParticles.h"
 #include "SceneLevel1.h"
 #include "ModuleCollisions.h"
 
@@ -109,16 +110,16 @@ void Bomb::Update()
 
 		idleAnim.Update();
 		//Set Bomb collider once the grid is empty
-		if (App->sceneLevel_1->grid[position.y][position.x] == SceneLevel1::EMPTY)
+		if (App->sceneLevel_1->GetGridType(position.y, position.x) == SceneLevel1::GridType::EMPTY && colliderList[0] == nullptr)
 		{
 			colliderList[0] = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::BOMB);
-			App->sceneLevel_1->grid[position.y][position.x] = SceneLevel1::BOMB;
+			App->sceneLevel_1->grid[(position.y - 32) / 16][(position.x - 24) / 16] = SceneLevel1::GridType::BOMB;
 		}
 
 		if (App->frameCounter >= frameSpawn + bombTimer) {
 			// UP DIRECTION
 			for (int i = 0; i < App->player->rangeExplosion; i++) {
-				if (App->sceneLevel_1->grid[(position.y - 32) / 16 - i - 1][(position.x - 24) / 16] == SceneLevel1::EMPTY) {
+				if (App->sceneLevel_1->GetGridType(position.y,position.x,0, i + 1) == SceneLevel1::EMPTY) {
 					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++) 
 					{
 						if (colliderList[i] == nullptr)

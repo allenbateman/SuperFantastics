@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 #include "SceneInit.h"
 #include "SceneIntro.h"
 #include "SceneLevel1.h"
@@ -30,14 +31,15 @@ Application::Application()
 	modules[4] =	sceneInit =		new SceneInit(true);
 	modules[5] =	sceneIntro =	new SceneIntro(false);
 	modules[6] =	sceneLevel_1 =	new SceneLevel1(false);		//Gameplay scene starts disabled
-	modules[7] =	particles =		new ModuleParticles(true);
-	modules[8] =    entities =		new ModuleEntities(false);	//Enemies start disabled
-	modules[9] =	player =		new ModulePlayer(false);	//Player starts disabled
+	modules[7] =	UI =			new ModuleUI(false);		//Gameplay scene starts disabled
+	modules[8] =	particles =		new ModuleParticles(false);
+	modules[9] =    entities =		new ModuleEntities(false);	//Enemies start disabled
+	modules[10] =	player =		new ModulePlayer(false);	//Player starts disabled
 
-	modules[10] =	collisions =	new ModuleCollisions(true);
-	modules[11] =	fade =			new ModuleFadeToBlack(true);
-	modules[12] =	fonts =			new ModuleFonts(true);
-	modules[13] =	render =		new ModuleRender(true);
+	modules[11] =	collisions =	new ModuleCollisions(true);
+	modules[12] =	fade =			new ModuleFadeToBlack(true);
+	modules[13] =	fonts =			new ModuleFonts(true);
+	modules[14] =	render =		new ModuleRender(true);
 }
 
 Application::~Application()
@@ -78,6 +80,11 @@ Update_Status Application::Update()
 
 	for (int i = 0; i < NUM_MODULES && ret == Update_Status::UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : Update_Status::UPDATE_CONTINUE;
+
+	//Exit apication
+	if (input->keys[SDL_SCANCODE_ESCAPE] == Key_State::KEY_DOWN)
+		ret = Update_Status::UPDATE_STOP;
+	
 
 	frameCounter++;
 

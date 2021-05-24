@@ -136,6 +136,9 @@
     <ClInclude Include="Entity.h">
       <Filter>Source Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleUI.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUI.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

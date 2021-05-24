@@ -2,7 +2,7 @@
 #define __COLLIDER_H__
 
 #include "SDL/include/SDL_Rect.h"
-
+#include "p2Point.h"
 #define MAX_LISTENERS 5
 
 class Module;
@@ -31,6 +31,8 @@ struct Collider
 
 	void SetPos(int x, int y);
 
+	iPoint GetPos() { return iPoint {rect.x,rect.y}; }
+	
 	bool Intersects(const SDL_Rect& r) const;
 
 	void AddListener(Module* listener);
