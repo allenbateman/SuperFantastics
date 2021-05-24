@@ -5,10 +5,12 @@
 #include "ModuleUI.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
+#include "ModuleInput.h"
 #include "ModuleCollisions.h"
 #include "ModuleEntities.h"
 #include "ModulePlayer.h"
 #include "MiddleStructure.h"
+#include "ModuleFadeToBlack.h"
 
 #include <ctime>
 
@@ -158,6 +160,16 @@ bool SceneLevel3::Start()
 
 Update_Status SceneLevel3::Update()
 {
+	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+	{
+		App->player->Disable();
+		App->entities->Disable();
+		App->collisions->Disable();
+		App->UI->Disable();
+
+		App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -180,12 +192,12 @@ bool SceneLevel3::CleanUp()
 	return true;
 }
 
-SceneLevel3::GridType SceneLevel3::GetGridType(int y, int x, int yIteration, int xIterantion)
+SceneLevel3::GridType SceneLevel3::GetGridType(int y, int x, int yIteration, int xIteration)
 {
-	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIterantion];
+	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration];
 }
 
-SceneLevel3::GridType SceneLevel3::SetGridType(GridType type, int y, int x, int yIteration, int xIterantion)
+SceneLevel3::GridType SceneLevel3::SetGridType(GridType type, int y, int x, int yIteration, int xIteration)
 {
-	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIterantion] = type;
+	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration] = type;
 }

@@ -59,7 +59,7 @@ CoreMechaWalker::CoreMechaWalker(int x, int y) : Entity(x, y)
 	collider = App->collisions->AddCollider({ 8, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
 	colliderPosition.x = position.x + 8;
 	colliderPosition.y = position.y + 16;
-	App->sceneLevel_1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
+	App->sceneLevel1->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = SceneLevel1::GridType::EMPTY;
 }
 
 
@@ -86,7 +86,7 @@ void CoreMechaWalker::Update()
 				if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
 				if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
 
-				App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::EMPTY;
+				App->sceneLevel1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::EMPTY;
 				if (direction == UP) position.y--;
 				else if (direction == DOWN) position.y++;
 				else if (direction == LEFT) position.x--;
@@ -95,7 +95,7 @@ void CoreMechaWalker::Update()
 				colliderPosition.x = position.x + 8;
 				colliderPosition.y = position.y + 16;
 
-				App->sceneLevel_1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::MECHA_WALKER;
+				App->sceneLevel1->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel1::GridType::MECHA_WALKER;
 			}
 		}
 
@@ -122,7 +122,7 @@ void CoreMechaWalker::CheckDirection()
 	int y = (colliderPosition.y - 32) / 16;
 
 	if (y != 10) {
-		if (App->sceneLevel_1->grid[y + 1][x] == SceneLevel1::GridType::EMPTY)
+		if (App->sceneLevel1->grid[y + 1][x] == SceneLevel1::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = DOWN;
 			avaibleCount++;
@@ -132,7 +132,7 @@ void CoreMechaWalker::CheckDirection()
 	{
 		if (y != 5 && x != 6)
 		{
-			if (App->sceneLevel_1->grid[y - 1][x] == SceneLevel1::GridType::EMPTY)
+			if (App->sceneLevel1->grid[y - 1][x] == SceneLevel1::GridType::EMPTY)
 			{
 				avaibleDirections[avaibleCount] = UP;
 				avaibleCount++;
@@ -141,14 +141,14 @@ void CoreMechaWalker::CheckDirection()
 	}
 	if (x != 0)
 	{
-		if (App->sceneLevel_1->grid[y][x - 1] == SceneLevel1::GridType::EMPTY)
+		if (App->sceneLevel1->grid[y][x - 1] == SceneLevel1::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = LEFT;
 			avaibleCount++;
 		}
 	}
 	if (x != 12) {
-		if (App->sceneLevel_1->grid[y][x + 1] == SceneLevel1::GridType::EMPTY)
+		if (App->sceneLevel1->grid[y][x + 1] == SceneLevel1::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = RIGHT;
 			avaibleCount++;

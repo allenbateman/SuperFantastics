@@ -104,7 +104,7 @@ Update_Status ModulePlayer::Update()
 	switch (currentState){
 		case PlayerState::ALIVE:
 			//Movement
-			App->sceneLevel_1->grid[(collider->GetPos().y - 32) / 16][(collider->GetPos().x - 24) / 16] = SceneLevel1::GridType::EMPTY;
+			App->sceneLevel1->grid[(collider->GetPos().y - 32) / 16][(collider->GetPos().x - 24) / 16] = SceneLevel1::GridType::EMPTY;
 			lastPos = position;
 			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT) {
 				position.x -= speed;
@@ -204,7 +204,7 @@ Update_Status ModulePlayer::Update()
 			//move collider
 			collider->SetPos(position.x, position.y);
 
-			App->sceneLevel_1->SetGridType(SceneLevel1::GridType::PLAYER,collider->GetPos().y,collider->GetPos().x);
+			App->sceneLevel1->SetGridType(SceneLevel1::GridType::PLAYER,collider->GetPos().y,collider->GetPos().x);
 
 			//check border colliders
 			if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
@@ -214,8 +214,8 @@ Update_Status ModulePlayer::Update()
 			//Update grid 
 			if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
 			{
-				App->sceneLevel_1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
-				App->sceneLevel_1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
+				App->sceneLevel1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
+				App->sceneLevel1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
 			}
 
 			//Place Bomb
@@ -247,7 +247,7 @@ Update_Status ModulePlayer::Update()
 				currentAnimation = &deathAnim;
 			}else if (currentAnimation == &deathAnim && currentAnimation->HasFinished()){
 				destroyed = true;
-				App->sceneLevel_1->Disable();
+				App->sceneLevel1->Disable();
 				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
 			}
 
@@ -261,7 +261,7 @@ Update_Status ModulePlayer::Update()
 				
 				//save player status...
 				//Disable current level...
-				App->sceneLevel_1->Disable();			
+				App->sceneLevel1->Disable();			
 				//load nex level...
 				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);		
 			
