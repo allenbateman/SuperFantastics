@@ -99,121 +99,163 @@ Bomb::Bomb(int x, int y):Entity(x, y)
 
 	currentAnim = &idleAnim;
 	frameSpawn = App->frameCounter;
+	collider = nullptr;
 }
 
 void Bomb::Update()
 {
 	Entity::Update();
 
+	frameCounter++;
+
 	switch (state) {
 	case IDLE:
 
 		idleAnim.Update();
-		//Set Bomb collider once the grid is empty
-		if (App->sceneLevel1->GetGridType(position.y, position.x) == SceneLevel1::GridType::EMPTY && colliderList[0] == nullptr)
-		{
-			colliderList[0] = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::BOMB);
-			App->sceneLevel1->grid[(position.y - 32) / 16][(position.x - 24) / 16] = SceneLevel1::GridType::BOMB;
-		}
+		
+		// TODO: START SOUND
+		if (collider == nullptr && frameCounter > 45) collider = App->collisions->AddCollider({ 0,0,16,16 }, Collider::WALL);
+		if (collider != nullptr) collider->SetPos(position.x, position.y);
 
-		if (App->frameCounter >= frameSpawn + bombTimer) {
-			// UP DIRECTION
-			for (int i = 0; i < App->player->rangeExplosion; i++) {
-				if (App->sceneLevel1->GetGridType(position.y,position.x,0, i + 1) == SceneLevel1::EMPTY) {
-					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++) 
-					{
-						if (colliderList[i] == nullptr)
-						{
-							colliderList[i] = App->collisions->AddCollider({ position.x, position.y - (i + 1) * 16 }, Collider::EXPLOSION);
-							upCount++;
-							break;
-						}
-					}
-				}
-				else {
-					break;
-				}
-			}
+		if (frameCounter > 120) state = EXPLOSION;
 
-			// DOWN DIRECTION
-			for (int i = 0; i < App->player->rangeExplosion; i++) {
-				if (App->sceneLevel1->grid[(position.y - 32) / 16 + i + 1][(position.x - 24) / 16] == SceneLevel1::EMPTY) {
-					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
-					{
-						if (colliderList[i] == nullptr)
-						{
-							colliderList[i] = App->collisions->AddCollider({ position.x, position.y + (i + 1) * 16 }, Collider::EXPLOSION);
-							downCount++;
-							break;
-						}
-					}
-				}
-				else {
-					break;
-				}
-			}
-
-			// RIGHT DIRECTION
-			for (int i = 0; i < App->player->rangeExplosion; i++) {
-				if (App->sceneLevel1->grid[(position.y - 32) / 16][(position.x - 24) / 16 + i + 1] == SceneLevel1::EMPTY) {
-					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
-					{
-						if (colliderList[i] == nullptr)
-						{
-							colliderList[i] = App->collisions->AddCollider({ position.x + (i + 1) * 16, position.y }, Collider::EXPLOSION);
-							rightCount++;
-							break;
-						}
-					}
-				}
-				else {
-					break;
-				}
-			}
-
-			// LEFT DIRECTION
-			for (int i = 0; i < App->player->rangeExplosion; i++) {
-				if (App->sceneLevel1->grid[(position.y - 32) / 16][(position.x - 24) / 16 - i - 1] == SceneLevel1::EMPTY) {
-					for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
-					{
-						if (colliderList[i] == nullptr)
-						{
-							colliderList[i] = App->collisions->AddCollider({ position.x - (i + 1) * 16, position.y }, Collider::EXPLOSION);
-							leftCount++;
-							break;
-						}
-					}			
-				}
-				else {
-					break;
-				}
-			}
-
-			// TODO: START SOUND
-			frameExplode = App->frameCounter;
-			state = EXPLOSION;
-			currentAnim = nullptr;
-		}
+			
 		break;
 
 	case EXPLOSION:
-		centerAnim.Update();
-		vertSideAnim.Update();
-		upExtrAnim.Update();
-		downExtrAnim.Update();
-		horSideAnim.Update();
-		leftExtrAnim.Update();
-		rightExtrAnim.Update();
+		collider->pendingToDelete = true;
+		currentAnim = nullptr;
 
+		if (withColliders == false) {
+			withColliders = true;
+			// initialize all particles
+			int range = App->player->rangeExplosion;
+
+			// CENTER
+			int index = ChooseArrayIndex();
+			colliderList[index] = App->collisions->AddCollider({ 0,0,16,16 }, Collider::EXPLOSION);
+			colliderList[index]->SetPos(position.x, position.y);
+			particle[index].type = CENTER;
+			particle[index].x = position.x;
+			particle[index].y = position.y;
+
+			// UP
+			for (int i = 0; i < range; i++) {
+				if (((position.y - 32) / 16) - (i + 1) >= 0) {
+					if (App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) == SceneLevel1::STRUCTURE ||
+						App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) == SceneLevel1::ROCK) {
+						break;
+					}
+
+					index = ChooseArrayIndex();
+					colliderList[index] = App->collisions->AddCollider({ 0,0,16,16 }, Collider::EXPLOSION);
+					colliderList[index]->SetPos(position.x, position.y - (i * 16 + 16));
+					if (i == range - 1) particle[index].type = END_UP;
+					else particle[index].type = VERTICAL;
+					particle[index].x = position.x;
+					particle[index].y = position.y - (i * 16 + 16);
+
+					if (App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) != SceneLevel1::EMPTY)
+						break;
+				}
+			}
+
+			// DOWN
+			for (int i = 0; i < range; i++) {
+				if (((position.y - 32) / 16) + (i + 1) <= 10) {
+					if (App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) == SceneLevel1::STRUCTURE ||
+						App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) == SceneLevel1::ROCK) {
+						break;
+					}
+
+					index = ChooseArrayIndex();
+					colliderList[index] = App->collisions->AddCollider({ 0,0,16,16 }, Collider::EXPLOSION);
+					colliderList[index]->SetPos(position.x, position.y + (i * 16 + 16));
+					if (i == range - 1) particle[index].type = END_DOWN;
+					else particle[index].type = VERTICAL;
+					particle[index].x = position.x;
+					particle[index].y = position.y + (i * 16 + 16);
+
+					if (App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) != SceneLevel1::EMPTY)
+						break;
+				}
+			}
+
+			// LEFT
+			for (int i = 0; i < range; i++) {
+				if (((position.x - 24) / 16) - (i + 1) >= 0) {
+					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) == SceneLevel1::STRUCTURE ||
+						App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) == SceneLevel1::ROCK) {
+						break;
+					}
+
+					index = ChooseArrayIndex();
+					colliderList[index] = App->collisions->AddCollider({ 0,0,16,16 }, Collider::EXPLOSION);
+					colliderList[index]->SetPos(position.x - (i * 16 + 16), position.y);
+					if (i == range - 1) particle[index].type = END_LEFT;
+					else particle[index].type = HORIZONTAL;
+					particle[index].x = position.x - (i * 16 + 16);
+					particle[index].y = position.y;
+
+					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) != SceneLevel1::EMPTY)
+						break;
+				}
+			}
+
+			// RIGHT
+			for (int i = 0; i < range; i++) {
+				if (((position.x - 24) / 16) + (i + 1) <= 12) {
+					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) == SceneLevel1::STRUCTURE ||
+						App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) == SceneLevel1::ROCK) {
+						break;
+					}
+
+					index = ChooseArrayIndex();
+					colliderList[index] = App->collisions->AddCollider({ 0,0,16,16 }, Collider::EXPLOSION);
+					colliderList[index]->SetPos(position.x + (i * 16 + 16), position.y);
+					if (i == range - 1) particle[index].type = END_RIGHT;
+					else particle[index].type = HORIZONTAL;
+					particle[index].x = position.x + (i * 16 + 16);
+					particle[index].y = position.y;
+
+					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) != SceneLevel1::EMPTY)
+						break;
+				}
+			}
+		}
+		else {
+			centerAnim.Update();
+			vertSideAnim.Update();
+			upExtrAnim.Update();
+			downExtrAnim.Update();
+			horSideAnim.Update();
+			leftExtrAnim.Update();
+			rightExtrAnim.Update();
+		}
+		if (frameCounter>180)SetToDelete();
+		state = EXPLOSION;
 		break;
+	/*case EXPLOSION:
+		if (frameCounter > 240) SetToDelete();
+		break;*/
 	}
+}
+
+
+int Bomb::ChooseArrayIndex() {
+	int res = 0;
+	for (int i = 0; i != MAX_BOMB_COLLIDERS; i++) {
+		res = i;
+		if (colliderList[i] == nullptr) break;
+	}
+	return res;
 }
 
 void Bomb::Draw()
 {
+	SDL_Rect rect;
 	switch (state)
 	{
-		SDL_Rect rect;
 	case IDLE:
 		rect = idleAnim.GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rect);
@@ -221,68 +263,39 @@ void Bomb::Draw()
 		break;
 	case EXPLOSION:
 		//draw bomb here
-		rect = centerAnim.GetCurrentFrame();
-		App->render->Blit(texture, position.x, position.y, &rect);
+		for (int i = 0; i != MAX_BOMB_COLLIDERS; i++) {
 
-		// UP DIRECTION
-		if (upCount > 0) {
-			rect = vertSideAnim.GetCurrentFrame();
+			if (particle[i].type != NONE) {
 
-			for (int i = 1; i < upCount; i++) {
-				App->render->Blit(texture, position.x, position.y - (i * 16), &rect);
+				switch (particle[i].type)
+				{
+				case CENTER:
+					rect = centerAnim.GetCurrentFrame();
+					break;
+				case VERTICAL:
+					rect = vertSideAnim.GetCurrentFrame();
+					break;
+				case END_UP:
+					rect = upExtrAnim.GetCurrentFrame();
+					break;
+				case END_DOWN:
+					rect = downExtrAnim.GetCurrentFrame();
+					break;
+				case HORIZONTAL:
+					rect = horSideAnim.GetCurrentFrame();
+					break;
+				case END_LEFT:
+					rect = leftExtrAnim.GetCurrentFrame();
+					break;
+				case END_RIGHT:
+					rect = rightExtrAnim.GetCurrentFrame();
+					break;
+				}
+				App->render->Blit(texture, particle[i].x, particle[i].y, &rect);
 			}
-
-			rect = upExtrAnim.GetCurrentFrame();
-
-			App->render->Blit(texture, position.x, position.y - (upCount * 16), &rect);
+			
 		}
-
-		// LEFT DIRECTION
-		if (leftCount > 0) {
-			rect = horSideAnim.GetCurrentFrame();
-
-			for (int i = 1; i < leftCount; i++) {
-				App->render->Blit(texture, position.x - (i * 16), position.y, &rect);
-			}
-
-			rect = leftExtrAnim.GetCurrentFrame();
-
-			App->render->Blit(texture, position.x - (leftCount * 16), position.y, &rect);
-		}
-
-		// RIGHT DIRECTION
-		if (rightCount > 0) {
-
-			rect = horSideAnim.GetCurrentFrame();
-
-			for (int i = 1; i < rightCount; i++) {
-				App->render->Blit(texture, position.x + (i * 16), position.y, &rect);
-			}
-
-			rect = rightExtrAnim.GetCurrentFrame();
-
-			App->render->Blit(texture, position.x + (rightCount * 16), position.y, &rect);
-		}
-
-		// DOWN DIRECTION
-		if (downCount > 0) {
-
-			rect = vertSideAnim.GetCurrentFrame();
-
-			for (int i = 1; i < downCount; i++) {
-				App->render->Blit(texture, position.x, position.y + (i * 16), &rect);
-			}
-
-			rect = downExtrAnim.GetCurrentFrame();
-
-			App->render->Blit(texture, position.x, position.y + (downCount * 16), &rect);
-		}
-
-		if (App->frameCounter >= frameExplode + explosionTimer) {
-
-			SetToDelete();
-		}
-
+		
 		break;
 	}
 	
@@ -296,14 +309,14 @@ void Bomb::OnCollision(Collider* collider)
 
 void Bomb::SetToDelete()
 {
-	currentAnim = nullptr;
+	//currentAnim = nullptr;
 	pendingToDelete = true;
-	for (int i = 0; i < MAX_BOMB_COLLIDERS; i++)
-	{
-		if (colliderList[i] != nullptr)
-		{
-			colliderList[i]->pendingToDelete = true;
-		}
+	
+	for (int i = 0; i != MAX_BOMB_COLLIDERS; i++) {
+		if (colliderList[i] != nullptr) colliderList[i]->pendingToDelete = true;
+		colliderList[i] = nullptr;
 	}
+	
 }
+
 
