@@ -96,6 +96,7 @@
     <ClInclude Include="Pokapoka.h" />
     <ClInclude Include="Powerup.h" />
     <ClInclude Include="RedFlower.h" />
+    <ClInclude Include="SceneBossFight.h" />
     <ClInclude Include="SceneInit.h" />
     <ClInclude Include="SceneIntro.h" />
     <ClInclude Include="SceneLevel1.h" />
@@ -110,6 +111,8 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="SceneLevel2.h" />
+    <ClInclude Include="SceneLevel3.h" />
     <ClInclude Include="YellowFlower.h" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +136,7 @@
     <ClCompile Include="Pokapoka.cpp" />
     <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="RedFlower.cpp" />
+    <ClCompile Include="SceneBossFight.cpp" />
     <ClCompile Include="SceneInit.cpp" />
     <ClCompile Include="SceneIntro.cpp" />
     <ClCompile Include="SceneLevel1.cpp" />
@@ -145,6 +149,8 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="SceneLevel2.cpp" />
+    <ClCompile Include="SceneLevel3.cpp" />
     <ClCompile Include="YellowFlower.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
