@@ -37,7 +37,7 @@ bool SceneBossFight::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/background.png");
+	bgTexture = App->textures->Load("Assets/Sprites/background4.png");
 	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	// Fixed positions
@@ -58,7 +58,7 @@ bool SceneBossFight::Start()
 		}
 	}
 
-	grid[0][1] = PLAYER;
+	grid[6][8] = PLAYER;
 
 	middleStructureIsSet = false;
 

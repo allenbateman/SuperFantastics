@@ -10,6 +10,9 @@
 #include "SceneInit.h"
 #include "SceneIntro.h"
 #include "SceneLevel1.h"
+#include "SceneLevel2.h"
+#include "SceneLevel3.h"
+#include "SceneBossFight.h"
 #include "ModuleParticles.h"
 #include "ModuleEntities.h"
 #include "ModuleCollisions.h"
@@ -23,23 +26,26 @@ Application::Application()
 	// It will define the order in which Pre/Update/Post will be called
 	// Render should always be last, as our last action should be updating the screen
 
-	modules[0] =	window =		new ModuleWindow(true);
-	modules[1] =	input =			new ModuleInput(true);
-	modules[2] =	textures =		new ModuleTextures(true);
-	modules[3] =	audio =			new ModuleAudio(true);
+	modules[0] =	window =		  new ModuleWindow(true);
+	modules[1] =	input =			  new ModuleInput(true);
+	modules[2] =	textures =		  new ModuleTextures(true);
+	modules[3] =	audio =			  new ModuleAudio(true);
 
-	modules[4] =	sceneInit =		new SceneInit(true);
-	modules[5] =	sceneIntro =	new SceneIntro(false);
-	modules[6] =	sceneLevel_1 =	new SceneLevel1(false);		//Gameplay scene starts disabled
-	modules[7] =	UI =			new ModuleUI(false);		//Gameplay scene starts disabled
-	modules[8] =	particles =		new ModuleParticles(false);
-	modules[9] =    entities =		new ModuleEntities(false);	//Enemies start disabled
-	modules[10] =	player =		new ModulePlayer(false);	//Player starts disabled
+	modules[4] =	sceneInit =		  new SceneInit(true);
+	modules[5] =	sceneIntro =	  new SceneIntro(false);
+	modules[6] =	sceneLevel1 =	  new SceneLevel1(false);	    //Gameplay scene starts disabled
+	modules[7] =    sceneLevel2 =     new SceneLevel2(false);
+	modules[7] =    sceneLevel3 =     new SceneLevel3(false);
+	modules[7] =	sceneBossFight =  new SceneBossFight(false);
+	modules[8] =	UI =			  new ModuleUI(false);		    //Gameplay scene starts disabled
+	modules[9] =	particles =		  new ModuleParticles(false);
+	modules[10] =   entities =		  new ModuleEntities(false);    //Enemies start disabled
+	modules[11] =	player =		  new ModulePlayer(false);	    //Player starts disabled
 
-	modules[11] =	collisions =	new ModuleCollisions(true);
-	modules[12] =	fade =			new ModuleFadeToBlack(true);
-	modules[13] =	fonts =			new ModuleFonts(true);
-	modules[14] =	render =		new ModuleRender(true);
+	modules[12] =	collisions =	new ModuleCollisions(true);
+	modules[13] =	fade =			new ModuleFadeToBlack(true);
+	modules[14] =	fonts =			new ModuleFonts(true);
+	modules[15] =	render =		new ModuleRender(true);
 }
 
 Application::~Application()
