@@ -48,7 +48,7 @@ void MiddleStructure::Update()
 {
 	currentAnim->Update();
 	//change to when player has collected all orbs instead of player state
-	if (App->player->currentState == ModulePlayer::PlayerState::WINING && !winColliderSet)
+	if (App->player->CollectedOrbs && !winColliderSet)
 	{
 		for (int i = 0; i < 11; i++) {
 			for (int j = 0; j < 13; j++) {

@@ -162,10 +162,7 @@ Update_Status SceneLevel3::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 	{
-		App->player->Disable();
-		App->entities->Disable();
-		App->collisions->Disable();
-		App->UI->Disable();
+		CleanUp();
 
 		App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);
 	}

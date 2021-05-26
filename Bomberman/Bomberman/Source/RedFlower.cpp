@@ -8,10 +8,13 @@ RedFlower::RedFlower(int x, int y) : Entity(x, y)
 {
 	position.x = 24 + (x * 16);
 	position.y = 32 + (y * 16);
+	
+
+	collider = App->collisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::RED_FLOWER, (Module*)App->entities);
+	collider->SetPos(position.x, position.y);
+
+
 	state = IDLE;
-
-	App->collisions->AddCollider({ 24 + (x * 16),32 + (y * 16),16,16 }, Collider::Type::RED_FLOWER);
-
 	idleAnim.PushBack({ 400, 16, 16, 16 });
 
 	deathAnim.PushBack({ 416, 0, 16, 16 });
@@ -31,6 +34,7 @@ void RedFlower::Update()
 	{
 	case Entity::IDLE:
 		currentAnim = &idleAnim;
+		collider->SetPos(position.x, position.y);
 		break;
 	case Entity::DEATH:
 		currentAnim = &deathAnim;

@@ -220,7 +220,7 @@ void Pokapoka::CheckDirection()
 
 void Pokapoka::OnCollision(Collider* collider)
 {
-	if (collider->type == Collider::Type::BOMB) {
+	if (collider->type == Collider::Type::EXPLOSION) {
 		state = DEATH;
 		currentAnim = &deathAnim;
 	}

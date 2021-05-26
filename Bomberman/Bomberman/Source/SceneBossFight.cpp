@@ -39,7 +39,7 @@ bool SceneBossFight::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/background4.png");
+	bgTexture = App->textures->Load("Assets/Sprites/FinalBossMap.png");
 	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	// Fixed positions

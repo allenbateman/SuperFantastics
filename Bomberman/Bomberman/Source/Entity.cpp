@@ -41,13 +41,6 @@ void Entity::Draw()
 
 void Entity::OnCollision(Collider* collider)
 {
-	//if(collider->type==BOMB){
-	//	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	//	App->audio->PlayFx(destroyedFx);
-	//}
-
-	//if(collider->type==WALL) pues q cambie de direccion
-
 	SetToDelete();
 }
 

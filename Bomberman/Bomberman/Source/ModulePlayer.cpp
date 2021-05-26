@@ -81,6 +81,8 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/Sprites/BomberManAnimations.png");
+
+
 	currentIdleAnim = downIdleAnim;
 	currentAnimation = &downAnim;
 
@@ -88,9 +90,11 @@ bool ModulePlayer::Start()
 
 	destroyed = false;
 	death = false;
-
+	frameCounter = 0;
     currentBombs = 1;
 	rangeExplosion = 3;
+	CollectedOrbs = false;
+	nOrbs = 0;
 
 	currentState = PlayerState::ALIVE;
 
@@ -101,6 +105,7 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	frameCounter++;
 	switch (currentState){
 		case PlayerState::ALIVE:
 			//Movement
@@ -224,7 +229,6 @@ Update_Status ModulePlayer::Update()
 				if (App->entities->bombCount < currentBombs) {
 					App->entities->AddEntity(Entity_Type::BOMB, position.x, position.y);
 					App->audio->PlayFx(bombIsPlaced);
-					bombPlaced = true;
 				}
 			}
 
@@ -238,14 +242,21 @@ Update_Status ModulePlayer::Update()
 			{
 				currentState = PlayerState::WINING;
 			}
-		
+			
+			if (nOrbs >= 2 )
+			{
+				CollectedOrbs = true;
+			}
+
 			break;
 		case PlayerState::DEAD:
 		
 			if (currentAnimation != &deathAnim) {
 				deathAnim.Reset();
 				currentAnimation = &deathAnim;
-			}else if (currentAnimation == &deathAnim && currentAnimation->HasFinished()){
+				frameCounter = 0;
+			}else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
+				
 				destroyed = true;
 				App->sceneLevel1->Disable();
 				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
@@ -256,21 +267,22 @@ Update_Status ModulePlayer::Update()
 			if (currentAnimation != &winAnim) {
 				winAnim.Reset();
 				currentAnimation = &winAnim;
+				frameCounter = 0;
 			}
-			else if (currentAnimation == &winAnim && currentAnimation->HasFinished()) {
+			else if (currentAnimation == &winAnim && currentAnimation->HasFinished() && frameCounter > 60) {
 				
 				//save player status...
 				//Disable current level...
 				App->sceneLevel1->Disable();			
 				//load nex level...
-				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);		
+				App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);		
 			
 			}
 			break;
 		default:
 			break;
 	}
-	
+
 	//update animations
 	currentAnimation->Update();
 
@@ -285,12 +297,18 @@ Update_Status ModulePlayer::PostUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
+bool ModulePlayer::CleanUp()
+{
+
+
+	return true;
+}
+
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
     if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
 		|| c2->type == Collider::Type::RED_FLOWER || c2->type == Collider::Type::BOMB)
 	{
-		bombPlaced = false;
 		isStuck = true;
 		switch (lastKeyPressed)
 		{
@@ -369,3 +387,4 @@ void ModulePlayer::Draw()
 		App->render->Blit(texture, position.x, position.y - 8, &rect);
 	}
 }
+

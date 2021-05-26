@@ -32,11 +32,14 @@ public:
 	// Performs the render call of the player sprite
 	Update_Status PostUpdate() override;
 
+	bool CleanUp() override;
+
+
+
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 	void Draw();
-	// Info on the scoreboard
-	void DrawScoreboard();
+
 
 public:
 	int lastKeyPressed = 0;
@@ -85,7 +88,10 @@ public:
 	int currentBombs = 1;
 	int rangeExplosion = 2;
 
-	bool bombPlaced = false;
+	int frameCounter = 0;
+
+	int nOrbs = 0;
+	bool CollectedOrbs = false;
 };
 
 #endif //!__MODULE_PLAYER_H__
