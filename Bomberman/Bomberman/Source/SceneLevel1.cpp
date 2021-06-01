@@ -152,7 +152,7 @@ bool SceneLevel1::Start()
 		}
 	}
 
-	App->render->camera.x = 0;
+	App->render->camera.x = 0; 
 	App->render->camera.y = 0;
 
 	return ret;

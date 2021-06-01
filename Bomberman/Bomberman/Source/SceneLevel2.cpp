@@ -39,7 +39,7 @@ bool SceneLevel2::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/BackGround2.png");
+	bgTexture = App->textures->Load("Assets/Sprites/Background2.png");
 	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	// Fixed positions
@@ -51,7 +51,7 @@ bool SceneLevel2::Start()
 			grid[i][j] = EMPTY;
 		}
 	}
-	/*
+	
 	for (int i = 1; i < 11; i += 2)
 	{
 		for (int j = 1; j < 13; j += 2)
@@ -151,7 +151,7 @@ bool SceneLevel2::Start()
 			}
 		}
 	}
-	*/
+	
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
