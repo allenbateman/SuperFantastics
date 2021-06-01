@@ -34,6 +34,8 @@ public:
 
 	bool CleanUp() override;
 
+	bool DisablePlayer();
+	bool EnablePlayer();
 
 
 	// Collision callback, called when the player intersects with another collider
@@ -76,7 +78,8 @@ public:
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 	int lifes = 3;
-	bool death = false;
+	
+	bool isVisible = false;
 
 	enum class PlayerState {
 		ALIVE,

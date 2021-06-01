@@ -27,7 +27,7 @@ SceneBossFight::~SceneBossFight()
 // Load assets
 bool SceneBossFight::Start()
 {
-	App->player->Enable();
+	App->player->EnablePlayer();
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();

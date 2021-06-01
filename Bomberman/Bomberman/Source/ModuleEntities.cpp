@@ -83,12 +83,12 @@ Update_Status ModuleEntities::PostUpdate()
 			//check if player is behind or in front of any entity
 			if (App->player->position.y < entities[i]->position.y)
 			{
-				App->player->Draw();
+				if(App->player->isVisible)App->player->Draw();
 				entities[i]->Draw();
 			}
 			else {
 				entities[i]->Draw();
-				App->player->Draw();
+				if (App->player->isVisible)App->player->Draw();
 			}
 			
 		}

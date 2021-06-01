@@ -27,7 +27,7 @@ SceneLevel3::~SceneLevel3()
 // Load assets
 bool SceneLevel3::Start()
 {
-	App->player->Enable();
+	App->player->EnablePlayer();
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
@@ -43,7 +43,7 @@ bool SceneLevel3::Start()
 	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	// Fixed positions
-
+	/*
 	for (int i = 0; i < 11; i++)
 	{
 		for (int j = 0; j < 13; j++)
@@ -151,7 +151,7 @@ bool SceneLevel3::Start()
 			}
 		}
 	}
-
+	*/
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -162,7 +162,11 @@ Update_Status SceneLevel3::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 	{
-		CleanUp();
+		App->player->DisablePlayer();
+		App->entities->Disable();
+		App->collisions->Disable();
+		App->UI->Disable();
+
 
 		App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);
 	}

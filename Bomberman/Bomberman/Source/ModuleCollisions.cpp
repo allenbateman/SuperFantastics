@@ -157,7 +157,7 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
 			case Collider::Type::WIN: // GREEN
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 120, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
 		}
 	}

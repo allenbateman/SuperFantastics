@@ -89,7 +89,8 @@ bool ModulePlayer::Start()
 	bombIsPlaced = App->audio->LoadFx("Assets/Fx/BomIsPlaced.wav");
 
 	destroyed = false;
-	death = false;
+	
+	isVisible = true;
 	frameCounter = 0;
     currentBombs = 1;
 	rangeExplosion = 3;
@@ -273,7 +274,8 @@ Update_Status ModulePlayer::Update()
 				
 				//save player status...
 				//Disable current level...
-				App->sceneLevel1->Disable();			
+				App->sceneLevel1->Disable();	
+				DisablePlayer();
 				//load nex level...
 				App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);		
 			
@@ -299,9 +301,22 @@ Update_Status ModulePlayer::PostUpdate()
 
 bool ModulePlayer::CleanUp()
 {
-
-
 	return true;
+}
+
+bool ModulePlayer::DisablePlayer()
+{
+	isVisible = false;
+	//collider->pendingToDelete = true;
+	//collider = nullptr;
+	return false;
+}
+
+bool ModulePlayer::EnablePlayer()
+{
+	isVisible = true;
+	//collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
+	return false;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)

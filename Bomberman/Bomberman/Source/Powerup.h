@@ -26,7 +26,6 @@ public:
 	iPoint position;
 	iPoint colliderPosition;
 	SDL_Texture* texture = nullptr;
-	bool pendingToDelete = false;
 	Entity_Type type;
 	int destroyedFx = 0;
 

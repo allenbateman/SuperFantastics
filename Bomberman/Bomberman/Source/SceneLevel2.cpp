@@ -27,7 +27,7 @@ SceneLevel2::~SceneLevel2()
 // Load assets
 bool SceneLevel2::Start()
 {
-	App->player->Enable();
+	App->player->EnablePlayer();
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
@@ -51,7 +51,7 @@ bool SceneLevel2::Start()
 			grid[i][j] = EMPTY;
 		}
 	}
-
+	/*
 	for (int i = 1; i < 11; i += 2)
 	{
 		for (int j = 1; j < 13; j += 2)
@@ -151,7 +151,7 @@ bool SceneLevel2::Start()
 			}
 		}
 	}
-
+	*/
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -162,7 +162,7 @@ Update_Status SceneLevel2::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 	{
-		App->player->Disable();
+		App->player->DisablePlayer();
 		App->entities->Disable();
 		App->collisions->Disable();
 		App->UI->Disable();
