@@ -21,5 +21,5 @@ private:
 
 
 	// Entitie animations
-	Animation moveAnim, deathAnim;
+	Animation moveAnim, deathAnim, idleAnim;
 };

@@ -196,7 +196,6 @@ void Pokapoka::CheckDirection()
 		randDirection = rand() % avaibleCount;
 		direction = avaibleDirections[randDirection];
 
-
 		switch (direction)
 		{
 		case Entity::UP: currentAnim = &upAnim;

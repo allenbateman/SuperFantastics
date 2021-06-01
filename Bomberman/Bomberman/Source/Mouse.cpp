@@ -11,6 +11,13 @@ Mouse::Mouse(int x, int y) : Entity(x, y)
 	position.y = y;
 
 	// animations
+
+	// idle
+	moveAnim.PushBack({ 0, 64, 32, 32 });
+	moveAnim.loop = true;
+	moveAnim.mustFlip = false;
+	moveAnim.speed = 0.1f;
+
 	// move
 	moveAnim.PushBack({ 0, 64, 32, 32 });
 	moveAnim.PushBack({ 33, 64, 32, 32 });
@@ -26,13 +33,57 @@ Mouse::Mouse(int x, int y) : Entity(x, y)
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
 
-	// MOVEMENT??????????????????????????
+	currentAnim = &moveAnim;
+	state = IDLE;
+	direction = RIGHT;
+	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
+	colliderPosition.x = position.x;
+	colliderPosition.y = position.y + 16;
+	App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::EMPTY;
 
 }
 
 void Mouse::Update()
 {
-	//do
+	Entity::Update();
+
+
+	switch (state)
+	{
+	case Entity::IDLE:
+
+		currentAnim = &idleAnim;
+		CheckDirection();
+		break;
+
+	case Entity::MOVE:
+		if ((App->frameCounter % 2)) {
+
+			if ((colliderPosition.x - 24) % 16 == 0 && (colliderPosition.y - 32) % 16 == 0) CheckDirection();
+
+			if (state != IDLE)
+			{
+				App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::EMPTY;
+				if (direction == UP) position.y--;
+				else if (direction == DOWN) position.y++;
+				else if (direction == LEFT) position.x--;
+				else if (direction == RIGHT) position.x++;
+
+				colliderPosition.x = position.x;
+				colliderPosition.y = position.y + 16;
+
+				App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::POKAPOKA;
+			}
+		}
+		break;
+	case Entity::DEATH:
+		if (deathAnim.HasFinished() == true) SetToDelete();
+		break;
+	default:
+		break;
+	}
+
+
 }
 
 void Mouse::OnCollision(Collider* collider)
