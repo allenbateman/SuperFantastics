@@ -33,25 +33,6 @@ public:
 	// Disables the player and the enemies
 	bool CleanUp();
 
-
-
-    enum GridType
-	{
-		EMPTY = 0,
-		PLAYER,
-		BOMB,
-		ROCK,
-		STRUCTURE,
-		ORB,
-		POKAPOKA,
-		MECHA_WALKER,
-		MOUSE,
-		SNAIL,
-		RED_FLOWER,
-		YELLOW_FLOWER,
-		WIN_SPOT
-	}; 
-
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 

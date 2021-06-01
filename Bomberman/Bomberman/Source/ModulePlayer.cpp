@@ -93,7 +93,7 @@ bool ModulePlayer::Start()
 	isVisible = true;
 	frameCounter = 0;
     currentBombs = 1;
-	rangeExplosion = 3;
+	rangeExplosion = 1;
 	CollectedOrbs = false;
 	nOrbs = 0;
 
@@ -106,11 +106,16 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	int y = 0;
+	int x = 0;
 	frameCounter++;
 	switch (currentState){
 		case PlayerState::ALIVE:
 			//Movement
-			App->sceneLevel1->grid[(collider->GetPos().y - 32) / 16][(collider->GetPos().x - 24) / 16] = SceneLevel1::GridType::EMPTY;
+			y = (collider->GetPos().y - 32) / 16;
+			x = (collider->GetPos().x - 24) / 16;
+
+			sceneGrid[y * sceneWidth + x] = SceneLevel1::GridType::EMPTY;
 			lastPos = position;
 			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT) {
 				position.x -= speed;

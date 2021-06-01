@@ -79,6 +79,10 @@ public:
 	char scoreText[10] = { "\0" };
 	int lifes = 3;
 	
+	GridType* sceneGrid = nullptr;
+	int sceneWidth = 0;
+	int sceneHeight = 0;
+
 	bool isVisible = false;
 
 	enum class PlayerState {
@@ -95,6 +99,8 @@ public:
 
 	int nOrbs = 0;
 	bool CollectedOrbs = false;
+
+	void SetSceneGrid(GridType* grid, int width, int height) { sceneGrid = grid; sceneWidth = width; sceneHeight = height; }
 };
 
 #endif //!__MODULE_PLAYER_H__

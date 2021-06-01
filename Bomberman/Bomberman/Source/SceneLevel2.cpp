@@ -96,13 +96,18 @@ bool SceneLevel2::Start()
 		}
 	}
 
-	// Fixed empy positions
+	// Fixed empty/rock positions
 	grid[0][0] = EMPTY;
-	grid[0][2] = EMPTY;
+	grid[0][1] = EMPTY;
 	grid[1][0] = EMPTY;
 	grid[2][0] = EMPTY;
 	grid[4][6] = EMPTY;
 	grid[5][6] = EMPTY;
+	grid[1][0] = EMPTY;
+	grid[1][1] = EMPTY;
+	grid[1][2] = EMPTY;
+	grid[1][3] = EMPTY;
+	grid[0][3] = EMPTY;
 
 	middleStructureIsSet = false;
 

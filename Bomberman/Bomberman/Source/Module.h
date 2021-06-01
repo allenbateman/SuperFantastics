@@ -41,6 +41,23 @@ public:
 
 	inline bool IsEnabled() const { return isEnabled; }
 
+	enum GridType
+	{
+		EMPTY = 0,
+		PLAYER,
+		BOMB,
+		ROCK,
+		STRUCTURE,
+		ORB,
+		POKAPOKA,
+		MECHA_WALKER,
+		MOUSE,
+		SNAIL,
+		RED_FLOWER,
+		YELLOW_FLOWER,
+		WIN_SPOT
+	};
+
 private:
 	bool isEnabled = true;
 };

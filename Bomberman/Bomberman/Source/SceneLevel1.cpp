@@ -154,7 +154,7 @@ bool SceneLevel1::Start()
 
 	App->render->camera.x = 0; 
 	App->render->camera.y = 0;
-
+	App->player->SetSceneGrid(&grid[0][0], 13, 11);
 	return ret;
 }
 
