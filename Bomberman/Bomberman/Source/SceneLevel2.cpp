@@ -40,7 +40,7 @@ bool SceneLevel2::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/Background2.png");
-	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f);
 
 	// Fixed positions
 
@@ -148,7 +148,18 @@ bool SceneLevel2::Start()
 	grid[5][17] = EMPTY;
 	grid[7][15] = EMPTY;
 	grid[7][17] = EMPTY;
-	
+	grid[10][10] = EMPTY;
+	grid[10][11] = EMPTY;
+	grid[10][12] = EMPTY;
+	grid[10][13] = EMPTY;
+	grid[10][14] = EMPTY;
+	grid[10][15] = EMPTY;
+	grid[0][10] = EMPTY;
+	grid[0][11] = EMPTY;
+	grid[0][12] = EMPTY;
+	grid[0][13] = EMPTY;
+	grid[0][14] = EMPTY;
+	grid[0][15] = EMPTY;
 
 	middleStructureIsSet = false;
 
@@ -179,14 +190,14 @@ bool SceneLevel2::Start()
 			{
 				App->entities->AddEntity(Entity_Type::ORB, j, i);
 			}
-			else if (grid[i][j] == STRUCTURE)
-			{
-				if (!middleStructureIsSet)
-				{
-					App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
-					middleStructureIsSet = true;
-				}
-			}
+			//else if (grid[i][j] == STRUCTURE)
+			//{
+			//	if (!middleStructureIsSet)
+			//	{
+			//		App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
+			//		middleStructureIsSet = true;
+			//	}
+			//}
 			else if (grid[i][j] == SNAIL)
 			{
 				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));
