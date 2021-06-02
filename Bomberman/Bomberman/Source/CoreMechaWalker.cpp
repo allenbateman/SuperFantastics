@@ -77,7 +77,8 @@ void CoreMechaWalker::Update()
 		break;
 
 	case Entity::MOVE:
-		if ((App->frameCounter % 2)) {
+		awakeCount++;
+		if ((App->frameCounter % 2) && awakeCount > 30) {
 
 			if ((colliderPosition.x - 24) % 16 == 0 && (colliderPosition.y - 32) % 16 == 0) CheckDirection();
 

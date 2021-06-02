@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "SceneLevel1.h"
 
 YellowFlower::YellowFlower(int x, int y) : Entity(x, y)
 {
@@ -18,11 +19,13 @@ YellowFlower::YellowFlower(int x, int y) : Entity(x, y)
 
 void YellowFlower::Update()
 {
+
 }
 
 void YellowFlower::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
+		App->sceneLevel1->SetGridType(SceneLevel1::GridType::EMPTY, position.y, position.x, 0, 0);
 		SetToDelete();
 	}
 }

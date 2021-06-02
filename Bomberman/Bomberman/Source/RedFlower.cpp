@@ -38,7 +38,11 @@ void RedFlower::Update()
 		break;
 	case Entity::DEATH:
 		currentAnim = &deathAnim;
-		if (deathAnim.HasFinished() == true) SetToDelete();
+		if (deathAnim.HasFinished() == true)
+		{
+			SetToDelete();
+			App->sceneLevel1->SetGridType(SceneLevel1::GridType::EMPTY, position.y, position.x, 0, 0);
+		}
 		break;
 	}
 }

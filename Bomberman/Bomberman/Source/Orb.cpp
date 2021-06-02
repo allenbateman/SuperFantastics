@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
+#include "SceneLevel1.h"
 
 Orb::Orb(int x, int y) : Entity(x, y)
 {
@@ -19,6 +20,7 @@ void Orb::Update()
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
 		App->player->nOrbs++;
+		App->sceneLevel1->SetGridType(SceneLevel1::GridType::EMPTY, position.y, position.x, 0, 0);
 		SetToDelete();
 	}
 }
