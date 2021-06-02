@@ -32,6 +32,9 @@
     <Filter Include="Source Files\Entities\Enviroment">
       <UniqueIdentifier>{76ccbadc-e24c-4a04-8c05-55675c19a2c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Boss">
+      <UniqueIdentifier>{d29038f1-0aee-4308-a57b-0130e59b3a49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -154,6 +157,12 @@
     <ClInclude Include="ModulePowerUp.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="Bananacher.h">
+      <Filter>Source Files\Entities\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Saru.h">
+      <Filter>Source Files\Entities\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -269,6 +278,12 @@
     </ClCompile>
     <ClCompile Include="ModulePowerUp.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Bananacher.cpp">
+      <Filter>Source Files\Entities\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Saru.cpp">
+      <Filter>Source Files\Entities\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
