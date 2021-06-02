@@ -3,7 +3,7 @@
 
 #include "Module.h"
 
-#define MAX_ENTITIES 100
+#define MAX_ENTITIES 150
 
 enum class Entity_Type
 {
@@ -17,7 +17,8 @@ enum class Entity_Type
 	MOUSE,
 	SNAIL,
 	BOMB,
-	BOMBUP
+	FIRE,
+	BOMB_UP,
 };
 
 struct EntitySpawnpoint
@@ -72,10 +73,11 @@ public:
 	void HandleEntitiesDespawn();
 
 	int bombCount = 0;
+
+	int powerUpCount = 0;
 private:
 	// Spawns a new Entitie using the data from the queue
 	void SpawnEntity(const EntitySpawnpoint& info);
-
 private:
 	// A queue with all spawn points information
 	EntitySpawnpoint spawnQueue[MAX_ENTITIES];

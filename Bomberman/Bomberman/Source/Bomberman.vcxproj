@@ -91,11 +91,11 @@
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleParticles.h" />
+    <ClInclude Include="ModulePowerUp.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Pokapoka.h" />
-    <ClInclude Include="Powerup.h" />
     <ClInclude Include="RedFlower.h" />
     <ClInclude Include="SceneBossFight.h" />
     <ClInclude Include="SceneInit.h" />
@@ -133,11 +133,11 @@
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
+    <ClCompile Include="ModulePowerUp.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Pokapoka.cpp" />
-    <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="RedFlower.cpp" />
     <ClCompile Include="SceneBossFight.cpp" />
     <ClCompile Include="SceneInit.cpp" />

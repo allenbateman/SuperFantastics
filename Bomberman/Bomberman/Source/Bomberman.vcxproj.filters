@@ -106,9 +106,6 @@
     <ClInclude Include="Bomb.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Powerup.h">
-      <Filter>Source Files\Entities\Powerups</Filter>
-    </ClInclude>
     <ClInclude Include="Bombup.h">
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClInclude>
@@ -153,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="Snail.h">
       <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePowerUp.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +222,6 @@
     <ClCompile Include="Bomb.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Powerup.cpp">
-      <Filter>Source Files\Entities\Powerups</Filter>
-    </ClCompile>
     <ClCompile Include="Bombup.cpp">
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="Snail.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePowerUp.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

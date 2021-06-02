@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
+#include "SceneLevel1.h"
 
 Bombup::Bombup(int x, int y) : Entity(x, y)
 {
@@ -11,6 +12,8 @@ Bombup::Bombup(int x, int y) : Entity(x, y)
 
 	idleAnim.PushBack({ 64, 288, 16, 16 });	
 	currentAnim = &idleAnim;
+
+	collider = App->collisions->AddCollider({ position.x,position.y,16,16 },Collider::Type::POWER_UP,(Module*)App->entities);
 }
 
 void Bombup::Update()
@@ -20,8 +23,12 @@ void Bombup::Update()
 
 void Bombup::OnCollision(Collider* collider)
 {	
-	if(MAX_BOMBS > App->player->currentBombs)
-	App->player->currentBombs++;
-
-	SetToDelete();
+	if (collider->type == Collider::Type::PLAYER)
+	{
+		if (MAX_BOMBS > App->player->currentBombs)
+		{
+			App->player->currentBombs++;
+		}
+		SetToDelete();
+	}
 }

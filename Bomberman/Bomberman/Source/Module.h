@@ -55,7 +55,8 @@ public:
 		SNAIL,
 		RED_FLOWER,
 		YELLOW_FLOWER,
-		WIN_SPOT
+		WIN_SPOT,
+		POWER_UP
 	};
 
 private:

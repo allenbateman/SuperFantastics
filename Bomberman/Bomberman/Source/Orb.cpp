@@ -4,6 +4,9 @@
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
 #include "SceneLevel1.h"
+#include "SceneLevel2.h"
+#include "SceneLevel3.h"
+
 
 Orb::Orb(int x, int y) : Entity(x, y)
 {

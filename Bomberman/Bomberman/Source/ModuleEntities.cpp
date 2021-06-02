@@ -13,6 +13,8 @@
 #include "MiddleStructure.h"
 #include "Pokapoka.h"
 #include "Bomb.h"
+#include "Bombup.h"
+#include "Fire.h"
 #include "CoreMechaWalker.h"
 #include "Mouse.h"
 #include "Snail.h"
@@ -34,7 +36,6 @@ ModuleEntities::~ModuleEntities()
 
 bool ModuleEntities::Start()
 {
-	//texture = App->textures->Load("Assets/Sprites/entities.png");
 	texture = App->textures->Load("Assets/Sprites/entities.png");
 	EntitieDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 	bombCount = 0;
@@ -208,6 +209,12 @@ void ModuleEntities::SpawnEntity(const EntitySpawnpoint& info)
 				case Entity_Type::BOMB:
 					entities[i] = new Bomb(info.x, info.y);
 					bombCount++;
+					break;
+				case Entity_Type::BOMB_UP:
+					entities[i] = new Bombup(info.x, info.y);
+					break;
+				case Entity_Type::FIRE:
+					entities[i] = new Fire(info.x, info.y);
 					break;
 			}
 			entities[i]->texture = texture;
