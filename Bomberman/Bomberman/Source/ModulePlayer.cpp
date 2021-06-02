@@ -225,8 +225,12 @@ Update_Status ModulePlayer::Update()
 			//Update grid 
 			if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
 			{
-				App->sceneLevel1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
-				App->sceneLevel1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
+				y = (lastPos.y - 24) % 16;
+				x = (lastPos.x - 32 + 8) % 16;
+				sceneGrid[y * sceneWidth + x] = Module::GridType::EMPTY;
+				y = (position.y - 24) % 16;
+				x = (position.x - 32 + 8) % 16;
+				sceneGrid[y * sceneWidth + x] = Module::GridType::PLAYER;
 			}
 
 			//Place Bomb
@@ -279,7 +283,7 @@ Update_Status ModulePlayer::Update()
 				
 				//save player status...
 				//Disable current level...
-				App->sceneLevel1->Disable();	
+				App->sceneLevel1->Disable();
 				DisablePlayer();
 				//load nex level...
 				App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);		
