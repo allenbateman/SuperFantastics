@@ -115,7 +115,7 @@ Update_Status ModulePlayer::Update()
 			y = (collider->GetPos().y - 32) / 16;
 			x = (collider->GetPos().x - 24) / 16;
 
-			sceneGrid[y * sceneWidth + x] = SceneLevel1::GridType::EMPTY;
+			sceneGrid[y * sceneWidth + x] = Module::GridType::EMPTY;
 			lastPos = position;
 			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT) {
 				position.x -= speed;

@@ -4,6 +4,8 @@
 #include "ModulePlayer.h"
 #include "ModuleCollisions.h"
 #include "SceneLevel1.h"
+#include "SceneLevel2.h"
+#include "SceneLevel3.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 

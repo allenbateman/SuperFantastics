@@ -35,11 +35,13 @@ public:
 
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
+	GridType Scene();
 
 public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
+
 	GridType grid[11][13];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;

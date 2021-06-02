@@ -126,8 +126,8 @@ void Mouse::OnCollision(Collider* collider)
 
 void Mouse::CheckDirection()
 {
-	Direction avaibleDirections[4];
-	int avaibleCount = 0;
+	Direction availableDirections[4];
+	int availableCount = 0;
 	int randDirection = 0;
 	bool canContinue = false;
 
@@ -137,8 +137,8 @@ void Mouse::CheckDirection()
 	if (y != 10) {
 		if (App->sceneLevel2->grid[y + 1][x] == SceneLevel2::GridType::EMPTY)
 		{
-			avaibleDirections[avaibleCount] = DOWN;
-			avaibleCount++;
+			availableDirections[availableCount] = DOWN;
+			availableCount++;
 		}
 	}
 	if (y != 0)
@@ -147,8 +147,8 @@ void Mouse::CheckDirection()
 		{
 			if (App->sceneLevel2->grid[y - 1][x] == SceneLevel2::GridType::EMPTY)
 			{
-				avaibleDirections[avaibleCount] = UP;
-				avaibleCount++;
+				availableDirections[availableCount] = UP;
+				availableCount++;
 			}
 		}
 	}
@@ -156,21 +156,21 @@ void Mouse::CheckDirection()
 	{
 		if (App->sceneLevel2->grid[y][x - 1] == SceneLevel2::GridType::EMPTY)
 		{
-			avaibleDirections[avaibleCount] = LEFT;
-			avaibleCount++;
+			availableDirections[availableCount] = LEFT;
+			availableCount++;
 		}
 	}
 	if (x != 12) {
 		if (App->sceneLevel2->grid[y][x + 1] == SceneLevel2
 			::GridType::EMPTY)
 		{
-			avaibleDirections[avaibleCount] = RIGHT;
-			avaibleCount++;
+			availableDirections[availableCount] = RIGHT;
+			availableCount++;
 		}
 	}
 
-	for (int i = 0; i < avaibleCount; i++) {
-		if (avaibleDirections[i] == direction) canContinue = true;
+	for (int i = 0; i < availableCount; i++) {
+		if (availableDirections[i] == direction) canContinue = true;
 	}
 
 	if (canContinue == true)
@@ -182,10 +182,10 @@ void Mouse::CheckDirection()
 		}
 	}
 
-	if (avaibleCount > 0 && canContinue == false)
+	if (availableCount > 0 && canContinue == false)
 	{
-		randDirection = rand() % avaibleCount;
-		direction = avaibleDirections[randDirection];
+		randDirection = rand() % availableCount;
+		direction = availableDirections[randDirection];
 
 
 		switch (direction)

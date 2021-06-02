@@ -74,7 +74,7 @@ public:
 	uint bombIsPlaced = 0;
 
 	// Font score index
-	uint score = 000;
+	uint score = 0;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 	int lifes = 3;

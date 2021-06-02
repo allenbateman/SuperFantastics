@@ -14,6 +14,8 @@
 #include "Pokapoka.h"
 #include "Bomb.h"
 #include "CoreMechaWalker.h"
+#include "Mouse.h"
+#include "Snail.h"
 #include "ModulePlayer.h"
 
 #define SPAWN_MARGIN 50
@@ -195,6 +197,12 @@ void ModuleEntities::SpawnEntity(const EntitySpawnpoint& info)
 					entities[i] = new Pokapoka(info.x, info.y);
 					break;
 				case Entity_Type::MECHA_WALKER:
+					entities[i] = new CoreMechaWalker(info.x, info.y);
+					break;
+				case Entity_Type::MOUSE:
+					entities[i] = new CoreMechaWalker(info.x, info.y);
+					break;
+				case Entity_Type::SNAIL:
 					entities[i] = new CoreMechaWalker(info.x, info.y);
 					break;
 				case Entity_Type::BOMB:

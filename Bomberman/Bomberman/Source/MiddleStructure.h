@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "SceneLevel1.h"
 
 #define COLLIDERS 7
 

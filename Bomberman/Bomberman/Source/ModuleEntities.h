@@ -14,6 +14,8 @@ enum class Entity_Type
 	MIDDLE_STRUCTURE,
 	POKAPOKA,
 	MECHA_WALKER,
+	MOUSE,
+	SNAIL,
 	BOMB,
 	BOMBUP
 };

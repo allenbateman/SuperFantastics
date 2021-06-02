@@ -162,11 +162,9 @@ Update_Status SceneLevel1::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 	{
-		App->player->DisablePlayer();
+		App->player->Disable();
 		App->entities->Disable();
 		App->collisions->Disable();
-		App->UI->Disable();
-
 
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel2, 60);
 	}
