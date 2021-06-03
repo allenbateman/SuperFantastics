@@ -25,42 +25,42 @@ Update_Status ModuleLevel::PreUpdate()
 	switch (gameState)
 	{
 	case INTRO:
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && transitionFinish)
+		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN )
 		{
 			gameState = MAIN_MENU;
 			transitionFinish = false;
 		}
 		break;
 	case MAIN_MENU:
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && transitionFinish)
+		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
 		{
 			gameState = LEVEL1;
 			transitionFinish = false;
 		}
 		break;
 	case LEVEL1:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN )
 		{
 			gameState = LEVEL2;
 			transitionFinish = false;
 		}
 		break;
 	case LEVEL2:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
 			gameState = LEVEL3;
 			transitionFinish = false;
 		}
 		break;
 	case LEVEL3:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
 			gameState = BOSS;
 			transitionFinish = false;
 		}
 		break;
 	case BOSS:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
 			gameState = MAIN_MENU;
 			transitionFinish = false;
@@ -80,13 +80,13 @@ Update_Status ModuleLevel::Update()
 	switch (gameState)
 	{
 	case INTRO:
-		if (currentScene == nullptr && !transitionFinish) {
+		if (currentScene == nullptr ) {
 			currentScene = (Module*)App->sceneInit;
 			transitionFinish = true;
 		}
 		break;
 	case MAIN_MENU:
-		if (currentScene != (Module*)App->sceneIntro && !transitionFinish) {
+		if (currentScene != (Module*)App->sceneIntro ) {
 
 			LOG("Loading MainMenu");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 60);
@@ -96,7 +96,7 @@ Update_Status ModuleLevel::Update()
 		break;
 	case LEVEL1:
 
-		if (currentScene != (Module*)App->sceneLevel1 && !transitionFinish )
+		if (currentScene != (Module*)App->sceneLevel1  )
 		{
 			//Load level
 			LOG("Loading Level 1");
@@ -107,7 +107,7 @@ Update_Status ModuleLevel::Update()
 		break;
 	case LEVEL2:
 
-		if (currentScene != (Module*)App->sceneLevel2 && !transitionFinish) {
+		if (currentScene != (Module*)App->sceneLevel2 ) {
 			//Load level
 			LOG("Loading Level 2");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 60);
@@ -116,7 +116,7 @@ Update_Status ModuleLevel::Update()
 		}
 		break;
 	case LEVEL3:
-		if (currentScene != (Module*)App->sceneLevel3 && !transitionFinish) {
+		if (currentScene != (Module*)App->sceneLevel3 ) {
 			//Load level
 			LOG("Loading Level 3");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 60);
@@ -125,7 +125,7 @@ Update_Status ModuleLevel::Update()
 		}
 		break;
 	case BOSS:
-		if (currentScene != (Module*)App->sceneBossFight && !transitionFinish) {
+		if (currentScene != (Module*)App->sceneBossFight) {
 			//Load level
 			LOG("Loading Level Boss");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 60);
