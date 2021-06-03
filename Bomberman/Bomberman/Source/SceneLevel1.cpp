@@ -160,14 +160,14 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-	{
-		App->player->Disable();
-		App->entities->Disable();
-		App->collisions->Disable();
+	//if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+	//{
+	//	App->player->Disable();
+	//	App->entities->Disable();
+	//	App->collisions->Disable();
 
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel2, 60);
-	}
+	//	App->fade->FadeToBlack(this, (Module*)App->sceneLevel2, 60);
+	//}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 
+#define LVL_BOSS_HEIGHT 11
+#define LVL_BOSS_WIDTH 13
+
 struct SDL_Texture;
 
 class SceneBossFight : public Module
@@ -32,19 +35,6 @@ public:
 
 	// Disables the player and the enemies
 	bool CleanUp();
-
-
-
-	enum GridType
-	{
-		EMPTY = 0,
-		PLAYER,
-		BOMB,
-		ROCK,
-		SARU,
-		BANANACHER
-	};
-
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 
@@ -52,7 +42,8 @@ public:
 
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
-	GridType grid[11][13];
+	const int gridHeight = LVL_BOSS_HEIGHT, gridWidth = LVL_BOSS_WIDTH;
+	GridType grid[LVL_BOSS_HEIGHT][LVL_BOSS_WIDTH];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;
 };

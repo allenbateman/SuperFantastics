@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 19
+#define NUM_MODULES 20
 
 class Module;
 class ModuleWindow;
@@ -25,6 +25,7 @@ class ModuleFonts;
 class ModuleRender;
 class ModuleUI;
 class ModulePowerUp;
+class ModuleLevel;
 
 class Application
 {
@@ -75,6 +76,8 @@ public:
 	ModulePowerUp* powerUps = nullptr;
 
 	ModuleRender* render = nullptr;
+	ModuleLevel* levelManager = nullptr;
+
 
 	int frameCounter = 0;
 };

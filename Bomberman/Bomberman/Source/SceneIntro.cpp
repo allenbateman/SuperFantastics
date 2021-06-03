@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
+#include "ModuleLevel.h"
 #include "ModuleFadeToBlack.h"
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
@@ -37,9 +38,8 @@ Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel1, 60);
+		App->levelManager->gameState = ModuleLevel::LEVEL1;
 	}
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

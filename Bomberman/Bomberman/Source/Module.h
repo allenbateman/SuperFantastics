@@ -3,6 +3,7 @@
 
 #include "Globals.h"
 
+
 struct Collider;
 
 class Module
@@ -56,7 +57,9 @@ public:
 		RED_FLOWER,
 		YELLOW_FLOWER,
 		WIN_SPOT,
-		POWER_UP
+		POWER_UP, 
+		SARU,
+		BANANACHER
 	};
 
 private:

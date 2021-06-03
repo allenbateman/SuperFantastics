@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 
+#define LVL_TWO_HEIGHT 11
+#define LVL_TWO_WIDTH 28
+
 struct SDL_Texture;
 
 class SceneLevel2 : public Module
@@ -41,8 +44,8 @@ public:
 
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
-
-	GridType grid[11][28];
+	const int gridHeight = LVL_TWO_HEIGHT, gridWidth = LVL_TWO_WIDTH;
+	GridType grid[LVL_TWO_HEIGHT][LVL_TWO_WIDTH];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;
 

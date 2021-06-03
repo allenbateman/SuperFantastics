@@ -20,6 +20,7 @@
 #include "ModuleFonts.h"
 #include "ModuleRender.h"
 #include "ModulePowerUp.h"
+#include "ModuleLevel.h"
 
 Application::Application()
 {
@@ -43,11 +44,12 @@ Application::Application()
 	modules[12] =   entities =		  new ModuleEntities(false);    //Enemies start disabled
 	modules[13] =	player =		  new ModulePlayer(false);	    //Player starts disabled
 
-	modules[14] =	collisions =	new ModuleCollisions(true);
-	modules[15] =	fade =			new ModuleFadeToBlack(true);
-	modules[16] =	fonts =			new ModuleFonts(true);
-	modules[17] =	render =		new ModuleRender(true);
-	modules[18] =	powerUps =		new ModulePowerUp(true);
+	modules[14] =	collisions =	  new ModuleCollisions(true);
+	modules[15] =	fade =			  new ModuleFadeToBlack(true);
+	modules[16] =	fonts =			  new ModuleFonts(true);
+	modules[17] =	render =		  new ModuleRender(true);
+	modules[18] =	powerUps =		  new ModulePowerUp(true);
+	modules[19] =	levelManager =    new ModuleLevel(true);
 }
 
 Application::~Application()

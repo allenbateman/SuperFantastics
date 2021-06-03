@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
+#include "ModuleLevel.h"
 #include "ModuleFadeToBlack.h"
 
 SceneInit::SceneInit(bool startEnabled) : Module(startEnabled)
@@ -25,7 +26,6 @@ bool SceneInit::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/initScreen.png");
-	//	App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f); (copied from sceneIntro.cpp, maybe not useful here)
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -35,10 +35,10 @@ bool SceneInit::Start()
 
 Update_Status SceneInit::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
-	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
-	}
+	//if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
+	//{
+	//	App->levelManager->gameState = ModuleLevel::MAIN_MENU;
+	//}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

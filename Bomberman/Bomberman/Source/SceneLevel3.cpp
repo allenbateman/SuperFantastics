@@ -160,16 +160,16 @@ bool SceneLevel3::Start()
 
 Update_Status SceneLevel3::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-	{
-		App->player->DisablePlayer();
-		App->entities->Disable();
-		App->collisions->Disable();
-		App->UI->Disable();
+	//if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+	//{
+	//	App->player->DisablePlayer();
+	//	App->entities->Disable();
+	//	App->collisions->Disable();
+	//	App->UI->Disable();
 
 
-		App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);
-	}
+	//	App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);
+	//}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

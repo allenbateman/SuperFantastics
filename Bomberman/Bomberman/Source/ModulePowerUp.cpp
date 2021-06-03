@@ -23,13 +23,13 @@ void ModulePowerUp::SpawnPowerUp(iPoint position)
 			App->entities->AddEntity(Entity_Type::FIRE, position.x, position.y);
 		}
 		else if (chance > 10 && chance < 15) {
-			//App->entities->AddEntity(Entity_Type::FIRE, position.x, position.y);
+
 		}
 		else if (chance >15 && chance < 20) {
-			//App->entities->AddEntity(Entity_Type::FIRE, position.x, position.y);
+
 		}
 		else if (chance > 20 && chance <25) {
-			//App->entities->AddEntity(Entity_Type::FIRE, position.x, position.y);
+
 		}
 	}
 }
