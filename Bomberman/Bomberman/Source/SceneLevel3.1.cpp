@@ -27,7 +27,7 @@ SceneLevel3x1::~SceneLevel3x1()
 // Load assets
 bool SceneLevel3x1::Start()
 {
-	App->player->EnablePlayer();
+	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
@@ -69,17 +69,22 @@ bool SceneLevel3x1::Start()
 	grid[4][7] = ROCK;
 	grid[6][7] = ROCK;
 	grid[8][7] = ROCK;
+	grid[1][0] = ROCK;
 	grid[1][1] = ROCK;
 	grid[1][2] = ROCK;
 	grid[1][3] = ROCK;
 	grid[1][4] = ROCK;
 	grid[1][5] = ROCK;
-	grid[0][10] = ROCK;
 	grid[1][9] = ROCK;
-	grid[1][10] = ROCK;
 	grid[9][8] = ROCK;
 	grid[9][10] = ROCK;
 	grid[9][12] = ROCK;
+	grid[0][9] = ROCK;
+	grid[1][8] = ROCK;
+	grid[0][9] = ROCK;
+	grid[1][0] = ROCK;
+	grid[7][6] = ROCK;
+	grid[9][6] = ROCK;
 
 	grid[2][1] = PLAYER;
 	grid[6][4] = MOUSE;
@@ -88,6 +93,13 @@ bool SceneLevel3x1::Start()
 	grid[0][11] = MECHA_WALKER;
 	grid[10][2] = ORB;
 	grid[2][10] = POKAPOKA;
+	grid[3][9] = STRUCTURE;
+	grid[3][10] = STRUCTURE;
+	grid[3][11] = STRUCTURE;
+	grid[4][9] = STRUCTURE;
+	grid[4][11] = STRUCTURE;
+	grid[5][9] = STRUCTURE;
+	grid[5][11] = STRUCTURE;
 	grid[5][10] = WIN_SPOT;
 
 	int flowerAmount = rand() % 10 + 30;
@@ -107,6 +119,14 @@ bool SceneLevel3x1::Start()
 	}
 
 	// Fixed empy positions
+	grid[0][0] = EMPTY;
+	grid[0][1] = EMPTY;
+	grid[0][2] = EMPTY;
+	grid[0][3] = EMPTY;
+	grid[0][4] = EMPTY;
+	grid[0][5] = EMPTY;
+	grid[0][6] = EMPTY;
+	grid[0][8] = EMPTY;
 	grid[2][0] = EMPTY;
 	grid[2][1] = EMPTY;
 	grid[2][2] = EMPTY;
@@ -121,11 +141,17 @@ bool SceneLevel3x1::Start()
 	grid[4][6] = EMPTY;
 	grid[5][6] = EMPTY;
 	grid[6][6] = EMPTY;
-	grid[7][6] = EMPTY;
 	grid[8][6] = EMPTY;
-	grid[9][6] = EMPTY;
 	grid[10][6] = EMPTY;
-
+	grid[10][7] = EMPTY;
+	grid[0][0] = EMPTY;
+	grid[0][0] = EMPTY;
+	grid[0][0] = EMPTY;
+	grid[10][8] = EMPTY;
+	grid[10][9] = EMPTY;
+	grid[10][10] = EMPTY;
+	grid[10][11] = EMPTY;
+	grid[10][12] = EMPTY;
 
 	middleStructureIsSet = false;
 
