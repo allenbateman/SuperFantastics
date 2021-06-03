@@ -9,7 +9,6 @@
 #include "ModuleCollisions.h"
 #include "ModuleEntities.h"
 #include "ModulePlayer.h"
-#include "MiddleStructure.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleLevel.h"
 
@@ -41,7 +40,7 @@ bool SceneLevel3x1::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/Background3.1.png");
-	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f);
 
 	// Fixed positions
 
@@ -61,27 +60,18 @@ bool SceneLevel3x1::Start()
 		}
 	}
 
-	grid[0][1] = PLAYER;
-	grid[0][6] = POKAPOKA;
+	grid[0][6] = PLAYER;
+	grid[2][10] = MOUSE;
 	grid[10][6] = POKAPOKA;
-	grid[2][4] = RED_FLOWER;
-	grid[2][8] = RED_FLOWER;
-	grid[8][4] = RED_FLOWER;
-	grid[8][8] = RED_FLOWER;
-	grid[2][9] = MECHA_WALKER;
-	grid[8][3] = MECHA_WALKER;
-	grid[2][10] = ORB;
-	grid[8][2] = ORB;
-	grid[3][5] = STRUCTURE;
-	grid[3][6] = STRUCTURE;
-	grid[3][7] = STRUCTURE;
-	grid[4][5] = STRUCTURE;
-	grid[4][6] = WIN_SPOT;
-	grid[4][7] = STRUCTURE;
-	grid[5][5] = STRUCTURE;
-	grid[5][7] = STRUCTURE;
+	grid[8][2] = MOUSE;
+	grid[5][6] = RED_FLOWER;
+	grid[3][2] = MECHA_WALKER;
+	grid[5][10] = MECHA_WALKER;
+	grid[4][4] = ORB;
+	grid[6][8] = ORB;
+	grid[1][11] = WIN_SPOT;
 
-	int flowerAmount = rand() % 10 + 35;
+	int flowerAmount = rand() % 10 + 27;
 	int x = 0;
 	int y = 0;
 
@@ -98,12 +88,14 @@ bool SceneLevel3x1::Start()
 	}
 
 	// Fixed empy positions
-	grid[0][0] = EMPTY;
-	grid[0][2] = EMPTY;
-	grid[1][0] = EMPTY;
-	grid[2][0] = EMPTY;
-	grid[4][6] = EMPTY;
-	grid[5][6] = EMPTY;
+	grid[0][4] = EMPTY;
+	grid[0][5] = EMPTY;
+	grid[0][6] = EMPTY;
+	grid[0][7] = EMPTY;
+	grid[1][6] = EMPTY;
+	grid[1][2] = EMPTY;
+	grid[1][4] = EMPTY;
+	grid[1][9] = EMPTY;
 
 	middleStructureIsSet = false;
 
@@ -142,9 +134,13 @@ bool SceneLevel3x1::Start()
 					middleStructureIsSet = true;
 				}
 			}
-			else if (grid[i][j] == POKAPOKA)
+			else if (grid[i][j] == MOUSE)
 			{
-				App->entities->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::MOUSE, 24 + (j * 16), 32 - 16 + (i * 16));
+			}
+			else if (grid[i][j] == SNAIL)
+			{
+				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == MECHA_WALKER)
 			{

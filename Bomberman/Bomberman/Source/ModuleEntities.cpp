@@ -147,7 +147,7 @@ void ModuleEntities::HandleEntitiesSpawn()
 			// Spawn a new Entitie if the screen has reached a spawn position
 			if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
 			{
-				LOG("Spawning Entitie at %d", spawnQueue[i].x * SCREEN_SIZE);
+				LOG("Spawning Entity at %d", spawnQueue[i].x * SCREEN_SIZE);
 
 				SpawnEntity(spawnQueue[i]);
 				spawnQueue[i].type = Entity_Type::NO_TYPE; // Removing the newly spawned Entitie from the queue
@@ -166,7 +166,7 @@ void ModuleEntities::HandleEntitiesDespawn()
 			// Delete the Entitie when it has reached the end of the screen
 			if (entities[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
 			{
-				LOG("DeSpawning Entitie at %d", entities[i]->position.x * SCREEN_SIZE);
+				LOG("DeSpawning Entity at %d", entities[i]->position.x * SCREEN_SIZE);
 
 				entities[i]->SetToDelete();
 			}

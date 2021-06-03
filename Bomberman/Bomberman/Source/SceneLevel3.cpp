@@ -41,7 +41,7 @@ bool SceneLevel3::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/Background3.png");
-	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f);
 
 	// Fixed positions
 	
@@ -61,27 +61,35 @@ bool SceneLevel3::Start()
 		}
 	}
 
-	grid[0][1] = PLAYER;
-	grid[0][6] = POKAPOKA;
-	grid[10][6] = POKAPOKA;
-	grid[2][4] = RED_FLOWER;
-	grid[2][8] = RED_FLOWER;
-	grid[8][4] = RED_FLOWER;
-	grid[8][8] = RED_FLOWER;
-	grid[2][9] = MECHA_WALKER;
-	grid[8][3] = MECHA_WALKER;
-	grid[2][10] = ORB;
-	grid[8][2] = ORB;
-	grid[3][5] = STRUCTURE;
-	grid[3][6] = STRUCTURE;
-	grid[3][7] = STRUCTURE;
-	grid[4][5] = STRUCTURE;
-	grid[4][6] = WIN_SPOT;
-	grid[4][7] = STRUCTURE;
-	grid[5][5] = STRUCTURE;
-	grid[5][7] = STRUCTURE;
+	grid[1][0] = ROCK;
+	grid[1][1] = ROCK;
+	grid[1][3] = ROCK;
+	grid[1][2] = ROCK;
+	grid[1][9] = ROCK;
+	grid[1][11] = ROCK;
+	grid[0][3] = ROCK;
+	grid[0][9] = ROCK;
+	grid[1][10] = ROCK;
+	grid[1][12] = ROCK;
+	grid[9][0] = ROCK;
+	grid[9][2] = ROCK;
+	grid[10][3] = ROCK;
+	grid[10][9] = ROCK;
+	grid[9][10] = ROCK;
+	grid[9][12] = ROCK;
 
-	int flowerAmount = rand() % 10 + 35;
+	grid[0][6] = PLAYER;
+	grid[2][10] = MOUSE;
+	grid[10][6] = POKAPOKA;
+	grid[8][2] = MOUSE;
+	grid[5][6] = RED_FLOWER;
+	grid[3][2] = MECHA_WALKER;
+	grid[5][10] = MECHA_WALKER;
+	grid[4][4] = ORB;
+	grid[6][8] = ORB;
+	grid[1][11] = WIN_SPOT;
+
+	int flowerAmount = rand() % 10 + 36;
 	int x = 0;
 	int y = 0;
 
@@ -97,13 +105,25 @@ bool SceneLevel3::Start()
 		}
 	}
 
-	// Fixed empy positions
+	// Fixed empty positions
+	grid[0][4] = EMPTY;
+	grid[0][5] = EMPTY;
+	grid[0][6] = EMPTY;
+	grid[0][7] = EMPTY;
+	grid[1][6] = EMPTY;
+	grid[1][9] = EMPTY;
 	grid[0][0] = EMPTY;
+	grid[0][1] = EMPTY;
 	grid[0][2] = EMPTY;
-	grid[1][0] = EMPTY;
-	grid[2][0] = EMPTY;
-	grid[4][6] = EMPTY;
-	grid[5][6] = EMPTY;
+	grid[0][10] = EMPTY;
+	grid[0][11] = EMPTY;
+	grid[0][12] = EMPTY;
+	grid[10][0] = EMPTY;
+	grid[10][1] = EMPTY;
+	grid[10][2] = EMPTY;
+	grid[10][10] = EMPTY;
+	grid[10][11] = EMPTY;
+	grid[10][12] = EMPTY;
 
 	middleStructureIsSet = false;
 
@@ -134,17 +154,9 @@ bool SceneLevel3::Start()
 			{
 				App->entities->AddEntity(Entity_Type::ORB, j, i);
 			}
-			else if (grid[i][j] == STRUCTURE)
+			else if (grid[i][j] == MOUSE)
 			{
-				if (!middleStructureIsSet)
-				{
-					App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
-					middleStructureIsSet = true;
-				}
-			}
-			else if (grid[i][j] == POKAPOKA)
-			{
-				App->entities->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::MOUSE, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == MECHA_WALKER)
 			{
@@ -153,7 +165,6 @@ bool SceneLevel3::Start()
 		}
 	}
 	
-
 	for (int y = 0; y < gridHeight; y++)
 	{
 		for (int x = 0; x < gridWidth; x++)
@@ -176,7 +187,6 @@ Update_Status SceneLevel3::Update()
 		App->entities->Disable();
 		App->collisions->Disable();
 		App->UI->Disable();
-
 
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel3x1, 60);
 	}

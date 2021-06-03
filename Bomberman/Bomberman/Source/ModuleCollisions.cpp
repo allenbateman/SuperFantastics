@@ -29,14 +29,17 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
 
-
 	matrix[Collider::Type::EXPLOSION][Collider::Type::WALL] = true;
 	matrix[Collider::Type::EXPLOSION][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::EXPLOSION][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::EXPLOSION][Collider::Type::RED_FLOWER] = true;
 	matrix[Collider::Type::EXPLOSION][Collider::Type::YELLOW_FLOWER] = true;
 
-
+	matrix[Collider::Type::BOMB][Collider::Type::WALL] = true;
+	matrix[Collider::Type::BOMB][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::BOMB][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::BOMB][Collider::Type::RED_FLOWER] = true;
+	matrix[Collider::Type::BOMB][Collider::Type::YELLOW_FLOWER] = true;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;

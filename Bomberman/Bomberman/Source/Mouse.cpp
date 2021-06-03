@@ -72,7 +72,7 @@ void Mouse::Update()
 				colliderPosition.x = position.x;
 				colliderPosition.y = position.y + 16;
 
-				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::POKAPOKA;
+				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::MOUSE;
 			}
 		}
 		break;
