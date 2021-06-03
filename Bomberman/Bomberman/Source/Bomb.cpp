@@ -26,6 +26,8 @@ Bomb::Bomb(int x, int y):Entity(x, y)
 
 	position.y -= diffY;
 
+	/*collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::BOMB);*/
+
 	idleAnim.PushBack({ 0,256,16,16 });
 	idleAnim.PushBack({ 16,256,16,16 });
 	idleAnim.PushBack({ 32,256,16,16 });
@@ -115,19 +117,21 @@ void Bomb::Update()
 
 		idleAnim.Update();
 
-		diff.x = App->player->position.x - position.x;
-		diff.y = App->player->position.y - position.y;
-		if (diff.x < 0) diff.x *= -1;
-		if (diff.y < 0) diff.y *= -1;
+		//Set Bomb collider once the grid is empty
+		if (App->sceneLevel1->GetGridType(position.y, position.x) == SceneLevel1::GridType::EMPTY && colliderList[0] == nullptr)
+		{
+			colliderList[0] = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::BOMB);
+			App->sceneLevel1->grid[(position.y - 32) / 16][(position.x - 24) / 16] = SceneLevel1::GridType::BOMB;
+		}
 
 		// TODO: START SOUND
 
-		if (collider!=nullptr) {
-			if (diff.x >= 16 && diff.y >= 16)
-			{
-				collider = App->collisions->AddCollider({ 0,0,16,16 }, Collider::WALL);
-			}
-		}
+		//if (collider == nullptr) {
+		//	if (diff.x >= 16 && diff.y >= 16)
+		//	{
+		//		collider = App->collisions->AddCollider({ 0,0,16,16 }, Collider::WALL);
+		//	}
+		//}
 		if (collider != nullptr) collider->SetPos(position.x, position.y);
 
 		if (frameCounter > 120) state = EXPLOSION;
