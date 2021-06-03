@@ -32,13 +32,8 @@
     <Filter Include="Source Files\Entities\Enviroment">
       <UniqueIdentifier>{76ccbadc-e24c-4a04-8c05-55675c19a2c6}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
     <Filter Include="Source Files\Modules\Gameplay\Levels">
       <UniqueIdentifier>{f146998a-2a12-4f06-bccb-dee95eb05cef}</UniqueIdentifier>
-
-    <Filter Include="Source Files\Entities\Boss">
-      <UniqueIdentifier>{d29038f1-0aee-4308-a57b-0130e59b3a49}</UniqueIdentifier>
->>>>>>> 081fcc95a80797353d693191e5e2e36253735e1e
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,7 +139,6 @@
     <ClInclude Include="ModulePowerUp.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="SceneLevel1.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
@@ -165,13 +159,6 @@
     </ClInclude>
     <ClInclude Include="SceneInit.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
-
-    <ClInclude Include="Bananacher.h">
-      <Filter>Source Files\Entities\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Saru.h">
-      <Filter>Source Files\Entities\Boss</Filter>
->>>>>>> 081fcc95a80797353d693191e5e2e36253735e1e
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -271,7 +258,6 @@
     <ClCompile Include="ModulePowerUp.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="SceneLevel1.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
@@ -292,13 +278,6 @@
     </ClCompile>
     <ClCompile Include="SceneInit.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
-
-    <ClCompile Include="Bananacher.cpp">
-      <Filter>Source Files\Entities\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="Saru.cpp">
-      <Filter>Source Files\Entities\Boss</Filter>
->>>>>>> 081fcc95a80797353d693191e5e2e36253735e1e
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -78,7 +78,6 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Bananacher.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bombup.h" />
     <ClInclude Include="Collider.h" />
@@ -99,7 +98,6 @@
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Pokapoka.h" />
     <ClInclude Include="RedFlower.h" />
-    <ClInclude Include="Saru.h" />
     <ClInclude Include="SceneBossFight.h" />
     <ClInclude Include="SceneInit.h" />
     <ClInclude Include="SceneIntro.h" />
@@ -122,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Bananacher.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bombup.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -144,7 +141,6 @@
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Pokapoka.cpp" />
     <ClCompile Include="RedFlower.cpp" />
-    <ClCompile Include="Saru.cpp" />
     <ClCompile Include="SceneBossFight.cpp" />
     <ClCompile Include="SceneInit.cpp" />
     <ClCompile Include="SceneIntro.cpp" />

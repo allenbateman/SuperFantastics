@@ -225,12 +225,8 @@ Update_Status ModulePlayer::Update()
 			//Update grid 
 			if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
 			{
-				y = (lastPos.y - 24) % 16;
-				x = (lastPos.x - 32 + 8) % 16;
-				sceneGrid[y * sceneWidth + x] = Module::GridType::EMPTY;
-				y = (position.y - 24) % 16;
-				x = (position.x - 32 + 8) % 16;
-				sceneGrid[y * sceneWidth + x] = Module::GridType::PLAYER;
+				App->sceneLevel1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
+				App->sceneLevel1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
 			}
 
 			//Place Bomb
@@ -283,7 +279,7 @@ Update_Status ModulePlayer::Update()
 				
 				//save player status...
 				//Disable current level...
-				App->sceneLevel1->Disable();
+				App->sceneLevel1->Disable();	
 				DisablePlayer();
 				//load nex level...
 				App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);		
@@ -331,7 +327,7 @@ bool ModulePlayer::EnablePlayer()
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
     if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
-		|| c2->type == Collider::Type::RED_FLOWER)
+		|| c2->type == Collider::Type::RED_FLOWER || c2->type == Collider::Type::BOMB)
 	{
 		isStuck = true;
 		switch (lastKeyPressed)
@@ -390,55 +386,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				break;
 			 default:
 				break;
-		}
-		c1->SetPos(position.x, position.y);
-	}
-	//if (c2->type == Collider::Type::BOMB)
-	//{
-	//	switch (lastKeyPressed)
-	//	{
-	//	case SDL_SCANCODE_LEFT:
-	//		if (position.y <= c2->rect.y + 17)
-	//		{
-	//			position.y -= 1;
-	//		}
-	//		if (position.y >= c2->rect.y + 17)
-	//		{
-	//			position.y += 1;
-	//		}
-	//		break;
-	//	case SDL_SCANCODE_RIGHT:
-	//		if (position.y + 16 >= c2->rect.y - 1)
-	//		{
-	//			position.y += 1;
-	//		}
-	//		if (position.y + 16 <= c2->rect.y - 1)
-	//		{
-	//			position.y -= 1;
-	//		}
-	//		break;
-	//	case SDL_SCANCODE_DOWN:
-	//		if (position.x + 16 >= c2->rect.x - 1)
-	//		{
-	//			position.x += 1;
-	//		}
-	//		if (position.x + 16 <= c2->rect.x - 1)
-	//		{
-	//			position.x -= 1;
-	//		}
-	//		break;
-	//	case SDL_SCANCODE_UP:
-	//		if (position.x <= c2->rect.x + 17)
-	//		{
-	//			position.x -= 1;
-	//		}
-	//		if (position.x >= c2->rect.x + 17)
-	//		{
-	//			position.x += 1;
-	//		}
-	//		break;
-		default:
-			break;
 		}
 		c1->SetPos(position.x, position.y);
 	}
