@@ -60,18 +60,17 @@ bool SceneLevel3x1::Start()
 		}
 	}
 
-	grid[0][6] = PLAYER;
-	grid[2][10] = MOUSE;
-	grid[10][6] = POKAPOKA;
+	grid[2][1] = PLAYER;
+	grid[6][4] = MOUSE;
 	grid[8][2] = MOUSE;
-	grid[5][6] = RED_FLOWER;
-	grid[3][2] = MECHA_WALKER;
-	grid[5][10] = MECHA_WALKER;
-	grid[4][4] = ORB;
-	grid[6][8] = ORB;
+	grid[8][2] = SNAIL;
+	grid[8][9] = MECHA_WALKER;
+	grid[0][11] = MECHA_WALKER;
+	grid[10][2] = ORB;
+	grid[2][10] = POKAPOKA;
 	grid[1][11] = WIN_SPOT;
 
-	int flowerAmount = rand() % 10 + 27;
+	int flowerAmount = rand() % 10 + 30;
 	int x = 0;
 	int y = 0;
 
