@@ -120,7 +120,7 @@ Update_Status SceneSelectLevel::Update()
 
 	if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN)
 	{
-		maxStage = 0;
+		maxStage = 1;
 		selectedStage = 0;
 	}
 
