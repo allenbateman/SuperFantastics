@@ -36,6 +36,8 @@ bool SceneLevel1::Start()
 	App->UI->timeLeft = timeLevel;
 	App->UI->timeLevel = timeLevel;
 
+	App->UI->StartTiming();
+
 	LOG("Loading background assets");
 
 	bool ret = true;

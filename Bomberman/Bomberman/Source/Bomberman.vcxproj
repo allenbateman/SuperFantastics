@@ -90,11 +90,12 @@
     <ClInclude Include="ModuleEntities.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleFonts.h" />
+    <ClInclude Include="ModuleLevel.h" />
     <ClInclude Include="ModuleParticles.h" />
+    <ClInclude Include="ModulePowerUp.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Pokapoka.h" />
-    <ClInclude Include="Powerup.h" />
     <ClInclude Include="RedFlower.h" />
     <ClInclude Include="SceneBossFight.h" />
     <ClInclude Include="SceneInit.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="SceneLevel2.h" />
+    <ClInclude Include="SceneLevel3.1.h" />
     <ClInclude Include="SceneLevel3.h" />
     <ClInclude Include="SceneSelectLevel.h" />
     <ClInclude Include="YellowFlower.h" />
@@ -131,11 +133,12 @@
     <ClCompile Include="ModuleEntities.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
+    <ClCompile Include="ModuleLevel.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
+    <ClCompile Include="ModulePowerUp.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Pokapoka.cpp" />
-    <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="RedFlower.cpp" />
     <ClCompile Include="SceneBossFight.cpp" />
     <ClCompile Include="SceneInit.cpp" />
@@ -151,6 +154,7 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="SceneLevel2.cpp" />
+    <ClCompile Include="SceneLevel3.1.cpp" />
     <ClCompile Include="SceneLevel3.cpp" />
     <ClCompile Include="SceneSelectLevel.cpp" />
     <ClCompile Include="YellowFlower.cpp" />

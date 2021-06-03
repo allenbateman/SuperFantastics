@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleUI.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 
 SceneSelectLevel::SceneSelectLevel(bool startEnabled) : Module(startEnabled)
 {
@@ -56,20 +57,25 @@ Update_Status SceneSelectLevel::Update()
 	{
 		if (!exit) {
 			Module* selectedLevel = nullptr;
+			ModuleLevel::GameState state;
 
 			switch (selectedStage) {
 			case 0:
 				selectedLevel = (Module*)App->sceneLevel1;
+				state = ModuleLevel::LEVEL1;
 				break;
 			case 1:
 				selectedLevel = (Module*)App->sceneLevel2;
+				state = ModuleLevel::LEVEL2;
 				break;
 			case 2:
 				selectedLevel = (Module*)App->sceneLevel3;
+				state = ModuleLevel::LEVEL3;
 				break;
 			}
 
 			App->fade->FadeToBlack(this, selectedLevel, 60);
+			App->levelManager->gameState = state;
 		}
 		else {
 			// FIX: Go main menu or exit game?

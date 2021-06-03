@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
+#include "ModuleLevel.h"
 #include "ModuleFadeToBlack.h"
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
@@ -25,7 +26,7 @@ bool SceneIntro::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/titleScreen.png");
-    //	App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
+    App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -39,7 +40,6 @@ Update_Status SceneIntro::Update()
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneSelectLevel, 60);
 	}
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

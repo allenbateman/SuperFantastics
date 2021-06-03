@@ -130,15 +130,6 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Snail.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePowerUp.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="SceneLevel1.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
@@ -151,19 +142,22 @@
     <ClInclude Include="SceneIntro.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLevel.h">
-      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
-    </ClInclude>
     <ClInclude Include="SceneBossFight.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
     <ClInclude Include="SceneInit.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="SceneSelectLevel.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
     <ClInclude Include="SceneLevel3.1.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="SceneSelectLevel.h">
+    <ClInclude Include="ModuleLevel.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePowerUp.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
@@ -255,15 +249,6 @@
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Snail.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePowerUp.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="SceneLevel1.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
@@ -276,19 +261,22 @@
     <ClCompile Include="SceneIntro.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLevel.cpp">
-      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
-    </ClCompile>
     <ClCompile Include="SceneBossFight.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
     <ClCompile Include="SceneInit.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="SceneSelectLevel.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClCompile>
     <ClCompile Include="SceneLevel3.1.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
-    <ClCompile Include="SceneSelectLevel.cpp">
+    <ClCompile Include="ModuleLevel.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePowerUp.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
