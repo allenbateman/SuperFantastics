@@ -46,6 +46,8 @@ bool ModuleAudio::Init()
 		ret = false;
 	}
 
+	activeMusicPath = new char[256]{ '\0' };
+
 	return ret;
 }
 
@@ -74,6 +76,10 @@ bool ModuleAudio::CleanUp()
 
 bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 {
+	if (strcmp(path, activeMusicPath) == 0) {
+		return true;
+	}
+
 	bool ret = true;
 
 	if(music != NULL)
@@ -118,7 +124,12 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 		}
 	}
 
-	LOG("Successfully playing %s", path);
+	if (ret)
+	{
+		LOG("Successfully playing %s", path);
+		strcpy_s(activeMusicPath, 256, path);
+	}
+
 	return ret;
 }
 
