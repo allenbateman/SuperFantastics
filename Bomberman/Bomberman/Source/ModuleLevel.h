@@ -35,7 +35,7 @@ public:
 	};
 	GameState gameState;
 
-
+	bool transitionFinish = true;
 	GridType grid[MAX_SIZE][MAX_SIZE];
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);

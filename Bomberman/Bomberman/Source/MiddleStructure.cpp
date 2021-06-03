@@ -3,9 +3,7 @@
 #include "Application.h"
 #include "ModulePlayer.h"
 #include "ModuleCollisions.h"
-#include "SceneLevel1.h"
-#include "SceneLevel2.h"
-#include "SceneLevel3.h"
+#include "ModuleLevel.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 
@@ -27,7 +25,7 @@ MiddleStructure::MiddleStructure(int x, int y) : Entity(x, y)
 
 	for (int i = 0; i < 11; i++) {
 		for (int j = 0; j < 13; j++){
-			if (App->sceneLevel1->grid[i][j] == SceneLevel1::STRUCTURE)
+			if (App->levelManager->grid[i][j] == Module::STRUCTURE)
 			{
 				for (int n = 0; n < COLLIDERS; n++)
 				{
@@ -73,7 +71,7 @@ void MiddleStructure::Update()
 		for (int i = 0; i < 11; i++) {
 			for (int j = 0; j < 13; j++) {
 
-				if (App->sceneLevel1->grid[i][j] == SceneLevel1::WIN_SPOT && winCollider == nullptr)
+				if (App->levelManager->grid[i][j] == Module::WIN_SPOT && winCollider == nullptr)
 				{
 					winCollider = App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WIN, (Module*)App->entities);
 					winCollider->SetPos(24 + (j * 16), 32 + (i * 16));

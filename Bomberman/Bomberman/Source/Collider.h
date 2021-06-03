@@ -13,6 +13,7 @@ struct Collider
 	{
 		NONE = -1,
 		WALL,
+		ORB,
 		YELLOW_FLOWER,
 		RED_FLOWER,
 		STRUCTURE,

@@ -13,6 +13,7 @@ ModuleLevel::~ModuleLevel()
 
 bool ModuleLevel::Start()
 {
+	transitionFinish = true;
 	gameState = INTRO;
 	currentScene = (Module*)App->sceneInit;
 	return true;
@@ -20,6 +21,56 @@ bool ModuleLevel::Start()
 
 Update_Status ModuleLevel::PreUpdate()
 {
+
+	switch (gameState)
+	{
+	case INTRO:
+		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && transitionFinish)
+		{
+			gameState = MAIN_MENU;
+			transitionFinish = false;
+		}
+		break;
+	case MAIN_MENU:
+		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && transitionFinish)
+		{
+			gameState = LEVEL1;
+			transitionFinish = false;
+		}
+		break;
+	case LEVEL1:
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		{
+			gameState = LEVEL2;
+			transitionFinish = false;
+		}
+		break;
+	case LEVEL2:
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		{
+			gameState = LEVEL3;
+			transitionFinish = false;
+		}
+		break;
+	case LEVEL3:
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		{
+			gameState = BOSS;
+			transitionFinish = false;
+		}
+		break;
+	case BOSS:
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && transitionFinish)
+		{
+			gameState = MAIN_MENU;
+			transitionFinish = false;
+		}
+		break;
+	default:
+		break;
+	}
+
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -29,81 +80,57 @@ Update_Status ModuleLevel::Update()
 	switch (gameState)
 	{
 	case INTRO:
-		if (currentScene == nullptr) {
+		if (currentScene == nullptr && !transitionFinish) {
 			currentScene = (Module*)App->sceneInit;
-		}
-		//change level
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
-		{
-			gameState = MAIN_MENU;
+			transitionFinish = true;
 		}
 		break;
 	case MAIN_MENU:
-		if (currentScene != (Module*)App->sceneIntro) {
+		if (currentScene != (Module*)App->sceneIntro && !transitionFinish) {
 
 			LOG("Loading MainMenu");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 60);
 			currentScene = (Module*)App->sceneIntro;
-		}		
-		//change level
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
-		{
-			gameState = LEVEL1;
+			transitionFinish = true;
 		}
 		break;
 	case LEVEL1:
 
-		if (currentScene != (Module*)App->sceneLevel1)
+		if (currentScene != (Module*)App->sceneLevel1 && !transitionFinish )
 		{
 			//Load level
 			LOG("Loading Level 1");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 60);
 			currentScene = (Module*)App->sceneLevel1;
-		}
-		//change level
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-		{
-			gameState = LEVEL2;
+			transitionFinish = true;
 		}
 		break;
 	case LEVEL2:
 
-		if (currentScene != (Module*)App->sceneLevel2) {
+		if (currentScene != (Module*)App->sceneLevel2 && !transitionFinish) {
 			//Load level
 			LOG("Loading Level 2");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 60);
 			currentScene = (Module*)App->sceneLevel2;
-		}
-		//change level
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-		{
-			gameState = LEVEL3;
+			transitionFinish = true;
 		}
 		break;
 	case LEVEL3:
-		if (currentScene != (Module*)App->sceneLevel3) {
+		if (currentScene != (Module*)App->sceneLevel3 && !transitionFinish) {
 			//Load level
 			LOG("Loading Level 3");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 60);
 			currentScene = (Module*)App->sceneLevel3;
-		}
-		//change level
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-		{
-			gameState = BOSS;
+			transitionFinish = true;
 		}
 		break;
 	case BOSS:
-		if (currentScene != (Module*)App->sceneBossFight) {
+		if (currentScene != (Module*)App->sceneBossFight && !transitionFinish) {
 			//Load level
 			LOG("Loading Level Boss");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 60);
 			currentScene = (Module*)App->sceneBossFight;
-		}
-		//change level
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-		{
-			gameState = MAIN_MENU;
+			transitionFinish = true;
 		}
 		break;
 	default:
@@ -115,8 +142,6 @@ Update_Status ModuleLevel::Update()
 
 bool ModuleLevel::CleanUp()
 {
-
-
 	if (currentScene != nullptr)
 	{
 		currentScene = nullptr;

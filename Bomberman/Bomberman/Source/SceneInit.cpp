@@ -35,11 +35,6 @@ bool SceneInit::Start()
 
 Update_Status SceneInit::Update()
 {
-	//if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
-	//{
-	//	App->levelManager->gameState = ModuleLevel::MAIN_MENU;
-	//}
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

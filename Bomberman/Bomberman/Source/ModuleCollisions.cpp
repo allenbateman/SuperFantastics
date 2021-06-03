@@ -128,6 +128,9 @@ void ModuleCollisions::DebugDraw()
 			break;
 			case Collider::Type::WALL: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;			
+			case Collider::Type::ORB: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 155, alpha);
 			break;
 			case Collider::Type::YELLOW_FLOWER: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);

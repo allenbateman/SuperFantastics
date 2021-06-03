@@ -17,6 +17,7 @@ bool ModuleUI::Start()
 {
 	numTex = App->textures->Load("Assets/Fonts/interface.png");
 	powerupTex = App->textures->Load("Assets/Sprites/Power_Ups.png");
+	initialFrame = 0;
 	return true;
 }
 

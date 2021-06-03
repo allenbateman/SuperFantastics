@@ -36,6 +36,7 @@ ModuleEntities::~ModuleEntities()
 
 bool ModuleEntities::Start()
 {
+	LOG("Loading Module Entities");
 	texture = App->textures->Load("Assets/Sprites/entities.png");
 	EntitieDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 	bombCount = 0;
