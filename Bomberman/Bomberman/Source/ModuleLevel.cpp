@@ -165,12 +165,12 @@ bool ModuleLevel::CleanUp()
 	return true;
 }
 
-ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIterantion)
+ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIteration)
 {
-	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIterantion];
+	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration];
 }
 
-ModuleLevel::GridType ModuleLevel::SetGridType(GridType type, int y, int x, int yIteration, int xIterantion)
+ModuleLevel::GridType ModuleLevel::SetGridType(GridType type, int y, int x, int yIteration, int xIteration)
 {
-	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIterantion] = type;
+	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration] = type;
 }

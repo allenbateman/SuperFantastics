@@ -60,15 +60,35 @@ bool SceneLevel3x1::Start()
 		}
 	}
 
+	grid[2][5] = ROCK;
+	grid[4][5] = ROCK;
+	grid[6][5] = ROCK;
+	grid[8][5] = ROCK;
+	grid[10][5] = ROCK;
+	grid[2][7] = ROCK;
+	grid[4][7] = ROCK;
+	grid[6][7] = ROCK;
+	grid[8][7] = ROCK;
+	grid[1][1] = ROCK;
+	grid[1][2] = ROCK;
+	grid[1][3] = ROCK;
+	grid[1][4] = ROCK;
+	grid[1][5] = ROCK;
+	grid[0][10] = ROCK;
+	grid[1][9] = ROCK;
+	grid[1][10] = ROCK;
+	grid[9][8] = ROCK;
+	grid[9][10] = ROCK;
+	grid[9][12] = ROCK;
+
 	grid[2][1] = PLAYER;
 	grid[6][4] = MOUSE;
-	grid[8][2] = MOUSE;
 	grid[8][2] = SNAIL;
 	grid[8][9] = MECHA_WALKER;
 	grid[0][11] = MECHA_WALKER;
 	grid[10][2] = ORB;
 	grid[2][10] = POKAPOKA;
-	grid[1][11] = WIN_SPOT;
+	grid[5][10] = WIN_SPOT;
 
 	int flowerAmount = rand() % 10 + 30;
 	int x = 0;
@@ -87,14 +107,25 @@ bool SceneLevel3x1::Start()
 	}
 
 	// Fixed empy positions
-	grid[0][4] = EMPTY;
-	grid[0][5] = EMPTY;
+	grid[2][0] = EMPTY;
+	grid[2][1] = EMPTY;
+	grid[2][2] = EMPTY;
+	grid[3][0] = EMPTY;
+	grid[5][10] = EMPTY;
+	grid[8][5] = EMPTY;
+	grid[8][7] = EMPTY;
 	grid[0][6] = EMPTY;
-	grid[0][7] = EMPTY;
 	grid[1][6] = EMPTY;
-	grid[1][2] = EMPTY;
-	grid[1][4] = EMPTY;
-	grid[1][9] = EMPTY;
+	grid[2][6] = EMPTY;
+	grid[3][6] = EMPTY;
+	grid[4][6] = EMPTY;
+	grid[5][6] = EMPTY;
+	grid[6][6] = EMPTY;
+	grid[7][6] = EMPTY;
+	grid[8][6] = EMPTY;
+	grid[9][6] = EMPTY;
+	grid[10][6] = EMPTY;
+
 
 	middleStructureIsSet = false;
 
@@ -132,6 +163,10 @@ bool SceneLevel3x1::Start()
 					App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
 					middleStructureIsSet = true;
 				}
+			}
+			else if (grid[i][j] == POKAPOKA)
+			{
+				App->entities->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == MOUSE)
 			{
