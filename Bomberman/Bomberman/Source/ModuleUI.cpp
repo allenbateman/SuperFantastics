@@ -22,8 +22,10 @@ bool ModuleUI::Start()
 
 Update_Status ModuleUI::Update()
 {
-	time = (App->frameCounter - initialFrame) / 60;
-	timeLeft = timeLevel - time;
+	if (startTiming) {
+		time = (App->frameCounter - initialFrame) / 60;
+		timeLeft = timeLevel - time;
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

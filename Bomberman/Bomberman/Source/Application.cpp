@@ -9,6 +9,7 @@
 #include "ModuleUI.h"
 #include "SceneInit.h"
 #include "SceneIntro.h"
+#include "SceneSelectLevel.h"
 #include "SceneLevel1.h"
 #include "SceneLevel2.h"
 #include "SceneLevel3.h"
@@ -33,19 +34,20 @@ Application::Application()
 
 	modules[4] =	sceneInit =		  new SceneInit(true);
 	modules[5] =	sceneIntro =	  new SceneIntro(false);
-	modules[6] =	sceneLevel1 =	  new SceneLevel1(false);	    //Gameplay scene starts disabled
-	modules[7] =    sceneLevel2 =     new SceneLevel2(false);
-	modules[7] =    sceneLevel3 =     new SceneLevel3(false);
-	modules[7] =	sceneBossFight =  new SceneBossFight(false);
-	modules[8] =	UI =			  new ModuleUI(false);		    //Gameplay scene starts disabled
-	modules[9] =	particles =		  new ModuleParticles(false);
-	modules[10] =   entities =		  new ModuleEntities(false);    //Enemies start disabled
-	modules[11] =	player =		  new ModulePlayer(false);	    //Player starts disabled
+	modules[6] =	sceneSelectLevel =new SceneSelectLevel(false);
+	modules[7] =	sceneLevel1 =	  new SceneLevel1(false);	    //Gameplay scene starts disabled
+	modules[8] =    sceneLevel2 =     new SceneLevel2(false);
+	modules[9] =    sceneLevel3 =     new SceneLevel3(false);
+	modules[10] =	sceneBossFight =  new SceneBossFight(false);
+	modules[11] =	UI =			  new ModuleUI(false);		    //Gameplay scene starts disabled
+	modules[12] =	particles =		  new ModuleParticles(false);
+	modules[13] =   entities =		  new ModuleEntities(false);    //Enemies start disabled
+	modules[14] =	player =		  new ModulePlayer(false);	    //Player starts disabled
 
-	modules[12] =	collisions =	new ModuleCollisions(true);
-	modules[13] =	fade =			new ModuleFadeToBlack(true);
-	modules[14] =	fonts =			new ModuleFonts(true);
-	modules[15] =	render =		new ModuleRender(true);
+	modules[15] =	collisions =	new ModuleCollisions(true);
+	modules[16] =	fade =			new ModuleFadeToBlack(true);
+	modules[17] =	fonts =			new ModuleFonts(true);
+	modules[18] =	render =		new ModuleRender(true);
 }
 
 Application::~Application()
