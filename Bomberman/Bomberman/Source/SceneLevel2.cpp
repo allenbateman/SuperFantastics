@@ -102,7 +102,7 @@ bool SceneLevel2::Start()
 	grid[9][14] = ROCK;
 
 	//Entities + Win spot
-	grid[0][1] = PLAYER;
+	grid[0][2] = PLAYER;
 	grid[2][6] = MOUSE;
 	grid[4][11] = SNAIL;
 	grid[9][26] = SNAIL;
