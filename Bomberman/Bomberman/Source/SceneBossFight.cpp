@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "MiddleStructure.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 
 #include <ctime>
 
@@ -27,7 +28,7 @@ SceneBossFight::~SceneBossFight()
 // Load assets
 bool SceneBossFight::Start()
 {
-	App->player->EnablePlayer();
+	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
@@ -60,7 +61,9 @@ bool SceneBossFight::Start()
 		}
 	}
 
-	grid[6][8] = PLAYER;
+	grid[7][6] = PLAYER;
+	grid[2][8] = SARU;
+	grid[2][6] = BANANACHER;
 
 	middleStructureIsSet = false;
 
@@ -78,6 +81,14 @@ bool SceneBossFight::Start()
 			else if (grid[i][j] == ROCK)
 			{
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
+			}
+			else if (grid[i][j] == SARU)
+			{
+				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));
+			}
+			else if (grid[i][j] == BANANACHER)
+			{
+				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 		}
 	}

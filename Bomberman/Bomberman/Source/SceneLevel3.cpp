@@ -28,7 +28,7 @@ SceneLevel3::~SceneLevel3()
 // Load assets
 bool SceneLevel3::Start()
 {
-	App->player->EnablePlayer();
+	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
@@ -66,7 +66,6 @@ bool SceneLevel3::Start()
 	grid[1][3] = ROCK;
 	grid[1][2] = ROCK;
 	grid[1][9] = ROCK;
-	grid[1][11] = ROCK;
 	grid[0][3] = ROCK;
 	grid[0][9] = ROCK;
 	grid[1][10] = ROCK;
@@ -77,8 +76,13 @@ bool SceneLevel3::Start()
 	grid[10][9] = ROCK;
 	grid[9][10] = ROCK;
 	grid[9][12] = ROCK;
+	grid[5][4] = ROCK;
+	grid[4][5] = ROCK;
+	grid[5][8] = ROCK;
+	grid[6][7] = ROCK;
+	grid[1][10] = ROCK;
 
-	grid[0][6] = PLAYER;
+	grid[1][6] = PLAYER;
 	grid[2][10] = MOUSE;
 	grid[10][6] = POKAPOKA;
 	grid[8][2] = MOUSE;
@@ -87,7 +91,9 @@ bool SceneLevel3::Start()
 	grid[5][10] = MECHA_WALKER;
 	grid[4][4] = ORB;
 	grid[6][8] = ORB;
-	grid[1][11] = WIN_SPOT;
+
+
+	grid[4][10] = WIN_SPOT;
 
 	int flowerAmount = rand() % 10 + 36;
 	int x = 0;
@@ -111,7 +117,7 @@ bool SceneLevel3::Start()
 	grid[0][6] = EMPTY;
 	grid[0][7] = EMPTY;
 	grid[1][6] = EMPTY;
-	grid[1][9] = EMPTY;
+	grid[1][11] = EMPTY;
 	grid[0][0] = EMPTY;
 	grid[0][1] = EMPTY;
 	grid[0][2] = EMPTY;

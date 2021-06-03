@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Bananacher.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bombup.h" />
     <ClInclude Include="Collider.h" />
@@ -94,9 +95,11 @@
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePowerUp.h" />
     <ClInclude Include="ModuleUI.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Pokapoka.h" />
     <ClInclude Include="RedFlower.h" />
+    <ClInclude Include="Saru.h" />
     <ClInclude Include="SceneBossFight.h" />
     <ClInclude Include="SceneInit.h" />
     <ClInclude Include="SceneIntro.h" />
@@ -116,10 +119,12 @@
     <ClInclude Include="SceneLevel3.1.h" />
     <ClInclude Include="SceneLevel3.h" />
     <ClInclude Include="SceneSelectLevel.h" />
+    <ClInclude Include="Snail.h" />
     <ClInclude Include="YellowFlower.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Bananacher.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bombup.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -137,9 +142,11 @@
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePowerUp.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Pokapoka.cpp" />
     <ClCompile Include="RedFlower.cpp" />
+    <ClCompile Include="Saru.cpp" />
     <ClCompile Include="SceneBossFight.cpp" />
     <ClCompile Include="SceneInit.cpp" />
     <ClCompile Include="SceneIntro.cpp" />
@@ -157,6 +164,7 @@
     <ClCompile Include="SceneLevel3.1.cpp" />
     <ClCompile Include="SceneLevel3.cpp" />
     <ClCompile Include="SceneSelectLevel.cpp" />
+    <ClCompile Include="Snail.cpp" />
     <ClCompile Include="YellowFlower.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
