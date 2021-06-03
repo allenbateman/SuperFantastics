@@ -7,6 +7,8 @@
 
 struct SDL_Texture;
 
+#define MAX_STAGES 3
+
 class SceneSelectLevel : public Module
 {
 public:

@@ -12,6 +12,7 @@
 #include "MiddleStructure.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleLevel.h"
+#include "SceneSelectLevel.h"
 
 #include <ctime>
 
@@ -169,6 +170,11 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
+	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->sceneSelectLevel, 60);
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 

@@ -109,6 +109,21 @@ Update_Status SceneSelectLevel::Update()
 
 	partAnimation.Update();
 
+	// DEBUGGING
+
+	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+	{
+		if (maxStage < MAX_STAGES) {
+			maxStage++;
+		}
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN)
+	{
+		maxStage = 0;
+		selectedStage = 0;
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
