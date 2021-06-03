@@ -263,7 +263,8 @@ Update_Status ModulePlayer::Update()
 				deathAnim.Reset();
 				currentAnimation = &deathAnim;
 				frameCounter = 0;
-			}else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
+			}
+			else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
 				
 				destroyed = true;
 				App->levelManager->gameState = ModuleLevel::MAIN_MENU;

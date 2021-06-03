@@ -55,6 +55,13 @@ Update_Status ModuleLevel::PreUpdate()
 	case LEVEL3:
 		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
+			gameState = LEVEL3X1;
+			transitionFinish = false;
+		}
+		break;
+	case LEVEL3X1:
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+		{
 			gameState = BOSS;
 			transitionFinish = false;
 		}
@@ -121,6 +128,15 @@ Update_Status ModuleLevel::Update()
 			LOG("Loading Level 3");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 60);
 			currentScene = (Module*)App->sceneLevel3;
+			transitionFinish = true;
+		}
+		break;
+	case LEVEL3X1:
+		if (currentScene != (Module*)App->sceneLevel3x1) {
+			//Load level
+			LOG("Loading Level 3.1");
+			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 60);
+			currentScene = (Module*)App->sceneLevel3x1;
 			transitionFinish = true;
 		}
 		break;

@@ -160,6 +160,9 @@
     <ClInclude Include="SceneInit.h">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="SceneLevel3.1.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -277,6 +280,9 @@
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
     <ClCompile Include="SceneInit.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLevel3.1.cpp">
       <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
   </ItemGroup>

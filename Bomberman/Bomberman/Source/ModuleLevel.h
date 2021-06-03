@@ -8,6 +8,7 @@
 #include "SceneLevel1.h"
 #include "SceneLevel2.h"
 #include "SceneLevel3.h"
+#include "SceneLevel3.1.h"
 #include "sceneBossFight.h"
 #include "SceneIntro.h"
 #include "ModuleInput.h"
@@ -31,7 +32,8 @@ public:
 		LEVEL1 = 3,
 		LEVEL2 = 4,
 		LEVEL3 = 5,
-		BOSS = 6	
+		LEVEL3X1 = 6,
+		BOSS = 7	
 	};
 	GameState gameState;
 
