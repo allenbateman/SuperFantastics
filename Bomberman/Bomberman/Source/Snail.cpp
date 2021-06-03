@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "SceneLevel2.h"
+#include "ModuleLevel.h"
 #include <ctime>
 
 Snail::Snail(int x, int y) : Entity (x, y)
@@ -60,7 +60,7 @@ Snail::Snail(int x, int y) : Entity (x, y)
 	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
 	colliderPosition.x = position.x;
 	colliderPosition.y = position.y + 16;
-	App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::EMPTY;
+	App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 }
 
 void Snail::Update()
@@ -83,7 +83,7 @@ void Snail::Update()
 
 			if (state != IDLE)
 			{
-				App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::EMPTY;
+				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 				if (direction == UP) position.y--;
 				else if (direction == DOWN) position.y++;
 				else if (direction == LEFT) position.x--;
@@ -92,7 +92,7 @@ void Snail::Update()
 				colliderPosition.x = position.x;
 				colliderPosition.y = position.y + 16;
 
-				App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::POKAPOKA;
+				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::POKAPOKA;
 			}
 		}
 
@@ -156,7 +156,7 @@ void Snail::CheckDirection()
 	int y = (colliderPosition.y - 32) / 16;
 
 	if (y != 10) {
-		if (App->sceneLevel2->grid[y + 1][x] == SceneLevel2::GridType::EMPTY)
+		if (App->levelManager->grid[y + 1][x] == Module::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = DOWN;
 			avaibleCount++;
@@ -166,7 +166,7 @@ void Snail::CheckDirection()
 	{
 		if (y != 5 && x != 6)
 		{
-			if (App->sceneLevel2->grid[y - 1][x] == SceneLevel2::GridType::EMPTY)
+			if (App->levelManager->grid[y - 1][x] == Module::GridType::EMPTY)
 			{
 				avaibleDirections[avaibleCount] = UP;
 				avaibleCount++;
@@ -175,14 +175,14 @@ void Snail::CheckDirection()
 	}
 	if (x != 0)
 	{
-		if (App->sceneLevel2->grid[y][x - 1] == SceneLevel2::GridType::EMPTY)
+		if (App->levelManager->grid[y][x - 1] == Module::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = LEFT;
 			avaibleCount++;
 		}
 	}
 	if (x != 12) {
-		if (App->sceneLevel2->grid[y][x + 1] == SceneLevel2::GridType::EMPTY)
+		if (App->levelManager->grid[y][x + 1] == Module::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = RIGHT;
 			avaibleCount++;

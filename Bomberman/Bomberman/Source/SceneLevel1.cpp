@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "MiddleStructure.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 
 #include <ctime>
 
@@ -151,7 +152,13 @@ bool SceneLevel1::Start()
 			}
 		}
 	}
-
+	for (int y = 0; y < gridHeight; y++)
+	{
+		for (int x = 0; x <gridWidth; x++)
+		{
+			App->levelManager->grid[y][x] = grid[y][x];
+		}
+	}
 	App->render->camera.x = 0; 
 	App->render->camera.y = 0;
 	App->player->SetSceneGrid(&grid[0][0], 13, 11);
@@ -160,15 +167,6 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	//if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-	//{
-	//	App->player->Disable();
-	//	App->entities->Disable();
-	//	App->collisions->Disable();
-
-	//	App->fade->FadeToBlack(this, (Module*)App->sceneLevel2, 60);
-	//}
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

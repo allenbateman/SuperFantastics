@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "SceneLevel2.h"
+#include "ModuleLevel.h"
 #include <ctime>
 
 Mouse::Mouse(int x, int y) : Entity(x, y)
@@ -39,7 +39,7 @@ Mouse::Mouse(int x, int y) : Entity(x, y)
 	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
 	colliderPosition.x = position.x;
 	colliderPosition.y = position.y + 16;
-	App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::EMPTY;
+	App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 
 }
 
@@ -63,7 +63,7 @@ void Mouse::Update()
 
 			if (state != IDLE)
 			{
-				App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::EMPTY;
+				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 				if (direction == UP) position.y--;
 				else if (direction == DOWN) position.y++;
 				else if (direction == LEFT) position.x--;
@@ -72,7 +72,7 @@ void Mouse::Update()
 				colliderPosition.x = position.x;
 				colliderPosition.y = position.y + 16;
 
-				App->sceneLevel2->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = SceneLevel2::GridType::POKAPOKA;
+				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::POKAPOKA;
 			}
 		}
 		break;
@@ -135,7 +135,7 @@ void Mouse::CheckDirection()
 	int y = (colliderPosition.y - 32) / 16;
 
 	if (y != 10) {
-		if (App->sceneLevel2->grid[y + 1][x] == SceneLevel2::GridType::EMPTY)
+		if (App->levelManager->grid[y + 1][x] == Module::GridType::EMPTY)
 		{
 			availableDirections[availableCount] = DOWN;
 			availableCount++;
@@ -145,7 +145,7 @@ void Mouse::CheckDirection()
 	{
 		if (y != 5 && x != 6)
 		{
-			if (App->sceneLevel2->grid[y - 1][x] == SceneLevel2::GridType::EMPTY)
+			if (App->levelManager->grid[y - 1][x] == Module::GridType::EMPTY)
 			{
 				availableDirections[availableCount] = UP;
 				availableCount++;
@@ -154,15 +154,14 @@ void Mouse::CheckDirection()
 	}
 	if (x != 0)
 	{
-		if (App->sceneLevel2->grid[y][x - 1] == SceneLevel2::GridType::EMPTY)
+		if (App->levelManager->grid[y][x - 1] ==  Module::GridType::EMPTY)
 		{
 			availableDirections[availableCount] = LEFT;
 			availableCount++;
 		}
 	}
 	if (x != 12) {
-		if (App->sceneLevel2->grid[y][x + 1] == SceneLevel2
-			::GridType::EMPTY)
+		if (App->levelManager->grid[y][x + 1]  == Module::GridType::EMPTY)
 		{
 			availableDirections[availableCount] = RIGHT;
 			availableCount++;

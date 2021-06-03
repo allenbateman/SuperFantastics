@@ -9,6 +9,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 #include "ModuleFonts.h"
 #include "SDL.h"
 #include "SceneLevel1.h"
@@ -115,7 +116,8 @@ Update_Status ModulePlayer::Update()
 			y = (collider->GetPos().y - 32) / 16;
 			x = (collider->GetPos().x - 24) / 16;
 
-			sceneGrid[y * sceneWidth + x] = Module::GridType::EMPTY;
+			App->levelManager->SetGridType(Module::GridType::PLAYER, position.y, position.x);
+
 			lastPos = position;
 			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT) {
 				position.x -= speed;
@@ -215,7 +217,7 @@ Update_Status ModulePlayer::Update()
 			//move collider
 			collider->SetPos(position.x, position.y);
 
-			App->sceneLevel1->SetGridType(SceneLevel1::GridType::PLAYER,collider->GetPos().y,collider->GetPos().x);
+			App->levelManager->SetGridType(Module::GridType::PLAYER, position.y, position.x);
 
 			//check border colliders
 			if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
@@ -225,8 +227,8 @@ Update_Status ModulePlayer::Update()
 			//Update grid 
 			if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
 			{
-				App->sceneLevel1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
-				App->sceneLevel1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
+				App->levelManager->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = Module::GridType::EMPTY;
+				App->levelManager->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = Module::GridType::PLAYER;
 			}
 
 			//Place Bomb
@@ -264,8 +266,7 @@ Update_Status ModulePlayer::Update()
 			}else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
 				
 				destroyed = true;
-				App->sceneLevel1->Disable();
-				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
+				App->levelManager->gameState = ModuleLevel::MAIN_MENU;
 			}
 
 			break;
@@ -282,7 +283,7 @@ Update_Status ModulePlayer::Update()
 				App->sceneLevel1->Disable();	
 				DisablePlayer();
 				//load nex level...
-				App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);		
+				App->levelManager->gameState = ModuleLevel::MAIN_MENU;
 			
 			}
 			break;

@@ -1,6 +1,6 @@
 #include "ModuleLevel.h"
-
-
+#include <string>
+#include <iostream>
 
 ModuleLevel::ModuleLevel(bool StartEnabled) : Module(StartEnabled)
 {
@@ -40,6 +40,8 @@ Update_Status ModuleLevel::Update()
 		break;
 	case MAIN_MENU:
 		if (currentScene != (Module*)App->sceneIntro) {
+
+			LOG("Loading MainMenu");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 60);
 			currentScene = (Module*)App->sceneIntro;
 		}		
@@ -53,15 +55,8 @@ Update_Status ModuleLevel::Update()
 
 		if (currentScene != (Module*)App->sceneLevel1)
 		{
-			//Copy level grid to general grid
-			for (int y = 0; y < App->sceneLevel1->gridHeight; y++)
-			{
-				for (int x = 0; x < App->sceneLevel1->gridWidth; x++)
-				{
-					grid[y][x] = App->sceneLevel1->grid[y][x];
-				}
-			}
 			//Load level
+			LOG("Loading Level 1");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 60);
 			currentScene = (Module*)App->sceneLevel1;
 		}
@@ -74,15 +69,8 @@ Update_Status ModuleLevel::Update()
 	case LEVEL2:
 
 		if (currentScene != (Module*)App->sceneLevel2) {
-			//Copy level grid to general grid
-			for (int y = 0; y < App->sceneLevel2->gridHeight; y++)
-			{
-				for (int x = 0; x < App->sceneLevel2->gridWidth; x++)
-				{
-					grid[y][x] = App->sceneLevel2->grid[y][x];
-				}
-			}
 			//Load level
+			LOG("Loading Level 2");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 60);
 			currentScene = (Module*)App->sceneLevel2;
 		}
@@ -94,15 +82,8 @@ Update_Status ModuleLevel::Update()
 		break;
 	case LEVEL3:
 		if (currentScene != (Module*)App->sceneLevel3) {
-			//Copy level grid to general grid
-			for (int y = 0; y < App->sceneLevel3->gridHeight; y++)
-			{
-				for (int x = 0; x < App->sceneLevel3->gridWidth; x++)
-				{
-					grid[y][x] = App->sceneLevel3->grid[y][x];
-				}
-			}
 			//Load level
+			LOG("Loading Level 3");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 60);
 			currentScene = (Module*)App->sceneLevel3;
 		}
@@ -114,14 +95,8 @@ Update_Status ModuleLevel::Update()
 		break;
 	case BOSS:
 		if (currentScene != (Module*)App->sceneBossFight) {
-			for (int y = 0; y < App->sceneBossFight->gridHeight; y++)
-			{
-				for (int x = 0; x < App->sceneBossFight->gridWidth; x++)
-				{
-					grid[y][x] = App->sceneBossFight->grid[y][x];
-				}
-			}
 			//Load level
+			LOG("Loading Level Boss");
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 60);
 			currentScene = (Module*)App->sceneBossFight;
 		}
@@ -140,9 +115,21 @@ Update_Status ModuleLevel::Update()
 
 bool ModuleLevel::CleanUp()
 {
+
+
 	if (currentScene != nullptr)
 	{
 		currentScene = nullptr;
 	}
 	return true;
+}
+
+ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIterantion)
+{
+	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIterantion];
+}
+
+ModuleLevel::GridType ModuleLevel::SetGridType(GridType type, int y, int x, int yIteration, int xIterantion)
+{
+	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIterantion] = type;
 }

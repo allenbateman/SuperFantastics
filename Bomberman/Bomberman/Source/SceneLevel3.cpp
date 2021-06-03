@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "MiddleStructure.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 
 #include <ctime>
 
@@ -152,6 +153,15 @@ bool SceneLevel3::Start()
 		}
 	}
 	*/
+
+	for (int y = 0; y < gridHeight; y++)
+	{
+		for (int x = 0; x < gridWidth; x++)
+		{
+			App->levelManager->grid[y][x] = grid[y][x];
+		}
+	}
+
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 

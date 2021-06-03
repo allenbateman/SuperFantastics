@@ -35,7 +35,10 @@ public:
 	};
 	GameState gameState;
 
+
 	GridType grid[MAX_SIZE][MAX_SIZE];
+	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
+	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 
 };
 #endif // __MODULE_LEVEL_H__

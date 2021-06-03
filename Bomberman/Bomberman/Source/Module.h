@@ -61,7 +61,7 @@ public:
 		SARU,
 		BANANACHER
 	};
-
+	inline const char* GridToString(GridType gridCell);
 private:
 	bool isEnabled = true;
 };

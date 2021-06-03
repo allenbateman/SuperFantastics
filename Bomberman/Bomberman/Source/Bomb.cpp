@@ -3,7 +3,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
-#include "SceneLevel1.h"
+#include "ModuleLevel.h"
 #include "ModuleCollisions.h"
 #include "p2Point.h"
 
@@ -157,8 +157,8 @@ void Bomb::Update()
 			// UP
 			for (int i = 0; i < range; i++) {
 				if (((position.y - 32) / 16) - (i + 1) >= 0) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, i - 1, 0) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, i - 1, 0) == Module::ROCK) {
 						break;
 					}
 
@@ -170,7 +170,7 @@ void Bomb::Update()
 					particle[index].x = position.x;
 					particle[index].y = position.y - (i * 16 + 16);
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, i - 1, 0) != Module::EMPTY)
 						break;
 				}
 			}
@@ -178,8 +178,8 @@ void Bomb::Update()
 			// DOWN
 			for (int i = 0; i < range; i++) {
 				if (((position.y - 32) / 16) + (i + 1) <= 10) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, i + 1, 0) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, i + 1, 0) == Module::ROCK) {
 						break;
 					}
 
@@ -191,7 +191,7 @@ void Bomb::Update()
 					particle[index].x = position.x;
 					particle[index].y = position.y + (i * 16 + 16);
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, i + 1, 0) != Module::EMPTY)
 						break;
 				}
 			}
@@ -199,8 +199,8 @@ void Bomb::Update()
 			// LEFT
 			for (int i = 0; i < range; i++) {
 				if (((position.x - 24) / 16) - (i + 1) >= 0) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i - 1) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, 0, i - 1) == Module::ROCK) {
 						break;
 					}
 
@@ -212,7 +212,7 @@ void Bomb::Update()
 					particle[index].x = position.x - (i * 16 + 16);
 					particle[index].y = position.y;
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i - 1) != Module::EMPTY)
 						break;
 				}
 			}
@@ -220,8 +220,8 @@ void Bomb::Update()
 			// RIGHT
 			for (int i = 0; i < range; i++) {
 				if (((position.x - 24) / 16) + (i + 1) <= 12) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i + 1) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, 0, i + 1) == Module::ROCK) {
 						break;
 					}
 
@@ -233,7 +233,7 @@ void Bomb::Update()
 					particle[index].x = position.x + (i * 16 + 16);
 					particle[index].y = position.y;
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i + 1) != Module::EMPTY)
 						break;
 				}
 			}
