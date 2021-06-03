@@ -1,4 +1,4 @@
-#include "SceneLevel3.h"
+#include "SceneLevel3.1.h"
 
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -15,18 +15,18 @@
 
 #include <ctime>
 
-SceneLevel3::SceneLevel3(bool startEnabled) : Module(startEnabled)
+SceneLevel3x1::SceneLevel3x1(bool startEnabled) : Module(startEnabled)
 {
 
 }
 
-SceneLevel3::~SceneLevel3()
+SceneLevel3x1::~SceneLevel3x1()
 {
 
 }
 
 // Load assets
-bool SceneLevel3::Start()
+bool SceneLevel3x1::Start()
 {
 	App->player->EnablePlayer();
 	App->entities->Enable();
@@ -40,11 +40,11 @@ bool SceneLevel3::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/Background3.png");
+	bgTexture = App->textures->Load("Assets/Sprites/Background3.1.png");
 	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	// Fixed positions
-	
+
 	for (int i = 0; i < 11; i++)
 	{
 		for (int j = 0; j < 13; j++)
@@ -152,7 +152,7 @@ bool SceneLevel3::Start()
 			}
 		}
 	}
-	
+
 
 	for (int y = 0; y < gridHeight; y++)
 	{
@@ -168,7 +168,7 @@ bool SceneLevel3::Start()
 	return ret;
 }
 
-Update_Status SceneLevel3::Update()
+Update_Status SceneLevel3x1::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 	{
@@ -178,14 +178,14 @@ Update_Status SceneLevel3::Update()
 		App->UI->Disable();
 
 
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel3x1, 60);
+		App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
-Update_Status SceneLevel3::PostUpdate()
+Update_Status SceneLevel3x1::PostUpdate()
 {
 	//Draw background
 	App->render->Blit(bgTexture, 0, 0, NULL);
@@ -193,7 +193,7 @@ Update_Status SceneLevel3::PostUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-bool SceneLevel3::CleanUp()
+bool SceneLevel3x1::CleanUp()
 {
 	App->player->Disable();
 	App->entities->Disable();
@@ -203,12 +203,12 @@ bool SceneLevel3::CleanUp()
 	return true;
 }
 
-SceneLevel3::GridType SceneLevel3::GetGridType(int y, int x, int yIteration, int xIteration)
+SceneLevel3x1::GridType SceneLevel3x1::GetGridType(int y, int x, int yIteration, int xIteration)
 {
 	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration];
 }
 
-SceneLevel3::GridType SceneLevel3::SetGridType(GridType type, int y, int x, int yIteration, int xIteration)
+SceneLevel3x1::GridType SceneLevel3x1::SetGridType(GridType type, int y, int x, int yIteration, int xIteration)
 {
 	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration] = type;
 }

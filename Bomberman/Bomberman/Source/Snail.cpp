@@ -1,69 +1,69 @@
-#include "CoreMechaWalker.h"
+#include "Snail.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleLevel.h"
 #include <ctime>
 
-CoreMechaWalker::CoreMechaWalker(int x, int y) : Entity(x, y)
+Snail::Snail(int x, int y) : Entity (x, y)
 {
 	position.x = x;
 	position.y = y;
 
-
-	// idle
-	idleAnim.PushBack({ 128, 64,32,32 });
+	idleAnim.PushBack({ 0,32,32,32 });
 	idleAnim.loop = true;
 	idleAnim.mustFlip = false;
 	idleAnim.speed = 0.1f;
 
-	// move up
-	upAnim.PushBack({ 192, 64,32,32 });
-	upAnim.PushBack({ 224, 64,32,32 });
-	upAnim.loop = true;
-	upAnim.mustFlip = false;
-	upAnim.speed = 0.1f;
-
 	// move down
-	downAnim.PushBack({ 128, 64,32,32 });
-	downAnim.PushBack({ 160, 64,32,32 });
+	downAnim.PushBack({ 0,32,32,32 });
+	downAnim.PushBack({ 32,32,32,32 });
+	downAnim.PushBack({ 64,32,32,32 });
 	downAnim.loop = true;
 	downAnim.mustFlip = false;
 	downAnim.speed = 0.1f;
 
 	// move left
-	leftAnim.PushBack({ 256, 64,32,32 });
-	leftAnim.PushBack({ 288, 64,32,32 });
-	leftAnim.PushBack({ 320, 64,32,32 });
+	leftAnim.PushBack({ 96,32,32,32 });
+	leftAnim.PushBack({ 128,32,32,32 });
+	leftAnim.PushBack({ 160,32,32,32 });
 	leftAnim.loop = true;
 	leftAnim.mustFlip = false;
 	leftAnim.speed = 0.1f;
 
+	// move up
+	upAnim.PushBack({ 192,32,32,32 });
+	upAnim.PushBack({ 224,32,32,32 });
+	upAnim.PushBack({ 256,32,32,32 });
+	upAnim.loop = true;
+	upAnim.mustFlip = false;
+	upAnim.speed = 0.1f;
+
 	// move right
-	rightAnim.PushBack({ 256, 64,32,32 });
-	rightAnim.PushBack({ 288, 64,32,32 });
-	rightAnim.PushBack({ 320, 64,32,32 });
+	rightAnim.PushBack({ 96,32,32,32 });
+	rightAnim.PushBack({ 128,32,32,32 });
+	rightAnim.PushBack({ 160,32,32,32 });
 	rightAnim.loop = true;
 	rightAnim.mustFlip = true;
 	rightAnim.speed = 0.1f;
 
 	// death
-	deathAnim.PushBack({ 352, 64,32,32 });
+	deathAnim.PushBack({ 288,32,32,32 });
+	deathAnim.PushBack({ 320,32,32,32 });
 	deathAnim.loop = false;
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
 
-	currentAnim = &idleAnim;
+	currentAnim = &rightAnim;
 	state = IDLE;
 	direction = RIGHT;
-	collider = App->collisions->AddCollider({ 8, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
-	colliderPosition.x = position.x + 8;
+	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
+	colliderPosition.x = position.x;
 	colliderPosition.y = position.y + 16;
-	App->levelManager->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = Module::GridType::EMPTY;
+	App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 }
 
-
-void CoreMechaWalker::Update()
+void Snail::Update()
 {
 	Entity::Update();
 
@@ -77,30 +77,27 @@ void CoreMechaWalker::Update()
 		break;
 
 	case Entity::MOVE:
-		awakeCount++;
-		if ((App->frameCounter % 2) && awakeCount > 30) {
+		if ((App->frameCounter % 2)) {
 
 			if ((colliderPosition.x - 24) % 16 == 0 && (colliderPosition.y - 32) % 16 == 0) CheckDirection();
 
 			if (state != IDLE)
 			{
-				if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
-				if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
-
 				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 				if (direction == UP) position.y--;
 				else if (direction == DOWN) position.y++;
 				else if (direction == LEFT) position.x--;
 				else if (direction == RIGHT) position.x++;
 
-				colliderPosition.x = position.x + 8;
+				colliderPosition.x = position.x;
 				colliderPosition.y = position.y + 16;
 
-				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::MECHA_WALKER;
+				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::POKAPOKA;
 			}
 		}
 
 		break;
+
 	case Entity::DEATH:
 		if (deathAnim.HasFinished() == true) SetToDelete();
 		break;
@@ -111,8 +108,44 @@ void CoreMechaWalker::Update()
 
 }
 
+void Snail::OnCollision(Collider* collider)
+{
+	if (collider->type == Collider::Type::EXPLOSION) {
+		state = DEATH;
+		currentAnim = &deathAnim;
+	}
+	if (collider->type == Collider::Type::ENEMY)
+	{
+		/*if (direction == UP) position.y++;
+		else if (direction == DOWN) position.y--;
+		else if (direction == LEFT) position.x++;
+		else if (direction == RIGHT) position.x--;*/
+		switch (direction)
+		{
+		case UP:
+			currentAnim = &downAnim;
+			direction = DOWN;
+			break;
 
-void CoreMechaWalker::CheckDirection()
+		case DOWN:
+			direction = UP;
+			currentAnim = &upAnim;
+			break;
+
+		case RIGHT:
+			direction = LEFT;
+			currentAnim = &leftAnim;
+			break;
+
+		case LEFT:
+			direction = RIGHT;
+			currentAnim = &rightAnim;
+			break;
+		}
+	}
+}
+
+void Snail::CheckDirection()
 {
 	Direction avaibleDirections[4];
 	int avaibleCount = 0;
@@ -164,7 +197,7 @@ void CoreMechaWalker::CheckDirection()
 	{
 		int randnum = rand() % (100);
 
-		if (randnum < 60) {
+		if (randnum < 90) {
 			canContinue = false;
 		}
 	}
@@ -173,7 +206,6 @@ void CoreMechaWalker::CheckDirection()
 	{
 		randDirection = rand() % avaibleCount;
 		direction = avaibleDirections[randDirection];
-
 
 		switch (direction)
 		{
@@ -194,41 +226,4 @@ void CoreMechaWalker::CheckDirection()
 	}
 	else state = IDLE;
 
-}
-
-void CoreMechaWalker::OnCollision(Collider* collider)
-{
-	if (collider->type == Collider::Type::EXPLOSION) {
-		state = DEATH;
-		currentAnim = &deathAnim;
-	}
-	if (collider->type == Collider::Type::ENEMY)
-	{
-		/*if (direction == UP) position.y++;
-		else if (direction == DOWN) position.y--;
-		else if (direction == LEFT) position.x++;
-		else if (direction == RIGHT) position.x--;*/
-		switch (direction)
-		{
-		case UP:
-			currentAnim = &downAnim;
-			direction = DOWN;
-			break;
-
-		case DOWN:
-			direction = UP;
-			currentAnim = &upAnim;
-			break;
-
-		case RIGHT:
-			direction = LEFT;
-			currentAnim = &leftAnim;
-			break;
-
-		case LEFT:
-			direction = RIGHT;
-			currentAnim = &rightAnim;
-			break;
-		}
-	}
 }

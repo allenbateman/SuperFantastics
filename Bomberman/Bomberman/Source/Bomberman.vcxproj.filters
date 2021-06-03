@@ -32,6 +32,9 @@
     <Filter Include="Source Files\Entities\Enviroment">
       <UniqueIdentifier>{76ccbadc-e24c-4a04-8c05-55675c19a2c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Modules\Gameplay\Levels">
+      <UniqueIdentifier>{f146998a-2a12-4f06-bccb-dee95eb05cef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -88,12 +91,6 @@
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="SceneLevel1.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneIntro.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleFonts.h">
       <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
@@ -106,9 +103,6 @@
     <ClInclude Include="Bomb.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Powerup.h">
-      <Filter>Source Files\Entities\Powerups</Filter>
-    </ClInclude>
     <ClInclude Include="Bombup.h">
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClInclude>
@@ -116,9 +110,6 @@
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClInclude>
     <ClInclude Include="ModuleEntities.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneInit.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="YellowFlower.h">
@@ -139,14 +130,38 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="SceneBossFight.h">
+    <ClInclude Include="Mouse.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Snail.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePowerUp.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLevel1.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
     <ClInclude Include="SceneLevel2.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
     <ClInclude Include="SceneLevel3.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneIntro.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLevel.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBossFight.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneInit.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLevel3.1.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClInclude>
     <ClInclude Include="SceneSelectLevel.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
@@ -201,12 +216,6 @@
     <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="SceneLevel1.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneIntro.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleFonts.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
@@ -219,9 +228,6 @@
     <ClCompile Include="Bomb.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Powerup.cpp">
-      <Filter>Source Files\Entities\Powerups</Filter>
-    </ClCompile>
     <ClCompile Include="Bombup.cpp">
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClCompile>
@@ -229,9 +235,6 @@
       <Filter>Source Files\Entities\Powerups</Filter>
     </ClCompile>
     <ClCompile Include="ModuleEntities.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneInit.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="YellowFlower.cpp">
@@ -252,14 +255,38 @@
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="SceneBossFight.cpp">
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Snail.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePowerUp.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLevel1.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
     <ClCompile Include="SceneLevel2.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
     <ClCompile Include="SceneLevel3.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneIntro.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLevel.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBossFight.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneInit.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLevel3.1.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
     <ClCompile Include="SceneSelectLevel.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>

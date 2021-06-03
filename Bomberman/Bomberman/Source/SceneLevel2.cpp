@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "MiddleStructure.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 
 #include <ctime>
 
@@ -39,54 +40,95 @@ bool SceneLevel2::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/BackGround2.png");
-	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	bgTexture = App->textures->Load("Assets/Sprites/Background2.png");
+	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f);
 
 	// Fixed positions
 
 	for (int i = 0; i < 11; i++)
 	{
-		for (int j = 0; j < 13; j++)
+		for (int j = 0; j < 28; j++)
 		{
 			grid[i][j] = EMPTY;
 		}
 	}
-
+	
 	for (int i = 1; i < 11; i += 2)
 	{
-		for (int j = 1; j < 13; j += 2)
+		for (int j = 1; j < 28; j += 2)
 		{
 			grid[i][j] = ROCK;
 		}
 	}
 
-	grid[0][1] = PLAYER;
-	grid[0][6] = POKAPOKA;
-	grid[10][6] = POKAPOKA;
-	grid[2][4] = RED_FLOWER;
-	grid[2][8] = RED_FLOWER;
-	grid[8][4] = RED_FLOWER;
-	grid[8][8] = RED_FLOWER;
-	grid[2][9] = MECHA_WALKER;
-	grid[8][3] = MECHA_WALKER;
-	grid[2][10] = ORB;
-	grid[8][2] = ORB;
-	grid[3][5] = STRUCTURE;
-	grid[3][6] = STRUCTURE;
-	grid[3][7] = STRUCTURE;
-	grid[4][5] = STRUCTURE;
-	grid[4][6] = WIN_SPOT;
-	grid[4][7] = STRUCTURE;
-	grid[5][5] = STRUCTURE;
-	grid[5][7] = STRUCTURE;
+	//Fixed rock positions
+	
+	grid[1][6] = ROCK;
+	grid[2][7] = ROCK;
+	grid[5][4] = ROCK;
+	grid[7][1] = ROCK;
+	grid[8][1] = ROCK;
+	grid[9][2] = ROCK;
+	grid[6][11] = ROCK;
+	grid[7][10] = ROCK;
+	grid[3][20] = ROCK;
+	grid[7][20] = ROCK;
+	grid[6][25] = ROCK;
+	grid[7][26] = ROCK;
+	grid[0][9] = ROCK;
+	grid[1][10] = ROCK;
+	grid[1][12] = ROCK;
+	grid[1][14] = ROCK;
+	grid[2][15] = ROCK;
+	grid[4][15] = ROCK;
+	grid[6][15] = ROCK;
+	grid[8][15] = ROCK;
+	grid[4][16] = ROCK;
+	grid[6][16] = ROCK;
+	grid[2][17] = ROCK;
+	grid[4][17] = ROCK;
+	grid[6][17] = ROCK;
+	grid[8][17] = ROCK;
+	grid[9][18] = ROCK;
+	grid[9][20] = ROCK;
+	grid[9][22] = ROCK;
+	grid[10][22] = ROCK;
+	grid[2][20] = ROCK;
+	grid[2][22] = ROCK;
+	grid[1][22] = ROCK;
+	grid[10][9] = ROCK;
+	grid[9][10] = ROCK;
+	grid[9][12] = ROCK;
+	grid[9][14] = ROCK;
 
-	int flowerAmount = rand() % 10 + 35;
+	//Entities + Win spot
+	grid[0][1] = PLAYER;
+	grid[2][6] = MOUSE;
+	grid[4][11] = SNAIL;
+	grid[9][26] = SNAIL;
+	grid[6][26] = RED_FLOWER;
+	grid[6][2] = MECHA_WALKER;
+	grid[6][14] = MECHA_WALKER;
+	grid[7][22] = MECHA_WALKER;
+	grid[8][2] = ORB;
+	grid[6][20] = ORB;
+	grid[1][25] = STRUCTURE;
+	grid[1][26] = STRUCTURE;
+	grid[1][27] = STRUCTURE;
+	grid[2][25] = STRUCTURE;
+	grid[2][26] = STRUCTURE;
+	grid[2][27] = STRUCTURE;
+	grid[3][25] = STRUCTURE;
+	grid[3][27] = STRUCTURE;
+	grid[2][26] = WIN_SPOT;
+
+	int flowerAmount = rand() % 55 + 70;
 	int x = 0;
 	int y = 0;
 
 	for (int i = 0; i < flowerAmount;)
 	{
-		x = rand() % 13;
+		x = rand() % 28;
 		y = rand() % 11;
 
 		if (grid[y][x] == EMPTY)
@@ -96,19 +138,35 @@ bool SceneLevel2::Start()
 		}
 	}
 
-	// Fixed empy positions
+	// Fixed empty/rock positions
 	grid[0][0] = EMPTY;
-	grid[0][2] = EMPTY;
+	grid[0][1] = EMPTY;
 	grid[1][0] = EMPTY;
 	grid[2][0] = EMPTY;
-	grid[4][6] = EMPTY;
-	grid[5][6] = EMPTY;
+	grid[3][15] = EMPTY;
+	grid[3][17] = EMPTY;
+	grid[5][15] = EMPTY;
+	grid[5][17] = EMPTY;
+	grid[7][15] = EMPTY;
+	grid[7][17] = EMPTY;
+	grid[10][10] = EMPTY;
+	grid[10][11] = EMPTY;
+	grid[10][12] = EMPTY;
+	grid[10][13] = EMPTY;
+	grid[10][14] = EMPTY;
+	grid[10][15] = EMPTY;
+	grid[0][10] = EMPTY;
+	grid[0][11] = EMPTY;
+	grid[0][12] = EMPTY;
+	grid[0][13] = EMPTY;
+	grid[0][14] = EMPTY;
+	grid[0][15] = EMPTY;
 
 	middleStructureIsSet = false;
 
-	// generate scene elements or rock collisions
+	// Generate scene entity or rock collisions
 	for (int i = 0; i < 11; i++) {
-		for (int j = 0; j < 13; j++)
+		for (int j = 0; j < 28; j++)
 		{
 			if (grid[i][j] == PLAYER)
 			{
@@ -141,9 +199,13 @@ bool SceneLevel2::Start()
 					middleStructureIsSet = true;
 				}
 			}
-			else if (grid[i][j] == POKAPOKA)
+			else if (grid[i][j] == SNAIL)
 			{
-				App->entities->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));
+			}
+			else if (grid[i][j] == MOUSE)
+			{
+				App->entities->AddEntity(Entity_Type::MOUSE, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == MECHA_WALKER)
 			{
@@ -151,25 +213,22 @@ bool SceneLevel2::Start()
 			}
 		}
 	}
-
+	for (int y = 0; y < gridHeight; y++)
+	{
+	for (int x = 0; x < gridWidth; x++)
+	{
+		App->levelManager->grid[y][x] = grid[y][x];
+	}
+	}
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+	App->player->SetSceneGrid(&grid[0][0], 28, 11);
 
 	return ret;
 }
 
 Update_Status SceneLevel2::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-	{
-		App->player->Disable();
-		App->entities->Disable();
-		App->collisions->Disable();
-		App->UI->Disable();
-
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel3, 60);
-	}
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

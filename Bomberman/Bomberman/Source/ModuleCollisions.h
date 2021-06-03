@@ -46,7 +46,7 @@ private:
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };
 
 	// The collision matrix. Defines the interaction for two collider types
-	// If set two false, collider 1 will ignore collider 2
+	// If set to false, collider 1 will ignore collider 2
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];
 
 	// Simple debugging flag to draw all colliders

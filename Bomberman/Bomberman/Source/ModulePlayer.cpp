@@ -9,6 +9,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 #include "ModuleFonts.h"
 #include "SDL.h"
 #include "SceneLevel1.h"
@@ -89,10 +90,11 @@ bool ModulePlayer::Start()
 	bombIsPlaced = App->audio->LoadFx("Assets/Fx/BomIsPlaced.wav");
 
 	destroyed = false;
-	death = false;
+	
+	isVisible = true;
 	frameCounter = 0;
     currentBombs = 1;
-	rangeExplosion = 3;
+	rangeExplosion = 1;
 	CollectedOrbs = false;
 	nOrbs = 0;
 
@@ -105,11 +107,17 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	int y = 0;
+	int x = 0;
 	frameCounter++;
 	switch (currentState){
 		case PlayerState::ALIVE:
 			//Movement
-			App->sceneLevel1->grid[(collider->GetPos().y - 32) / 16][(collider->GetPos().x - 24) / 16] = SceneLevel1::GridType::EMPTY;
+			y = (collider->GetPos().y - 32) / 16;
+			x = (collider->GetPos().x - 24) / 16;
+
+			App->levelManager->SetGridType(Module::GridType::PLAYER, position.y, position.x);
+
 			lastPos = position;
 			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT) {
 				position.x -= speed;
@@ -209,7 +217,7 @@ Update_Status ModulePlayer::Update()
 			//move collider
 			collider->SetPos(position.x, position.y);
 
-			App->sceneLevel1->SetGridType(SceneLevel1::GridType::PLAYER,collider->GetPos().y,collider->GetPos().x);
+			App->levelManager->SetGridType(Module::GridType::PLAYER, position.y, position.x);
 
 			//check border colliders
 			if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
@@ -219,8 +227,8 @@ Update_Status ModulePlayer::Update()
 			//Update grid 
 			if ((position.x - 24) % 16 == 0 && (position.y - 32 + 8) % 16 == 0)
 			{
-				App->sceneLevel1->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = SceneLevel1::GridType::EMPTY;
-				App->sceneLevel1->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = SceneLevel1::GridType::PLAYER;
+				App->levelManager->grid[(lastPos.x - 24) % 16][(lastPos.y - 32 + 8) % 16] = Module::GridType::EMPTY;
+				App->levelManager->grid[(position.x - 24) % 16][(position.y - 32 + 8) % 16] = Module::GridType::PLAYER;
 			}
 
 			//Place Bomb
@@ -255,11 +263,11 @@ Update_Status ModulePlayer::Update()
 				deathAnim.Reset();
 				currentAnimation = &deathAnim;
 				frameCounter = 0;
-			}else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
+			}
+			else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
 				
 				destroyed = true;
-				App->sceneLevel1->Disable();
-				App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
+				App->levelManager->gameState = ModuleLevel::MAIN_MENU;
 			}
 
 			break;
@@ -273,9 +281,10 @@ Update_Status ModulePlayer::Update()
 				
 				//save player status...
 				//Disable current level...
-				App->sceneLevel1->Disable();			
+				App->sceneLevel1->Disable();	
+				DisablePlayer();
 				//load nex level...
-				App->fade->FadeToBlack(this, (Module*)App->sceneBossFight, 60);		
+				App->levelManager->gameState = ModuleLevel::MAIN_MENU;
 			
 			}
 			break;
@@ -299,9 +308,22 @@ Update_Status ModulePlayer::PostUpdate()
 
 bool ModulePlayer::CleanUp()
 {
-
-
 	return true;
+}
+
+bool ModulePlayer::DisablePlayer()
+{
+	isVisible = false;
+	//collider->pendingToDelete = true;
+	//collider = nullptr;
+	return false;
+}
+
+bool ModulePlayer::EnablePlayer()
+{
+	isVisible = true;
+	//collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
+	return false;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)

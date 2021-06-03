@@ -1,25 +1,25 @@
-#ifndef __SCENE_BOSS_FIGHT_H__
-#define __SCENE_BOSS_FIGHT_H__
+#ifndef __SCENE_LEVEL3X1_H__
+#define __SCENE_LEVEL3X1_H__
 
 #include "Module.h"
 #include "Animation.h"
 
-#define LVL_BOSS_HEIGHT 11
-#define LVL_BOSS_WIDTH 13
+#define LVL_THREEONE_HEIGHT 11
+#define LVL_THREEONE_WIDTH 13
 
 struct SDL_Texture;
 
-class SceneBossFight : public Module
+class SceneLevel3x1 : public Module
 {
 private:
 
 
 public:
 	//Constructor
-	SceneBossFight(bool startEnabled);
+	SceneLevel3x1(bool startEnabled);
 
 	//Destructor
-	~SceneBossFight();
+	~SceneLevel3x1();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background
@@ -35,6 +35,7 @@ public:
 
 	// Disables the player and the enemies
 	bool CleanUp();
+
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 
@@ -42,10 +43,9 @@ public:
 
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
-	const int gridHeight = LVL_BOSS_HEIGHT, gridWidth = LVL_BOSS_WIDTH;
-	GridType grid[LVL_BOSS_HEIGHT][LVL_BOSS_WIDTH];
+	const int gridHeight = LVL_THREEONE_HEIGHT, gridWidth = LVL_THREEONE_WIDTH;
+	GridType grid[LVL_THREEONE_HEIGHT][LVL_THREEONE_WIDTH];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;
 };
-
 #endif

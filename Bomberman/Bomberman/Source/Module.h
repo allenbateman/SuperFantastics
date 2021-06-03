@@ -3,6 +3,7 @@
 
 #include "Globals.h"
 
+
 struct Collider;
 
 class Module
@@ -41,6 +42,26 @@ public:
 
 	inline bool IsEnabled() const { return isEnabled; }
 
+	enum GridType
+	{
+		EMPTY = 0,
+		PLAYER,
+		BOMB,
+		ROCK,
+		STRUCTURE,
+		ORB,
+		POKAPOKA,
+		MECHA_WALKER,
+		MOUSE,
+		SNAIL,
+		RED_FLOWER,
+		YELLOW_FLOWER,
+		WIN_SPOT,
+		POWER_UP, 
+		SARU,
+		BANANACHER
+	};
+	inline const char* GridToString(GridType gridCell);
 private:
 	bool isEnabled = true;
 };

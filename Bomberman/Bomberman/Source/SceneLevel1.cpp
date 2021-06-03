@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "MiddleStructure.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleLevel.h"
 
 #include <ctime>
 
@@ -40,7 +41,7 @@ bool SceneLevel1::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/background1.png");
-	//App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f);
 
 	// Fixed positions
 
@@ -151,25 +152,21 @@ bool SceneLevel1::Start()
 			}
 		}
 	}
-
-	App->render->camera.x = 0;
+	for (int y = 0; y < gridHeight; y++)
+	{
+		for (int x = 0; x <gridWidth; x++)
+		{
+			App->levelManager->grid[y][x] = grid[y][x];
+		}
+	}
+	App->render->camera.x = 0; 
 	App->render->camera.y = 0;
-
+	App->player->SetSceneGrid(&grid[0][0], 13, 11);
 	return ret;
 }
 
 Update_Status SceneLevel1::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-	{
-		App->player->Disable();
-		App->entities->Disable();
-		App->collisions->Disable();
-		App->UI->Disable();
-
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel2, 60);
-	}
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

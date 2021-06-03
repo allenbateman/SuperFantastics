@@ -3,8 +3,9 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
-#include "SceneLevel1.h"
+#include "ModuleLevel.h"
 #include "ModuleCollisions.h"
+#include "p2Point.h"
 
 Bomb::Bomb(int x, int y):Entity(x, y)
 {
@@ -106,24 +107,38 @@ void Bomb::Update()
 {
 	Entity::Update();
 
+	iPoint diff;
 	frameCounter++;
 
 	switch (state) {
 	case IDLE:
 
 		idleAnim.Update();
-		
+
+		diff.x = App->player->position.x - position.x;
+		diff.y = App->player->position.y - position.y;
+		if (diff.x < 0) diff.x *= -1;
+		if (diff.y < 0) diff.y *= -1;
+
 		// TODO: START SOUND
-		if (collider == nullptr && frameCounter > 45) collider = App->collisions->AddCollider({ 0,0,16,16 }, Collider::WALL);
+
+		if (collider!=nullptr) {
+			if (diff.x >= 16 && diff.y >= 16)
+			{
+				collider = App->collisions->AddCollider({ 0,0,16,16 }, Collider::WALL);
+			}
+		}
 		if (collider != nullptr) collider->SetPos(position.x, position.y);
 
 		if (frameCounter > 120) state = EXPLOSION;
 
+		
+		lastVal = collidingCounter;
 			
 		break;
 
 	case EXPLOSION:
-		collider->pendingToDelete = true;
+		if(collider!=nullptr) collider->pendingToDelete = true;
 		currentAnim = nullptr;
 
 		if (withColliders == false) {
@@ -142,8 +157,8 @@ void Bomb::Update()
 			// UP
 			for (int i = 0; i < range; i++) {
 				if (((position.y - 32) / 16) - (i + 1) >= 0) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, i - 1, 0) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, i - 1, 0) == Module::ROCK) {
 						break;
 					}
 
@@ -155,7 +170,7 @@ void Bomb::Update()
 					particle[index].x = position.x;
 					particle[index].y = position.y - (i * 16 + 16);
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i - 1, 0) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, i - 1, 0) != Module::EMPTY)
 						break;
 				}
 			}
@@ -163,8 +178,8 @@ void Bomb::Update()
 			// DOWN
 			for (int i = 0; i < range; i++) {
 				if (((position.y - 32) / 16) + (i + 1) <= 10) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, i + 1, 0) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, i + 1, 0) == Module::ROCK) {
 						break;
 					}
 
@@ -176,7 +191,7 @@ void Bomb::Update()
 					particle[index].x = position.x;
 					particle[index].y = position.y + (i * 16 + 16);
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, i + 1, 0) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, i + 1, 0) != Module::EMPTY)
 						break;
 				}
 			}
@@ -184,8 +199,8 @@ void Bomb::Update()
 			// LEFT
 			for (int i = 0; i < range; i++) {
 				if (((position.x - 24) / 16) - (i + 1) >= 0) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i - 1) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, 0, i - 1) == Module::ROCK) {
 						break;
 					}
 
@@ -197,7 +212,7 @@ void Bomb::Update()
 					particle[index].x = position.x - (i * 16 + 16);
 					particle[index].y = position.y;
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i - 1) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i - 1) != Module::EMPTY)
 						break;
 				}
 			}
@@ -205,8 +220,8 @@ void Bomb::Update()
 			// RIGHT
 			for (int i = 0; i < range; i++) {
 				if (((position.x - 24) / 16) + (i + 1) <= 12) {
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) == SceneLevel1::STRUCTURE ||
-						App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) == SceneLevel1::ROCK) {
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i + 1) == Module::STRUCTURE ||
+						App->levelManager->GetGridType(position.y, position.x, 0, i + 1) == Module::ROCK) {
 						break;
 					}
 
@@ -218,7 +233,7 @@ void Bomb::Update()
 					particle[index].x = position.x + (i * 16 + 16);
 					particle[index].y = position.y;
 
-					if (App->sceneLevel1->GetGridType(position.y, position.x, 0, i + 1) != SceneLevel1::EMPTY)
+					if (App->levelManager->GetGridType(position.y, position.x, 0, i + 1) != Module::EMPTY)
 						break;
 				}
 			}
@@ -232,7 +247,7 @@ void Bomb::Update()
 			leftExtrAnim.Update();
 			rightExtrAnim.Update();
 		}
-		if (frameCounter>180)SetToDelete();
+		if (frameCounter>150)SetToDelete();
 		state = EXPLOSION;
 		break;
 	/*case EXPLOSION:

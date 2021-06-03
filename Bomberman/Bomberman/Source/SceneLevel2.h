@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 
+#define LVL_TWO_HEIGHT 11
+#define LVL_TWO_WIDTH 28
+
 struct SDL_Texture;
 
 class SceneLevel2 : public Module
@@ -34,24 +37,6 @@ public:
 	bool CleanUp();
 
 
-
-	enum GridType
-	{
-		EMPTY = 0,
-		PLAYER,
-		BOMB,
-		ROCK,
-		STRUCTURE,
-		ORB,
-		POKAPOKA,
-		MECHA_WALKER,
-		MOUSE,
-		SNAIL,
-		RED_FLOWER,
-		YELLOW_FLOWER,
-		WIN_SPOT
-	};
-
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 
@@ -59,9 +44,12 @@ public:
 
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
-	GridType grid[11][13];
+	const int gridHeight = LVL_TWO_HEIGHT, gridWidth = LVL_TWO_WIDTH;
+	GridType grid[LVL_TWO_HEIGHT][LVL_TWO_WIDTH];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;
+
+	int numScene = 2;
 };
 
 #endif

@@ -15,6 +15,7 @@ public:
 	void CheckDirection();
 	
 	bool atack = false;
+	Direction lastDirection;
 
 private:
 	// The path that will define the position in the world

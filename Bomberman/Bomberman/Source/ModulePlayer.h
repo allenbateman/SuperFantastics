@@ -34,6 +34,8 @@ public:
 
 	bool CleanUp() override;
 
+	bool DisablePlayer();
+	bool EnablePlayer();
 
 
 	// Collision callback, called when the player intersects with another collider
@@ -72,11 +74,16 @@ public:
 	uint bombIsPlaced = 0;
 
 	// Font score index
-	uint score = 000;
+	uint score = 0;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 	int lifes = 3;
-	bool death = false;
+	
+	GridType* sceneGrid = nullptr;
+	int sceneWidth = 0;
+	int sceneHeight = 0;
+
+	bool isVisible = false;
 
 	enum class PlayerState {
 		ALIVE,
@@ -92,6 +99,8 @@ public:
 
 	int nOrbs = 0;
 	bool CollectedOrbs = false;
+
+	void SetSceneGrid(GridType* grid, int width, int height) { sceneGrid = grid; sceneWidth = width; sceneHeight = height; }
 };
 
 #endif //!__MODULE_PLAYER_H__

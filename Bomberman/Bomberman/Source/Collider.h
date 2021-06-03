@@ -13,6 +13,7 @@ struct Collider
 	{
 		NONE = -1,
 		WALL,
+		ORB,
 		YELLOW_FLOWER,
 		RED_FLOWER,
 		STRUCTURE,
@@ -23,7 +24,8 @@ struct Collider
 		BOMB,
 		EXPLOSION,
 		WIN,
-		MAX
+		MAX,
+		POWER_UP
 	};
 
 	//Methods

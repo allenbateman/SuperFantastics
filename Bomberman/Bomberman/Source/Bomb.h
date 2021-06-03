@@ -50,6 +50,8 @@ private:
 	State state = IDLE;
 	int frameSpawn = 0;
 	bool withColliders = false;
+	int collidingCounter = 0;
+	int lastVal;
 
 	Collider* colliderList[MAX_BOMB_COLLIDERS] = { nullptr };
 	Particle particle[MAX_BOMB_COLLIDERS];

@@ -40,7 +40,7 @@ void Module::OnCollision(Collider* c1, Collider* c2)
 
 }
 
-void Module::Enable()
+void Module::Enable() 
 {
 	if (!isEnabled)
 	{
@@ -57,3 +57,28 @@ void Module::Disable()
 		CleanUp();
 	}
 }
+
+inline const char* Module::GridToString(GridType gridCell)
+{
+	switch (gridCell)
+	{
+		case EMPTY:			return"EMPTY";
+		case PLAYER:		return"PLAYER";
+		case BOMB:			return"BOMB";
+		case ROCK:			return"ROCK";
+		case STRUCTURE:		return"STRUCTURE";
+		case ORB:			return"ORB";
+		case POKAPOKA:		return"POKAPOKA";
+		case MECHA_WALKER:  return"MECHA_WALKER";
+		case MOUSE:			return"MOUSE";
+		case SNAIL:			return"SNAIL";
+		case RED_FLOWER:	return"RED_FLOWER";
+		case YELLOW_FLOWER: return"YELLOW_FLOWER";
+		case WIN_SPOT:		return"WIN_SPOT";
+		case POWER_UP:		return"POWER_UP";
+		case SARU:			return"SARU";
+		case BANANACHER:	return"BANANACHER";
+		default:			return "[Unknown grid type]";
+	}
+}
+

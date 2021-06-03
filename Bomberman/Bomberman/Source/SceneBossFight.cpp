@@ -27,7 +27,7 @@ SceneBossFight::~SceneBossFight()
 // Load assets
 bool SceneBossFight::Start()
 {
-	App->player->Enable();
+	App->player->EnablePlayer();
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
@@ -90,15 +90,15 @@ bool SceneBossFight::Start()
 
 Update_Status SceneBossFight::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
-	{
-		App->player->Disable();
-		App->entities->Disable();
-		App->collisions->Disable();
-		App->UI->Disable();
+	//if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+	//{
+	//	App->player->Disable();
+	//	App->entities->Disable();
+	//	App->collisions->Disable();
+	//	App->UI->Disable();
 
-		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
-	}
+	//	App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 60);
+	//}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

@@ -13,7 +13,11 @@
 #include "MiddleStructure.h"
 #include "Pokapoka.h"
 #include "Bomb.h"
+#include "Bombup.h"
+#include "Fire.h"
 #include "CoreMechaWalker.h"
+#include "Mouse.h"
+#include "Snail.h"
 #include "ModulePlayer.h"
 
 #define SPAWN_MARGIN 50
@@ -32,7 +36,7 @@ ModuleEntities::~ModuleEntities()
 
 bool ModuleEntities::Start()
 {
-	//texture = App->textures->Load("Assets/Sprites/entities.png");
+	LOG("Loading Module Entities");
 	texture = App->textures->Load("Assets/Sprites/entities.png");
 	EntitieDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 	bombCount = 0;
@@ -83,12 +87,12 @@ Update_Status ModuleEntities::PostUpdate()
 			//check if player is behind or in front of any entity
 			if (App->player->position.y < entities[i]->position.y)
 			{
-				App->player->Draw();
+				if(App->player->isVisible)App->player->Draw();
 				entities[i]->Draw();
 			}
 			else {
 				entities[i]->Draw();
-				App->player->Draw();
+				if (App->player->isVisible)App->player->Draw();
 			}
 			
 		}
@@ -197,9 +201,21 @@ void ModuleEntities::SpawnEntity(const EntitySpawnpoint& info)
 				case Entity_Type::MECHA_WALKER:
 					entities[i] = new CoreMechaWalker(info.x, info.y);
 					break;
+				case Entity_Type::MOUSE:
+					entities[i] = new CoreMechaWalker(info.x, info.y);
+					break;
+				case Entity_Type::SNAIL:
+					entities[i] = new CoreMechaWalker(info.x, info.y);
+					break;
 				case Entity_Type::BOMB:
 					entities[i] = new Bomb(info.x, info.y);
 					bombCount++;
+					break;
+				case Entity_Type::BOMB_UP:
+					entities[i] = new Bombup(info.x, info.y);
+					break;
+				case Entity_Type::FIRE:
+					entities[i] = new Fire(info.x, info.y);
 					break;
 			}
 			entities[i]->texture = texture;

@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 
+#define LVL_THREE_HEIGHT 11
+#define LVL_THREE_WIDTH 13
+
 struct SDL_Texture;
 
 class SceneLevel3 : public Module
@@ -33,25 +36,6 @@ public:
 	// Disables the player and the enemies
 	bool CleanUp();
 
-
-
-	enum GridType
-	{
-		EMPTY = 0,
-		PLAYER,
-		BOMB,
-		ROCK,
-		STRUCTURE,
-		ORB,
-		POKAPOKA,
-		MECHA_WALKER,
-		MOUSE,
-		SNAIL,
-		RED_FLOWER,
-		YELLOW_FLOWER,
-		WIN_SPOT
-	};
-
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 
@@ -59,7 +43,8 @@ public:
 
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
-	GridType grid[11][13];
+	const int gridHeight = LVL_THREE_HEIGHT, gridWidth = LVL_THREE_WIDTH;
+	GridType grid[LVL_THREE_HEIGHT][LVL_THREE_WIDTH];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;
 };
