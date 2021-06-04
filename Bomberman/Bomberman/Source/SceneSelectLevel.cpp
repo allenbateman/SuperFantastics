@@ -28,6 +28,8 @@ bool SceneSelectLevel::Start()
 	App->UI->timeLevel = 5000;
 	App->UI->timeLeft = 300;
 
+	App->UI->StopTiming();
+
 	bool ret = true;
 
 	sheetTexture = App->textures->Load("Assets/Sprites/selectLevelSpritesheet.png");

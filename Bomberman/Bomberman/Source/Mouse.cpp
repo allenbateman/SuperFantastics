@@ -13,10 +13,10 @@ Mouse::Mouse(int x, int y) : Entity(x, y)
 	// animations
 
 	// idle
-	moveAnim.PushBack({ 0, 64, 32, 32 });
-	moveAnim.loop = true;
-	moveAnim.mustFlip = false;
-	moveAnim.speed = 0.1f;
+	idleAnim.PushBack({ 0, 64, 32, 32 });
+	idleAnim.loop = true;
+	idleAnim.mustFlip = false;
+	idleAnim.speed = 0.1f;
 
 	// move
 	moveAnim.PushBack({ 0, 64, 32, 32 });
@@ -39,6 +39,7 @@ Mouse::Mouse(int x, int y) : Entity(x, y)
 	collider = App->collisions->AddCollider({ 0, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
 	colliderPosition.x = position.x;
 	colliderPosition.y = position.y + 16;
+	drawOffset.x = -8;
 	App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 
 }

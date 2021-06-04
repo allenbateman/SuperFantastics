@@ -31,6 +31,7 @@ public:
 	SDL_Texture* powerupTex = nullptr;
 
 	void StartTiming() { startTiming = true; }
+	void StopTiming() { startTiming = false; }
 };
 
 #endif //!__MODULE_UI_H__

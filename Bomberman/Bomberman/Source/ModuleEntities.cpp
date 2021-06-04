@@ -202,10 +202,10 @@ void ModuleEntities::SpawnEntity(const EntitySpawnpoint& info)
 					entities[i] = new CoreMechaWalker(info.x, info.y);
 					break;
 				case Entity_Type::MOUSE:
-					entities[i] = new CoreMechaWalker(info.x, info.y);
+					entities[i] = new Mouse(info.x, info.y);
 					break;
 				case Entity_Type::SNAIL:
-					entities[i] = new CoreMechaWalker(info.x, info.y);
+					entities[i] = new Snail(info.x, info.y);
 					break;
 				case Entity_Type::BOMB:
 					entities[i] = new Bomb(info.x, info.y);

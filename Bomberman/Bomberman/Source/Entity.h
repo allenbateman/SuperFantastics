@@ -41,6 +41,7 @@ public:
 	// The current position in the world
 	iPoint position;
 	iPoint colliderPosition;
+	iPoint drawOffset = { 0, 0 };
 
 	Entity_Type type;
 

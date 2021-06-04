@@ -34,8 +34,8 @@ void Entity::Update()
 void Entity::Draw()
 {
 	if (currentAnim != nullptr) {
-		if (currentAnim->mustFlip==false) App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
-		else App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()), 1.0f, true, Horizontal);
+		if (currentAnim->mustFlip==false) App->render->Blit(texture, position.x + drawOffset.x, position.y + drawOffset.y, &(currentAnim->GetCurrentFrame()));
+		else App->render->Blit(texture, position.x + drawOffset.x, position.y + drawOffset.y, &(currentAnim->GetCurrentFrame()), 1.0f, true, Horizontal);
 	}
 }
 
