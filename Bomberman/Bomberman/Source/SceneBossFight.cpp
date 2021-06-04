@@ -43,6 +43,16 @@ bool SceneBossFight::Start()
 	bgTexture = App->textures->Load("Assets/Sprites/FinalBossMap.png");
 	App->audio->PlayMusic("Assets/Music/SceneBossFight.ogg", 1.0f);
 
+	//add bounding colliders
+	//Left collider
+	App->collisions->AddCollider({ 0,23,24,223 }, Collider::Type::BOUNDS);
+	//Right Collider
+	App->collisions->AddCollider({ 232,23,24,223 }, Collider::Type::BOUNDS);
+	//Top Collider
+	App->collisions->AddCollider({ 24,23,208,8 }, Collider::Type::BOUNDS);
+	//Bot collider 
+	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
+
 	// Fixed positions
 
 	for (int i = 0; i < 11; i++)
@@ -92,7 +102,13 @@ bool SceneBossFight::Start()
 			}
 		}
 	}
-
+	for (int y = 0; y < gridHeight; y++)
+	{
+		for (int x = 0; x < gridWidth; x++)
+		{
+			App->levelManager->grid[y][x] = grid[y][x];
+		}
+	}
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 

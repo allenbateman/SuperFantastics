@@ -13,7 +13,6 @@ ModuleLevel::~ModuleLevel()
 
 bool ModuleLevel::Start()
 {
-	transitionFinish = true;
 	gameState = INTRO;
 	currentScene = (Module*)App->sceneInit;
 	return true;
@@ -28,49 +27,42 @@ Update_Status ModuleLevel::PreUpdate()
 		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN )
 		{
 			gameState = MAIN_MENU;
-			transitionFinish = false;
 		}
 		break;
 	case MAIN_MENU:
 		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
 		{
 			gameState = LEVEL1;
-			transitionFinish = false;
 		}
 		break;
 	case LEVEL1:
 		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN )
 		{
 			gameState = LEVEL2;
-			transitionFinish = false;
 		}
 		break;
 	case LEVEL2:
 		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
 			gameState = LEVEL3;
-			transitionFinish = false;
 		}
 		break;
 	case LEVEL3:
 		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
 			gameState = LEVEL3X1;
-			transitionFinish = false;
 		}
 		break;
 	case LEVEL3X1:
 		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
 			gameState = BOSS;
-			transitionFinish = false;
 		}
 		break;
 	case BOSS:
 		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 		{
 			gameState = MAIN_MENU;
-			transitionFinish = false;
 		}
 		break;
 	default:
@@ -89,16 +81,21 @@ Update_Status ModuleLevel::Update()
 	case INTRO:
 		if (currentScene == nullptr ) {
 			currentScene = (Module*)App->sceneInit;
-			transitionFinish = true;
 		}
 		break;
 	case MAIN_MENU:
 		if (currentScene != (Module*)App->sceneIntro ) {
 
 			LOG("Loading MainMenu");
+			for (int y = 0; y < MAX_SIZE; y++)
+			{
+				for (int x = 0; x < MAX_SIZE; x++)
+				{
+					grid[y][x] = GridType::EMPTY;
+				}
+			}
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 60);
 			currentScene = (Module*)App->sceneIntro;
-			transitionFinish = true;
 		}
 		break;
 	case LEVEL1:
@@ -107,9 +104,15 @@ Update_Status ModuleLevel::Update()
 		{
 			//Load level
 			LOG("Loading Level 1");
+			for (int y = 0; y < MAX_SIZE; y++)
+			{
+				for (int x = 0; x < MAX_SIZE; x++)
+				{
+					grid[y][x] = GridType::EMPTY;
+				}
+			}
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 60);
 			currentScene = (Module*)App->sceneLevel1;
-			transitionFinish = true;
 		}
 		break;
 	case LEVEL2:
@@ -117,36 +120,60 @@ Update_Status ModuleLevel::Update()
 		if (currentScene != (Module*)App->sceneLevel2 ) {
 			//Load level
 			LOG("Loading Level 2");
+			for (int y = 0; y < MAX_SIZE; y++)
+			{
+				for (int x = 0; x < MAX_SIZE; x++)
+				{
+					grid[y][x] = GridType::EMPTY;
+				}
+			}
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 60);
 			currentScene = (Module*)App->sceneLevel2;
-			transitionFinish = true;
 		}
 		break;
 	case LEVEL3:
 		if (currentScene != (Module*)App->sceneLevel3 ) {
 			//Load level
 			LOG("Loading Level 3");
+			for (int y = 0; y < MAX_SIZE; y++)
+			{
+				for (int x = 0; x < MAX_SIZE; x++)
+				{
+					grid[y][x] = GridType::EMPTY;
+				}
+			}
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 60);
 			currentScene = (Module*)App->sceneLevel3;
-			transitionFinish = true;
 		}
 		break;
 	case LEVEL3X1:
 		if (currentScene != (Module*)App->sceneLevel3x1) {
 			//Load level
 			LOG("Loading Level 3.1");
+			for (int y = 0; y < MAX_SIZE; y++)
+			{
+				for (int x = 0; x < MAX_SIZE; x++)
+				{
+					grid[y][x] = GridType::EMPTY;
+				}
+			}
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 60);
 			currentScene = (Module*)App->sceneLevel3x1;
-			transitionFinish = true;
 		}
 		break;
 	case BOSS:
 		if (currentScene != (Module*)App->sceneBossFight) {
 			//Load level
 			LOG("Loading Level Boss");
+			for (int y = 0; y < MAX_SIZE; y++)
+			{
+				for (int x = 0; x < MAX_SIZE; x++)
+				{
+					grid[y][x] = GridType::EMPTY;
+				}
+			}
 			App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 60);
 			currentScene = (Module*)App->sceneBossFight;
-			transitionFinish = true;
 		}
 		break;
 	default:

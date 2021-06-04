@@ -25,7 +25,8 @@ struct Collider
 		EXPLOSION,
 		WIN,
 		MAX,
-		POWER_UP
+		POWER_UP,
+		BOUNDS
 	};
 
 	//Methods
