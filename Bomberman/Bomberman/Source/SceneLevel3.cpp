@@ -91,7 +91,7 @@ bool SceneLevel3::Start()
 	grid[6][7] = ROCK;
 	grid[1][10] = ROCK;
 
-	grid[1][6] = PLAYER;
+	grid[0][6] = PLAYER;
 	grid[2][10] = MOUSE;
 	grid[10][6] = POKAPOKA;
 	grid[8][2] = MOUSE;
@@ -121,9 +121,7 @@ bool SceneLevel3::Start()
 	// Fixed empty positions
 	grid[0][4] = EMPTY;
 	grid[0][5] = EMPTY;
-	grid[0][6] = EMPTY;
 	grid[0][7] = EMPTY;
-	grid[1][6] = EMPTY;
 	grid[1][11] = EMPTY;
 	grid[0][0] = EMPTY;
 	grid[0][1] = EMPTY;

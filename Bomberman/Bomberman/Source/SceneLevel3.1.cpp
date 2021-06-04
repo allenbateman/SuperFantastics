@@ -110,7 +110,7 @@ bool SceneLevel3x1::Start()
 	grid[4][11] = STRUCTURE;
 	grid[5][9] = STRUCTURE;
 	grid[5][11] = STRUCTURE;
-	grid[5][10] = WIN_SPOT;
+	grid[4][10] = WIN_SPOT;
 
 	int flowerAmount = rand() % 10 + 30;
 	int x = 0;
@@ -138,7 +138,6 @@ bool SceneLevel3x1::Start()
 	grid[0][6] = EMPTY;
 	grid[0][8] = EMPTY;
 	grid[2][0] = EMPTY;
-	grid[2][1] = EMPTY;
 	grid[2][2] = EMPTY;
 	grid[3][0] = EMPTY;
 	grid[5][10] = EMPTY;

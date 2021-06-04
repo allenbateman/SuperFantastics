@@ -82,6 +82,8 @@ public:
 	int sceneWidth = 0;
 	int sceneHeight = 0;
 
+	Module* currentScene = nullptr;
+
 	bool isVisible = false;
 
 	enum class PlayerState {

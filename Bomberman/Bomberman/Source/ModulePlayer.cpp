@@ -422,11 +422,27 @@ Update_Status ModulePlayer::Update()
 				
 				//save player status...
 				//Disable current level...
-				App->sceneLevel1->Disable();	
 				DisablePlayer();
-				//load nex level...
-				App->levelManager->gameState = ModuleLevel::MAIN_MENU;
-			
+				if (App->levelManager->currentScene = (Module*)App->sceneLevel1)
+				{
+					App->levelManager->gameState = ModuleLevel::LEVEL2;
+				}
+				if (App->levelManager->currentScene = (Module*)App->sceneLevel2)
+				{
+					App->levelManager->gameState = ModuleLevel::LEVEL3;
+				}
+				if (App->levelManager->currentScene = (Module*)App->sceneLevel3)
+				{
+					App->levelManager->gameState = ModuleLevel::LEVEL3X1;
+				}
+				if (App->levelManager->currentScene = (Module*)App->sceneLevel3x1)
+				{
+					App->levelManager->gameState = ModuleLevel::BOSS;
+				}
+				if (App->levelManager->currentScene = (Module*)App->sceneBossFight)
+				{
+					App->levelManager->gameState = ModuleLevel::INTRO;
+				}
 			}
 			break;
 		default:
