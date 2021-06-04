@@ -91,14 +91,14 @@ bool SceneBossFight::Start()
 			else if (grid[i][j] == ROCK)
 			{
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
-			}
+	 		}
 			else if (grid[i][j] == SARU)
 			{
-				App->entities->AddEntity(Entity_Type::SARU, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::SARU, 24 - 8 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == BANANACHER)
 			{
-				App->entities->AddEntity(Entity_Type::BANANACHER, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::BANANACHER, 24 -16+ (j * 16), 32 - 48 + (i * 16));
 			}
 		}
 	}

@@ -14,6 +14,7 @@ public:
 	void Update() override;
 	void OnCollision(Collider* collider) override;
 	void CheckDirection();
+	void SetToDelete() override;
 
 private:
 	// The path that will define the position in the world

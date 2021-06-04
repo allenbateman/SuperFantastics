@@ -20,7 +20,7 @@ Bananacher::Bananacher(int x, int y) : Entity(x, y)
 	downAnim.PushBack({ 704,0,48,64 });
 	downAnim.PushBack({ 752,0,48,64 });
 	downAnim.PushBack({ 800,0,48,64 });
-	downAnim.PushBack({ 840,0,48,64 });
+	downAnim.PushBack({ 848,0,48,64 });
 	downAnim.loop = true;
 	downAnim.mustFlip = false;
 	downAnim.speed = 0.1f;
@@ -33,7 +33,7 @@ Bananacher::Bananacher(int x, int y) : Entity(x, y)
 	leftAnim.PushBack({ 704,64,48,64 });
 	leftAnim.PushBack({ 752,64,48,64 });
 	leftAnim.PushBack({ 800,64,48,64 });
-	leftAnim.PushBack({ 840,64,48,64 });
+	leftAnim.PushBack({ 848,64,48,64 });
 	leftAnim.loop = true;
 	leftAnim.mustFlip = false;
 	leftAnim.speed = 0.1f;
@@ -46,7 +46,7 @@ Bananacher::Bananacher(int x, int y) : Entity(x, y)
 	rightAnim.PushBack({ 704,64,48,64 });
 	rightAnim.PushBack({ 752,64,48,64 });
 	rightAnim.PushBack({ 800,64,48,64 });
-	rightAnim.PushBack({ 840,64,48,64 });
+	rightAnim.PushBack({ 848,64,48,64 });
 	rightAnim.loop = true;
 	rightAnim.mustFlip = true;
 	rightAnim.speed = 0.1f;
@@ -58,7 +58,7 @@ Bananacher::Bananacher(int x, int y) : Entity(x, y)
 	leftAnim.PushBack({ 656,128,48,64 });
 	leftAnim.PushBack({ 704,128,48,64 });
 	leftAnim.PushBack({ 752,128,48,64 });
-	leftAnim.PushBack({ 800,128,48,64 });
+	leftAnim.PushBack({ 808,128,48,64 });
 	leftAnim.loop = true;
 	leftAnim.mustFlip = false;
 	leftAnim.speed = 0.1f;
@@ -91,23 +91,19 @@ void Bananacher::Update()
 		if ((App->frameCounter % 2)) {
 
 			if ((colliderPosition.x - 24) % 16 == 0 && (colliderPosition.y - 32) % 16 == 0) CheckDirection();
+			if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
+			if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
 
-			if (state != IDLE)
-			{
-				if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
-				if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
+			//App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
+			if (direction == UP) position.y--;
+			else if (direction == DOWN) position.y++;
+			else if (direction == LEFT) position.x--;
+			else if (direction == RIGHT) position.x++;
 
-				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
-				if (direction == UP) position.y--;
-				else if (direction == DOWN) position.y++;
-				else if (direction == LEFT) position.x--;
-				else if (direction == RIGHT) position.x++;
+			colliderPosition.x = position.x + 16;
+			colliderPosition.y = position.y + 48;
 
-				colliderPosition.x = position.x + 16;
-				colliderPosition.y = position.y + 48;
-
-				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::BANANACHER;
-			}
+			//App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::BANANACHER;
 		}
 
 		switch (direction)
@@ -233,5 +229,13 @@ void Bananacher::OnCollision(Collider* collider)
 		//state = DEATH;
 		life--;
 		//currentAnim = &deathAnim;
+	}
+}
+
+void Bananacher::SetToDelete() {
+	if (collider != nullptr)
+	{
+		collider->pendingToDelete = true;
+		collider = nullptr;
 	}
 }
