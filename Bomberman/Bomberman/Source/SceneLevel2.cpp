@@ -126,6 +126,14 @@ bool SceneLevel2::Start()
 	grid[7][22] = MECHA_WALKER;
 	grid[8][2] = ORB;
 	grid[6][20] = ORB;
+	grid[1][25] = STRUCTURE;
+	grid[1][26] = STRUCTURE;
+	grid[1][27] = STRUCTURE;
+	grid[2][25] = STRUCTURE;
+	grid[2][26] = STRUCTURE;
+	grid[2][27] = STRUCTURE;
+	grid[3][25] = STRUCTURE;
+	grid[3][27] = STRUCTURE;
 	grid[2][26] = WIN_SPOT;
 
 	int flowerAmount = rand() % 55 + 70;
@@ -168,6 +176,8 @@ bool SceneLevel2::Start()
 	grid[0][14] = EMPTY;
 	grid[0][15] = EMPTY;
 
+	middleStructureIsSet = false;
+
 	// Generate scene entity or rock collisions
 	for (int i = 0; i < 11; i++) {
 		for (int j = 0; j < 28; j++)
@@ -194,6 +204,14 @@ bool SceneLevel2::Start()
 			else if (grid[i][j] == ORB)
 			{
 				App->entities->AddEntity(Entity_Type::ORB, j, i);
+			}
+			else if (grid[i][j] == STRUCTURE)
+			{
+				if (!middleStructureIsSet)
+				{
+					App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
+					middleStructureIsSet = true;
+				}
 			}
 			else if (grid[i][j] == SNAIL)
 			{
