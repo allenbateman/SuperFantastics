@@ -235,39 +235,97 @@ Update_Status ModulePlayer::Update()
 			}
 
 
-
-
 			// Implement gamepad support
 
-			if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.left_x < 0.0f)
+			if (pad.left_x < 0.0f)
 			{
 				position.x -= speed;
-				currentAnimation = &leftAnim;
+				if (currentAnimation != &leftAnim)
+				{
+					leftAnim.Reset();
+					currentAnimation = &leftAnim;
+					currentIdleAnim = leftIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_LEFT;
+
+				if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y += speed;
+					isStuck = false;
+				}
 			}
 
-			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.left_x > 0.0f)
+			if (pad.left_x > 0.0f)
 			{
 				position.x += speed;
-				currentAnimation = &rightAnim;
+				if (currentAnimation != &rightAnim)
+				{
+					rightAnim.Reset();
+					currentAnimation = &rightAnim;
+					currentIdleAnim = rightIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_RIGHT;
+
+				if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.y += speed;
+					isStuck = false;
+				}
 			}
 
-			if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || pad.left_y > 0.0f)
+			if (pad.left_y > 0.0f)
 			{
 				position.y += speed;
 				if (currentAnimation != &downAnim)
 				{
 					downAnim.Reset();
 					currentAnimation = &downAnim;
+					currentIdleAnim = downIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_DOWN;
+
+				if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x += speed;
+					isStuck = false;
 				}
 			}
 
-			if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || pad.left_y < 0.0f)
+			if (pad.left_y < 0.0f)
 			{
 				position.y -= speed;
 				if (currentAnimation != &upAnim)
 				{
 					upAnim.Reset();
 					currentAnimation = &upAnim;
+					currentIdleAnim = upIdleAnim;
+				}
+				lastKeyPressed = SDL_SCANCODE_UP;
+
+				if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x -= speed;
+					isStuck = false;
+				}
+				else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT && isStuck)
+				{
+					position.x += speed;
+					isStuck = false;
 				}
 			}
 
@@ -287,7 +345,7 @@ Update_Status ModulePlayer::Update()
 			// If no movement detected, set the current animation back to idle
 			if (pad.enabled)
 			{
-				if (pad.left_x == 0.0f && pad.left_y == 0.0f) currentAnimation = &downIdleAnim;
+				if (pad.left_x == 0.0f && pad.left_y == 0.0f) currentAnimation = &currentIdleAnim;
 			}
 			
 			else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
