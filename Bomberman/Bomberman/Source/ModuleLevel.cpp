@@ -20,17 +20,19 @@ bool ModuleLevel::Start()
 
 Update_Status ModuleLevel::PreUpdate()
 {
+	// Get gamepad info
+	GamePad& pad = App->input->pads[0];
 
 	switch (gameState)
 	{
 	case INTRO:
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN )
+		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.a==true)
 		{
 			gameState = MAIN_MENU;
 		}
 		break;
 	case MAIN_MENU:
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.a == true)
 		{
 			gameState = LEVEL1;
 		}

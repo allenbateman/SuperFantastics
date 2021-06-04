@@ -237,7 +237,7 @@ Update_Status ModulePlayer::Update()
 
 			// Implement gamepad support
 
-			if (pad.left_x < 0.0f)
+			if (pad.left_x < 0.0f || pad.left == true)
 			{
 				position.x -= speed;
 				if (currentAnimation != &leftAnim)
@@ -260,7 +260,7 @@ Update_Status ModulePlayer::Update()
 				}
 			}
 
-			if (pad.left_x > 0.0f)
+			if (pad.left_x > 0.0f || pad.right == true)
 			{
 				position.x += speed;
 				if (currentAnimation != &rightAnim)
@@ -283,7 +283,7 @@ Update_Status ModulePlayer::Update()
 				}
 			}
 
-			if (pad.left_y > 0.0f)
+			if (pad.left_y > 0.0f || pad.down == true)
 			{
 				position.y += speed;
 				if (currentAnimation != &downAnim)
@@ -306,7 +306,7 @@ Update_Status ModulePlayer::Update()
 				}
 			}
 
-			if (pad.left_y < 0.0f)
+			if (pad.left_y < 0.0f || pad.up == true)
 			{
 				position.y -= speed;
 				if (currentAnimation != &upAnim)
@@ -373,7 +373,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//Place Bomb
-			if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN || pad.x == true)
 			{
 				if (App->entities->bombCount < currentBombs) {
 					App->entities->AddEntity(Entity_Type::BOMB, position.x, position.y);
