@@ -100,7 +100,7 @@ bool SceneLevel3::Start()
 	grid[5][10] = MECHA_WALKER;
 	grid[4][4] = ORB;
 	grid[6][8] = ORB;
-	grid[4][10] = WIN_SPOT;
+	grid[0][11] = WIN_SPOT;
 
 	int flowerAmount = rand() % 10 + 36;
 	int x = 0;
@@ -127,7 +127,6 @@ bool SceneLevel3::Start()
 	grid[0][1] = EMPTY;
 	grid[0][2] = EMPTY;
 	grid[0][10] = EMPTY;
-	grid[0][11] = EMPTY;
 	grid[0][12] = EMPTY;
 	grid[10][0] = EMPTY;
 	grid[10][1] = EMPTY;

@@ -423,23 +423,23 @@ Update_Status ModulePlayer::Update()
 				//save player status...
 				//Disable current level...
 				DisablePlayer();
-				if (App->levelManager->currentScene = (Module*)App->sceneLevel1)
+				if (App->levelManager->currentScene == (Module*)App->sceneLevel1)
 				{
 					App->levelManager->gameState = ModuleLevel::LEVEL2;
 				}
-				if (App->levelManager->currentScene = (Module*)App->sceneLevel2)
+				if (App->levelManager->currentScene == (Module*)App->sceneLevel2)
 				{
 					App->levelManager->gameState = ModuleLevel::LEVEL3;
 				}
-				if (App->levelManager->currentScene = (Module*)App->sceneLevel3)
+				if (App->levelManager->currentScene == (Module*)App->sceneLevel3)
 				{
 					App->levelManager->gameState = ModuleLevel::LEVEL3X1;
 				}
-				if (App->levelManager->currentScene = (Module*)App->sceneLevel3x1)
+				if (App->levelManager->currentScene == (Module*)App->sceneLevel3x1)
 				{
 					App->levelManager->gameState = ModuleLevel::BOSS;
 				}
-				if (App->levelManager->currentScene = (Module*)App->sceneBossFight)
+				if (App->levelManager->currentScene == (Module*)App->sceneBossFight)
 				{
 					App->levelManager->gameState = ModuleLevel::INTRO;
 				}
@@ -479,7 +479,6 @@ bool ModulePlayer::DisablePlayer()
 bool ModulePlayer::EnablePlayer()
 {
 	isVisible = true;
-	//collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
 	return false;
 }
 
