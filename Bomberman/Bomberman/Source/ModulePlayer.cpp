@@ -221,7 +221,7 @@ Update_Status ModulePlayer::Update()
 
 			//check border colliders
 			if (position.y < 32 || position.y > 192 || position.x < 24 || position.x > 216) {
-				position = lastPos;
+				//position = lastPos;
 			}
 
 			//Update grid 
@@ -328,6 +328,8 @@ bool ModulePlayer::EnablePlayer()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
+
+	//world element collision movement
     if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::YELLOW_FLOWER || c2->type == Collider::Type::STRUCTURE 
 		|| c2->type == Collider::Type::RED_FLOWER || c2->type == Collider::Type::ORB || c2->type == Collider::Type::BOMB)
 	{
@@ -388,6 +390,26 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				break;
 			 default:
 				break;
+		}
+		c1->SetPos(position.x, position.y);
+	}else if(c2->type == Collider::Type::BOUNDS){
+		switch (lastKeyPressed)
+		{
+		case SDL_SCANCODE_LEFT:
+			position.x += speed;
+			break;
+		case SDL_SCANCODE_RIGHT:
+			position.x -= speed;
+			break;
+		case SDL_SCANCODE_DOWN:
+			position.y -= speed;
+			break;
+		case SDL_SCANCODE_UP:
+			position.y += speed;
+
+			break;
+		default:
+			break;
 		}
 		c1->SetPos(position.x, position.y);
 	}
