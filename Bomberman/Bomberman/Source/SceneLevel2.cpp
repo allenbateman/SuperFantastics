@@ -43,6 +43,20 @@ bool SceneLevel2::Start()
 	bgTexture = App->textures->Load("Assets/Sprites/Background2.png");
 	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f);
 
+	//BoundColliders
+	//Left collider
+	App->collisions->AddCollider({ 0,23,24,223 }, Collider::Type::BOUNDS);
+
+	//Right Collider
+
+	//Collider 
+
+	//top river
+	App->collisions->AddCollider({ 167,32,241,32 }, Collider::Type::BOUNDS);
+	//botRiver
+	App->collisions->AddCollider({ 167,176,241,32 }, Collider::Type::BOUNDS);
+
+
 	// Fixed positions
 
 	for (int i = 0; i < 11; i++)
