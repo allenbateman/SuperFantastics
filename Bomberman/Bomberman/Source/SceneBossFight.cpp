@@ -94,11 +94,11 @@ bool SceneBossFight::Start()
 			}
 			else if (grid[i][j] == SARU)
 			{
-				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::SARU, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 			else if (grid[i][j] == BANANACHER)
 			{
-				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));
+				App->entities->AddEntity(Entity_Type::BANANACHER, 24 + (j * 16), 32 - 16 + (i * 16));
 			}
 		}
 	}

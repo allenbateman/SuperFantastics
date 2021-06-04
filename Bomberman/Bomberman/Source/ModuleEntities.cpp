@@ -20,6 +20,8 @@
 #include "Mouse.h"
 #include "Snail.h"
 #include "ModulePlayer.h"
+#include "Saru.h"
+#include "Bananacher.h"
 
 #define SPAWN_MARGIN 50
 
@@ -220,6 +222,12 @@ void ModuleEntities::SpawnEntity(const EntitySpawnpoint& info)
 					break;
 				case Entity_Type::FIRE:
 					entities[i] = new Fire(info.x, info.y);
+					break;
+				case Entity_Type::SARU:
+					entities[i] = new Saru(info.x, info.y);
+					break;
+				case Entity_Type::BANANACHER:
+					entities[i] = new Bananacher(info.x, info.y);
 					break;
 			}
 			entities[i]->texture = texture;

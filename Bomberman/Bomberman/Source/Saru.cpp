@@ -30,7 +30,7 @@ Saru::Saru(int x, int y) : Entity(x, y)
 	downAnim.PushBack({ 224, 160, 32, 32 });
 	downAnim.loop = true;
 	downAnim.mustFlip = false;
-	idleAnim.speed = 0.1f;
+	downAnim.speed = 0.1f;
 
 	// right
 	rightAnim.PushBack({ 192, 192, 32, 32 });

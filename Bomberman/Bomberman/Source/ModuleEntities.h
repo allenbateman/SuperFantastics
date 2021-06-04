@@ -20,6 +20,8 @@ enum class Entity_Type
 	BOMB,
 	FIRE,
 	BOMB_UP,
+	SARU,
+	BANANACHER
 };
 
 struct EntitySpawnpoint
