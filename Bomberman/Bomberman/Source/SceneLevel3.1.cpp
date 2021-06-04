@@ -200,6 +200,10 @@ bool SceneLevel3x1::Start()
 					middleStructureIsSet = true;
 				}
 			}
+			else if (grid[i][j] == WIN_SPOT)
+			{
+				App->entities->AddEntity(Entity_Type::WIN, j, i);
+			}
 			else if (grid[i][j] == POKAPOKA)
 			{
 				App->entities->AddEntity(Entity_Type::POKAPOKA, 24 + (j * 16), 32 - 16 + (i * 16));

@@ -100,8 +100,6 @@ bool SceneLevel3::Start()
 	grid[5][10] = MECHA_WALKER;
 	grid[4][4] = ORB;
 	grid[6][8] = ORB;
-
-
 	grid[4][10] = WIN_SPOT;
 
 	int flowerAmount = rand() % 10 + 36;
@@ -168,6 +166,10 @@ bool SceneLevel3::Start()
 			else if (grid[i][j] == ORB)
 			{
 				App->entities->AddEntity(Entity_Type::ORB, j, i);
+			}
+			else if (grid[i][j] == WIN_SPOT)
+			{
+				App->entities->AddEntity(Entity_Type::WIN, j, i);
 			}
 			else if (grid[i][j] == MOUSE)
 			{

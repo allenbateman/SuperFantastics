@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "SceneLevel1.h"
+#include "ModuleLevel.h"
 
 RedFlower::RedFlower(int x, int y) : Entity(x, y)
 {
@@ -41,7 +41,7 @@ void RedFlower::Update()
 		if (deathAnim.HasFinished() == true)
 		{
 			SetToDelete();
-			App->sceneLevel1->SetGridType(SceneLevel1::GridType::EMPTY, position.y, position.x, 0, 0);
+			App->levelManager->SetGridType(Module::GridType::EMPTY, position.y, position.x, 0, 0);
 		}
 		break;
 	}

@@ -53,9 +53,9 @@ bool SceneLevel1::Start()
 	App->collisions->AddCollider({ 232,23,24,223 }, Collider::Type::BOUNDS);
 	//Top Collider
 	App->collisions->AddCollider({ 24,23,208,8 }, Collider::Type::BOUNDS);
-	//Bot collider 
+	//Bot collider
 	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
-	// Fixed positions
+	//Fixed positions
 
 	for (int i = 0; i < 11; i++)
 	{
@@ -114,7 +114,6 @@ bool SceneLevel1::Start()
 	grid[0][2] = EMPTY;
 	grid[1][0] = EMPTY;
 	grid[2][0] = EMPTY;
-	grid[4][6] = EMPTY;
 	grid[5][6] = EMPTY;
 
 	middleStructureIsSet = false;
@@ -153,6 +152,10 @@ bool SceneLevel1::Start()
 					App->entities->AddEntity(Entity_Type::MIDDLE_STRUCTURE, j, i);
 					middleStructureIsSet = true;
 				}
+			}
+			else if (grid[i][j] == WIN_SPOT)
+			{
+				App->entities->AddEntity(Entity_Type::WIN, j, i);
 			}
 			else if (grid[i][j] == POKAPOKA)
 			{

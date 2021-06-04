@@ -213,6 +213,10 @@ bool SceneLevel2::Start()
 					middleStructureIsSet = true;
 				}
 			}
+			else if (grid[i][j] == WIN_SPOT)
+			{
+				App->entities->AddEntity(Entity_Type::WIN, j, i);
+			}
 			else if (grid[i][j] == SNAIL)
 			{
 				App->entities->AddEntity(Entity_Type::SNAIL, 24 + (j * 16), 32 - 16 + (i * 16));

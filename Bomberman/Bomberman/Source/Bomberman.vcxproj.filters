@@ -172,6 +172,9 @@
     <ClInclude Include="Bananacher.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="WinSpot.h">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -302,6 +305,9 @@
     </ClCompile>
     <ClCompile Include="Bananacher.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="WinSpot.cpp">
+      <Filter>Source Files\Entities\Enviroment</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

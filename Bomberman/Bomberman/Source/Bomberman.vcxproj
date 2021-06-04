@@ -120,6 +120,7 @@
     <ClInclude Include="SceneLevel3.h" />
     <ClInclude Include="SceneSelectLevel.h" />
     <ClInclude Include="Snail.h" />
+    <ClInclude Include="WinSpot.h" />
     <ClInclude Include="YellowFlower.h" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +166,7 @@
     <ClCompile Include="SceneLevel3.cpp" />
     <ClCompile Include="SceneSelectLevel.cpp" />
     <ClCompile Include="Snail.cpp" />
+    <ClCompile Include="WinSpot.cpp" />
     <ClCompile Include="YellowFlower.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

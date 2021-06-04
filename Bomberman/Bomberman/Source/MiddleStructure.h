@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity.h"
-#include "SceneLevel1.h"
 
 #define COLLIDERS 7
 
@@ -18,7 +17,5 @@ private:
 	Animation idleAnim, winAnim;
 
 	Collider* colliders[COLLIDERS] = {nullptr};
-	Collider* winCollider = nullptr;
-	bool winColliderSet = false;
 
 };
