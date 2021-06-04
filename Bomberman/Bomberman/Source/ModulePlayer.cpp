@@ -107,6 +107,9 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	// Get gamepad info
+	GamePad& pad = App->input->pads[0];
+
 	int y = 0;
 	int x = 0;
 	frameCounter++;
@@ -206,8 +209,88 @@ Update_Status ModulePlayer::Update()
 				}
 			}
 
+
+			// GAMEPAD SUPPORT
+			
+
+			// Moving the player with the camera scroll
+			// App->player->position.x += 1;
+
+			// Debug key for gamepad rumble testing purposes
+			if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN)
+			{
+				App->input->ShakeController(0, 12, 0.33f);
+			}
+
+			// Debug key for gamepad rumble testing purposes
+			if (App->input->keys[SDL_SCANCODE_2] == Key_State::KEY_DOWN)
+			{
+				App->input->ShakeController(0, 36, 0.66f);
+			}
+
+			// Debug key for gamepad rumble testing purposes
+			if (App->input->keys[SDL_SCANCODE_3] == Key_State::KEY_DOWN)
+			{
+				App->input->ShakeController(0, 60, 1.0f);
+			}
+
+
+
+
+			// Implement gamepad support
+
+			if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.left_x < 0.0f)
+			{
+				position.x -= speed;
+				currentAnimation = &leftAnim;
+			}
+
+			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.left_x > 0.0f)
+			{
+				position.x += speed;
+				currentAnimation = &rightAnim;
+			}
+
+			if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || pad.left_y > 0.0f)
+			{
+				position.y += speed;
+				if (currentAnimation != &downAnim)
+				{
+					downAnim.Reset();
+					currentAnimation = &downAnim;
+				}
+			}
+
+			if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || pad.left_y < 0.0f)
+			{
+				position.y -= speed;
+				if (currentAnimation != &upAnim)
+				{
+					upAnim.Reset();
+					currentAnimation = &upAnim;
+				}
+			}
+
+			/*if (App->input->keys[SDL_SCANCODE_SPACE] == KeyState::KEY_REPEAT || pad.a == true)
+			{
+				if (shotCountdown == 0)
+				{
+					Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+					newParticle->collider->AddListener(this);
+					App->audio->PlayFx(laserFx);
+					shotCountdown = shotMaxCountdown;
+				}
+			}*/
+
+
+
 			// If no movement detected, set the current animation back to idle
-			if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
+			if (pad.enabled)
+			{
+				if (pad.left_x == 0.0f && pad.left_y == 0.0f) currentAnimation = &downIdleAnim;
+			}
+			
+			else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
 				&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
 				&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
 				&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE

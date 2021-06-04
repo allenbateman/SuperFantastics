@@ -42,7 +42,6 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 	void Draw();
 
-
 public:
 	int lastKeyPressed = 0;
 	bool isStuck=false;
