@@ -476,25 +476,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 		c1->SetPos(position.x, position.y);
 	}else if(c2->type == Collider::Type::BOUNDS){
-		switch (lastKeyPressed)
-		{
-		case SDL_SCANCODE_LEFT:
-			position.x += speed;
-			break;
-		case SDL_SCANCODE_RIGHT:
-			position.x -= speed;
-			break;
-		case SDL_SCANCODE_DOWN:
-			position.y -= speed;
-			break;
-		case SDL_SCANCODE_UP:
-			position.y += speed;
-
-			break;
-		default:
-			break;
-		}
-		c1->SetPos(position.x, position.y);
+		position = lastPos;
 	}
 	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT || c2->type == Collider::Type::EXPLOSION)
 	{
