@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "SDL/include/SDL_Rect.h"
+#include "p2Point.h"
 
 struct SDL_Texture;
 struct SDL_Renderer;
@@ -54,10 +55,18 @@ public:
 	// A rectangle that represents the camera section
 	// Sprites will be rendered to the screen depending on the camera position
 	SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-
+	//boxes that move camera
+	int boxWidth = 50;
+	SDL_Rect leftBox = { 0,0,boxWidth,SCREEN_HEIGHT };
+	SDL_Rect rightBox = { SCREEN_WIDTH - boxWidth,0, boxWidth, SCREEN_HEIGHT };
+	iPoint GetCenterRectPos(SDL_Rect rect);
+	iPoint SetCenterRectPos(SDL_Rect rect);
 	// The speed at which the camera will be moving
 	int cameraSpeed = 3;
+	bool debug = false;
+	SDL_Rect* levelBounds = nullptr;
 
+	//level2 w = 512 h = 224
 };
 
 #endif //__MODULE_RENDER_H__

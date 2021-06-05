@@ -5,6 +5,8 @@
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
+#include "Collider.h"
 
 #include "SDL/include/SDL_render.h"
 
@@ -36,9 +38,11 @@ bool ModuleRender::Init()
 		LOG("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-
+	debug = false;
 	// Set render logical size
 	// SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);		// Uncomment previous for fullscreen
+	
+	levelBounds = new SDL_Rect{ 0,0,1556,224 };
 
 	return ret;
 }
@@ -57,11 +61,36 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
+	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN)
+		debug = !debug;
+
+	//camera scroll
+	if (levelBounds != nullptr && App->player->IsEnabled())
+	{
+		//right box detection
+		if (App->player->position.x > rightBox.x && camera.x + camera.w < levelBounds->w )
+		{
+			camera.x += cameraSpeed;
+			leftBox.x += App->player->speed;
+			rightBox.x += App->player->speed;
+		}
+		if (App->player->position.x + App->player->collider->rect.w < leftBox.x + leftBox.w && camera.x > levelBounds->x  )
+		{
+			camera.x -= cameraSpeed;
+			leftBox.x -= App->player->speed;
+			rightBox.x -= App->player->speed;
+		}
+	}
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModuleRender::PostUpdate()
 {
+
+	if (debug) {
+		DrawQuad(leftBox, 255, 255, 255, 50);
+		DrawQuad(rightBox, 255, 255, 255, 50);
+	}
 	// Update the screen
 	SDL_RenderPresent(renderer);
 
@@ -72,6 +101,11 @@ bool ModuleRender::CleanUp()
 {
 	LOG("Destroying renderer");
 
+	if (levelBounds != nullptr)
+	{
+		delete levelBounds;
+		levelBounds = nullptr;
+	}
 	// Destroy the rendering context
 	if (renderer != nullptr)
 		SDL_DestroyRenderer(renderer);
@@ -137,4 +171,36 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	}
 
 	return ret;
+}
+
+iPoint ModuleRender::GetCenterRectPos(SDL_Rect rect)
+{
+	int x1, x2, x3, x4;
+	int y1, y2, y3, y4;
+	iPoint center;
+	//
+	//  1---2
+	//  |   |
+	//	3---4
+	//
+	x1 = rect.x;
+	x2 = rect.x + rect.w;
+	x3 = rect.x;
+	x4 = rect.x + rect.w;
+
+	y1 = rect.y;
+	y2 = rect.y;
+	y3 = rect.y + rect.h;
+	y4 = rect.y + rect.h;
+
+	center.x = (x1 + x2 + x3 + x4) / 4;
+	center.y = (y1 + y2 + y3 + y4) / 4;
+
+
+	return center;
+}
+
+iPoint ModuleRender::SetCenterRectPos(SDL_Rect rect)
+{
+	return iPoint();
 }

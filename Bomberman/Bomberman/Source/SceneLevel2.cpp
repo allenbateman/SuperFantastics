@@ -237,6 +237,7 @@ bool SceneLevel2::Start()
 		App->levelManager->grid[y][x] = grid[y][x];
 	}
 	}
+	
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	App->player->SetSceneGrid(&grid[0][0], 28, 11);
