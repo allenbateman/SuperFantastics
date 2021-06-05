@@ -3,6 +3,7 @@
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
 #include "ModuleTextures.h"
+#include "ModuleAudio.h"
 
 Fire::Fire(int x, int y) : Entity(x, y)
 {
@@ -27,6 +28,9 @@ void Fire::OnCollision(Collider* collider)
 		if (MAX_RANGE_EXPLOSION > App->player->rangeExplosion)
 		{
 			App->player->rangeExplosion += range;
+			
+			upgrade = App->audio->LoadFx("Assets/Fx/21UpgradeAcquired.wav");
+			App->audio->PlayFx(upgrade, 0);
 		}
 		SetToDelete();
 	}

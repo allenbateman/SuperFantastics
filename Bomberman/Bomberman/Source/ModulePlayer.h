@@ -70,7 +70,7 @@ public:
 	bool destroyed = false;
 
 	// Sound effects indices
-	uint bombIsPlaced = 0;
+	uint bomb = 0;
 
 	// Font score index
 	uint score = 0;

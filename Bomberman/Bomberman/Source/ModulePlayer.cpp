@@ -87,7 +87,7 @@ bool ModulePlayer::Start()
 	currentIdleAnim = downIdleAnim;
 	currentAnimation = &downAnim;
 
-	bombIsPlaced = App->audio->LoadFx("Assets/Fx/17BombIsPlaced.wav");
+	bomb = App->audio->LoadFx("Assets/Fx/19Bomb.wav");
 
 	destroyed = false;
 	
@@ -378,7 +378,7 @@ Update_Status ModulePlayer::Update()
 			{
 				if (App->entities->bombCount < currentBombs) {
 					App->entities->AddEntity(Entity_Type::BOMB, position.x, position.y);
-					App->audio->PlayFx(bombIsPlaced);
+					App->audio->PlayFx(bomb);
 				}
 			}
 

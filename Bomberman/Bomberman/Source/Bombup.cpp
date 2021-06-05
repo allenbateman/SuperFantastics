@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
 #include "SceneLevel1.h"
+#include "ModuleAudio.h"
 
 Bombup::Bombup(int x, int y) : Entity(x, y)
 {
@@ -28,6 +29,9 @@ void Bombup::OnCollision(Collider* collider)
 		if (MAX_BOMBS > App->player->currentBombs)
 		{
 			App->player->currentBombs++;
+
+			upgrade = App->audio->LoadFx("Assets/Fx/21UpgradeAcquired.wav");
+			App->audio->PlayFx(upgrade, 0);
 		}
 		SetToDelete();
 	}

@@ -8,6 +8,9 @@ public:
 	void OnCollision(Collider* collider) override;
 	int timeOut;
 	int range = 1;
+
+	uint upgrade = 0;
+
 private:
 	Animation idleAnim;
 };
