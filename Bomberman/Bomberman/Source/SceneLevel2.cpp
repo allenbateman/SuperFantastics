@@ -107,8 +107,8 @@ bool SceneLevel2::Start()
 	grid[9][20] = ROCK;
 	grid[9][22] = ROCK;
 	grid[10][22] = ROCK;
-	grid[2][20] = ROCK;
-	grid[2][22] = ROCK;
+	grid[1][18] = ROCK;
+	grid[1][20] = ROCK;
 	grid[1][22] = ROCK;
 	grid[10][9] = ROCK;
 	grid[9][10] = ROCK;
