@@ -34,7 +34,7 @@ bool SceneSelectLevel::Start()
 
 	sheetTexture = App->textures->Load("Assets/Sprites/selectLevelSpritesheet.png");
 	//	App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f); (copied from sceneIntro.cpp, maybe not useful here)
-	App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/05StageSelect.ogg", 1.0f);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

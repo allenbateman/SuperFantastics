@@ -87,7 +87,7 @@ bool ModulePlayer::Start()
 	currentIdleAnim = downIdleAnim;
 	currentAnimation = &downAnim;
 
-	bombIsPlaced = App->audio->LoadFx("Assets/Fx/BomIsPlaced.wav");
+	bombIsPlaced = App->audio->LoadFx("Assets/Fx/17BombIsPlaced.wav");
 
 	destroyed = false;
 	
