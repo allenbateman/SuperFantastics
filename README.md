@@ -5,7 +5,7 @@ Game Development - Project I - Recreation of an arcade game.
 
 Bomberman is a game where the player must deploy bombs to destroy enemies and structures. Being able to pickup powerups and being more effective.
 
-The player, following the story line, will travel arround different biomas and fighting new enemies.
+The player, following the story line, will travel arround different biomes and fighting new enemies.
 
 ## Controls
 
