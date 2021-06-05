@@ -29,6 +29,11 @@ public:
 	
 	SDL_Texture* numTex  = nullptr;
 	SDL_Texture* powerupTex = nullptr;
+	SDL_Texture* uiTex = nullptr;
+
+	p2Point<int> orbPos = { 56, 8 };
+	SDL_Rect orbRect = { 0,24,8,16 };
+	SDL_Rect deletedOrbRect = { 8,24,8,16 };
 
 	void StartTiming() { startTiming = true; }
 	void StopTiming() { startTiming = false; }

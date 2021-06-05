@@ -40,6 +40,8 @@ public:
 	};
 	GameState gameState;
 	GridType grid[MAX_SIZE][MAX_SIZE];
+	int orbCount = 0;
+	int orbsLeft = 0;
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 	int frameCounter = 0;

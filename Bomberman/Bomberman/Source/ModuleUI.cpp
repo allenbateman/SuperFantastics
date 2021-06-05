@@ -5,6 +5,8 @@
 #include "ModuleAudio.h"
 #include "ModuleEntities.h"
 #include "ModulePlayer.h"
+#include "ModuleLevel.h"
+
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 }
@@ -17,6 +19,7 @@ bool ModuleUI::Start()
 {
 	numTex = App->textures->Load("Assets/Fonts/interface.png");
 	powerupTex = App->textures->Load("Assets/Sprites/Power_Ups.png");
+	uiTex = App->textures->Load("Assets/Sprites/Ui.png");
 	initialFrame = 0;
 	return true;
 }
@@ -26,6 +29,10 @@ Update_Status ModuleUI::Update()
 	if (startTiming) {
 		time = (App->frameCounter - initialFrame) / 60;
 		timeLeft = timeLevel - time;
+
+		if (timeLeft <= 0) {
+			App->levelManager->RetunrToMainMenu();
+		}
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -68,6 +75,16 @@ Update_Status ModuleUI::PostUpdate(){
 	App->render->Blit(numTex, 40, y, &rec);
 	
 	//draw Orbs
+	for (int i = 0; i < App->levelManager->orbCount; i++)
+	{
+		if (i < App->levelManager->orbsLeft)
+		{
+			App->render->Blit(uiTex, orbPos.x + i * 8, orbPos.y, &orbRect);
+		}
+		else {
+			App->render->Blit(uiTex, orbPos.x + i * 8, orbPos.y, &deletedOrbRect);
+		}
+	}
 
 	return  Update_Status::UPDATE_CONTINUE;
 }

@@ -28,6 +28,9 @@ bool SceneSelectLevel::Start()
 	App->UI->timeLevel = 5000;
 	App->UI->timeLeft = 300;
 
+	App->levelManager->orbCount = 0;
+	App->levelManager->orbsLeft = 0;
+
 	App->UI->StopTiming();
 
 	bool ret = true;

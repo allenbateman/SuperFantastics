@@ -40,6 +40,9 @@ bool SceneLevel2::Start()
 	App->UI->timeLeft = timeLevel;
 	App->UI->timeLevel = timeLevel;
 
+	App->levelManager->orbCount = 3;
+	App->levelManager->orbsLeft = 3;
+
 	LOG("Loading background assets");
 
 	bool ret = true;
