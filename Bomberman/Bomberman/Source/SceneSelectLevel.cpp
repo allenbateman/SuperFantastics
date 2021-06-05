@@ -51,8 +51,8 @@ bool SceneSelectLevel::Start()
 	partAnimation.speed = 0.1f;
 
 	selectedLevelPoints[0].create(43, 55);
-	selectedLevelPoints[1].create(51, 75);
-	selectedLevelPoints[2].create(94, 79);
+	selectedLevelPoints[1].create(94, 79);
+	selectedLevelPoints[2].create(51, 75);
 
 	return ret;
 }
@@ -152,9 +152,16 @@ Update_Status SceneSelectLevel::PostUpdate()
 	}
 
 	SDL_Rect rect = partAnimation.GetCurrentFrame();
-	App->render->Blit(sheetTexture, 52, 56, &rect);
-	App->render->Blit(sheetTexture, 60, 76, &rect);
-	App->render->Blit(sheetTexture, 103, 80, &rect);
+
+	switch (maxStage) {
+	case 1:
+		App->render->Blit(sheetTexture, 52, 56, &rect);
+	case 2:
+		App->render->Blit(sheetTexture, 103, 80, &rect);
+	case 3:
+		App->render->Blit(sheetTexture, 60, 76, &rect);
+	}
+	
 
 	if (!exit) {
 		stageNumberRect.x = selectedStage * 16;
