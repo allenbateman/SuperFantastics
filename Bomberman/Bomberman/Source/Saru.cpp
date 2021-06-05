@@ -191,7 +191,7 @@ void Saru::CheckDirection()
 
 	int changeCount = 0;
 
-	// quiero llorar, no entra en ningun for xD
+	// quiero llorar, no entra en ningun for xD-------------------------------------------------------
 	if (colliderPosition.x > playerPos.x) {
 		for (int i = 0; i < avaibleCount; i++)
 		{
@@ -222,12 +222,14 @@ void Saru::CheckDirection()
 	}
 	else {
 		for (int i = 0; i < avaibleCount; i++)
+		{
 			if (avaibleDirections[avaibleCount] == DOWN) {
 				direction = avaibleDirections[avaibleCount];
 				changeCount++;
 			}
+		}
 	}
-
+	//-----------------------------------------------------------------------------------------------
 	
 
 	switch (direction)

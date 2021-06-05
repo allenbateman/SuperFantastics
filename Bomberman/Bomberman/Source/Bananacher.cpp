@@ -52,16 +52,16 @@ Bananacher::Bananacher(int x, int y) : Entity(x, y)
 	rightAnim.speed = 0.1f;
 
 	// up
-	leftAnim.PushBack({ 512,128,48,64 });
-	leftAnim.PushBack({ 560,128,48,64 });
-	leftAnim.PushBack({ 608,128,48,64 });
-	leftAnim.PushBack({ 656,128,48,64 });
-	leftAnim.PushBack({ 704,128,48,64 });
-	leftAnim.PushBack({ 752,128,48,64 });
-	leftAnim.PushBack({ 808,128,48,64 });
-	leftAnim.loop = true;
-	leftAnim.mustFlip = false;
-	leftAnim.speed = 0.1f;
+	upAnim.PushBack({ 512,128,48,64 });
+	upAnim.PushBack({ 560,128,48,64 });
+	upAnim.PushBack({ 608,128,48,64 });
+	upAnim.PushBack({ 656,128,48,64 });
+	upAnim.PushBack({ 704,128,48,64 });
+	upAnim.PushBack({ 752,128,48,64 });
+	upAnim.PushBack({ 800,128,48,64 });
+	upAnim.loop = true;
+	upAnim.mustFlip = false;
+	upAnim.speed = 0.1f;
 
 	//improve death anim spritesheet pq que pereza
 
@@ -186,20 +186,64 @@ void Bananacher::CheckDirection()
 	}
 
 	//----------------------------BANANACHER MOVEMENT---------------------------
-
 	iPoint playerPos = App->player->position;
-	int difX = colliderPosition.x - playerPos.x;
-	int difY = colliderPosition.y - playerPos.y;
+	iPoint diff;
 
-	direction = NONE;
-	
-	
+	diff.x = colliderPosition.x - playerPos.x;
+	diff.y = colliderPosition.y - playerPos.y;
+	if (diff.x < 0) diff.x *= -1;
+	if (diff.y < 0) diff.y *= -1;
 
-	if (direction == NONE && avaibleCount != 0) {
-		randDirection = rand() % avaibleCount;
-		direction = avaibleDirections[randDirection];
+	if (avaibleCount >= 3) {
+		if (diff.x > diff.y) {
+			if (colliderPosition.y < playerPos.y) direction = DOWN;
+			else direction = UP;
+			if (colliderPosition.x < playerPos.x) direction = RIGHT;
+			else direction = LEFT;
+		}
+		else
+		{
+			if (colliderPosition.x < playerPos.x) direction = RIGHT;
+			else direction = LEFT;
+			if (colliderPosition.y < playerPos.y) direction = DOWN;
+			else direction = UP;
+		}
 	}
 
+
+	switch (direction)
+	{
+	case Entity::UP:
+		if (y <= 0) {
+			if (colliderPosition.x < playerPos.x) direction = RIGHT;
+			else direction = LEFT;
+		}
+		break;
+	case Entity::DOWN:
+		if (y >= 10)
+		{
+			if (colliderPosition.x < playerPos.x) direction = RIGHT;
+			else direction = LEFT;
+		}
+		break;
+	case Entity::RIGHT:
+		if (x >= 12)
+		{
+			if (colliderPosition.y < playerPos.y) direction = DOWN;
+			else direction = UP;
+		}
+		break;
+	case Entity::LEFT:
+		if (x <= 0) {
+			if (colliderPosition.y < playerPos.y) direction = DOWN;
+			else direction = UP;
+		}
+		break;
+	case Entity::NONE:
+		break;
+	default:
+		break;
+	}
 
  
 }
