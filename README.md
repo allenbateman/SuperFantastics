@@ -9,9 +9,12 @@ The player, following the story line, will travel arround different biomes and f
 
 ## Controls
 
+### Keyboard
 -Arrows for movement.
-
--Z to place bomb.
+-C to place bomb.
+### Gamepad
+-Arrows / Left joystick for movement.
+-X button to place bomb.
 
 ## Members
 
