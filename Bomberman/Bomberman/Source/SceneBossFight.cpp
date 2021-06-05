@@ -44,7 +44,7 @@ bool SceneBossFight::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/FinalBossMap.png");
-	App->audio->PlayMusic("Assets/Music/SceneBossFight.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/08BossTheme.ogg", 1.0f);
 
 	//add bounding colliders
 	//Left collider
