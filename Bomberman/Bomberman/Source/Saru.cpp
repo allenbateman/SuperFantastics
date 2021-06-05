@@ -55,7 +55,7 @@ Saru::Saru(int x, int y) : Entity(x, y)
 
 	currentAnim = &downAnim;
 	state = IDLE;
-	direction = DOWN;
+	direction = RIGHT;
 
 	// must put better the colliders
 	collider = App->collisions->AddCollider({ 8, 16, 16, 16 }, Collider::Type::ENEMY, (Module*)App->entities);
@@ -93,33 +93,36 @@ void Saru::Update()
 				if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
 				if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
 
-				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
-				if (direction == UP) position.y--;
-				if (direction == DOWN) position.y++;
-				if (direction == LEFT) position.x--;
-				if (direction == RIGHT) position.x++;
+				//App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
+				switch (direction)
+				{
+				case Entity::UP:
+					currentAnim = &upAnim;
+					position.y--;
+					break;
+				case Entity::DOWN:
+					currentAnim = &downAnim;
+					position.y++;
+					break;
+				case Entity::RIGHT:
+					currentAnim = &rightAnim;
+					position.x++;
+					break;
+				case Entity::LEFT:
+					currentAnim = &leftAnim;
+					position.x--;
+					break;
+				case Entity::NONE:
+					break;
+				default:
+					break;
+				}
 
 				colliderPosition.x = position.x + 8;
 				colliderPosition.y = position.y + 16;
 
-				App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::SARU;
+				//App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::SARU;
 			}
-		}
-
-		switch (direction)
-		{
-		case Entity::UP: currentAnim = &upAnim;
-			break;
-		case Entity::DOWN: currentAnim = &downAnim;
-			break;
-		case Entity::RIGHT: currentAnim = &rightAnim;
-			break;
-		case Entity::LEFT: currentAnim = &leftAnim;
-			break;
-		case Entity::NONE:
-			break;
-		default:
-			break;
 		}
 
 		if (canStop == true) state = IDLE;
@@ -183,45 +186,70 @@ void Saru::CheckDirection()
 
 	//---------------------------Saru movement----------------------------------------------------
 	iPoint playerPos = App->player->position;
-	int difX = colliderPosition.x - playerPos.x;
-	int difY = colliderPosition.y - playerPos.y;
+	/*int difX = colliderPosition.x - playerPos.x;
+	int difY = colliderPosition.y - playerPos.y;*/
 
-	if (priority == HORIZONTAL) {
-		if (difX > 0) {
-			for (int i = 0; i < avaibleCount; i++)
-				if (avaibleDirections[avaibleCount] == RIGHT) direction = avaibleDirections[avaibleCount];
+	int changeCount = 0;
+
+	// quiero llorar, no entra en ningun for xD
+	if (colliderPosition.x > playerPos.x) {
+		for (int i = 0; i < avaibleCount; i++)
+		{
+			if (avaibleDirections[avaibleCount] == RIGHT) {
+				direction = avaibleDirections[avaibleCount];
+				changeCount++;
+			}
 		}
-		else {
-			for (int i = 0; i < avaibleCount; i++)
-				if (avaibleDirections[avaibleCount] == LEFT) direction = avaibleDirections[avaibleCount];
+			
+	}
+	else {
+		for (int i = 0; i < avaibleCount; i++)
+		{
+			if (avaibleDirections[avaibleCount] == LEFT) {
+				direction = avaibleDirections[avaibleCount];
+				changeCount++;
+			}
 		}
 	}
-	if (priority == VERTICAL) {
-		if (difY > 0) {
-			for (int i = 0; i < avaibleCount; i++)
-				if (avaibleDirections[avaibleCount] == DOWN) direction = avaibleDirections[avaibleCount];
-		}
-		else {
-			for (int i = 0; i < avaibleCount; i++)
-				if (avaibleDirections[avaibleCount] == UP) direction = avaibleDirections[avaibleCount];
+	if (colliderPosition.y < playerPos.y) {
+		for (int i = 0; i < avaibleCount; i++)
+		{
+			if (avaibleDirections[avaibleCount] == UP) {
+				direction = avaibleDirections[avaibleCount];
+				changeCount++;
+			}
 		}
 	}
+	else {
+		for (int i = 0; i < avaibleCount; i++)
+			if (avaibleDirections[avaibleCount] == DOWN) {
+				direction = avaibleDirections[avaibleCount];
+				changeCount++;
+			}
+	}
+
+	
 
 	switch (direction)
 	{
-	case Entity::UP: currentAnim = &upAnim;
+	case Entity::UP:
+		if (y <= 0) direction = DOWN;
 		break;
-	case Entity::DOWN: currentAnim = &downAnim;
+	case Entity::DOWN:
+		if (y >= 10) direction = RIGHT;
 		break;
-	case Entity::RIGHT: currentAnim = &rightAnim;
+	case Entity::RIGHT:
+		if (x >= 12) direction = LEFT;
 		break;
-	case Entity::LEFT: currentAnim = &leftAnim;
+	case Entity::LEFT:
+		if (x <= 0) direction = RIGHT;
 		break;
 	case Entity::NONE:
 		break;
 	default:
 		break;
 	}
+
 
 	if (avaibleCount >= 3) canStop = true;
 	else false;
@@ -235,7 +263,7 @@ bool Saru::PlayerNear() {
 
 
 
-	if ((difX < 48 && difX>-32) && (difY < 48 && difY>-32))
+	if ((difX < 48 && difX>-48) && (difY < 48 && difY>-48))
 	{
 		canStop = false;
 		ret = true;
@@ -243,8 +271,8 @@ bool Saru::PlayerNear() {
 		if (difX < 0) difX *= -1;
 		if (difY < 0) difY *= -1;
 
-		if (difX < difY) priority = HORIZONTAL;
-		else priority = VERTICAL;
+		if (difX < difY) goVertical = false;
+		else goVertical = true;
 	}
 	else ret = false;
 

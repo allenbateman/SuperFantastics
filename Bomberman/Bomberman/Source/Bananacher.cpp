@@ -91,14 +91,35 @@ void Bananacher::Update()
 		if ((App->frameCounter % 2)) {
 
 			if ((colliderPosition.x - 24) % 16 == 0 && (colliderPosition.y - 32) % 16 == 0) CheckDirection();
+
 			if (upAnim.HasFinished() == true) upAnim.mustFlip = !upAnim.mustFlip;
 			if (downAnim.HasFinished() == true) downAnim.mustFlip = !downAnim.mustFlip;
 
 			//App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
-			if (direction == UP) position.y--;
-			else if (direction == DOWN) position.y++;
-			else if (direction == LEFT) position.x--;
-			else if (direction == RIGHT) position.x++;
+	
+			switch (direction)
+			{
+			case Entity::UP:
+				currentAnim = &upAnim;
+				position.y--;
+				break;
+			case Entity::DOWN:
+				currentAnim = &downAnim;
+				position.y++;
+				break;
+			case Entity::RIGHT:
+				currentAnim = &rightAnim;
+				position.x++;
+				break;
+			case Entity::LEFT:
+				currentAnim = &leftAnim;
+				position.x--;
+				break;
+			case Entity::NONE:
+				break;
+			default:
+				break;
+			}
 
 			colliderPosition.x = position.x + 16;
 			colliderPosition.y = position.y + 48;
@@ -106,21 +127,7 @@ void Bananacher::Update()
 			//App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::BANANACHER;
 		}
 
-		switch (direction)
-		{
-		case Entity::UP: currentAnim = &upAnim;
-			break;
-		case Entity::DOWN: currentAnim = &downAnim;
-			break;
-		case Entity::RIGHT: currentAnim = &rightAnim;
-			break;
-		case Entity::LEFT: currentAnim = &leftAnim;
-			break;
-		case Entity::NONE:
-			break;
-		default:
-			break;
-		}
+		
 
 		break;
 	case Entity::DEATH:
@@ -144,14 +151,14 @@ void Bananacher::CheckDirection()
 	int x = (colliderPosition.x - 24) / 16;
 	int y = (colliderPosition.y - 32) / 16;
 
-	if (y != 10) {
+	if (y <= 10) {
 		if (App->levelManager->grid[y + 1][x] == Module::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = DOWN;
 			avaibleCount++;
 		}
 	}
-	if (y != 0)
+	if (y >= 0)
 	{
 		if (y != 5 && x != 6)
 		{
@@ -162,7 +169,7 @@ void Bananacher::CheckDirection()
 			}
 		}
 	}
-	if (x != 0)
+	if (x >= 0)
 	{
 		if (App->levelManager->grid[y][x - 1] == Module::GridType::EMPTY)
 		{
@@ -170,7 +177,7 @@ void Bananacher::CheckDirection()
 			avaibleCount++;
 		}
 	}
-	if (x != 12) {
+	if (x <= 12) {
 		if (App->levelManager->grid[y][x + 1] == Module::GridType::EMPTY)
 		{
 			avaibleDirections[avaibleCount] = RIGHT;
@@ -184,43 +191,17 @@ void Bananacher::CheckDirection()
 	int difX = colliderPosition.x - playerPos.x;
 	int difY = colliderPosition.y - playerPos.y;
 
-	//HORIZONTAL
-	if (difX > 0) {
-		for (int i = 0; i < avaibleCount; i++)
-			if (avaibleDirections[avaibleCount] == LEFT) direction = avaibleDirections[avaibleCount];
-	}
-	else {
-		for (int i = 0; i < avaibleCount; i++)
-			if (avaibleDirections[avaibleCount] == RIGHT) direction = avaibleDirections[avaibleCount];
-	}
+	direction = NONE;
+	
+	
 
-	//VERTICAL
-	if (difY > 0) {
-		for (int i = 0; i < avaibleCount; i++)
-			if (avaibleDirections[avaibleCount] == UP) direction = avaibleDirections[avaibleCount];
-	}
-	else {
-		for (int i = 0; i < avaibleCount; i++)
-			if (avaibleDirections[avaibleCount] == DOWN) direction = avaibleDirections[avaibleCount];
-	}
-
-	switch (direction)
-	{
-	case Entity::UP: currentAnim = &upAnim;
-		break;
-	case Entity::DOWN: currentAnim = &downAnim;
-		break;
-	case Entity::RIGHT: currentAnim = &rightAnim;
-		break;
-	case Entity::LEFT: currentAnim = &leftAnim;
-		break;
-	case Entity::NONE:
-		break;
-	default:
-		break;
+	if (direction == NONE && avaibleCount != 0) {
+		randDirection = rand() % avaibleCount;
+		direction = avaibleDirections[randDirection];
 	}
 
 
+ 
 }
 
 void Bananacher::OnCollision(Collider* collider)

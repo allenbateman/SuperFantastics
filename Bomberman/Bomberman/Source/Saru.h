@@ -20,6 +20,7 @@ private:
 	// The path that will define the position in the world
 	int life = 4;
 	bool canStop = true;
+	bool goVertical;
 
 	enum Priority
 	{

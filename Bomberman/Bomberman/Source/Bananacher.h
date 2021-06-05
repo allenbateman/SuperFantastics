@@ -20,15 +20,6 @@ private:
 	// The path that will define the position in the world
 	int life = 8;
 
-	enum Priority
-	{
-		VERTICAL,
-		HORIZONTAL,
-		NONE
-	};
-
-	Priority priority = NONE;
-
 	// Entitie animations
 	Animation upAnim, downAnim, leftAnim, rightAnim, deathAnim, damagedAnim;
 };
