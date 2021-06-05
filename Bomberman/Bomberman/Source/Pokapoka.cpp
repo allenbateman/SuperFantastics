@@ -82,6 +82,8 @@ Pokapoka::Pokapoka(int x, int y) : Entity(x, y)
 	colliderPosition.x = position.x;
 	colliderPosition.y = position.y + 16;
 	App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
+
+	scorePoints = 100;
 }
 
 

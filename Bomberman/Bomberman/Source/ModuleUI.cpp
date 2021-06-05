@@ -38,10 +38,16 @@ Update_Status ModuleUI::PostUpdate(){
 	SDL_Rect rec = { 0 };
 
 	// draw score
+	bool draw = false;
 	int digits = 10000000;
 	for (int i = 0; i < 8; i++) {
 		int d = score / digits;
-		if (d > 0 || i > 5) {
+
+		if (d > 0) {
+			draw = true;
+		}
+
+		if (draw || i > 5) {
 			rec = { d * 8,0,8,8 };
 			App->render->Blit(numTex, x + (8 * i), y, &rec);
 		}

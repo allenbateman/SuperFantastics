@@ -60,6 +60,8 @@ CoreMechaWalker::CoreMechaWalker(int x, int y) : Entity(x, y)
 	colliderPosition.x = position.x + 8;
 	colliderPosition.y = position.y + 16;
 	App->levelManager->grid[(colliderPosition.x - 24) / 16][(colliderPosition.y - 32) / 16] = Module::GridType::EMPTY;
+
+	scorePoints = 400;
 }
 
 

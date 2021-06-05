@@ -14,6 +14,7 @@ Orb::Orb(int x, int y) : Entity(x, y)
 
 	idleAnim.PushBack({ 452, 72, 15, 27 });
 	currentAnim = &idleAnim;
+	scorePoints = 800;
 }
 
 void Orb::Update()

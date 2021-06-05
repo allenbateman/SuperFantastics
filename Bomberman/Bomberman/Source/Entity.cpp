@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
+#include "ModulePlayer.h"
 
 Entity::Entity(int x, int y) : position(x, y)
 {
@@ -49,4 +50,5 @@ void Entity::SetToDelete()
 	pendingToDelete = true;
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
+	App->player->score += scorePoints;
 }

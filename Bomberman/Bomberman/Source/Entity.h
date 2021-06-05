@@ -53,6 +53,8 @@ public:
 
 	// A flag for the Entity removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
+	
+	int scorePoints = 0;
 
 	enum Direction
 	{

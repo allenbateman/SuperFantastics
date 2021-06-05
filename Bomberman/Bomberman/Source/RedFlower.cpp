@@ -24,6 +24,8 @@ RedFlower::RedFlower(int x, int y) : Entity(x, y)
 	deathAnim.loop = false;
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
+
+	scorePoints = 100;
 }
 
 void RedFlower::Update()
