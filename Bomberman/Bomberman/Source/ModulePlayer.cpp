@@ -101,6 +101,7 @@ bool ModulePlayer::Start()
 	currentState = PlayerState::ALIVE;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
+	EnablePlayer();
 
 	return ret;
 }
@@ -408,7 +409,7 @@ Update_Status ModulePlayer::Update()
 			else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
 				
 				destroyed = true;
-				App->levelManager->gameState = ModuleLevel::MAIN_MENU;
+				App->levelManager->RetunrToMainMenu();
 			}
 
 			break;
@@ -423,26 +424,7 @@ Update_Status ModulePlayer::Update()
 				//save player status...
 				//Disable current level...
 				DisablePlayer();
-				if (App->levelManager->currentScene == (Module*)App->sceneLevel1)
-				{
-					App->levelManager->gameState = ModuleLevel::LEVEL2;
-				}
-				if (App->levelManager->currentScene == (Module*)App->sceneLevel2)
-				{
-					App->levelManager->gameState = ModuleLevel::LEVEL3;
-				}
-				if (App->levelManager->currentScene == (Module*)App->sceneLevel3)
-				{
-					App->levelManager->gameState = ModuleLevel::LEVEL3X1;
-				}
-				if (App->levelManager->currentScene == (Module*)App->sceneLevel3x1)
-				{
-					App->levelManager->gameState = ModuleLevel::BOSS;
-				}
-				if (App->levelManager->currentScene == (Module*)App->sceneBossFight)
-				{
-					App->levelManager->gameState = ModuleLevel::INTRO;
-				}
+				App->levelManager->NextScene();
 			}
 			break;
 		default:
@@ -471,8 +453,6 @@ bool ModulePlayer::CleanUp()
 bool ModulePlayer::DisablePlayer()
 {
 	isVisible = false;
-	//collider->pendingToDelete = true;
-	//collider = nullptr;
 	return false;
 }
 

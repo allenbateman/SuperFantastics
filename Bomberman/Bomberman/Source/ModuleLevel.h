@@ -24,21 +24,25 @@ public:
 	Update_Status Update() override;
 	bool CleanUp() override;
 	Module* currentScene = nullptr;
+	void NextScene();
+	void RetunrToMainMenu();
 
 	enum GameState {
 		NONE = 0,
 		INTRO = 1,
 		MAIN_MENU = 2,
-		LEVEL1 = 3,
-		LEVEL2 = 4,
-		LEVEL3 = 5,
-		LEVEL3X1 = 6,
-		BOSS = 7	
+		LEVEL_SELECTION = 3,
+		LEVEL1 = 4,
+		LEVEL2 = 5,
+		LEVEL3 = 6,
+		LEVEL3X1 = 7,
+		BOSS = 8	
 	};
 	GameState gameState;
 	GridType grid[MAX_SIZE][MAX_SIZE];
 	GridType GetGridType(int y, int x, int yIteration = 0, int xIterantion = 0);
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
-
+	int frameCounter = 0;
+	int delayTime = 100;
 };
 #endif // __MODULE_LEVEL_H__

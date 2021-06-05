@@ -47,7 +47,7 @@ Application::Application()
 	modules[13] =	particles =		  new ModuleParticles(false);
 	modules[14] =   entities =		  new ModuleEntities(false);    //Enemies start disabled
 	modules[15] =	player =		  new ModulePlayer(false);	    //Player starts disabled
-	modules[16] =	levelManager =	  new ModuleLevel(false);
+	modules[16] =	levelManager =	  new ModuleLevel(true);
 	modules[17] =	powerUps =		  new ModulePowerUp(false);
 
 	modules[18] =	collisions =	new ModuleCollisions(true);

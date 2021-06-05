@@ -78,6 +78,7 @@ Update_Status SceneSelectLevel::Update()
 			}
 
 			App->fade->FadeToBlack(this, selectedLevel, 60);
+			App->levelManager->currentScene = selectedLevel;
 			App->levelManager->gameState = state;
 		}
 		else {

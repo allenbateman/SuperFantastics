@@ -13,6 +13,7 @@ ModuleLevel::~ModuleLevel()
 
 bool ModuleLevel::Start()
 {
+	LOG("Loading LevelManager....");
 	gameState = INTRO;
 	currentScene = (Module*)App->sceneInit;
 	return true;
@@ -25,44 +26,48 @@ Update_Status ModuleLevel::PreUpdate()
 
 	switch (gameState)
 	{
-	case INTRO:
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.a==true)
+	case INTRO: 
+		if ((App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.a==true) && currentScene->IsEnabled())
 		{
+			
 			gameState = MAIN_MENU;
 		}
 		break;
 	case MAIN_MENU:
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.a == true)
+		if ((App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.a == true) && currentScene->IsEnabled())
 		{
-			gameState = LEVEL1;
+			gameState = LEVEL_SELECTION;
 		}
 		break;
+	case LEVEL_SELECTION:
+
+		break;
 	case LEVEL1:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN )
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && currentScene->IsEnabled())
 		{
 			gameState = LEVEL2;
 		}
 		break;
 	case LEVEL2:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && currentScene->IsEnabled())
 		{
 			gameState = LEVEL3;
 		}
 		break;
 	case LEVEL3:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && currentScene->IsEnabled())
 		{
 			gameState = LEVEL3X1;
 		}
 		break;
 	case LEVEL3X1:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && currentScene->IsEnabled())
 		{
 			gameState = BOSS;
 		}
 		break;
 	case BOSS:
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && currentScene->IsEnabled())
 		{
 			gameState = MAIN_MENU;
 		}
@@ -96,8 +101,15 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 60);
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 30))
 			currentScene = (Module*)App->sceneIntro;
+		}
+		break;
+	case LEVEL_SELECTION:
+		if (currentScene != (Module*)App->sceneSelectLevel) {
+			LOG("Loading Level Selection");
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 30))
+			currentScene = (Module*)App->sceneSelectLevel;
 		}
 		break;
 	case LEVEL1:
@@ -113,8 +125,8 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 60);
-			currentScene = (Module*)App->sceneLevel1;
+			if(App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 30))
+				currentScene = (Module*)App->sceneLevel1;
 		}
 		break;
 	case LEVEL2:
@@ -129,7 +141,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 60);
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 30))
 			currentScene = (Module*)App->sceneLevel2;
 		}
 		break;
@@ -144,7 +156,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 60);
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 30))
 			currentScene = (Module*)App->sceneLevel3;
 		}
 		break;
@@ -159,7 +171,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 60);
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 30))
 			currentScene = (Module*)App->sceneLevel3x1;
 		}
 		break;
@@ -174,24 +186,46 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 60);
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 30))
 			currentScene = (Module*)App->sceneBossFight;
 		}
 		break;
 	default:
 		break;
 	}
-
+	frameCounter++;
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-bool ModuleLevel::CleanUp()
+void ModuleLevel::NextScene()
 {
-	if (currentScene != nullptr)
+	// if player touches the win collider, move to next scene
+	switch (gameState)
 	{
-		currentScene = nullptr;
+	case LEVEL1:
+			gameState = LEVEL2;
+		break;
+	case LEVEL2:
+			gameState = LEVEL3;
+		break;
+	case LEVEL3:
+			gameState = LEVEL3X1;	
+		break;
+	case LEVEL3X1:
+			gameState = BOSS;	
+		break;
+	case BOSS:
+			gameState = MAIN_MENU;
+		break;
+	default:
+		break;
 	}
-	return true;
+
+}
+
+void ModuleLevel::RetunrToMainMenu()
+{
+	gameState = MAIN_MENU;
 }
 
 ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIteration)
@@ -202,4 +236,14 @@ ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int
 ModuleLevel::GridType ModuleLevel::SetGridType(GridType type, int y, int x, int yIteration, int xIteration)
 {
 	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration] = type;
+}
+
+
+bool ModuleLevel::CleanUp()
+{
+	if (currentScene != nullptr)
+	{
+		currentScene = nullptr;
+	}
+	return true;
 }
