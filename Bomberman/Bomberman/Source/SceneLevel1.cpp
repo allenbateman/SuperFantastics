@@ -29,6 +29,9 @@ SceneLevel1::~SceneLevel1()
 // Load assets
 bool SceneLevel1::Start()
 {
+
+	App->render->levelBounds = levelBounds;
+
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
@@ -55,6 +58,8 @@ bool SceneLevel1::Start()
 	App->collisions->AddCollider({ 24,23,208,8 }, Collider::Type::BOUNDS);
 	//Bot collider
 	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
+
+
 	//Fixed positions
 
 	for (int i = 0; i < 11; i++)

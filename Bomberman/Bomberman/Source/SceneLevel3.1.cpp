@@ -27,6 +27,10 @@ SceneLevel3x1::~SceneLevel3x1()
 // Load assets
 bool SceneLevel3x1::Start()
 {
+
+
+	App->render->levelBounds = levelBounds;
+
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();

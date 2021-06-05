@@ -41,8 +41,6 @@ bool ModuleRender::Init()
 	debug = false;
 	// Set render logical size
 	// SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);		// Uncomment previous for fullscreen
-	
-	levelBounds = new SDL_Rect{ 0,0,1556,224 };
 
 	return ret;
 }
@@ -65,16 +63,16 @@ Update_Status ModuleRender::Update()
 		debug = !debug;
 
 	//camera scroll
-	if (levelBounds != nullptr && App->player->IsEnabled())
+	if (App->player->IsEnabled())
 	{
 		//right box detection
-		if (App->player->position.x > rightBox.x && camera.x + camera.w < levelBounds->w )
+		if (App->player->position.x > rightBox.x && camera.x + camera.w < levelBounds.w )
 		{
 			camera.x += cameraSpeed;
 			leftBox.x += App->player->speed;
 			rightBox.x += App->player->speed;
 		}
-		if (App->player->position.x + App->player->collider->rect.w < leftBox.x + leftBox.w && camera.x > levelBounds->x  )
+		if (App->player->position.x + App->player->collider->rect.w < leftBox.x + leftBox.w && camera.x > levelBounds.x  )
 		{
 			camera.x -= cameraSpeed;
 			leftBox.x -= App->player->speed;
@@ -101,11 +99,6 @@ bool ModuleRender::CleanUp()
 {
 	LOG("Destroying renderer");
 
-	if (levelBounds != nullptr)
-	{
-		delete levelBounds;
-		levelBounds = nullptr;
-	}
 	// Destroy the rendering context
 	if (renderer != nullptr)
 		SDL_DestroyRenderer(renderer);

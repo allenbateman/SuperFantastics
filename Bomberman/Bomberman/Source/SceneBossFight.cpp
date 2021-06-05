@@ -28,6 +28,9 @@ SceneBossFight::~SceneBossFight()
 // Load assets
 bool SceneBossFight::Start()
 {
+
+	App->render->levelBounds = levelBounds;
+
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();

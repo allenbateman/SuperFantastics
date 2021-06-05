@@ -64,7 +64,7 @@ public:
 	// The speed at which the camera will be moving
 	int cameraSpeed = 3;
 	bool debug = false;
-	SDL_Rect* levelBounds = nullptr;
+	SDL_Rect levelBounds = {0,0,0,0};
 
 	//level2 w = 512 h = 224
 };
