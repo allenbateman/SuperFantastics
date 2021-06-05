@@ -154,12 +154,12 @@ Update_Status SceneSelectLevel::PostUpdate()
 	SDL_Rect rect = partAnimation.GetCurrentFrame();
 
 	switch (maxStage) {
-	case 1:
-		App->render->Blit(sheetTexture, 52, 56, &rect);
-	case 2:
-		App->render->Blit(sheetTexture, 103, 80, &rect);
-	case 3:
-		App->render->Blit(sheetTexture, 60, 76, &rect);
+		case 1:
+			App->render->Blit(sheetTexture, 52, 56, &rect);
+		case 2:
+			App->render->Blit(sheetTexture, 103, 80, &rect);
+		case 3:
+			App->render->Blit(sheetTexture, 60, 76, &rect);
 	}
 	
 
