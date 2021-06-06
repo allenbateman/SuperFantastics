@@ -24,6 +24,7 @@ struct Collider
 		BOMB,
 		EXPLOSION,
 		WIN,
+		NEXT,
 		MAX,
 		POWER_UP,
 		BOUNDS

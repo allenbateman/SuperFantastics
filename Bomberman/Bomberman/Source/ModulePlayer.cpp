@@ -409,7 +409,7 @@ Update_Status ModulePlayer::Update()
 			}
 			else if (currentAnimation == &winAnim && frameCounter > 200) {
 				App->levelManager->PassedLevel();
-				App->levelManager->RetunrToLevelSelection();
+				//App->levelManager->RetunrToLevelSelection();
 				currentState = PlayerState::WAITNING;
 			}
 			break;
@@ -545,6 +545,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 	else if(c2->type == Collider::Type::BOUNDS){
 		position = lastPos;
+	}
+	else if(c2->type == Collider::Type::NEXT){
+		currentState = PlayerState::WINING;
 	}
 	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT || c2->type == Collider::Type::EXPLOSION)
 	{

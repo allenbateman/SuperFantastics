@@ -175,6 +175,9 @@
     <ClInclude Include="WinSpot.h">
       <Filter>Source Files\Entities\Enviroment</Filter>
     </ClInclude>
+    <ClInclude Include="NextSpot.h">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -307,6 +310,9 @@
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="WinSpot.cpp">
+      <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="NextSpot.cpp">
       <Filter>Source Files\Entities\Enviroment</Filter>
     </ClCompile>
   </ItemGroup>

@@ -75,7 +75,11 @@ Update_Status SceneSelectLevel::Update()
 			case 2:
 				selectedLevel = (Module*)App->sceneLevel3;
 				state = ModuleLevel::LEVEL3;
-				break;
+				break;		
+			default:
+				selectedLevel = (Module*)App->sceneInit;
+				state = ModuleLevel::MAIN_MENU;
+					break;
 			}
 
 			App->fade->FadeToBlack(this, selectedLevel, 60);

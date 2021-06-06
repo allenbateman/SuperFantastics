@@ -95,10 +95,11 @@ Update_Status ModuleLevel::Update()
 	case MAIN_MENU:
 		if (currentScene != (Module*)App->sceneIntro ) {
 
-			LOG("Loading MainMenu");
+		
 
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 45))
 			{
+				LOG("Loading MainMenu");
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
 					for (int x = 0; x < MAX_SIZE; x++)
@@ -112,9 +113,10 @@ Update_Status ModuleLevel::Update()
 		break;
 	case LEVEL_SELECTION:
 		if (currentScene != (Module*)App->sceneSelectLevel) {
-			LOG("Loading Level Selection");
+			
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 45))
 			{
+				LOG("Loading Level Selection");
 				currentScene = (Module*)App->sceneSelectLevel;
 			}
 		}
@@ -124,9 +126,10 @@ Update_Status ModuleLevel::Update()
 		if (currentScene != (Module*)App->sceneLevel1  )
 		{
 			//Load level
-			LOG("Loading Level 1");
+
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 45))
 			{
+				LOG("Loading Level 1");
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
 					for (int x = 0; x < MAX_SIZE; x++)
@@ -143,10 +146,11 @@ Update_Status ModuleLevel::Update()
 
 		if (currentScene != (Module*)App->sceneLevel2 ) {
 			//Load level
-			LOG("Loading Level 2");
+
 
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 45))
 			{
+				LOG("Loading Level 2");
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
 					for (int x = 0; x < MAX_SIZE; x++)
@@ -162,10 +166,9 @@ Update_Status ModuleLevel::Update()
 	case LEVEL3:
 		if (currentScene != (Module*)App->sceneLevel3 ) {
 			//Load level
-			LOG("Loading Level 3");
-
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 45))
 			{
+				LOG("Loading Level 3");
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
 					for (int x = 0; x < MAX_SIZE; x++)
@@ -181,10 +184,11 @@ Update_Status ModuleLevel::Update()
 	case LEVEL3X1:
 		if (currentScene != (Module*)App->sceneLevel3x1) {
 			//Load level
-			LOG("Loading Level 3.1");
+
 
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 45))
 			{
+				LOG("Loading Level 3.1");
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
 					for (int x = 0; x < MAX_SIZE; x++)
@@ -200,10 +204,11 @@ Update_Status ModuleLevel::Update()
 	case BOSS:
 		if (currentScene != (Module*)App->sceneBossFight) {
 			//Load level
-			LOG("Loading Level Boss");
+
 
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 45))
 			{
+				LOG("Loading Level Boss");
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
 					for (int x = 0; x < MAX_SIZE; x++)
@@ -231,17 +236,22 @@ void ModuleLevel::PassedLevel()
 			if (levelsPassed < 1) {
 				levelsPassed++;
 			}
+			RetunrToLevelSelection();
 			break;
 		case GameState::LEVEL2:
 			if (levelsPassed < 2) {
 				levelsPassed++;
-			}
+			}	
+			RetunrToLevelSelection();
 			break;
 		case GameState::LEVEL3:
+			gameState = GameState::LEVEL3X1;
+			break;
 		case GameState::LEVEL3X1:
 			if (levelsPassed < 3) {
-				levelsPassed++;
+				levelsPassed++;	
 			}
+			gameState = GameState::BOSS;
 			break;
 	}
 
