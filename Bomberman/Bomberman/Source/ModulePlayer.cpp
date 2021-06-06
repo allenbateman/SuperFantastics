@@ -95,8 +95,6 @@ bool ModulePlayer::Start()
     currentBombs = 1;
 	rangeExplosion = 1;
 	CollectedOrbs = false;
-	nOrbs = 0;
-
 	currentState = PlayerState::ALIVE;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 16, 16 }, Collider::Type::PLAYER, this);
@@ -211,10 +209,6 @@ Update_Status ModulePlayer::Update()
 
 
 			// GAMEPAD SUPPORT
-			
-
-			// Moving the player with the camera scroll
-			// App->player->position.x += 1;
 
 			// Debug key for gamepad rumble testing purposes
 			if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN)
@@ -329,19 +323,6 @@ Update_Status ModulePlayer::Update()
 				}
 			}
 
-			/*if (App->input->keys[SDL_SCANCODE_SPACE] == KeyState::KEY_REPEAT || pad.a == true)
-			{
-				if (shotCountdown == 0)
-				{
-					Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
-					newParticle->collider->AddListener(this);
-					App->audio->PlayFx(laserFx);
-					shotCountdown = shotMaxCountdown;
-				}
-			}*/
-
-
-
 			// If no movement detected, set the current animation back to idle
 			if (pad.enabled)
 			{
@@ -358,6 +339,7 @@ Update_Status ModulePlayer::Update()
 			//move collider
 			collider->SetPos(position.x, position.y);
 
+			//Update player position in the grid
 			App->levelManager->SetGridType(Module::GridType::PLAYER, position.y, position.x);
 
 			//check border colliders
@@ -391,19 +373,11 @@ Update_Status ModulePlayer::Update()
 			{
 				currentState = PlayerState::WINING;
 			}
-			if (currentScene == (Module*)App->sceneLevel3x1)
+
+			//check if player collected all orbs
+			if (App->levelManager->orbsLeft == 0)
 			{
-				if (nOrbs >= 1)
-				{
-					CollectedOrbs = true;
-				}
-			}
-			else
-			{
-				if (nOrbs >= 2)
-				{
-					CollectedOrbs = true;
-				}
+				CollectedOrbs = true;
 			}
 
 			break;
@@ -423,6 +397,7 @@ Update_Status ModulePlayer::Update()
 			break;
 		case PlayerState::WINING:
 			if (currentAnimation != &winAnim) {
+				
 				App->audio->PlayMusic("Assets/Music/Victory.ogg", 0.0f);
 				winAnim.Reset();
 				currentAnimation = &winAnim;
@@ -432,7 +407,7 @@ Update_Status ModulePlayer::Update()
 				
 				//save player status...
 				//Disable current level...
-				DisablePlayer();
+				//DisablePlayer();
 				App->levelManager->NextScene();
 			}
 			break;
@@ -462,13 +437,13 @@ bool ModulePlayer::CleanUp()
 bool ModulePlayer::DisablePlayer()
 {
 	isVisible = false;
-	return false;
+	return true;
 }
 
 bool ModulePlayer::EnablePlayer()
 {
 	isVisible = true;
-	return false;
+	return true;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)

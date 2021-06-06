@@ -33,6 +33,9 @@ bool SceneLevel3::Start()
 
 	App->render->levelBounds = levelBounds;
 
+	App->levelManager->orbCount = orbs;
+	App->levelManager->orbsLeft = orbs;
+
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();

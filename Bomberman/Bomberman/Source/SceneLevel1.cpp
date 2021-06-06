@@ -36,12 +36,12 @@ bool SceneLevel1::Start()
 	App->entities->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
-	
+
 	App->UI->timeLeft = timeLevel;
 	App->UI->timeLevel = timeLevel;
 
-	App->levelManager->orbCount = 2;
-	App->levelManager->orbsLeft = 2;
+	App->levelManager->orbCount = orbs;
+	App->levelManager->orbsLeft = orbs;
 
 	App->UI->StartTiming();
 
@@ -184,7 +184,6 @@ bool SceneLevel1::Start()
 	}
 	App->render->camera.x = 0; 
 	App->render->camera.y = 0;
-	App->player->SetSceneGrid(&grid[0][0], 13, 11);
 	return ret;
 }
 

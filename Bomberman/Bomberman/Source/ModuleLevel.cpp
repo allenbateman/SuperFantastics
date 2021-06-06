@@ -87,6 +87,8 @@ Update_Status ModuleLevel::Update()
 	{
 	case INTRO:
 		if (currentScene == nullptr ) {
+
+			LOG("Loading Scene Intro");
 			currentScene = (Module*)App->sceneInit;
 		}
 		break;
@@ -94,15 +96,18 @@ Update_Status ModuleLevel::Update()
 		if (currentScene != (Module*)App->sceneIntro ) {
 
 			LOG("Loading MainMenu");
-			for (int y = 0; y < MAX_SIZE; y++)
-			{
-				for (int x = 0; x < MAX_SIZE; x++)
-				{
-					grid[y][x] = GridType::EMPTY;
-				}
-			}
+
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 90))
-			currentScene = (Module*)App->sceneIntro;
+			{
+				for (int y = 0; y < MAX_SIZE; y++)
+				{
+					for (int x = 0; x < MAX_SIZE; x++)
+					{
+						grid[y][x] = GridType::EMPTY;
+					}
+				}
+				currentScene = (Module*)App->sceneIntro;
+			}
 		}
 		break;
 	case LEVEL_SELECTION:
@@ -118,15 +123,17 @@ Update_Status ModuleLevel::Update()
 		{
 			//Load level
 			LOG("Loading Level 1");
-			for (int y = 0; y < MAX_SIZE; y++)
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 90))
 			{
-				for (int x = 0; x < MAX_SIZE; x++)
+				for (int y = 0; y < MAX_SIZE; y++)
 				{
-					grid[y][x] = GridType::EMPTY;
+					for (int x = 0; x < MAX_SIZE; x++)
+					{
+						grid[y][x] = GridType::EMPTY;
+					}
 				}
-			}
-			if(App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 90))
 				currentScene = (Module*)App->sceneLevel1;
+			}
 		}
 		break;
 	case LEVEL2:
@@ -134,60 +141,72 @@ Update_Status ModuleLevel::Update()
 		if (currentScene != (Module*)App->sceneLevel2 ) {
 			//Load level
 			LOG("Loading Level 2");
-			for (int y = 0; y < MAX_SIZE; y++)
-			{
-				for (int x = 0; x < MAX_SIZE; x++)
-				{
-					grid[y][x] = GridType::EMPTY;
-				}
-			}
+
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 90))
-			currentScene = (Module*)App->sceneLevel2;
+			{
+				for (int y = 0; y < MAX_SIZE; y++)
+				{
+					for (int x = 0; x < MAX_SIZE; x++)
+					{
+						grid[y][x] = GridType::EMPTY;
+					}
+				}
+				currentScene = (Module*)App->sceneLevel2;
+			}
 		}
 		break;
 	case LEVEL3:
 		if (currentScene != (Module*)App->sceneLevel3 ) {
 			//Load level
 			LOG("Loading Level 3");
-			for (int y = 0; y < MAX_SIZE; y++)
-			{
-				for (int x = 0; x < MAX_SIZE; x++)
-				{
-					grid[y][x] = GridType::EMPTY;
-				}
-			}
+
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 90))
-			currentScene = (Module*)App->sceneLevel3;
+			{
+				for (int y = 0; y < MAX_SIZE; y++)
+				{
+					for (int x = 0; x < MAX_SIZE; x++)
+					{
+						grid[y][x] = GridType::EMPTY;
+					}
+				}
+				currentScene = (Module*)App->sceneLevel3;
+			}
 		}
 		break;
 	case LEVEL3X1:
 		if (currentScene != (Module*)App->sceneLevel3x1) {
 			//Load level
 			LOG("Loading Level 3.1");
-			for (int y = 0; y < MAX_SIZE; y++)
-			{
-				for (int x = 0; x < MAX_SIZE; x++)
-				{
-					grid[y][x] = GridType::EMPTY;
-				}
-			}
+
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 90))
-			currentScene = (Module*)App->sceneLevel3x1;
+			{
+				for (int y = 0; y < MAX_SIZE; y++)
+				{
+					for (int x = 0; x < MAX_SIZE; x++)
+					{
+						grid[y][x] = GridType::EMPTY;
+					}
+				}
+				currentScene = (Module*)App->sceneLevel3x1;
+			}
 		}
 		break;
 	case BOSS:
 		if (currentScene != (Module*)App->sceneBossFight) {
 			//Load level
 			LOG("Loading Level Boss");
-			for (int y = 0; y < MAX_SIZE; y++)
-			{
-				for (int x = 0; x < MAX_SIZE; x++)
-				{
-					grid[y][x] = GridType::EMPTY;
-				}
-			}
+
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 90))
-			currentScene = (Module*)App->sceneBossFight;
+			{
+				for (int y = 0; y < MAX_SIZE; y++)
+				{
+					for (int x = 0; x < MAX_SIZE; x++)
+					{
+						grid[y][x] = GridType::EMPTY;
+					}
+				}
+				currentScene = (Module*)App->sceneBossFight;
+			}
 		}
 		break;
 	default:

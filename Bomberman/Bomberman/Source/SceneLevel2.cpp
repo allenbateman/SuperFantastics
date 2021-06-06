@@ -29,6 +29,8 @@ SceneLevel2::~SceneLevel2()
 bool SceneLevel2::Start()
 {
 	App->render->levelBounds = levelBounds;
+	App->levelManager->orbCount = orbs;
+	App->levelManager->orbsLeft = orbs;
 
 	App->player->Enable();
 	App->entities->Enable();
@@ -38,8 +40,7 @@ bool SceneLevel2::Start()
 	App->UI->timeLeft = timeLevel;
 	App->UI->timeLevel = timeLevel;
 
-	App->levelManager->orbCount = 3;
-	App->levelManager->orbsLeft = 3;
+
 
 	LOG("Loading background assets");
 
@@ -245,7 +246,6 @@ bool SceneLevel2::Start()
 	
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
-	App->player->SetSceneGrid(&grid[0][0], 28, 11);
 
 	return ret;
 }
