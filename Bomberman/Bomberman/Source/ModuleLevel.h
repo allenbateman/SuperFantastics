@@ -9,6 +9,7 @@
 #include "SceneLevel2.h"
 #include "SceneLevel3.h"
 #include "SceneLevel3.1.h"
+#include "SceneSelectLevel.h"
 #include "sceneBossFight.h"
 #include "SceneIntro.h"
 #include "ModuleInput.h"
@@ -24,8 +25,8 @@ public:
 	Update_Status Update() override;
 	bool CleanUp() override;
 	Module* currentScene = nullptr;
-	void NextScene();
 	void RetunrToMainMenu();
+	void RetunrToLevelSelection();
 
 	enum GameState {
 		NONE = 0,
@@ -46,5 +47,6 @@ public:
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 	int frameCounter = 0;
 	int delayTime = 100;
+	int currentLevel = 1;
 };
 #endif // __MODULE_LEVEL_H__

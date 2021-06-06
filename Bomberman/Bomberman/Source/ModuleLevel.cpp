@@ -114,7 +114,12 @@ Update_Status ModuleLevel::Update()
 		if (currentScene != (Module*)App->sceneSelectLevel) {
 			LOG("Loading Level Selection");
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 90))
-			currentScene = (Module*)App->sceneSelectLevel;
+			{
+				App->sceneSelectLevel->maxStage = currentLevel + 1;
+				App->sceneSelectLevel->selectedStage = currentLevel;
+
+				currentScene = (Module*)App->sceneSelectLevel;
+			}
 		}
 		break;
 	case LEVEL1:
@@ -216,38 +221,20 @@ Update_Status ModuleLevel::Update()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-void ModuleLevel::NextScene()
-{
-	// if player touches the win collider, move to next scene
-	LOG("NEXT LEVEL");
-	switch (gameState)
-	{
-	case LEVEL1:
-			gameState = LEVEL2;
-		break;
-	case LEVEL2:
-			gameState = LEVEL3;
-		break;
-	case LEVEL3:
-			gameState = LEVEL3X1;	
-		break;
-	case LEVEL3X1:
-			gameState = BOSS;	
-		break;
-	case BOSS:
-			gameState = MAIN_MENU;
-		break;
-	default:
-		break;
-	}
-
-}
 
 void ModuleLevel::RetunrToMainMenu()
 {
 	LOG("RETURN TO MAIN MENU")
 	if(gameState != MAIN_MENU)
 		gameState = MAIN_MENU;
+}
+
+void ModuleLevel::RetunrToLevelSelection()
+{
+	LOG("RETURN TO LEVEL SELECTION")
+		if (gameState != LEVEL_SELECTION)
+			gameState = LEVEL_SELECTION;
+
 }
 
 ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIteration)

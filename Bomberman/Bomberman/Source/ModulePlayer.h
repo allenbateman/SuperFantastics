@@ -91,12 +91,12 @@ public:
 		ALIVE,
 		DEAD,
 		WINING,
-		NONE
+		WAITNING
 	};
 	PlayerState currentState;
 	// Player powers
 	int currentBombs = 1;
-	int rangeExplosion = 2;
+	int rangeExplosion = 3;
 
 	int frameCounter = 0;
 	bool CollectedOrbs = false;

@@ -408,9 +408,13 @@ Update_Status ModulePlayer::Update()
 				//save player status...
 				//Disable current level...
 				//DisablePlayer();
-				App->levelManager->NextScene();
+				App->levelManager->RetunrToLevelSelection();
+				App->levelManager->currentLevel++;
+				currentState = PlayerState::WAITNING;
 			}
 			break;
+		case PlayerState::WAITNING:
+				break;
 		default:
 			break;
 	}
