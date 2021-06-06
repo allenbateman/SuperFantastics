@@ -139,6 +139,7 @@ bool SceneLevel3::Start()
 	grid[10][1] = WALL;
 	grid[10][2] = WALL;
 	grid[10][3] = WALL;
+	grid[10][9] = WALL;
 	grid[10][10] = WALL;
 	grid[10][11] = WALL;
 	grid[10][12] = WALL;
@@ -148,8 +149,8 @@ bool SceneLevel3::Start()
 	grid[1][3] = WALL;
 	grid[1][9] = WALL;
 	grid[1][10] = WALL;
-	grid[1][11] = WALL;
 	grid[1][12] = WALL;
+	grid[9][0] = WALL;
 	grid[9][1] = WALL;
 	grid[9][2] = WALL;
 	grid[9][3] = WALL;
@@ -173,7 +174,7 @@ bool SceneLevel3::Start()
 			}
 			else if (grid[i][j] == WALL)
 			{
-				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::BOUNDS);
+				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
 			}
 			else if (grid[i][j] == ROCK)
 			{

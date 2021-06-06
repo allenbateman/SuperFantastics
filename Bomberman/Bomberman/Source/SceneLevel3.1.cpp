@@ -59,7 +59,7 @@ bool SceneLevel3x1::Start()
 	//Right Collider
 	App->collisions->AddCollider({ 232,23,24,223 }, Collider::Type::BOUNDS);
 	//Top Collider
-	App->collisions->AddCollider({ 24,23,208,8 }, Collider::Type::BOUNDS);
+	App->collisions->AddCollider({ 24,24,208,8 }, Collider::Type::BOUNDS);
 	//Bot collider
 	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
 
@@ -82,32 +82,6 @@ bool SceneLevel3x1::Start()
 		}
 	}
 
-	grid[2][5] = ROCK;
-	grid[4][5] = ROCK;
-	grid[6][5] = ROCK;
-	grid[8][5] = ROCK;
-	grid[10][5] = ROCK;
-	grid[2][7] = ROCK;
-	grid[4][7] = ROCK;
-	grid[6][7] = ROCK;
-	grid[8][7] = ROCK;
-	grid[1][0] = ROCK;
-	grid[1][1] = ROCK;
-	grid[1][2] = ROCK;
-	grid[1][3] = ROCK;
-	grid[1][4] = ROCK;
-	grid[1][5] = ROCK;
-	grid[1][9] = ROCK;
-	grid[9][8] = ROCK;
-	grid[9][10] = ROCK;
-	grid[9][12] = ROCK;
-	grid[0][9] = ROCK;
-	grid[1][8] = ROCK;
-	grid[0][9] = ROCK;
-	grid[1][0] = ROCK;
-	grid[7][6] = ROCK;
-	grid[9][6] = ROCK;
-
 	grid[2][1] = PLAYER;
 	grid[6][4] = MOUSE;
 	grid[8][2] = SNAIL;
@@ -124,7 +98,7 @@ bool SceneLevel3x1::Start()
 	grid[5][11] = STRUCTURE;
 	grid[4][10] = WIN_SPOT;
 
-	int flowerAmount = rand() % 10 + 30;
+	int flowerAmount = rand() % 20 + 30;
 	int x = 0;
 	int y = 0;
 
@@ -141,38 +115,64 @@ bool SceneLevel3x1::Start()
 	}
 
 	// Fixed empy positions
-	grid[0][0] = EMPTY;
-	grid[0][1] = EMPTY;
-	grid[0][2] = EMPTY;
-	grid[0][3] = EMPTY;
-	grid[0][4] = EMPTY;
-	grid[0][5] = EMPTY;
-	grid[0][6] = EMPTY;
-	grid[0][8] = EMPTY;
+	
 	grid[2][0] = EMPTY;
 	grid[2][2] = EMPTY;
 	grid[3][0] = EMPTY;
 	grid[5][10] = EMPTY;
-	grid[8][5] = EMPTY;
-	grid[8][7] = EMPTY;
-	grid[0][6] = EMPTY;
-	grid[1][6] = EMPTY;
-	grid[2][6] = EMPTY;
-	grid[3][6] = EMPTY;
-	grid[4][6] = EMPTY;
-	grid[5][6] = EMPTY;
-	grid[6][6] = EMPTY;
-	grid[8][6] = EMPTY;
-	grid[10][6] = EMPTY;
-	grid[10][7] = EMPTY;
-	grid[0][0] = EMPTY;
-	grid[0][0] = EMPTY;
-	grid[0][0] = EMPTY;
-	grid[10][8] = EMPTY;
-	grid[10][9] = EMPTY;
-	grid[10][10] = EMPTY;
-	grid[10][11] = EMPTY;
-	grid[10][12] = EMPTY;
+
+	grid[0][0] = WALL;
+	grid[0][1] = WALL;
+	grid[0][2] = WALL;
+	grid[0][3] = WALL;
+	grid[0][4] = WALL;
+	grid[0][5] = WALL;
+	grid[0][6] = WALL;
+	grid[0][7] = WALL;
+	grid[0][8] = WALL;
+	grid[2][5] = WALL;
+	grid[4][5] = WALL;
+	grid[6][5] = WALL;
+	grid[8][5] = WALL;
+	grid[10][5] = WALL;
+	grid[2][7] = WALL;
+	grid[4][7] = WALL;
+	grid[6][7] = WALL;
+	grid[8][7] = WALL;
+	grid[1][0] = WALL;
+	grid[1][1] = WALL;
+	grid[1][2] = WALL;
+	grid[1][3] = WALL;
+	grid[1][4] = WALL;
+	grid[1][5] = WALL;
+	grid[1][6] = WALL;
+	grid[1][9] = WALL;
+	grid[2][6] = WALL;
+	grid[3][6] = WALL;
+	grid[4][6] = WALL;
+	grid[5][6] = WALL;
+	grid[6][6] = WALL;
+	grid[8][6] = WALL;
+	grid[9][8] = WALL;
+	grid[9][10] = WALL;
+	grid[9][12] = WALL;
+	grid[0][9] = WALL;
+	grid[1][8] = WALL;
+	grid[0][9] = WALL;
+	grid[1][0] = WALL;
+	grid[7][6] = WALL;
+	grid[9][6] = WALL;
+	grid[10][6] = WALL;
+	grid[10][7] = WALL;
+	grid[10][8] = WALL;
+	grid[10][9] = WALL;
+	grid[10][10] = WALL;
+	grid[10][11] = WALL;
+	grid[10][12] = WALL;
+
+	grid[7][5] = EMPTY;
+	grid[7][6] = EMPTY;
+	grid[7][7] = EMPTY;
 
 	middleStructureIsSet = false;
 
@@ -186,6 +186,10 @@ bool SceneLevel3x1::Start()
 				pos.x = 24 + j * 16;
 				pos.y = 32 + i * 16;
 				App->player->position = pos;
+			}
+			else if (grid[i][j] == WALL)
+			{
+				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
 			}
 			else if (grid[i][j] == ROCK)
 			{
