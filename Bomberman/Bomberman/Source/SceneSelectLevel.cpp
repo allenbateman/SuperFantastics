@@ -92,8 +92,23 @@ Update_Status SceneSelectLevel::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_DOWN || pad.left_x > 0.0f || pad.right == true)
+	if(!pad.right)
 	{
+		rightPadContinue = false;
+	}
+	else if (!pad.left)
+	{
+		leftPadContinue = false;
+	}
+
+	if (pad.left_x == 0.0f) {
+		joystickContinue = false;
+	}
+
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_DOWN || (pad.left_x > 0.0f && !joystickContinue) || (pad.right == true && !rightPadContinue))
+	{
+		rightPadContinue = true;
+		joystickContinue = true;
 		selectedStage++;
 
 		if (selectedStage > App->levelManager->levelsPassed || selectedStage >= MAX_STAGES)
@@ -101,8 +116,10 @@ Update_Status SceneSelectLevel::Update()
 			selectedStage = 0;
 		}
 	}
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_DOWN || pad.left_x < 0.0f || pad.left == true)
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_DOWN || (pad.left_x < 0.0f && !joystickContinue) || (pad.left == true && !leftPadContinue))
 	{
+		leftPadContinue = true;
+		joystickContinue = true;
 		selectedStage--;
 
 		if (selectedStage < 0)

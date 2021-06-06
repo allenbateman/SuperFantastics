@@ -50,6 +50,9 @@ public:
 	bool exit = false;
 
 	bool showSelectedLevel = true;
+
+	bool leftPadContinue = false, rightPadContinue = false;
+	bool joystickContinue = false;
 };
 
 #endif
