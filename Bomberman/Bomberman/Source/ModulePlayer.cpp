@@ -395,7 +395,9 @@ Update_Status ModulePlayer::Update()
 			else if (currentAnimation == &deathAnim && currentAnimation->HasFinished() && frameCounter > 60){
 				
 				destroyed = true;
-				App->levelManager->RetunrToMainMenu();
+				lifes--;
+				currentState = PlayerState::WAITNING;
+				App->levelManager->RestartLevel();
 			}
 
 			break;

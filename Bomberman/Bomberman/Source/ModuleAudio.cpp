@@ -74,9 +74,9 @@ bool ModuleAudio::CleanUp()
 	return true;
 }
 
-bool ModuleAudio::PlayMusic(const char* path, float fade_time)
+bool ModuleAudio::PlayMusic(const char* path, float fade_time, bool ignoreActive)
 {
-	if (strcmp(path, activeMusicPath) == 0) {
+	if (strcmp(path, activeMusicPath) == 0 && !ignoreActive) {
 		return true;
 	}
 
