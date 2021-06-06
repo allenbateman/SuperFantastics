@@ -59,7 +59,7 @@ bool SceneLevel1::Start()
 	App->collisions->AddCollider({ 232,23,24,223 }, Collider::Type::BOUNDS);
 	//Top Collider
 	App->collisions->AddCollider({ 24,23,208,8 }, Collider::Type::BOUNDS);
-	//Bot collider
+	//Bottom collider
 	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
 
 

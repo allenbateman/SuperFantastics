@@ -559,7 +559,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 		else
 		{
-			currentState = PlayerState::WINING;
+			if (position.y <= c2->rect.y + 3)
+			{
+				currentState = PlayerState::WINING;
+			}
 		}
 	}
 	else if(c2->type == Collider::Type::BOUNDS){

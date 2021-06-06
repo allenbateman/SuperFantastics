@@ -28,8 +28,6 @@ SceneLevel2::~SceneLevel2()
 // Load assets
 bool SceneLevel2::Start()
 {
-
-
 	App->render->levelBounds = levelBounds;
 
 	App->player->Enable();

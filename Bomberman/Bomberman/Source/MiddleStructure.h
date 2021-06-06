@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 
-#define COLLIDERS 8
+#define COLLIDERS 7
 
 class MiddleStructure : public Entity
 {
@@ -9,7 +9,6 @@ public:
 	MiddleStructure(int x, int y);
 	~MiddleStructure();
 	void Update() override;
-	void Draw() override;
 	void SetToDelete() override;
 
 private:

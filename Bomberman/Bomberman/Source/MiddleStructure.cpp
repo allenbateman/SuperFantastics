@@ -11,21 +11,23 @@
 MiddleStructure::MiddleStructure(int x, int y) : Entity(x, y)
 {
 	position.x = 24 + (x * 16);
-	position.y = 32 + (y * 16);
+	position.y = 16 + (y * 16);
 
 	//Structure Animation
 	idleAnim.PushBack({ 48, 98, 48, 64 });
 	idleAnim.PushBack({ 96, 98, 48, 64 });
 	idleAnim.PushBack({ 144, 98, 48, 64 });
+	idleAnim.PushBack({ 96, 98, 48, 64 });
 	idleAnim.loop = true;
-	idleAnim.speed = 0.05f;
+	idleAnim.speed = 0.03f;
 
 	//Destroyed Animation
-	winAnim.PushBack({ 0, 172, 48, 64 });
-	winAnim.PushBack({ 48, 172, 48, 64 });
-	winAnim.PushBack({ 96, 172, 48, 64 });
+	winAnim.PushBack({ 0, 162, 48, 64 });
+	winAnim.PushBack({ 48, 162, 48, 64 });
+	winAnim.PushBack({ 96, 162, 48, 64 });
+	winAnim.PushBack({ 48, 162, 48, 64 });
 	winAnim.loop = true;
-	winAnim.speed = 0.05f;
+	winAnim.speed = 0.03f;
 
 	currentAnim = &idleAnim;
 
@@ -49,23 +51,16 @@ MiddleStructure::MiddleStructure(int x, int y) : Entity(x, y)
 
 MiddleStructure::~MiddleStructure()
 {
+
 }
 
 void MiddleStructure::Update()
 {
-	currentAnim->Update();
-}
-void MiddleStructure::Draw() {
-	
+	Entity::Update();
+
 	if (App->player->CollectedOrbs == true)
 	{
-		SDL_Rect rect = winAnim.GetCurrentFrame();
-		App->render->Blit(texture, 104, 64, &rect);
-	}
-	else 
-	{
-		SDL_Rect rect = idleAnim.GetCurrentFrame();
-		App->render->Blit(texture, 104, 64, &rect);
+		currentAnim = &winAnim;
 	}
 }
 
