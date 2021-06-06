@@ -48,6 +48,8 @@ public:
 
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f, bool useCamera = true);
 
+	void ResetScrollBoxPositions();
+
 public:
 	// Rendering context used for any rendering action
 	SDL_Renderer* renderer = nullptr;
@@ -65,6 +67,8 @@ public:
 	int cameraSpeed = 3;
 	bool debug = false;
 	SDL_Rect levelBounds = {0,0,0,0};
+
+	
 
 	//level2 w = 512 h = 224
 };

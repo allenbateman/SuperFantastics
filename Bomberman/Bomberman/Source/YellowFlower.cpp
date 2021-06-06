@@ -28,7 +28,7 @@ void YellowFlower::OnCollision(Collider* collider)
 	if (collider->type == Collider::Type::EXPLOSION) {
 		App->levelManager->SetGridType(Module::GridType::EMPTY, position.y, position.x, 0, 0);
 		App->powerUps->SpawnPowerUp(position);
-		App->levelManager->SetGridType(Module::GridType::POWER_UP, position.y, position.x, 0, 0);
+	
 		SetToDelete();
 	}
 }

@@ -4,6 +4,7 @@
 #include "ModulePlayer.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleLevel.h"
 
 Fire::Fire(int x, int y) : Entity(x, y)
 {
@@ -32,6 +33,7 @@ void Fire::OnCollision(Collider* collider)
 			upgrade = App->audio->LoadFx("Assets/Fx/21UpgradeAcquired.wav");
 			App->audio->PlayFx(upgrade, 0);
 		}
+		App->levelManager->SetGridType(Module::GridType::EMPTY, position.y, position.x, 0, 0);
 		SetToDelete();
 	}
 	

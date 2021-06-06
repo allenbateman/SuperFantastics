@@ -40,7 +40,7 @@ bool ModuleRender::Init()
 	}
 	debug = false;
 	// Set render logical size
-	// SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);		// Uncomment previous for fullscreen
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);		// Uncomment previous for fullscreen
 
 	return ret;
 }
@@ -72,6 +72,7 @@ Update_Status ModuleRender::Update()
 			leftBox.x += App->player->speed;
 			rightBox.x += App->player->speed;
 		}
+		//left box detection
 		if (App->player->position.x + App->player->collider->rect.w < leftBox.x + leftBox.w && camera.x > levelBounds.x  )
 		{
 			camera.x -= cameraSpeed;
@@ -164,6 +165,12 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	}
 
 	return ret;
+}
+
+void ModuleRender::ResetScrollBoxPositions()
+{
+	leftBox = { 0,0,boxWidth,SCREEN_HEIGHT };
+	rightBox = { SCREEN_WIDTH - boxWidth,0, boxWidth, SCREEN_HEIGHT };
 }
 
 iPoint ModuleRender::GetCenterRectPos(SDL_Rect rect)

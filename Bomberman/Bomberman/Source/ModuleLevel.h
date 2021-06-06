@@ -11,6 +11,7 @@
 #include "SceneLevel3.1.h"
 #include "SceneSelectLevel.h"
 #include "sceneBossFight.h"
+#include "ModuleRender.h"
 #include "SceneIntro.h"
 #include "ModuleInput.h"
 

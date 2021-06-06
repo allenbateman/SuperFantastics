@@ -97,7 +97,7 @@ Update_Status ModuleLevel::Update()
 
 			LOG("Loading MainMenu");
 
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 90))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 45))
 			{
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
@@ -113,11 +113,11 @@ Update_Status ModuleLevel::Update()
 	case LEVEL_SELECTION:
 		if (currentScene != (Module*)App->sceneSelectLevel) {
 			LOG("Loading Level Selection");
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 90))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 45))
 			{
 				App->sceneSelectLevel->maxStage = currentLevel + 1;
 				App->sceneSelectLevel->selectedStage = currentLevel;
-
+				
 				currentScene = (Module*)App->sceneSelectLevel;
 			}
 		}
@@ -128,7 +128,7 @@ Update_Status ModuleLevel::Update()
 		{
 			//Load level
 			LOG("Loading Level 1");
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 90))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 45))
 			{
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
@@ -137,6 +137,7 @@ Update_Status ModuleLevel::Update()
 						grid[y][x] = GridType::EMPTY;
 					}
 				}
+				App->render->ResetScrollBoxPositions();
 				currentScene = (Module*)App->sceneLevel1;
 			}
 		}
@@ -147,7 +148,7 @@ Update_Status ModuleLevel::Update()
 			//Load level
 			LOG("Loading Level 2");
 
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 90))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 45))
 			{
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
@@ -156,6 +157,7 @@ Update_Status ModuleLevel::Update()
 						grid[y][x] = GridType::EMPTY;
 					}
 				}
+				App->render->ResetScrollBoxPositions();
 				currentScene = (Module*)App->sceneLevel2;
 			}
 		}
@@ -165,7 +167,7 @@ Update_Status ModuleLevel::Update()
 			//Load level
 			LOG("Loading Level 3");
 
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 90))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 45))
 			{
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
@@ -174,6 +176,7 @@ Update_Status ModuleLevel::Update()
 						grid[y][x] = GridType::EMPTY;
 					}
 				}
+				App->render->ResetScrollBoxPositions();
 				currentScene = (Module*)App->sceneLevel3;
 			}
 		}
@@ -183,7 +186,7 @@ Update_Status ModuleLevel::Update()
 			//Load level
 			LOG("Loading Level 3.1");
 
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 90))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 45))
 			{
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
@@ -192,6 +195,7 @@ Update_Status ModuleLevel::Update()
 						grid[y][x] = GridType::EMPTY;
 					}
 				}
+				App->render->ResetScrollBoxPositions();
 				currentScene = (Module*)App->sceneLevel3x1;
 			}
 		}
@@ -201,7 +205,7 @@ Update_Status ModuleLevel::Update()
 			//Load level
 			LOG("Loading Level Boss");
 
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 90))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 45))
 			{
 				for (int y = 0; y < MAX_SIZE; y++)
 				{
@@ -210,6 +214,7 @@ Update_Status ModuleLevel::Update()
 						grid[y][x] = GridType::EMPTY;
 					}
 				}
+				App->render->ResetScrollBoxPositions();
 				currentScene = (Module*)App->sceneBossFight;
 			}
 		}
@@ -232,8 +237,8 @@ void ModuleLevel::RetunrToMainMenu()
 void ModuleLevel::RetunrToLevelSelection()
 {
 	LOG("RETURN TO LEVEL SELECTION")
-		if (gameState != LEVEL_SELECTION)
-			gameState = LEVEL_SELECTION;
+	if (gameState != LEVEL_SELECTION)
+		gameState = LEVEL_SELECTION;
 
 }
 
