@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleLevel.h"
+#include "ModulePlayer.h"
+#include "ModuleRender.h"
 #include <ctime>
 
 CoreMechaWalker::CoreMechaWalker(int x, int y) : Entity(x, y)
@@ -53,6 +55,8 @@ CoreMechaWalker::CoreMechaWalker(int x, int y) : Entity(x, y)
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
 
+	score.PushBack({ 80,248,16,8 });
+
 	currentAnim = &idleAnim;
 	state = IDLE;
 	direction = RIGHT;
@@ -79,8 +83,8 @@ void CoreMechaWalker::Update()
 		break;
 
 	case Entity::MOVE:
-		awakeCount++;
-		if ((App->frameCounter % 2) && awakeCount > 30) {
+		count++;
+		if ((App->frameCounter % 2) && count > 30) {
 
 			if ((colliderPosition.x - 24) % 16 == 0 && (colliderPosition.y - 32) % 16 == 0) CheckDirection();
 
@@ -104,7 +108,23 @@ void CoreMechaWalker::Update()
 
 		break;
 	case Entity::DEATH:
-		if (deathAnim.HasFinished() == true) SetToDelete();
+		if (deathAnim.HasFinished() == true) {
+			state = SCORE;
+			count = 0;
+			position.y = colliderPosition.y + 8 + 4;
+			position.x = colliderPosition.x;
+		}
+		break;
+	case Entity::SCORE:
+		count++;
+		currentAnim = &score;
+		if (count > 30)
+		{
+			scorePoints = 400 / 2;
+			App->player->score += scorePoints;
+			App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
+			SetToDelete();
+		}
 		break;
 	default:
 		break;
@@ -201,10 +221,14 @@ void CoreMechaWalker::CheckDirection()
 void CoreMechaWalker::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
+		if (collider != nullptr) {
+			collider->pendingToDelete = true;
+			collider = nullptr;
+		}
 		state = DEATH;
 		currentAnim = &deathAnim;
 	}
-	if (collider->type == Collider::Type::ENEMY)
+	if (collider != nullptr) if (collider->type == Collider::Type::ENEMY)
 	{
 		/*if (direction == UP) position.y++;
 		else if (direction == DOWN) position.y--;

@@ -15,7 +15,7 @@ public:
 
 private:
 	// The path that will define the position in the world
-
+	int count = 0;
 
 	// Entitie animations
 	Animation idleAnim, deathAnim;

@@ -2,6 +2,8 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleRender.h"
+#include "ModulePlayer.h"
 #include "ModuleLevel.h"
 #include "SceneLevel1.h"
 #include <ctime>
@@ -74,7 +76,9 @@ Pokapoka::Pokapoka(int x, int y) : Entity(x, y)
 	deathAnim.loop = false;
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
-	
+
+	score.PushBack({ 25, 248, 13, 8 });
+
 	currentAnim = &rightAnim;
 	state = IDLE;
 	direction = RIGHT;
@@ -127,7 +131,22 @@ void Pokapoka::Update()
 		if (atackAnim.HasFinished() == true) state = IDLE;
 		break;
 	case Entity::DEATH:
-		if (deathAnim.HasFinished()==true) SetToDelete();
+		if (deathAnim.HasFinished() == true) {
+			state = SCORE;
+			count = 0;
+			position.y = colliderPosition.y + 4;
+			position.x += 2;
+		}
+		break;
+	case Entity::SCORE:
+		count++;
+		currentAnim = &score;
+		if (count > 30)
+		{
+			scorePoints = 100/2;
+			App->player->score += scorePoints;
+			SetToDelete();
+		}
 		break;
 	default:
 		break;
@@ -223,10 +242,15 @@ void Pokapoka::CheckDirection()
 void Pokapoka::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
+		if (collider != nullptr) {
+			collider->pendingToDelete = true;
+			collider = nullptr;
+		}
+		App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
 		state = DEATH;
 		currentAnim = &deathAnim;
 	}
-	if (collider->type == Collider::Type::ENEMY)
+	if(collider!=nullptr) if (collider->type == Collider::Type::ENEMY)
 	{
 		/*if (direction == UP) position.y++;
 		else if (direction == DOWN) position.y--;
