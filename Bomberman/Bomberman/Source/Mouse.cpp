@@ -118,7 +118,7 @@ void Mouse::OnCollision(Collider* collider)
 		currentAnim = &deathAnim;
 		
 	}
-	if (collider->type == Collider::Type::ENEMY)
+	if (collider != nullptr) if (collider->type == Collider::Type::ENEMY)
 	{
 		/*if (direction == UP) position.y++;
 		else if (direction == DOWN) position.y--;

@@ -112,7 +112,7 @@ void CoreMechaWalker::Update()
 			state = SCORE;
 			count = 0;
 			position.y = colliderPosition.y + 8 + 4;
-			position.x = colliderPosition.x + 16;
+			position.x = colliderPosition.x;
 		}
 		break;
 	case Entity::SCORE:
@@ -228,7 +228,7 @@ void CoreMechaWalker::OnCollision(Collider* collider)
 		state = DEATH;
 		currentAnim = &deathAnim;
 	}
-	if (collider->type == Collider::Type::ENEMY)
+	if (collider != nullptr) if (collider->type == Collider::Type::ENEMY)
 	{
 		/*if (direction == UP) position.y++;
 		else if (direction == DOWN) position.y--;

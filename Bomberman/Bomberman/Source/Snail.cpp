@@ -139,7 +139,7 @@ void Snail::OnCollision(Collider* collider)
 		state = DEATH;
 		currentAnim = &deathAnim;
 	}
-	if (collider->type == Collider::Type::ENEMY)
+	if (collider != nullptr) if (collider->type == Collider::Type::ENEMY)
 	{
 		/*if (direction == UP) position.y++;
 		else if (direction == DOWN) position.y--;
