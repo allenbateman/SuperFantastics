@@ -96,6 +96,7 @@
     <ClInclude Include="ModulePowerUp.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="NextSpot.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Pokapoka.h" />
     <ClInclude Include="RedFlower.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="ModulePowerUp.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="NextSpot.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Pokapoka.cpp" />
     <ClCompile Include="RedFlower.cpp" />

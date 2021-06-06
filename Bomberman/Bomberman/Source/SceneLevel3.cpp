@@ -66,7 +66,8 @@ bool SceneLevel3::Start()
 	//Top left
 	App->collisions->AddCollider({ 0,32,86,32 }, Collider::Type::BOUNDS);
 	//Top right
-	App->collisions->AddCollider({ 168,32,86,32 }, Collider::Type::BOUNDS);
+	App->collisions->AddCollider({ 168,32,32,32 }, Collider::Type::BOUNDS);
+	App->collisions->AddCollider({ 217,32,16,32 }, Collider::Type::BOUNDS);
 	//Bottom left
 	App->collisions->AddCollider({ 0,176,86,32 }, Collider::Type::BOUNDS);
 	//Bottom right
@@ -104,7 +105,7 @@ bool SceneLevel3::Start()
 	grid[5][10] = MECHA_WALKER;
 	grid[4][4] = ORB;
 	grid[6][8] = ORB;
-	grid[0][11] = WIN_SPOT;
+	grid[0][11] = NEXT_SPOT;
 
 	int flowerAmount = rand() % 10 + 36;
 	int x = 0;
@@ -192,9 +193,9 @@ bool SceneLevel3::Start()
 			{
 				App->entities->AddEntity(Entity_Type::ORB, j, i);
 			}
-			else if (grid[i][j] == WIN_SPOT)
+			else if (grid[i][j] == NEXT_SPOT)
 			{
-				App->entities->AddEntity(Entity_Type::WIN, j, i);
+				App->entities->AddEntity(Entity_Type::NEXT, j, i);
 			}
 			else if (grid[i][j] == MOUSE)
 			{

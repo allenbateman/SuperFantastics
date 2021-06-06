@@ -12,6 +12,7 @@ enum class Entity_Type
 	RED_FLOWER,
 	ORB,
 	WIN,
+	NEXT,
 	MIDDLE_STRUCTURE,
 	POKAPOKA,
 	MECHA_WALKER,
@@ -22,6 +23,7 @@ enum class Entity_Type
 	BOMB_UP,
 	SARU,
 	BANANACHER
+
 };
 
 struct EntitySpawnpoint

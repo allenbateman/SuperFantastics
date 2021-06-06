@@ -11,6 +11,7 @@
 #include "RedFlower.h"
 #include "Orb.h"
 #include "WinSpot.h"
+#include "NextSpot.h"
 #include "MiddleStructure.h"
 #include "Pokapoka.h"
 #include "Bomb.h"
@@ -222,6 +223,9 @@ void ModuleEntities::SpawnEntity(const EntitySpawnpoint& info)
 					break;
 				case Entity_Type::WIN:
 					entities[i] = new WinSpot(info.x, info.y);
+					break;	
+				case Entity_Type::NEXT:
+					entities[i] = new NextSpot(info.x, info.y);
 					break;
 				case Entity_Type::POKAPOKA:
 					entities[i] = new Pokapoka(info.x, info.y);
