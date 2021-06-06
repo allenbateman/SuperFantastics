@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleLevel.h"
+#include "ModulePlayer.h"
 #include <ctime>
 
 Snail::Snail(int x, int y) : Entity (x, y)
@@ -54,6 +55,8 @@ Snail::Snail(int x, int y) : Entity (x, y)
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
 
+	score.PushBack({ 25, 248, 13, 8 });
+
 	currentAnim = &rightAnim;
 	state = IDLE;
 	direction = RIGHT;
@@ -101,7 +104,23 @@ void Snail::Update()
 		break;
 
 	case Entity::DEATH:
-		if (deathAnim.HasFinished() == true) SetToDelete();
+		if (deathAnim.HasFinished() == true) {
+			state = SCORE;
+			count = 0;
+			position.y = colliderPosition.y + 4;
+			position.x = colliderPosition.x + 2;
+		}
+		break;
+	case Entity::SCORE:
+		count++;
+		currentAnim = &score;
+		if (count > 30)
+		{
+			scorePoints = 100 / 2;
+			App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
+			App->player->score += scorePoints;
+			SetToDelete();
+		}
 		break;
 	default:
 		break;
@@ -113,6 +132,10 @@ void Snail::Update()
 void Snail::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
+		if (collider != nullptr) {
+			collider->pendingToDelete = true;
+			collider = nullptr;
+		}
 		state = DEATH;
 		currentAnim = &deathAnim;
 	}

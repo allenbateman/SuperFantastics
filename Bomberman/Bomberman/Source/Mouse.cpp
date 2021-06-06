@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleLevel.h"
+#include "ModuleRender.h"
+#include "ModulePlayer.h"
 #include <ctime>
 
 Mouse::Mouse(int x, int y) : Entity(x, y)
@@ -32,6 +34,8 @@ Mouse::Mouse(int x, int y) : Entity(x, y)
 	deathAnim.loop = false;
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
+
+	score.PushBack({ 80, 248, 16, 8 });
 
 	currentAnim = &moveAnim;
 	state = IDLE;
@@ -78,7 +82,23 @@ void Mouse::Update()
 		}
 		break;
 	case Entity::DEATH:
-		if (deathAnim.HasFinished() == true) SetToDelete();
+		if (deathAnim.HasFinished() == true) {
+			state = SCORE;
+			count = 0;
+			position.y = colliderPosition.y + 4;
+			position.x = colliderPosition.x;
+		}
+		break;
+	case Entity::SCORE:
+		count++;
+		currentAnim = &score;
+		if (count > 30)
+		{
+			scorePoints = 200 / 2;
+			App->player->score += scorePoints;
+			App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
+			SetToDelete();
+		}
 		break;
 	default:
 		break;
@@ -90,8 +110,13 @@ void Mouse::Update()
 void Mouse::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
+		if (collider != nullptr) {
+			collider->pendingToDelete = true;
+			collider = nullptr;
+		}
 		state = DEATH;
 		currentAnim = &deathAnim;
+		
 	}
 	if (collider->type == Collider::Type::ENEMY)
 	{
