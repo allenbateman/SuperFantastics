@@ -40,7 +40,8 @@ public:
 		LEVEL2 = 5,
 		LEVEL3 = 6,
 		LEVEL3X1 = 7,
-		BOSS = 8	
+		BOSS = 8,
+		GAMEOVER = 9
 	};
 	GameState gameState;
 	GridType grid[MAX_SIZE][MAX_SIZE];

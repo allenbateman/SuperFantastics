@@ -88,6 +88,8 @@ bool ModulePlayer::Start()
 
 	bomb = App->audio->LoadFx("Assets/Fx/19Bomb.wav");
 
+	death = App->audio->LoadFx("Assets/Fx/23Player_Death.mp3");
+
 	destroyed = false;
 	
 	isVisible = true;
@@ -396,6 +398,7 @@ Update_Status ModulePlayer::Update()
 				
 				destroyed = true;
 				lifes--;
+				//App->audio->PlayMusic("Assets/Fx/23PlayerDeath.mp3", 0.0f);
 				currentState = PlayerState::WAITNING;
 				App->levelManager->RestartLevel();
 			}

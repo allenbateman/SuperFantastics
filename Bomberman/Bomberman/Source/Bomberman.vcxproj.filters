@@ -178,6 +178,9 @@
     <ClInclude Include="NextSpot.h">
       <Filter>Source Files\Entities\Enviroment</Filter>
     </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -314,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="NextSpot.cpp">
       <Filter>Source Files\Entities\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>Source Files\Modules\Gameplay\Levels</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 #include "ModuleLevel.h"
+#include "ModulePlayer.h"
 #include <string>
 #include <iostream>
 
@@ -278,7 +279,15 @@ void ModuleLevel::RetunrToLevelSelection()
 
 void ModuleLevel::RestartLevel()
 {
-	App->fade->FadeToBlack(currentScene, currentScene, 60.0f);
+	if (App->player->lifes < 0)
+	{
+		gameState = GAMEOVER;
+
+		App->fade->FadeToBlack(currentScene, (Module*)App->sceneGameOver, 60.0f);
+	}
+	else {
+		App->fade->FadeToBlack(currentScene, currentScene, 60.0f);
+	}
 }
 
 ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIteration)

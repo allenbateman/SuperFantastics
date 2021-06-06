@@ -72,6 +72,7 @@ public:
 
 	// Sound effects indices
 	uint bomb = 0;
+	uint death = 0;
 
 	// Font score index
 	uint score = 0;
