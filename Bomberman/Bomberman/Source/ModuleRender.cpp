@@ -40,7 +40,7 @@ bool ModuleRender::Init()
 	}
 	debug = false;
 	// Set render logical size
-	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);		// Uncomment previous for fullscreen
+	//SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);		// Uncomment previous for fullscreen
 
 	return ret;
 }
