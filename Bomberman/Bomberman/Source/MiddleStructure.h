@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 
-#define COLLIDERS 7
+#define COLLIDERS 8
 
 class MiddleStructure : public Entity
 {

@@ -392,10 +392,19 @@ Update_Status ModulePlayer::Update()
 			{
 				currentState = PlayerState::WINING;
 			}
-			
-			if (nOrbs >= 2 )
+			if (currentScene == (Module*)App->sceneLevel3x1)
 			{
-				CollectedOrbs = true;
+				if (nOrbs >= 1)
+				{
+					CollectedOrbs = true;
+				}
+			}
+			else
+			{
+				if (nOrbs >= 2)
+				{
+					CollectedOrbs = true;
+				}
 			}
 
 			break;
@@ -527,17 +536,38 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			 default:
 				break;
 		}
+		
 		c1->SetPos(position.x, position.y);
-	}else if(c2->type == Collider::Type::BOUNDS){
+
+
+	}
+	else if (c2->type == Collider::Type::WIN)
+	{
+		if (CollectedOrbs == false && lastKeyPressed == SDL_SCANCODE_UP)
+		{
+			position.y += speed;
+			if (position.x + 16 <= c2->rect.x + 7)
+			{
+				position.x -= 1;
+				position.y -= 1;
+			}
+			if (position.x >= c2->rect.x + 9)
+			{
+				position.x += 1;
+				position.y -= 1;
+			}
+		}
+		else
+		{
+			currentState = PlayerState::WINING;
+		}
+	}
+	else if(c2->type == Collider::Type::BOUNDS){
 		position = lastPos;
 	}
 	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT || c2->type == Collider::Type::EXPLOSION)
 	{
 		currentState = PlayerState::DEAD;
-	}
-	else if (c2->type == Collider::Type::WIN)
-	{
-		currentState = PlayerState::WINING;
 	}
 }
 

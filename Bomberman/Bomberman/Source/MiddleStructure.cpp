@@ -37,7 +37,6 @@ MiddleStructure::MiddleStructure(int x, int y) : Entity(x, y)
 				{
 					if (colliders[n] == nullptr)
 					{
-	
 						colliders[n] = App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::STRUCTURE, (Module*)App->entities);
 			
 						break;

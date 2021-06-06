@@ -96,10 +96,10 @@ bool SceneLevel1::Start()
 	grid[3][6] = STRUCTURE;
 	grid[3][7] = STRUCTURE;
 	grid[4][5] = STRUCTURE;
-	grid[4][6] = WIN_SPOT;
 	grid[4][7] = STRUCTURE;
 	grid[5][5] = STRUCTURE;
 	grid[5][7] = STRUCTURE;
+	grid[4][6] = WIN_SPOT;
 
 	int flowerAmount = rand() % 10 + 35;
 	int x = 0;
@@ -190,6 +190,15 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
+	//if (App->player->CollectedOrbs == true)
+	//{
+	//	grid[4][6] = WIN_SPOT;
+	//}
+	//else
+	//{
+	//	grid[4][6] = STRUCTURE;
+	//}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
