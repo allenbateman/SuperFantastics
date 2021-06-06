@@ -5,7 +5,7 @@
 #include "Animation.h"
 
 #define LVL_TWO_HEIGHT 11
-#define LVL_TWO_WIDTH 28
+#define LVL_TWO_WIDTH 29
 
 struct SDL_Texture;
 
@@ -48,9 +48,8 @@ public:
 	GridType grid[LVL_TWO_HEIGHT][LVL_TWO_WIDTH];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;
-	SDL_Rect levelBounds = {0,0,1024,224};
+	SDL_Rect levelBounds = { 0,0,1024,224 };
 	int numScene = 2;
 	int orbs = 2;
 };
-
 #endif

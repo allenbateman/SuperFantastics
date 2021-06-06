@@ -24,7 +24,7 @@ void WinSpot::Update()
 	if (winCollider == nullptr)
 	{
 		for (int i = 0; i < 11; i++) {
-			for (int j = 0; j < 13; j++) {
+			for (int j = 0; j < App->levelManager->activeLevelWidth; j++) {
 				if (App->levelManager->grid[i][j] == Module::WIN_SPOT)
 				{
 					winCollider = App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WIN, (Module*)App->entities);

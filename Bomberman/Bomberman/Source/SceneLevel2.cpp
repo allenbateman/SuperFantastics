@@ -52,12 +52,13 @@ bool SceneLevel2::Start()
 	//BoundColliders
 	//Left collider
 	App->collisions->AddCollider({ 0,23,24,223 }, Collider::Type::BOUNDS);
-
 	//Right Collider
+	App->collisions->AddCollider({ 488,23,24,223 }, Collider::Type::BOUNDS);
+	//Top Collider
+	App->collisions->AddCollider({ 24,24,488,8 }, Collider::Type::BOUNDS);
+	//Bottom collider
+	/*App->collisions->AddCollider({ 24,208,488,8 }, Collider::Type::BOUNDS);*/
 
-	//Collider 
-
-	//top river
 	App->collisions->AddCollider({ 168,32,241,32 }, Collider::Type::BOUNDS);
 	//botRiver
 	App->collisions->AddCollider({ 168,176,241,32 }, Collider::Type::BOUNDS);
@@ -67,7 +68,7 @@ bool SceneLevel2::Start()
 
 	for (int i = 0; i < 11; i++)
 	{
-		for (int j = 0; j < 28; j++)
+		for (int j = 0; j < 29; j++)
 		{
 			grid[i][j] = EMPTY;
 		}
@@ -75,7 +76,7 @@ bool SceneLevel2::Start()
 	
 	for (int i = 1; i < 11; i += 2)
 	{
-		for (int j = 1; j < 28; j += 2)
+		for (int j = 1; j < 29; j += 2)
 		{
 			grid[i][j] = ROCK;
 		}
@@ -95,31 +96,6 @@ bool SceneLevel2::Start()
 	grid[7][20] = ROCK;
 	grid[6][25] = ROCK;
 	grid[7][26] = ROCK;
-	grid[0][9] = ROCK;
-	grid[1][10] = ROCK;
-	grid[1][12] = ROCK;
-	grid[1][14] = ROCK;
-	grid[2][15] = ROCK;
-	grid[4][15] = ROCK;
-	grid[6][15] = ROCK;
-	grid[8][15] = ROCK;
-	grid[4][16] = ROCK;
-	grid[6][16] = ROCK;
-	grid[2][17] = ROCK;
-	grid[4][17] = ROCK;
-	grid[6][17] = ROCK;
-	grid[8][17] = ROCK;
-	grid[9][18] = ROCK;
-	grid[9][20] = ROCK;
-	grid[9][22] = ROCK;
-	grid[10][22] = ROCK;
-	grid[1][18] = ROCK;
-	grid[1][20] = ROCK;
-	grid[1][22] = ROCK;
-	grid[10][9] = ROCK;
-	grid[9][10] = ROCK;
-	grid[9][12] = ROCK;
-	grid[9][14] = ROCK;
 
 	//Entities + Win spot
 	grid[0][1] = PLAYER;
@@ -165,6 +141,7 @@ bool SceneLevel2::Start()
 	grid[3][15] = EMPTY;
 	grid[3][17] = EMPTY;
 	grid[5][15] = EMPTY;
+	grid[5][16] = EMPTY;
 	grid[5][17] = EMPTY;
 	grid[7][15] = EMPTY;
 	grid[7][17] = EMPTY;
@@ -181,11 +158,95 @@ bool SceneLevel2::Start()
 	grid[0][14] = EMPTY;
 	grid[0][15] = EMPTY;
 
+	grid[0][9] = WALL;
+	grid[1][10] = WALL;
+	grid[1][12] = WALL;
+	grid[1][14] = WALL;
+	grid[2][15] = WALL;
+	grid[4][15] = WALL;
+	grid[6][15] = WALL;
+	grid[8][15] = WALL;
+	grid[4][16] = WALL;
+	grid[6][16] = WALL;
+	grid[2][17] = WALL;
+	grid[4][17] = WALL;
+	grid[6][17] = WALL;
+	grid[8][17] = WALL;
+	grid[9][18] = WALL;
+	grid[9][20] = WALL;
+	grid[9][22] = WALL;
+	grid[10][22] = WALL;
+	grid[1][18] = WALL;
+	grid[1][20] = WALL;
+	grid[1][22] = WALL;
+	grid[10][9] = WALL;
+	grid[9][10] = WALL;
+	grid[9][12] = WALL;
+	grid[9][14] = WALL;
+	grid[0][10] = WALL;
+	grid[0][11] = WALL;
+	grid[0][12] = WALL;
+	grid[0][13] = WALL;
+	grid[0][14] = WALL;
+	grid[0][15] = WALL;
+	grid[0][16] = WALL;
+	grid[0][17] = WALL;
+	grid[0][18] = WALL;
+	grid[0][19] = WALL;
+	grid[0][20] = WALL;
+	grid[0][21] = WALL;
+	grid[0][22] = WALL;
+	grid[0][23] = WALL;
+	grid[1][10] = WALL;
+	grid[1][12] = WALL;
+	grid[1][14] = WALL;
+	grid[1][16] = WALL;
+	grid[1][18] = WALL;
+	grid[1][20] = WALL;
+	grid[9][10] = WALL;
+	grid[9][12] = WALL;
+	grid[9][14] = WALL;
+	grid[9][16] = WALL;
+	grid[9][18] = WALL;
+	grid[9][20] = WALL;
+	grid[10][10] = WALL;
+	grid[10][11] = WALL;
+	grid[10][12] = WALL;
+	grid[10][13] = WALL;
+	grid[10][14] = WALL;
+	grid[10][15] = WALL;
+	grid[10][16] = WALL;
+	grid[10][17] = WALL;
+	grid[10][18] = WALL;
+	grid[10][19] = WALL;
+	grid[10][20] = WALL;
+	grid[10][21] = WALL;
+	grid[10][22] = WALL;
+	grid[10][23] = WALL;
+	grid[2][15] = WALL;
+	grid[3][15] = WALL;
+	grid[4][15] = WALL;
+	grid[6][15] = WALL;
+	grid[7][15] = WALL;
+	grid[8][15] = WALL;
+	grid[2][16] = WALL;
+	grid[3][16] = WALL;
+	grid[4][16] = WALL;
+	grid[6][16] = WALL;
+	grid[7][16] = WALL;
+	grid[8][16] = WALL;
+	grid[2][17] = WALL;
+	grid[3][17] = WALL;
+	grid[4][17] = WALL;
+	grid[6][17] = WALL;
+	grid[7][17] = WALL;
+	grid[8][17] = WALL;
+
 	middleStructureIsSet = false;
 
 	// Generate scene entity or rock collisions
 	for (int i = 0; i < 11; i++) {
-		for (int j = 0; j < 28; j++)
+		for (int j = 0; j < 29; j++)
 		{
 			if (grid[i][j] == PLAYER)
 			{
@@ -193,6 +254,10 @@ bool SceneLevel2::Start()
 				pos.x = 24 + j * 16;
 				pos.y = 32 + i * 16;
 				App->player->position = pos;
+			}
+			else if (grid[i][j] == WALL)
+			{
+				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);
 			}
 			else if (grid[i][j] == ROCK)
 			{

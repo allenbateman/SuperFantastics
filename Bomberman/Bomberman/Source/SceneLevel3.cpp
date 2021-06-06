@@ -171,6 +171,10 @@ bool SceneLevel3::Start()
 				pos.y = 32 + i * 16;
 				App->player->position = pos;
 			}
+			else if (grid[i][j] == WALL)
+			{
+				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::BOUNDS);
+			}
 			else if (grid[i][j] == ROCK)
 			{
 				App->collisions->AddCollider({ 24 + (j * 16),32 + (i * 16),16,16 }, Collider::Type::WALL);

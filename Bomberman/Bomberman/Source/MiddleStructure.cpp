@@ -36,7 +36,7 @@ MiddleStructure::MiddleStructure(int x, int y) : Entity(x, y)
 	currentAnim = &idleAnim;
 
 	for (int i = 0; i < 11; i++) {
-		for (int j = 0; j < 13; j++){
+		for (int j = 0; j < App->levelManager->activeLevelWidth; j++){
 			if (App->levelManager->grid[i][j] == Module::STRUCTURE)
 			{
 				for (int n = 0; n < COLLIDERS; n++)
