@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleLevel.h"
+#include "ModulePlayer.h"
+#include "ModuleRender.h"
 
 RedFlower::RedFlower(int x, int y) : Entity(x, y)
 {
@@ -25,6 +27,11 @@ RedFlower::RedFlower(int x, int y) : Entity(x, y)
 	deathAnim.mustFlip = false;
 	deathAnim.speed = 0.1f;
 
+	score.PushBack({ 25,248,13,8 });
+	score.loop = true;
+	score.mustFlip = false;
+	score.speed = 0.1f;
+
 	scorePoints = 100;
 }
 
@@ -40,12 +47,24 @@ void RedFlower::Update()
 		break;
 	case Entity::DEATH:
 		currentAnim = &deathAnim;
-		if (deathAnim.HasFinished() == true)
-		{
-			SetToDelete();
-			App->levelManager->SetGridType(Module::GridType::EMPTY, position.y, position.x, 0, 0);
+		if (deathAnim.HasFinished() == true) {
+			state = SCORE;
+			currentAnim = nullptr;
+			count = 0;
+			position.y += 4;
 		}
 		break;
+	case Entity::SCORE:
+		currentAnim = &score;
+		if (count > 30)
+		{
+			scorePoints = 100/2;
+			App->player->score += scorePoints;
+			App->levelManager->SetGridType(Module::GridType::EMPTY, position.y, position.x, 0, 0);
+			count = 0;
+			SetToDelete();
+		}
+		else count++;
 	}
 }
 
@@ -53,5 +72,9 @@ void RedFlower::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
 		state = DEATH;
+		if (collider != nullptr) {
+			collider->pendingToDelete = true;
+			collider = nullptr;
+		}
 	}
 }

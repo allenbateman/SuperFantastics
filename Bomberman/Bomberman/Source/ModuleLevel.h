@@ -26,6 +26,7 @@ public:
 	Update_Status Update() override;
 	bool CleanUp() override;
 	Module* currentScene = nullptr;
+	void PassedLevel();
 	void RetunrToMainMenu();
 	void RetunrToLevelSelection();
 
@@ -49,6 +50,6 @@ public:
 	GridType SetGridType(GridType type, int y, int x, int yIteration = 0, int xIterantion = 0);
 	int frameCounter = 0;
 	int delayTime = 100;
-	int currentLevel = 1;
+	int levelsPassed = 0;
 };
 #endif // __MODULE_LEVEL_H__

@@ -47,7 +47,6 @@ public:
 	Animation partAnimation;
 
 	int selectedStage = 0;
-	int maxStage = 1;
 	bool exit = false;
 
 	bool showSelectedLevel = true;

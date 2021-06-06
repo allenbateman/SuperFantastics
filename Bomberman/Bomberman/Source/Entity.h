@@ -69,7 +69,8 @@ public:
 		IDLE,
 		MOVE,
 		ATACK,
-		DEATH
+		DEATH,
+		SCORE
 	};
 
 	State state;
@@ -78,6 +79,7 @@ public:
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+	Animation score;
 
 	// The Entity's collider
 	Collider* collider = nullptr;

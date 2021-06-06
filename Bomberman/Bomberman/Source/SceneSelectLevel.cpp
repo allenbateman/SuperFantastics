@@ -42,8 +42,6 @@ bool SceneSelectLevel::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	selectedStage = 0;
-
 	for (int i = 0; i < 8; i++) {
 		partAnimation.PushBack({i * 16, 416, 16, 16});
 	}
@@ -94,7 +92,7 @@ Update_Status SceneSelectLevel::Update()
 	{
 		selectedStage++;
 
-		if (selectedStage >= maxStage)
+		if (selectedStage > App->levelManager->levelsPassed || selectedStage >= MAX_STAGES)
 		{
 			selectedStage = 0;
 		}
@@ -105,7 +103,11 @@ Update_Status SceneSelectLevel::Update()
 
 		if (selectedStage < 0)
 		{
-			selectedStage = maxStage - 1;
+			selectedStage = App->levelManager->levelsPassed;
+
+			if (selectedStage >= MAX_STAGES) {
+				selectedStage = MAX_STAGES - 1;
+			}
 		}
 	}
 
@@ -120,14 +122,14 @@ Update_Status SceneSelectLevel::Update()
 
 	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN)
 	{
-		if (maxStage < MAX_STAGES) {
-			maxStage++;
+		if (App->levelManager->levelsPassed < MAX_STAGES) {
+			App->levelManager->levelsPassed++;
 		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN)
 	{
-		maxStage = 1;
+		App->levelManager->levelsPassed = 0;
 		selectedStage = 0;
 	}
 
@@ -153,12 +155,12 @@ Update_Status SceneSelectLevel::PostUpdate()
 
 	SDL_Rect rect = partAnimation.GetCurrentFrame();
 
-	switch (maxStage) {
-		case 1:
+	switch (App->levelManager->levelsPassed) {
+		case 0:
 			App->render->Blit(sheetTexture, 52, 56, &rect);
-		case 2:
+		case 1:
 			App->render->Blit(sheetTexture, 103, 80, &rect);
-		case 3:
+		case 2:
 			App->render->Blit(sheetTexture, 60, 76, &rect);
 	}
 	
