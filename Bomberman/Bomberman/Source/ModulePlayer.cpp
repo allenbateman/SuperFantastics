@@ -404,10 +404,7 @@ Update_Status ModulePlayer::Update()
 				frameCounter = 0;
 			}
 			else if (currentAnimation == &winAnim && frameCounter > 550) {
-				
-				//save player status...
-				//Disable current level...
-				//DisablePlayer();
+	
 				App->levelManager->RetunrToLevelSelection();
 				App->levelManager->currentLevel++;
 				currentState = PlayerState::WAITNING;
@@ -427,7 +424,6 @@ Update_Status ModulePlayer::Update()
 
 Update_Status ModulePlayer::PostUpdate()
 {
-	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
 
 	return Update_Status::UPDATE_CONTINUE;
