@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleLevel.h"
 #include "ModulePlayer.h"
+#include "Bananacher.h"
 #include <ctime>
 
 Saru::Saru(int x, int y) : Entity(x, y)
@@ -69,6 +70,14 @@ void Saru::Update()
 {
 	Entity::Update();
 
+	if (life <= 0)
+	{
+		App->player->defeatedBoss = true;
+		state = DEATH;
+	}
+	else {
+		if (App->player->defeatedBoss == true) state = DEATH;
+	}
 
 	switch (state)
 	{
@@ -129,8 +138,12 @@ void Saru::Update()
 
 		break;
 	case Entity::DEATH:
-		currentAnim = &deathAnim;
-		if (deathAnim.HasFinished() == true) SetToDelete();
+		currentAnim = nullptr;//&deathAnim;
+		if (collider != nullptr) {
+			collider->pendingToDelete = true;
+			collider = nullptr;
+		}
+		SetToDelete();
 		break;
 	default:
 		break;
@@ -186,50 +199,30 @@ void Saru::CheckDirection()
 
 	//---------------------------Saru movement----------------------------------------------------
 	iPoint playerPos = App->player->position;
-	/*int difX = colliderPosition.x - playerPos.x;
-	int difY = colliderPosition.y - playerPos.y;*/
+	iPoint diff;
 
-	int changeCount = 0;
+	diff.x = colliderPosition.x - playerPos.x;
+	diff.y = colliderPosition.y - playerPos.y;
+	if (diff.x < 0) diff.x *= -1;
+	if (diff.y < 0) diff.y *= -1;
 
-	// quiero llorar, no entra en ningun for xD-------------------------------------------------------
-	if (colliderPosition.x > playerPos.x) {
-		for (int i = 0; i < avaibleCount; i++)
-		{
-			if (avaibleDirections[avaibleCount] == RIGHT) {
-				direction = avaibleDirections[avaibleCount];
-				changeCount++;
-			}
+	if (avaibleCount >= 3) {
+		if (diff.x < diff.y) {
+			if (colliderPosition.y > playerPos.y) direction = DOWN;
+			else direction = UP;
+			if (colliderPosition.x > playerPos.x) direction = RIGHT;
+			else direction = LEFT;
 		}
-			
-	}
-	else {
-		for (int i = 0; i < avaibleCount; i++)
+		else
 		{
-			if (avaibleDirections[avaibleCount] == LEFT) {
-				direction = avaibleDirections[avaibleCount];
-				changeCount++;
-			}
+			if (colliderPosition.x > playerPos.x) direction = RIGHT;
+			else direction = LEFT;
+			if (colliderPosition.y > playerPos.y) direction = DOWN;
+			else direction = UP;
 		}
 	}
-	if (colliderPosition.y < playerPos.y) {
-		for (int i = 0; i < avaibleCount; i++)
-		{
-			if (avaibleDirections[avaibleCount] == UP) {
-				direction = avaibleDirections[avaibleCount];
-				changeCount++;
-			}
-		}
-	}
-	else {
-		for (int i = 0; i < avaibleCount; i++)
-		{
-			if (avaibleDirections[avaibleCount] == DOWN) {
-				direction = avaibleDirections[avaibleCount];
-				changeCount++;
-			}
-		}
-	}
-	//-----------------------------------------------------------------------------------------------
+
+
 	
 
 	switch (direction)
@@ -273,8 +266,6 @@ bool Saru::PlayerNear() {
 		if (difX < 0) difX *= -1;
 		if (difY < 0) difY *= -1;
 
-		if (difX < difY) goVertical = false;
-		else goVertical = true;
 	}
 	else ret = false;
 
@@ -283,9 +274,11 @@ bool Saru::PlayerNear() {
 
 void Saru::OnCollision(Collider* collider)
 {
-	if (collider->type == Collider::Type::EXPLOSION) {
+	if (collider->type == Collider::Type::EXPLOSION && inmunity == false) {
 		//state = DEATH;
-		//currentAnim = &deathAnim;
+		inmunity = true;
+		count = 0;
 		life--;
+		//currentAnim = &deathAnim;
 	}
 }

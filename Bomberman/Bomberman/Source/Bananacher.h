@@ -16,9 +16,13 @@ public:
 	void CheckDirection();
 	void SetToDelete() override;
 
+	int life = 8;
+
 private:
 	// The path that will define the position in the world
-	int life = 8;
+	bool inmunity = false;
+	int count = 0;
+
 	
 	// Entitie animations
 	Animation upAnim, downAnim, leftAnim, rightAnim, deathAnim, damagedAnim;

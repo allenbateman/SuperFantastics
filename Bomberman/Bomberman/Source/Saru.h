@@ -16,9 +16,13 @@ public:
 
 	bool PlayerNear();
 
+	int life = 4;
+
 private:
 	// The path that will define the position in the world
-	int life = 4;
+	
+	int count = 0;
+	bool inmunity = false;
 	bool canStop = true;
 	bool goVertical;
 

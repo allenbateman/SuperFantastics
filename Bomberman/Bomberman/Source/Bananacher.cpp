@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleLevel.h"
 #include "ModulePlayer.h"
+#include "Saru.h"
 #include <ctime>
 
 Bananacher::Bananacher(int x, int y) : Entity(x, y)
@@ -63,7 +64,35 @@ Bananacher::Bananacher(int x, int y) : Entity(x, y)
 	upAnim.mustFlip = false;
 	upAnim.speed = 0.1f;
 
-	//improve death anim spritesheet pq que pereza
+	// death
+	deathAnim.PushBack({ 112,272,64,80 });
+	deathAnim.PushBack({ 176,272,64,80 });
+	deathAnim.PushBack({ 240,272,64,80 });
+	deathAnim.PushBack({ 304,272,64,80 });
+	deathAnim.PushBack({ 368,272,64,80 });
+	deathAnim.PushBack({ 432,272,64,80 });
+	deathAnim.PushBack({ 496,272,64,80 });
+	deathAnim.PushBack({ 560,272,64,80 });
+	deathAnim.PushBack({ 624,272,64,80 });
+	deathAnim.PushBack({ 688,272,64,80 });
+	deathAnim.PushBack({ 752,272,64,80 });
+	deathAnim.PushBack({ 816,272,64,80 });
+
+	deathAnim.PushBack({ 112,352,64,80 });
+	deathAnim.PushBack({ 176,352,64,80 });
+	deathAnim.PushBack({ 240,352,64,80 });
+	deathAnim.PushBack({ 304,352,64,80 });
+	deathAnim.PushBack({ 368,352,64,80 });
+	deathAnim.PushBack({ 432,352,64,80 });
+	deathAnim.PushBack({ 496,352,64,80 });
+	deathAnim.PushBack({ 560,352,64,80 });
+	deathAnim.PushBack({ 624,352,64,80 });
+	deathAnim.PushBack({ 688,352,64,80 });
+	deathAnim.PushBack({ 752,352,64,80 });
+
+	deathAnim.loop = false;
+	deathAnim.mustFlip = false;
+	upAnim.speed = 0.1f;
 
 
 	currentAnim = &downAnim;
@@ -82,7 +111,20 @@ void Bananacher::Update()
 {
 	Entity::Update();
 
+	//App->sceneBossFight->
+	if (life <= 0)
+	{
+		App->player->defeatedBoss = true;
+		state = DEATH;
+	}
+	else {
+		if (App->player->defeatedBoss == true) state = DEATH;
+	}
 
+	if (inmunity == true) {
+		count++;
+		if (count > 60) inmunity = false;
+	}
 
 	switch (state)
 	{
@@ -127,11 +169,17 @@ void Bananacher::Update()
 			//App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::BANANACHER;
 		}
 
-		
-
 		break;
 	case Entity::DEATH:
-		if (deathAnim.HasFinished() == true) SetToDelete();
+		currentAnim = &deathAnim;
+		if (deathAnim.HasFinished() == true) {
+			SetToDelete();
+			// METER WIN CONDITION
+		}
+		if (collider != nullptr) {
+			collider->pendingToDelete = true;
+			collider = nullptr;
+		}
 		break;
 	default:
 		break;
@@ -250,8 +298,10 @@ void Bananacher::CheckDirection()
 
 void Bananacher::OnCollision(Collider* collider)
 {
-	if (collider->type == Collider::Type::EXPLOSION) {
+	if (collider->type == Collider::Type::EXPLOSION && inmunity == false) {
 		//state = DEATH;
+		inmunity = true;
+		count = 0;
 		life--;
 		//currentAnim = &deathAnim;
 	}
