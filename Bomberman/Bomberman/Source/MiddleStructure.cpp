@@ -15,7 +15,9 @@ MiddleStructure::MiddleStructure(int x, int y) : Entity(x, y)
 
 	//Structure Animation
 	idleAnim.PushBack({ 48, 98, 48, 64 });
+	idleAnim.PushBack({ 48, 98, 48, 64 });
 	idleAnim.PushBack({ 96, 98, 48, 64 });
+	idleAnim.PushBack({ 144, 98, 48, 64 });
 	idleAnim.PushBack({ 144, 98, 48, 64 });
 	idleAnim.PushBack({ 96, 98, 48, 64 });
 	idleAnim.loop = true;
@@ -23,7 +25,9 @@ MiddleStructure::MiddleStructure(int x, int y) : Entity(x, y)
 
 	//Destroyed Animation
 	winAnim.PushBack({ 0, 162, 48, 64 });
+	winAnim.PushBack({ 0, 162, 48, 64 });
 	winAnim.PushBack({ 48, 162, 48, 64 });
+	winAnim.PushBack({ 96, 162, 48, 64 });
 	winAnim.PushBack({ 96, 162, 48, 64 });
 	winAnim.PushBack({ 48, 162, 48, 64 });
 	winAnim.loop = true;

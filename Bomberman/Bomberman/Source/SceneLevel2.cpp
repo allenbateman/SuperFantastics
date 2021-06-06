@@ -57,9 +57,9 @@ bool SceneLevel2::Start()
 	//Collider 
 
 	//top river
-	App->collisions->AddCollider({ 167,32,241,32 }, Collider::Type::BOUNDS);
+	App->collisions->AddCollider({ 168,32,241,32 }, Collider::Type::BOUNDS);
 	//botRiver
-	App->collisions->AddCollider({ 167,176,241,32 }, Collider::Type::BOUNDS);
+	App->collisions->AddCollider({ 168,176,241,32 }, Collider::Type::BOUNDS);
 
 
 	// Fixed positions

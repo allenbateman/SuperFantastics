@@ -101,14 +101,14 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 30))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneIntro, 90))
 			currentScene = (Module*)App->sceneIntro;
 		}
 		break;
 	case LEVEL_SELECTION:
 		if (currentScene != (Module*)App->sceneSelectLevel) {
 			LOG("Loading Level Selection");
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 30))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 90))
 			currentScene = (Module*)App->sceneSelectLevel;
 		}
 		break;
@@ -125,7 +125,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			if(App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 30))
+			if(App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel1, 90))
 				currentScene = (Module*)App->sceneLevel1;
 		}
 		break;
@@ -141,7 +141,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 30))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel2, 90))
 			currentScene = (Module*)App->sceneLevel2;
 		}
 		break;
@@ -156,7 +156,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 30))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3, 90))
 			currentScene = (Module*)App->sceneLevel3;
 		}
 		break;
@@ -171,7 +171,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 30))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneLevel3x1, 90))
 			currentScene = (Module*)App->sceneLevel3x1;
 		}
 		break;
@@ -186,7 +186,7 @@ Update_Status ModuleLevel::Update()
 					grid[y][x] = GridType::EMPTY;
 				}
 			}
-			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 30))
+			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneBossFight, 90))
 			currentScene = (Module*)App->sceneBossFight;
 		}
 		break;

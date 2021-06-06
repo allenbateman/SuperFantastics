@@ -63,10 +63,9 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	deathAnim.speed = 0.15f;
 
 	// Win Animation
-	winAnim.PushBack({ 0,74,17,19 });
 	winAnim.PushBack({ 18,73,17,20 });
 	winAnim.PushBack({ 40,71,15,23 });
-	winAnim.loop = false;
+	winAnim.loop = true;
 	winAnim.speed = 0.1f;
 }
 
@@ -424,11 +423,12 @@ Update_Status ModulePlayer::Update()
 			break;
 		case PlayerState::WINING:
 			if (currentAnimation != &winAnim) {
+				App->audio->PlayMusic("Assets/Music/Victory.ogg", 0.0f);
 				winAnim.Reset();
 				currentAnimation = &winAnim;
 				frameCounter = 0;
 			}
-			else if (currentAnimation == &winAnim && currentAnimation->HasFinished() && frameCounter > 60) {
+			else if (currentAnimation == &winAnim && frameCounter > 550) {
 				
 				//save player status...
 				//Disable current level...
