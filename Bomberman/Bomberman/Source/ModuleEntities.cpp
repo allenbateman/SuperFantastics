@@ -166,13 +166,7 @@ void ModuleEntities::HandleEntitiesDespawn()
 	{
 		if (entities[i] != nullptr)
 		{
-			// Delete the Entitie when it has reached the end of the screen
-			if (entities[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
-			{
-				LOG("DeSpawning Entity at %d", entities[i]->position.x * SCREEN_SIZE);
 
-				entities[i]->SetToDelete();
-			}
 		}
 	}
 }
