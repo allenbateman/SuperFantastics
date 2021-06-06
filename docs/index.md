@@ -25,7 +25,8 @@ Boberman has the power of dropping bombs around the map, these bombs can either 
 ## Controls
 
 ``` CONTROLS HERE
-KEYBOARD
+
+**KEYBOARD**
 - Move up: up arrow
 - Move down: down arrow
 - Move left: left arrow
@@ -33,7 +34,7 @@ KEYBOARD
 - Place bomb: C key
 - Skip introduction and select level/exit : Enter button
 
-GAMEPAD
+**GAMEPAD**
 - Moves the character / Moves around Ui: directional pad or left joystick
 - Place a bomb: X button
 - Skip scene / select level: A button
