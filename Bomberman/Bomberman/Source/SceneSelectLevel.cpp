@@ -91,7 +91,6 @@ Update_Status SceneSelectLevel::Update()
 			App->levelManager->gameState = state;
 		}
 		else {
-			// FIX: Go main menu or exit game?
 			return Update_Status::UPDATE_STOP;
 		}
 	}

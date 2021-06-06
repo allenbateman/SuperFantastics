@@ -51,14 +51,6 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 	font.texture = tex;
 	font.rows = rows;
 
-	// TODO 1: Finish storing font data
-
-	// totalLength ---	length of the lookup table
-	// table ---------  All characters displayed in the same order as the texture
-	// columns -------  Amount of chars per row of the texture
-	// char_w --------	Width of each character
-	// char_h --------	Height of each character
-
 	strcpy_s(fonts[id].table, MAX_FONT_CHARS, characters);
 	font.totalLength = strlen(characters);
 	font.columns = fonts[id].totalLength / rows;
@@ -100,7 +92,6 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 
 	for(uint i = 0; i < len; ++i)
 	{
-		// TODO 2: Find the character in the table and its position in the texture, then Blit
 		uint charIndex = 0;
 
 		// Find the location of the current character in the lookup table
