@@ -115,10 +115,6 @@ Update_Status ModuleLevel::Update()
 			LOG("Loading Level Selection");
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 45))
 			{
-				App->sceneSelectLevel->maxStage = currentLevel + 1;
-				App->sceneSelectLevel->selectedStage = currentLevel;
-				
-
 				currentScene = (Module*)App->sceneSelectLevel;
 			}
 		}
