@@ -31,6 +31,8 @@ public:
 	SDL_Texture* powerupTex = nullptr;
 	SDL_Texture* uiTex = nullptr;
 
+	SDL_Rect uiRect = {0,0,256,24};
+
 	p2Point<int> orbPos = { 56, 8 };
 	SDL_Rect orbRect = { 0,24,8,16 };
 	SDL_Rect deletedOrbRect = { 8,24,8,16 };

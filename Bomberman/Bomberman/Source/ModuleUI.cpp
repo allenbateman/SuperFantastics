@@ -39,6 +39,10 @@ Update_Status ModuleUI::Update()
 }
 
 Update_Status ModuleUI::PostUpdate(){
+	int uiXoffset = App->render->leftBox.x;
+
+	App->render->Blit(uiTex, uiXoffset, 0, &uiRect);
+
 	int x = 136;
 	int y = 8;
 	int score = App->player->score;
@@ -56,7 +60,7 @@ Update_Status ModuleUI::PostUpdate(){
 
 		if (draw || i > 5) {
 			rec = { d * 8,0,8,8 };
-			App->render->Blit(numTex, x + (8 * i), y, &rec);
+			App->render->Blit(numTex, x + (8 * i) + uiXoffset, y, &rec);
 		}
 		score = score % digits;
 		digits /= 10;
@@ -64,25 +68,25 @@ Update_Status ModuleUI::PostUpdate(){
 
 	// draw lifes
 	rec = { App->player->lifes * 8,0,8,8 };
-	App->render->Blit(numTex, 232, y, &rec);
+	App->render->Blit(numTex, 232 + uiXoffset, y, &rec);
 
 	// draw time
 	rec = { timeLeft / (60) * 8,0,8,8 };
-	App->render->Blit(numTex, 16, y, &rec);
+	App->render->Blit(numTex, 16 + uiXoffset, y, &rec);
 	rec = { (timeLeft % 60) / 10 * 8,0,8,8 };
-	App->render->Blit(numTex, 32, y, &rec);
+	App->render->Blit(numTex, 32 + uiXoffset, y, &rec);
 	rec = { (timeLeft % 10) * 8,0,8,8 };
-	App->render->Blit(numTex, 40, y, &rec);
+	App->render->Blit(numTex, 40 + uiXoffset, y, &rec);
 	
 	//draw Orbs
 	for (int i = 0; i < App->levelManager->orbCount; i++)
 	{
 		if (i < App->levelManager->orbsLeft)
 		{
-			App->render->Blit(uiTex, orbPos.x + i * 8, orbPos.y, &orbRect);
+			App->render->Blit(uiTex, orbPos.x + i * 8 + uiXoffset, orbPos.y, &orbRect);
 		}
 		else {
-			App->render->Blit(uiTex, orbPos.x + i * 8, orbPos.y, &deletedOrbRect);
+			App->render->Blit(uiTex, orbPos.x + i * 8 + uiXoffset, orbPos.y, &deletedOrbRect);
 		}
 	}
 
