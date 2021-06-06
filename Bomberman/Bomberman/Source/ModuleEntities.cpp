@@ -84,34 +84,6 @@ Update_Status ModuleEntities::Update()
 
 Update_Status ModuleEntities::PostUpdate()
 {
-	//for (uint i = 0; i < MAX_ENTITIES; ++i)
-	//{
-	//	for (uint ii = 0; ii < MAX_ENTITIES; ++ii)
-	//	{
-	//		if (entities[i] != nullptr && entities[ii] != nullptr)
-	//		{
-	//			if (i != ii && entities[i]->position.y < entities[ii]->position.y)
-	//			{
-	//				//check if player is behind or in front of any entity
-	//				if (App->player->position.y < entities[i]->position.y)
-	//				{
-	//					if (App->player->isVisible)App->player->Draw();
-	//					entities[i]->Draw();
-	//				}
-	//				else {
-	//					entities[i]->Draw();
-	//					if (App->player->isVisible)App->player->Draw();
-	//				}
-	//				break;
-	//			}
-	//			else {
-	//				entities[i]->Draw();
-	//			}
-	//		
-	//		}
-
-	//	}
-	//}
 	for (uint i = 0; i < MAX_ENTITIES; ++i)
 	{
 			if (entities[i] != nullptr)
