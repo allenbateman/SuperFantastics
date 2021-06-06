@@ -219,6 +219,7 @@ Update_Status ModuleLevel::Update()
 void ModuleLevel::NextScene()
 {
 	// if player touches the win collider, move to next scene
+	LOG("NEXT LEVEL");
 	switch (gameState)
 	{
 	case LEVEL1:
@@ -244,7 +245,9 @@ void ModuleLevel::NextScene()
 
 void ModuleLevel::RetunrToMainMenu()
 {
-	gameState = MAIN_MENU;
+	LOG("RETURN TO MAIN MENU")
+	if(gameState != MAIN_MENU)
+		gameState = MAIN_MENU;
 }
 
 ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIteration)

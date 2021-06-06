@@ -238,10 +238,10 @@ bool SceneLevel2::Start()
 	}
 	for (int y = 0; y < gridHeight; y++)
 	{
-	for (int x = 0; x < gridWidth; x++)
-	{
-		App->levelManager->grid[y][x] = grid[y][x];
-	}
+		for (int x = 0; x < gridWidth; x++)
+		{
+			App->levelManager->grid[y][x] = grid[y][x];
+		}
 	}
 	
 	App->render->camera.x = 0;

@@ -90,7 +90,8 @@ public:
 	enum class PlayerState {
 		ALIVE,
 		DEAD,
-		WINING
+		WINING,
+		NONE
 	};
 	PlayerState currentState;
 	// Player powers

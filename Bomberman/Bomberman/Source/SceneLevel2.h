@@ -50,7 +50,7 @@ public:
 	int timeLevel = 240;
 	SDL_Rect levelBounds = {0,0,1024,224};
 	int numScene = 2;
-	int orbs = 3;
+	int orbs = 2;
 };
 
 #endif
