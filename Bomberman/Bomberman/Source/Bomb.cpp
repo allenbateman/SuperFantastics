@@ -219,7 +219,7 @@ void Bomb::Update()
 
 			// RIGHT
 			for (int i = 0; i < range; i++) {
-				if (((position.x - 24) / 16) + (i + 1) <= 12) {
+				if (((position.x - 24) / 16) + (i + 1) < App->levelManager->activeLevelWidth) {
 					if (App->levelManager->GetGridType(position.y, position.x, 0, i + 1) == Module::STRUCTURE ||
 						App->levelManager->GetGridType(position.y, position.x, 0, i + 1) == Module::ROCK) {
 						break;

@@ -40,7 +40,7 @@ bool SceneLevel2::Start()
 	App->UI->timeLeft = timeLevel;
 	App->UI->timeLevel = timeLevel;
 
-
+	App->levelManager->activeLevelWidth = LVL_TWO_WIDTH;
 
 	LOG("Loading background assets");
 

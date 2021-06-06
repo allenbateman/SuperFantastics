@@ -43,6 +43,8 @@ bool SceneLevel1::Start()
 	App->levelManager->orbCount = orbs;
 	App->levelManager->orbsLeft = orbs;
 
+	App->levelManager->activeLevelWidth = LVL_ONE_WIDTH;
+
 	App->UI->StartTiming();
 
 	LOG("Loading background assets");

@@ -34,6 +34,8 @@ bool SceneLevel3x1::Start()
 	App->levelManager->orbCount = orbs;
 	App->levelManager->orbsLeft = orbs;
 
+	App->levelManager->activeLevelWidth = LVL_THREEONE_WIDTH;
+
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
