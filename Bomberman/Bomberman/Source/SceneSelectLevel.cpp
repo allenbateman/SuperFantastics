@@ -57,7 +57,11 @@ bool SceneSelectLevel::Start()
 
 Update_Status SceneSelectLevel::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
+	GamePad& pad = App->input->pads[0]; // Gamepad support for level selection
+	
+
+
+	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.a == true)
 	{
 		if (!exit) {
 			Module* selectedLevel = nullptr;
@@ -88,7 +92,7 @@ Update_Status SceneSelectLevel::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_DOWN || pad.left_x > 0.0f || pad.right == true)
 	{
 		selectedStage++;
 
@@ -97,7 +101,7 @@ Update_Status SceneSelectLevel::Update()
 			selectedStage = 0;
 		}
 	}
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_DOWN)
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_DOWN || pad.left_x < 0.0f || pad.left == true)
 	{
 		selectedStage--;
 
@@ -111,9 +115,14 @@ Update_Status SceneSelectLevel::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN || App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN || pad.left_y < 0.0f || pad.down == true)
 	{
-		exit = !exit;
+		exit = true;
+	}
+	
+	if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_DOWN || pad.left_y > 0.0f || pad.up == true)
+	{
+		exit = false;
 	}
 
 	partAnimation.Update();
