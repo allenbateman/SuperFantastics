@@ -47,6 +47,7 @@ public:
 	GridType grid[LVL_THREE_HEIGHT][LVL_THREE_WIDTH];
 	bool middleStructureIsSet = false;
 	int timeLevel = 240;
+	int orbs = 2;
 	SDL_Rect levelBounds = { 0,0,256,224 };
 };
 

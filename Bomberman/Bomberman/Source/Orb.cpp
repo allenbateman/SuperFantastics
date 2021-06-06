@@ -25,7 +25,6 @@ void Orb::Update()
 void Orb::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::EXPLOSION) {
-		App->player->nOrbs++;
 		App->levelManager->SetGridType(Module::GridType::EMPTY, position.y, position.x, 0, 0);
 		App->levelManager->orbsLeft--;
 		SetToDelete();

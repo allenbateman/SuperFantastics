@@ -98,11 +98,7 @@ public:
 	int rangeExplosion = 2;
 
 	int frameCounter = 0;
-
-	int nOrbs = 0;
 	bool CollectedOrbs = false;
-
-	void SetSceneGrid(GridType* grid, int width, int height) { sceneGrid = grid; sceneWidth = width; sceneHeight = height; }
 };
 
 #endif //!__MODULE_PLAYER_H__
