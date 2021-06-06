@@ -407,10 +407,9 @@ Update_Status ModulePlayer::Update()
 				currentAnimation = &winAnim;
 				frameCounter = 0;
 			}
-			else if (currentAnimation == &winAnim && frameCounter > 550) {
-	
+			else if (currentAnimation == &winAnim && frameCounter > 200) {
+				App->levelManager->PassedLevel();
 				App->levelManager->RetunrToLevelSelection();
-				App->levelManager->currentLevel++;
 				currentState = PlayerState::WAITNING;
 			}
 			break;

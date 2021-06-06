@@ -115,9 +115,6 @@ Update_Status ModuleLevel::Update()
 			LOG("Loading Level Selection");
 			if (App->fade->FadeToBlack(currentScene, (Module*)App->sceneSelectLevel, 90))
 			{
-				App->sceneSelectLevel->maxStage = currentLevel + 1;
-				App->sceneSelectLevel->selectedStage = currentLevel;
-
 				currentScene = (Module*)App->sceneSelectLevel;
 			}
 		}
@@ -221,6 +218,30 @@ Update_Status ModuleLevel::Update()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
+
+void ModuleLevel::PassedLevel()
+{
+	switch (gameState) {
+		case GameState::LEVEL1:
+			if (levelsPassed < 1) {
+				levelsPassed++;
+			}
+			break;
+		case GameState::LEVEL2:
+			if (levelsPassed < 2) {
+				levelsPassed++;
+			}
+			break;
+		case GameState::LEVEL3:
+		case GameState::LEVEL3X1:
+			if (levelsPassed < 3) {
+				levelsPassed++;
+			}
+			break;
+	}
+
+	App->sceneSelectLevel->selectedStage = levelsPassed;
+}
 
 void ModuleLevel::RetunrToMainMenu()
 {
