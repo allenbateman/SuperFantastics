@@ -1,10 +1,5 @@
 # Mega Bomberman
 ## Project I - Recreation of Mega Bomberman
-
-### Info that may be helpful
-You can use the [editor on GitHub](https://github.com/allenbateman/SuperFantastics/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
 ### Introduction
 This is a replica of the first level of Mega Bomberman, a game from the Bomberman's saga launched in 1994 for the Sega Mega Drive. This project has been done by five Game Design & Development students from UPC in Barcelona, Spain.
 
