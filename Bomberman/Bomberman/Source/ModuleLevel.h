@@ -29,6 +29,7 @@ public:
 	void PassedLevel();
 	void RetunrToMainMenu();
 	void RetunrToLevelSelection();
+	void RestartLevel();
 
 	enum GameState {
 		NONE = 0,

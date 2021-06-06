@@ -51,7 +51,7 @@ bool SceneLevel3x1::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/Background3.1.png");
-	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/SceneLevel1.ogg", 1.0f, true);
 
 	//add bounding colliders
 	//Left collider

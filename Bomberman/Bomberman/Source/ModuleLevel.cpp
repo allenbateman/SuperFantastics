@@ -263,6 +263,11 @@ void ModuleLevel::RetunrToLevelSelection()
 
 }
 
+void ModuleLevel::RestartLevel()
+{
+	App->fade->FadeToBlack(currentScene, currentScene, 60.0f);
+}
+
 ModuleLevel::GridType ModuleLevel::GetGridType(int y, int x, int yIteration, int xIteration)
 {
 	return grid[(y - 32) / 16 + yIteration][(x - 24) / 16 + xIteration];
