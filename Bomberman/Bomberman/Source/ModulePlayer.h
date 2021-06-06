@@ -100,6 +100,7 @@ public:
 
 	int frameCounter = 0;
 	bool CollectedOrbs = false;
+	bool godMode = false;
 };
 
 #endif //!__MODULE_PLAYER_H__

@@ -105,6 +105,10 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
+		godMode = !godMode;
+	}
+
 	// Get gamepad info
 	GamePad& pad = App->input->pads[0];
 
@@ -545,7 +549,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 	else if (c2->type == Collider::Type::ENEMY || c2->type == Collider::Type::ENEMY_SHOT || c2->type == Collider::Type::EXPLOSION)
 	{
-		currentState = PlayerState::DEAD;
+		if (!godMode) {
+			currentState = PlayerState::DEAD;
+		}
 	}
 }
 
