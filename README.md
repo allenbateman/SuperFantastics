@@ -10,19 +10,24 @@ The player, following the story line, will travel arround different biomes and f
 ## Controls
 
 ### Keyboard
--Arrows for movement.
+-Arrows: Movement.
 
--C to place bomb.
+-C: Place bomb.
 
--F1 Debug Colliders.
+-F1: Debug Colliders.
 
--F2 Death.
+-F2: Death.
 
--F3 Win.
+-F3: Win.
 
 -F4: In game you jump directly to the next level, in the level selection ypu unlock the the next level.
 
--F6 God Mode.
+-F6: God Mode.
+
+-Enter/Return: continue
+
+-ESC: Exit program
+
 
 ### Gamepad
 -Arrows / Left joystick for movement.
