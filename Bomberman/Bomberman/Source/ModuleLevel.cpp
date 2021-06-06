@@ -252,6 +252,9 @@ void ModuleLevel::PassedLevel()
 				levelsPassed++;	
 			}
 			gameState = GameState::BOSS;
+		case GameState::BOSS:
+			gameState = GameState::MAIN_MENU;
+			break;
 			break;
 	}
 
