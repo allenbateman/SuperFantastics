@@ -30,12 +30,11 @@ KEYBOARD
 - Place bomb: C key
 
 GAMEPAD
-- Moves the character / Moves around Ui: directional pad
-- Place a bomb / Select: C button
-- Pause Game: Start
+- Moves the character / Moves around Ui: directional pad or left joystick
+- Place a bomb / Select: X button
 - Use Luie’s power: B button
+- Skip scene: A button
 
-No use buttons: A button
 
 **Bold** and _Italic_ and `Code` text
 
