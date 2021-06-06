@@ -63,6 +63,7 @@ inline const char* Module::GridToString(GridType gridCell)
 	switch (gridCell)
 	{
 		case EMPTY:			return"EMPTY";
+		case WALL:			return"WALL";
 		case PLAYER:		return"PLAYER";
 		case BOMB:			return"BOMB";
 		case ROCK:			return"ROCK";

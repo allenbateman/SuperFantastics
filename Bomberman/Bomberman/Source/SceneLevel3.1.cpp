@@ -56,6 +56,7 @@ bool SceneLevel3x1::Start()
 	//Bot collider 
 	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
 
+
 	// Fixed positions
 
 	for (int i = 0; i < 11; i++)

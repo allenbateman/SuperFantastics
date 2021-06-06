@@ -45,6 +45,7 @@ public:
 	enum GridType
 	{
 		EMPTY = 0,
+		WALL,
 		PLAYER,
 		BOMB,
 		ROCK,

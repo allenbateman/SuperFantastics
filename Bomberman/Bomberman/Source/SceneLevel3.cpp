@@ -53,10 +53,17 @@ bool SceneLevel3::Start()
 	//Right Collider
 	App->collisions->AddCollider({ 232,23,24,223 }, Collider::Type::BOUNDS);
 	//Top Collider
-	App->collisions->AddCollider({ 24,23,208,8 }, Collider::Type::BOUNDS);
+	App->collisions->AddCollider({ 24,24,208,8 }, Collider::Type::BOUNDS);
 	//Bot collider 
 	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
-
+	//Top left
+	App->collisions->AddCollider({ 0,32,86,32 }, Collider::Type::BOUNDS);
+	//Top right
+	App->collisions->AddCollider({ 168,32,86,32 }, Collider::Type::BOUNDS);
+	//Bottom left
+	App->collisions->AddCollider({ 0,176,86,32 }, Collider::Type::BOUNDS);
+	//Bottom right
+	App->collisions->AddCollider({ 168,176,86,32 }, Collider::Type::BOUNDS);
 
 	// Fixed positions
 	
@@ -76,26 +83,10 @@ bool SceneLevel3::Start()
 		}
 	}
 
-	grid[1][0] = ROCK;
-	grid[1][1] = ROCK;
-	grid[1][3] = ROCK;
-	grid[1][2] = ROCK;
-	grid[1][9] = ROCK;
-	grid[0][3] = ROCK;
-	grid[0][9] = ROCK;
-	grid[1][10] = ROCK;
-	grid[1][12] = ROCK;
-	grid[9][0] = ROCK;
-	grid[9][2] = ROCK;
-	grid[10][3] = ROCK;
-	grid[10][9] = ROCK;
-	grid[9][10] = ROCK;
-	grid[9][12] = ROCK;
 	grid[5][4] = ROCK;
 	grid[4][5] = ROCK;
 	grid[5][8] = ROCK;
 	grid[6][7] = ROCK;
-	grid[1][10] = ROCK;
 
 	grid[0][6] = PLAYER;
 	grid[2][10] = MOUSE;
@@ -129,17 +120,36 @@ bool SceneLevel3::Start()
 	grid[0][5] = EMPTY;
 	grid[0][7] = EMPTY;
 	grid[1][11] = EMPTY;
-	grid[0][0] = EMPTY;
-	grid[0][1] = EMPTY;
-	grid[0][2] = EMPTY;
-	grid[0][10] = EMPTY;
-	grid[0][12] = EMPTY;
-	grid[10][0] = EMPTY;
-	grid[10][1] = EMPTY;
-	grid[10][2] = EMPTY;
-	grid[10][10] = EMPTY;
-	grid[10][11] = EMPTY;
-	grid[10][12] = EMPTY;
+
+	grid[0][0] = WALL;
+	grid[0][1] = WALL;
+	grid[0][2] = WALL;
+	grid[0][3] = WALL;
+	grid[0][9] = WALL;
+	grid[0][10] = WALL;
+	grid[0][12] = WALL;
+	grid[10][0] = WALL;
+	grid[10][1] = WALL;
+	grid[10][2] = WALL;
+	grid[10][3] = WALL;
+	grid[10][10] = WALL;
+	grid[10][11] = WALL;
+	grid[10][12] = WALL;
+	grid[1][0] = WALL;
+	grid[1][1] = WALL;
+	grid[1][2] = WALL;
+	grid[1][3] = WALL;
+	grid[1][9] = WALL;
+	grid[1][10] = WALL;
+	grid[1][11] = WALL;
+	grid[1][12] = WALL;
+	grid[9][1] = WALL;
+	grid[9][2] = WALL;
+	grid[9][3] = WALL;
+	grid[9][9] = WALL;
+	grid[9][10] = WALL;
+	grid[9][11] = WALL;
+	grid[9][12] = WALL;
 
 	middleStructureIsSet = false;
 
