@@ -3,7 +3,11 @@
 ### Introduction
 This is a replica of the first level of Mega Bomberman, a game from the Bomberman's saga launched in 1994 for the Sega Mega Drive. This project has been done by five Game Design & Development students from UPC in Barcelona, Spain.
 
-![][https://cdn.discordapp.com/attachments/811523291524497409/851201205253701632/Untitled_Artwork.png]
+### Team Logo
+<img src="https://cdn.discordapp.com/attachments/811523291524497409/851201205253701632/Untitled_Artwork.png" width=35% height = 40%>
+
+### Team Members
+<img src="https://cdn.discordapp.com/attachments/818247767314923520/851202848145408040/unknown.png" width=70% height = 80%>
 
 ## About Mega Bomberman
 Mega Bomberman is an action and maze game launched the 10th of December of 1993 under the name of Bomberman '94 for the TurboGrafx-16 exclussively in Japan. Some months later, the 11th of October of 1994 it was released in USA and Europe as Mega Bomberman for the Sega Genesis and Mega Drive.
