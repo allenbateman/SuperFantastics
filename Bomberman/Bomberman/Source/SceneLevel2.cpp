@@ -40,7 +40,7 @@ bool SceneLevel2::Start()
 	App->UI->timeLeft = timeLevel;
 	App->UI->timeLevel = timeLevel;
 
-
+	App->levelManager->activeLevelWidth = LVL_TWO_WIDTH;
 
 	LOG("Loading background assets");
 
@@ -142,7 +142,7 @@ bool SceneLevel2::Start()
 	grid[3][27] = STRUCTURE;
 	grid[2][26] = WIN_SPOT;
 
-	int flowerAmount = rand() % 55 + 70;
+	int flowerAmount = rand() % 45 + 60;
 	int x = 0;
 	int y = 0;
 

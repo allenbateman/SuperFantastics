@@ -34,6 +34,8 @@ bool SceneLevel3x1::Start()
 	App->levelManager->orbCount = orbs;
 	App->levelManager->orbsLeft = orbs;
 
+	App->levelManager->activeLevelWidth = LVL_THREEONE_WIDTH;
+
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
@@ -58,7 +60,7 @@ bool SceneLevel3x1::Start()
 	App->collisions->AddCollider({ 232,23,24,223 }, Collider::Type::BOUNDS);
 	//Top Collider
 	App->collisions->AddCollider({ 24,23,208,8 }, Collider::Type::BOUNDS);
-	//Bot collider 
+	//Bot collider
 	App->collisions->AddCollider({ 24,208,208,8 }, Collider::Type::BOUNDS);
 
 

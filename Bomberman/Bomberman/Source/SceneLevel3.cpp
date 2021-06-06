@@ -36,6 +36,8 @@ bool SceneLevel3::Start()
 	App->levelManager->orbCount = orbs;
 	App->levelManager->orbsLeft = orbs;
 
+	App->levelManager->activeLevelWidth = LVL_THREE_WIDTH;
+
 	App->player->Enable();
 	App->entities->Enable();
 	App->collisions->Enable();
@@ -43,6 +45,8 @@ bool SceneLevel3::Start()
 
 	App->UI->timeLeft = timeLevel;
 	App->UI->timeLevel = timeLevel;
+
+
 
 	LOG("Loading background assets");
 

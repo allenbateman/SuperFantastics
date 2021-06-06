@@ -62,6 +62,7 @@ Snail::Snail(int x, int y) : Entity (x, y)
 	colliderPosition.y = position.y + 16;
 	drawOffset.x = -8;
 	App->levelManager->grid[(colliderPosition.y - 32) / 16][(colliderPosition.x - 24) / 16] = Module::GridType::EMPTY;
+	scorePoints = 100;
 }
 
 void Snail::Update()
