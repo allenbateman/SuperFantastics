@@ -11,7 +11,6 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleLevel.h"
 #include "ModuleFonts.h"
-#include "SDL.h"
 #include "SceneLevel1.h"
 #include "MiddleStructure.h"
 #include <stdio.h>
