@@ -18,10 +18,7 @@ In this game you take the role of the main character of the story, "Bomberman". 
 Boberman has the power of dropping bombs around the map, these bombs can either break obstacles (which block the path for Bomberman to walk through) to let Bomberman move around the entire map or kill enemies what will harm and get one of Bomberman's 3 lives. To advance to the next level, the player must be able to destroy all of the orbs that are located around the map, again, with his bombs. Once the orbs are broken he will be able to scape. The game ends with a boss battle against Saru and Bananacher.
 
 ### Gameplay video
-
-
-
-
+[Game Trailer](https://www.youtube.com/watch?v=qbPBePNUTUs)
 
 ## Controls
 ```
@@ -58,8 +55,6 @@ The whole team has been responsible of the code and organisation of the project.
 
 ### Download the latest version of our game
 [Mega Bomberman](https://github.com/allenbateman/SuperFantastics/releases)
-
-### Gameplay video
 
 ### Project wiki
 [For more information look at the project's wiki](https://github.com/allenbateman/SuperFantastics/wiki)
