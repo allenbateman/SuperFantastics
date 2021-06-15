@@ -18,11 +18,12 @@ In this game you take the role of the main character of the story, "Bomberman". 
 Boberman has the power of dropping bombs around the map, these bombs can either break obstacles (which block the path for Bomberman to walk through) to let Bomberman move around the entire map or kill enemies what will harm and get one of Bomberman's 3 lives. To advance to the next level, the player must be able to destroy all of the orbs that are located around the map, again, with his bombs. Once the orbs are broken he will be able to scape. The game ends with a boss battle against Saru and Bananacher.
 
 ### Gameplay video
-[Game Trailer](https://www.youtube.com/watch?v=qbPBePNUTUs)
+[Game Trailer] (https://youtu.be/lRo79lb8T5c)
+https://www.youtube.com/watch?v=qbPBePNUTUs
 
 ## Controls
 ```
-**KEYBOARD**
+KEYBOARD
 - Move up: up arrow
 - Move down: down arrow
 - Move left: left arrow
@@ -30,7 +31,7 @@ Boberman has the power of dropping bombs around the map, these bombs can either 
 - Place bomb: C key
 - Skip introduction and select level/exit : Enter button
 
-**GAMEPAD**
+GAMEPAD
 - Moves the character / Moves around UI: directional pad or left joystick
 - Place a bomb: X button
 - Skip scene / select level: A button
