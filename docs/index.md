@@ -4,7 +4,7 @@
 This is a replica of the first level of Mega Bomberman, a game from the Bomberman's saga launched in 1994 for the Sega Mega Drive. This project has been done by five Game Design & Development students from UPC in Barcelona, Spain.
 
 ### Team Logo
-<img src="https://cdn.discordapp.com/attachments/811523291524497409/851201205253701632/Untitled_Artwork.png" width=35% height = 40%>
+![](img src="https://cdn.discordapp.com/attachments/811523291524497409/851201205253701632/Untitled_Artwork.png" width=35% height = 40%)
 
 ### Team Members
 <img src="https://cdn.discordapp.com/attachments/818247767314923520/851202848145408040/unknown.png" width=70% height = 80%>
